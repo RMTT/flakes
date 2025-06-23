@@ -33,7 +33,11 @@ in with lib; {
     #to use gnome apps
     services.gvfs.enable = true;
     services.gnome.gnome-keyring.enable = true;
+    services.gnome.tinysparql.enable = true;
+    services.gnome.localsearch.enable = true;
     programs.gnome-disks.enable = true;
+
+    services.logind.lidSwitch = "ignore";
 
     services.upower.enable = true;
 

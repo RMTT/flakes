@@ -16,8 +16,15 @@ input {
     touchpad {
         tap
     }
+    keyboard {
+        xkb {
+            layout "us"
+            options "caps:swapescape"
+        }
+    }
 
     warp-mouse-to-focus
+    disable-power-key-handling
 }
 
 environment {

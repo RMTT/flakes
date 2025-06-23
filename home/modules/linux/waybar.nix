@@ -16,7 +16,6 @@
         "upower"
         "custom/brightness"
         "cpu"
-        "battery"
         "clock"
         "tray"
         "custom/lock"
@@ -32,7 +31,7 @@
         "max-length" = 30;
       };
       "upower" = {
-        format = "";
+        icon-size = 15;
         "hide-if-empty" = true;
         "tooltip" = true;
       };
@@ -68,17 +67,6 @@
           <tt><small>{calendar}</small></tt>'';
         "format-alt" = " {:%d/%m/%Y}";
         "format" = " {:%H:%M}";
-      };
-      "battery" = {
-        "states" = {
-          "warning" = 30;
-          "critical" = 15;
-        };
-        "format" = "{icon}";
-        "format-charging" = "";
-        "format-plugged" = "";
-        "format-alt" = "{icon}";
-        "format-icons" = [ "" "" "" "" "" "" "" "" "" "" "" "" ];
       };
       "pulseaudio" = {
         "format" = "{icon} {volume}%";
@@ -172,7 +160,6 @@
       #tray,
       #custom-brightness,
       #clock,
-      #battery,
       #pulseaudio,
       #custom-lock,
       #custom-power {
@@ -186,23 +173,11 @@
         margin-right: 1rem;
       }
 
-      #battery {
-        color: @green;
-      }
-
-      #battery.charging {
-        color: @green;
-      }
-
-      #battery.warning:not(.charging) {
-        color: @red;
-      }
-
       #custom-brightness {
         color: @yellow;
       }
 
-      #custom-brightness, #battery {
+      #custom-brightness {
           border-radius: 0;
       }
 

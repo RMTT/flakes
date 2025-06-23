@@ -116,19 +116,5 @@ in with lib; {
     # enable logitech
     hardware.logitech.wireless.enable = true;
     hardware.logitech.wireless.enableGraphical = true;
-
-    # key mapper
-    services.kanata = {
-      enable = true;
-      keyboards.default = {
-        config = ''
-          (defsrc
-            caps)
-
-          (deflayermap (default-layer)
-            caps esc)
-        '';
-      };
-    };
   };
 }

@@ -115,7 +115,7 @@ in
           (mapAttrs
             (_: options: {
               device = mkIf (cfg.btrfs.device != "")
-                "/dev/disk/by-label/${cfg.btrfs.device}";
+                "/dev/disk/by-uuid/${cfg.btrfs.device}";
               label = mkIf (cfg.btrfs.label != "") cfg.btrfs.label;
               fsType = "btrfs";
               options = options;
