@@ -3,10 +3,10 @@
   imports =
     with modules; [ secrets ];
 
-  sops.secrets.wg-private = {
+  sops.secrets.muconnect_key = {
     owner = "systemd-network";
     mode = "0400";
-    sopsFile = ./secrets/wg-private.key;
+    sopsFile = ./secrets/muconnect.key;
     format = "binary";
   };
 

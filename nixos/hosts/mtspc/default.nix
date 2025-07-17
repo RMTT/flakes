@@ -34,6 +34,8 @@
 
   base.gl.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+  boot.kernelModules = [ "nvidia" "nvidia_drm" "nvidia_uvm" ];
   hardware.nvidia = {
     modesetting.enable = true;
     prime = {
@@ -51,6 +53,7 @@
     open = true;
   };
 
+  services.logind.lidSwitch = "ignore";
   desktop.niri.enable = true;
   # https://wayland.freedesktop.org/libinput/doc/1.28.1/clickpad-with-right-button.html
   environment.etc."libinput/local-overrides.quirks".text = pkgs.lib.mkForce ''

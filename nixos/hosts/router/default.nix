@@ -101,58 +101,74 @@ with lib; {
     };
 
     # kea has bug when new interfaces added, use adguardhome as dhcp server now
-    services.kea = {
-      dhcp4 = {
-        enable = false;
-        settings = {
-          option-data = [
-            {
-              name = "domain-name-servers";
-              data = "${lan_gateway}";
-              always-send = true;
-            }
-            {
-              name = "routers";
-              data = "${lan_gateway}";
-            }
-          ];
-          interfaces-config = {
-            interfaces = [ "lan" ];
-            service-sockets-require-all = true;
-            service-sockets-max-retries = 50;
-            service-sockets-retry-wait-time = 5000;
-            dhcp-socket-type = "raw";
-          };
-          subnet4 = [{
-            id = 1;
-            pools = [{ pool = "${lan_ip_start} - ${lan_ip_end}"; }];
-            subnet = "${lan_ip_subnet}";
-            reservations = [
-              {
-                hw-address = "00:e0:4c:68:07:6e";
-                hostname = "homeserver";
-                ip-address = "192.168.6.2";
-              }
-              {
-                hw-address = "20:88:10:a9:e7:3d";
-                hostname = "homeserver";
-                ip-address = "192.168.6.4";
-              }
-              {
-                hw-address = "9e:20:b6:6d:b6:50";
-                hostname = "pikvm";
-                ip-address = "192.168.6.3";
-              }
-            ];
-          }];
-        };
-      };
-    };
+    # services.kea = {
+    #   dhcp4 = {
+    #     enable = false;
+    #     settings = {
+    #       option-data = [
+    #         {
+    #           name = "domain-name-servers";
+    #           data = "${lan_gateway}";
+    #           always-send = true;
+    #         }
+    #         {
+    #           name = "routers";
+    #           data = "${lan_gateway}";
+    #         }
+    #       ];
+    #       interfaces-config = {
+    #         interfaces = [ "lan" ];
+    #         service-sockets-require-all = true;
+    #         service-sockets-max-retries = 50;
+    #         service-sockets-retry-wait-time = 5000;
+    #         dhcp-socket-type = "raw";
+    #       };
+    #       subnet4 = [{
+    #         id = 1;
+    #         pools = [{ pool = "${lan_ip_start} - ${lan_ip_end}"; }];
+    #         subnet = "${lan_ip_subnet}";
+    #         reservations = [
+    #           {
+    #             hw-address = "00:e0:4c:68:07:6e";
+    #             hostname = "homeserver";
+    #             ip-address = "192.168.6.2";
+    #           }
+    #           {
+    #             hw-address = "20:88:10:a9:e7:3d";
+    #             hostname = "homeserver";
+    #             ip-address = "192.168.6.4";
+    #           }
+    #           {
+    #             hw-address = "9e:20:b6:6d:b6:50";
+    #             hostname = "pikvm";
+    #             ip-address = "192.168.6.3";
+    #           }
+    #         ];
+    #       }];
+    #     };
+    #   };
+    # };
 
     services.netflow.interface = "wan";
     services.tailscale = {
       enable = true;
       openFirewall = true;
     };
+
+    networking.wireguard.interfaces = {
+      muconnect = {
+        ips = [ "2001:db8:169::249/128" "198.18.169.249/32" ];
+        privateKeyFile = config.sops.secrets.muconnect_key.path;
+        extraOptions = { DNS = [ "2001:db8:169::1" "198.18.169.1" ]; };
+        mtu = 1353;
+        peers = [{
+          publicKey = "jcfVGt+MSR3nKj7/yB9VY/3qqvClI2op1COrrDpyvQs=";
+          endpoint = "muconnect-origin4.fernvenue.com:39573";
+          allowedIPs = [ "2001:db8:169::/48" "198.18.169.0/24" ];
+          persistentKeepalive = 30;
+        }];
+      };
+    };
+
   };
 }

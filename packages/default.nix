@@ -8,4 +8,6 @@
     pkgs.callPackage ./kwin4-effect-geometry-change.nix { };
   xdg-desktop-portal-gtk = pkgs.callPackage ./xdg-desktop-portal-gtk.nix { };
   aronet = pkgs.callPackage ./aronet.nix { };
+  gost = pkgs.callPackage ./gost.nix { };
+  gost-ui = pkgs.callPackage ./gost-ui.nix { };
 }

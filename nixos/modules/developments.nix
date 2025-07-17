@@ -2,7 +2,6 @@
   config = {
     # add development tools
     environment.systemPackages = with pkgs; [
-      gcc
       gdb
       poetry
       jdk

@@ -101,7 +101,6 @@ in with lib; {
       tcpdump
       man-pages
       gnupg
-      bitwarden-cli
       sops
       jq
       unzip
@@ -119,6 +118,7 @@ in with lib; {
       moreutils
       sshuttle
       mtr
+      hugo
     ];
 
     # set XDG viarables

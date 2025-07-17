@@ -1,5 +1,4 @@
 // auto launch
-spawn-at-startup "wlsunset" "-l 39.9 -L 116.3"
 spawn-at-startup "xwayland-satellite" ":0"
 
 window-rule {
@@ -15,6 +14,7 @@ window-rule {
 input {
     touchpad {
         tap
+        natural-scroll
     }
     keyboard {
         xkb {

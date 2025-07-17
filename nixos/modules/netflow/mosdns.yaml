@@ -11,17 +11,18 @@ plugins:
           - /var/lib/netflow/chnlist.txt
           - /var/lib/netflow/direct_domains.txt
 
-    - args:
+    - tag: forward_proxy
+      args:
         upstreams:
-          - addr: 127.0.0.1:1253 # clash dns with cache
-      tag: forward_proxy
+          - addr: https://1.1.1.1/dns-query
+          - addr: https://8.8.8.8/dns-query
       type: forward
 
-    - args:
+    - tag: forward_cn
+      args:
         upstreams:
           - addr: https://223.5.5.5/dns-query
           - addr: https://223.6.6.6/dns-query
-      tag: forward_cn
       type: forward
 
     - type: sequence
@@ -39,7 +40,7 @@ plugins:
         - matches:
           - "!has_resp"
           exec: $forward_proxy
-        - exec: nftset inet,netflow,proxy4,ipv4_addr,32 inet,netflow,proxy6,ipv6_addr,128
+        # - exec: nftset inet,netflow,proxy4,ipv4_addr,32 inet,netflow,proxy6,ipv6_addr,128
 
     - type: sequence
       tag: main

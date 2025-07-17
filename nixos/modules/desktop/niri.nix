@@ -12,7 +12,7 @@ in with lib; {
       kitty
       alacritty
       xwayland-satellite
-      wlsunset
+      gammastep
       wl-clipboard-rs
 
       kdePackages.qtwayland
@@ -36,8 +36,6 @@ in with lib; {
     services.gnome.tinysparql.enable = true;
     services.gnome.localsearch.enable = true;
     programs.gnome-disks.enable = true;
-
-    services.logind.lidSwitch = "ignore";
 
     services.upower.enable = true;
 

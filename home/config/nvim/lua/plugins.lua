@@ -215,10 +215,13 @@ lspconfig.efm.setup {
     languages = {
       sh = {
         { formatCommand = 'shfmt -s', formatStdin = true }
+      },
+      json = {
+        { formatCommand = 'jq', formatStdin = true }
       }
     }
   },
-  filetypes = { 'sh' },
+  filetypes = { 'sh', 'json' },
   single_file_support = true
 }
 ---- end ----

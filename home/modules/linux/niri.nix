@@ -47,33 +47,18 @@
   };
 
   services.swww.enable = true; # for wallpapaer
-  services.dunst = {
+  services.mako = {
     enable = true;
-    iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
-    };
     settings = {
-      global = {
-        font = "Monospace 12";
-        frame_color = "#89b4fa";
-        separator_color = "frame";
-        highlight = "#89b4fa";
-      };
+      icon-path = "${pkgs.numix-icon-theme}/share/icons/Numix";
+      font = "monospace 12";
 
-      urgency_low = {
-        background = "#1e1e2e";
-        foreground = "#cdd6f4";
-      };
-      urgency_normal = {
-        background = "#1e1e2e";
-        foreground = "#cdd6f4";
-      };
-      urgency_critical = {
-        background = "#1e1e2e";
-        foreground = "#cdd6f4";
-        frame_color = "#fab387";
-      };
+      # colors: https://github.com/catppuccin/mako/blob/main/themes/catppuccin-mocha/catppuccin-mocha-sky
+      background-color = "#1e1e2e";
+      text-color = "#cdd6f4";
+      border-color = "#89dceb";
+      progress-color = "over #313244";
+      "urgency=high" = { border-color = "#fab387"; };
     };
   };
 }

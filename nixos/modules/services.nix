@@ -7,5 +7,6 @@
     ./services/udp2raw.nix
     ./services/socat.nix
     ./services/aronet.nix
+    ./services/gost.nix
   ];
 }

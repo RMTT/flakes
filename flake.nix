@@ -65,5 +65,9 @@
       in {
         formatter = pkgs.nixpkgs-fmt;
         packages = import ./packages pkgs;
+        devShells.default = pkgs.mkShell {
+          packages =
+            [ (pkgs.python3.withPackages (pypkgs: with pypkgs; [ requests ])) ];
+        };
       });
 }
