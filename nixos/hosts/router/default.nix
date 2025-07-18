@@ -54,7 +54,12 @@ with lib; {
         wan = {
           name = "wan";
           networkConfig = { DHCP = "yes"; };
-          dhcpV6Config = { WithoutRA = "solicit"; };
+          dhcpV6Config = {
+            WithoutRA = "solicit";
+            UseDNS = false;
+          };
+          dhcpV4Config = { UseDNS = false; };
+          ipv6AcceptRAConfig = { UseDNS = false; };
           dhcpPrefixDelegationConfig = {
             UplinkInterface = ":self";
             SubnetId = 0;
@@ -80,11 +85,15 @@ with lib; {
         };
       };
     };
-    services.resolved.extraConfig = ''
-            DNS = 127.0.0.1
-            DNSStubListener = false
-      			DNSSEC = false
-    '';
+    services.resolved = {
+      fallbackDns = null;
+      extraConfig = ''
+        DNS = 127.0.0.1
+        DNSStubListener = false
+        DNSSEC = false
+        FallbackDNS =
+      '';
+    };
 
     # enable nat from lan
     networking.nat = {

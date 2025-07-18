@@ -9,7 +9,13 @@ plugins:
       args:
         files:
           - /var/lib/netflow/chnlist.txt
-          - /var/lib/netflow/direct_domains.txt
+
+    # for domains which located in oversea but not in chnlist and chn cidr
+    - tag: reserve_list
+      type: "domain_set"
+      args:
+        files:
+          - /var/lib/netflow/reserve_domains.txt
 
     - tag: forward_proxy
       args:
@@ -26,9 +32,16 @@ plugins:
       type: forward
 
     - type: sequence
+      tag: reserve
+      args:
+        - matches:
+          - "!has_resp"
+          exec: $forward_cn
+        - exec: nftset inet,netflow,reserve4,ipv4_addr,32 inet,netflow,reserve6,ipv6_addr,128
+
+    - type: sequence
       tag: direct
       args:
-        - exec: cache 2048
         - matches:
           - "!has_resp"
           exec: $forward_cn
@@ -36,11 +49,9 @@ plugins:
     - type: sequence
       tag: proxy
       args:
-        - exec: cache 2048
         - matches:
           - "!has_resp"
           exec: $forward_proxy
-        # - exec: nftset inet,netflow,proxy4,ipv4_addr,32 inet,netflow,proxy6,ipv6_addr,128
 
     - type: sequence
       tag: main
@@ -48,6 +59,9 @@ plugins:
         - matches:
             - qname $direct_list
           exec: goto direct
+        - matches:
+            - qname $reserve_list
+          exec: goto reserve
         - exec: goto proxy
 
     - args:

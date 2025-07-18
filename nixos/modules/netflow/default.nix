@@ -1,5 +1,5 @@
-# services order: sing-box + netflow -> netflow-update -> mosdns
-# workflow: after sing-box launched, it'd download subcriptions and this process doesn't need outer dns.
+# services order: gost + netflow -> netflow-update -> mosdns
+# workflow: after gost launched, it'd download subcriptions and this process doesn't need outer dns.
 # Then the proxy can be used to download other resources(netflow-update)
 # dns cache located in clash and mosdns
 { pkgs, lib, config, ... }:
@@ -17,25 +17,6 @@ in {
 
     services.gost = { enable = true; };
 
-    # systemd.services.sing-box = {
-    #   path = [ pkgs.coreutils ];
-    #   preStart = ''
-    #     rm -rf ''${STATE_DIRECTORY}/dashboard || true
-    #     cp -r ${pkgs.metacubexd} ''${STATE_DIRECTORY}/dashboard'';
-    #   serviceConfig = {
-    #     StateDirectory = "sing-box";
-    #     StateDirectoryMode = "0700";
-    #     RuntimeDirectory = "sing-box";
-    #     RuntimeDirectoryMode = "0700";
-    #     ExecStart = [
-    #       "${
-    #         lib.getExe pkgs.sing-box
-    #       } -D \${STATE_DIRECTORY} -c ${config.sops.secrets.singbox.path} run"
-    #     ];
-    #   };
-    #   wantedBy = [ "multi-user.target" ];
-    # };
-
     systemd.services.netflow = {
       wantedBy = [ "multi-user.target" ];
       path = [ pkgs.iproute2 pkgs.coreutils ];
@@ -45,15 +26,19 @@ in {
         fi
 
         ip ru add priority 32000 fwmark ${fwmark} lookup 200 || true
+        ip -6 ru add priority 32000 fwmark ${fwmark} lookup 200 || true
 
         ip r flush table 200 || true
         ip r add local 0.0.0.0/0 dev lo table 200 || true
+
+        ip -6 r flush table 200 || true
+        ip -6 r add local ::/0 dev lo table 200 || true
 
         # create filter lists
         if [ ! -e "${stateDir}/chnlist.txt" ]; then
           touch "${stateDir}/chnlist.txt"
         fi
-        cp ${./sets/direct_domains.txt} "${stateDir}/direct_domains.txt"
+        cp ${./sets/reserve_domains.txt} "${stateDir}/reserve_domains.txt"
       '';
       serviceConfig = { Type = "oneshot"; };
     };
@@ -62,14 +47,15 @@ in {
       after = [
         "netflow.service"
         "network-online.service"
-        "sing-box.service"
+        "gost.service"
         "nftables.service"
       ];
       wantedBy = [ "multi-user.target" ];
       path = [ pkgs.python3 pkgs.curl pkgs.nftables ];
       environment = {
-        HTTP_PROXY = "http://127.0.0.1:7891";
-        HTTPS_PROXY = "http://127.0.0.1:7891";
+        ALL_PROXY = "socks5://127.0.0.1:7891";
+        HTTP_PROXY = "socks5://127.0.0.1:7891";
+        HTTPS_PROXY = "socks5://127.0.0.1:7891";
       };
       script = ''
         # when host reboot, it will load previous data
@@ -117,7 +103,7 @@ in {
       serviceConfig = { Type = "oneshot"; };
     };
     systemd.timers.netflow-update = {
-      after = [ "netflow.service" "network-online.service" "sing-box.service" ];
+      after = [ "netflow.service" "network-online.service" "gost.service" ];
       wantedBy = [ "multi-user.target" ];
       timerConfig = {
         OnCalendar = "daily";
@@ -127,14 +113,14 @@ in {
 
     # mosdns needs chnlist for work, so wait until netflow-update completing
     systemd.services.mosdns = {
-      after = [ "netflow.service" ];
+      after = [ "netflow.service" "gost.service" ];
       wantedBy = [ "multi-user.target" ];
       path = [ pkgs.mosdns ];
       script = "mosdns start -c ${./mosdns.yaml}";
       serviceConfig = { Type = "simple"; };
     };
     systemd.paths.chnlist = {
-      after = [ "sing-box.service" "netflow.service" "netflow-update.service" ];
+      after = [ "gost.service" "netflow.service" "netflow-update.service" ];
       pathConfig = {
         PathChanged = "${stateDir}";
         Unit = "mosdns.service";
@@ -151,7 +137,6 @@ in {
         define proxy_protocols = { tcp }
 
         include "${./sets/reserve.nft}"
-        include "${./sets/proxy.nft}"
 
         set reserve4 {
           type ipv4_addr;
@@ -197,7 +182,8 @@ in {
           ip6 daddr @reserve6 return
           ip6 daddr @direct6 return
 
-          ip protocol tcp meta mark set $FWMARK
+          meta protocol ip meta l4proto $proxy_protocols meta mark set $FWMARK
+          meta protocol ip6 meta l4proto $proxy_protocols meta mark set $FWMARK
         }
 
         chain prerouting {
@@ -216,7 +202,8 @@ in {
           ip6 daddr @reserve6 return
           ip6 daddr @direct6 return
 
-          meta l4proto tcp tproxy ip to :$TPROXY_PORT meta mark set $FWMARK
+          meta protocol ip meta l4proto $proxy_protocols tproxy ip to :$TPROXY_PORT meta mark set $FWMARK
+          meta protocol ip6 meta l4proto $proxy_protocols tproxy ip6 to :$TPROXY_PORT meta mark set $FWMARK
         }
       '';
       family = "inet";
