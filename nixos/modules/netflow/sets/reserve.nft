@@ -1,3 +1,5 @@
+# https://whatismyipaddress.com/reserved-ip-address-blocks
+
 define reserve_v4 = {
   127.0.0.0/8,
   100.64.0.0/10,
@@ -7,6 +9,9 @@ define reserve_v4 = {
   10.0.0.0/8,
   172.16.0.0/12,
   192.168.0.0/16,
+  192.0.2.0/24,
+  198.51.100.0/24,
+  198.18.0.0/15,
   # muconnect
   198.18.169.0/24,
   # fallback dns
@@ -15,8 +20,11 @@ define reserve_v4 = {
 }
 
 define reserve_v6 = {
+  fe80::/10,
+  ff00::/8,
   fc00::/7,
   fd00::/7,
+  2001::/32,
   # muconnect
   2001:db8:169::/48,
 }

@@ -1,8 +1,0 @@
-resources:
-  - namespace.yaml
-  - volumes.yaml
-  - deployment.yaml
-
-namespace: backrest
-commonLabels:
-  app: backrest
