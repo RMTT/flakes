@@ -29,8 +29,8 @@ with lib; {
     services.godel = {
       enable = true;
       network = infra_network;
-      netns = true;
-      prefixs = [ "${infra_node_ip}/32" "10.42.2.0/24" ];
+      mode = "netns";
+      extra_network = [ "${infra_node_ip}/32" "10.42.2.0/24" ];
       extra_ip = [ "${infra_node_ip}/32" ];
       public = true;
 

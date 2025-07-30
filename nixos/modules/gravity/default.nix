@@ -115,7 +115,7 @@ in {
           hash = "sha256-GB8FXnHzaM06MivfpYEFFIp4q0WfH3a7+jmoC3Tpwbs=";
         };
 
-        cargoHash = "sha256-+f793L/qYdHaVP3S3wCn0d4URbXzGzgRwwCo5mrIEq8=";
+        cargoHash = "sha256-fiSJaOdhSX7fakNlrfHH8bePXMUx8zOifq7dZuRlXNU=";
         checkFlags = [ "--skip=address::test::remote" ];
       };
     in {

@@ -32,7 +32,7 @@ in {
         "iwd.service"
       ];
       script =
-        "${pkgs.aronet}/bin/aronet daemon run -c ${cfg.config} -r ${cfg.registry}";
+        "${pkgs.aronet}/bin/aronet -c ${cfg.config} -r ${cfg.registry} daemon run";
       serviceConfig = {
         Type = "simple";
         Restart = "always";

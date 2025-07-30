@@ -126,9 +126,9 @@
     services.godel = {
       enable = true;
       network = infra_network;
-      prefixs = [ "${infra_node_ip}/32" "10.42.0.0/24" ];
+      extra_network = [ "${infra_node_ip}/32" "10.42.0.0/24" ];
       extra_ip = [ "${infra_node_ip}/32" ];
-      netns = true;
+      mode = "netns";
       k3s = {
         enable = true;
         node-ip = infra_node_ip;
