@@ -22,7 +22,7 @@ helmCharts:
       installCRDs: true
       podDnsPolicy: "Default"
       nodeSelector:
-        kubernetes.io/hostname: cn2-la
+        kubernetes.io/hostname: cn2-box
       extraArgs:
         - --enable-certificate-owner-ref=true
         - --dns01-recursive-nameservers-only

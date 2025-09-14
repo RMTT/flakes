@@ -19,7 +19,6 @@
       go
       tldr
       trace-cmd
-      vagrant
       guestfs-tools
       kubernetes
       kubernetes-helm

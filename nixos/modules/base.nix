@@ -226,8 +226,8 @@ in with lib; {
       enable32Bit = true;
       extraPackages = with pkgs; [
         libva
-        mesa
         vaapiVdpau
+        intel-vaapi-driver
         libvdpau-va-gl
         amdvlk
       ];

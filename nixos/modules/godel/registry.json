@@ -22,24 +22,6 @@
         }
       },
       {
-        "common_name": "cn2-la",
-        "endpoints": [
-          {
-            "address_family": "ip4",
-            "address": "cn2-la.rmtt.host",
-            "port": 12025,
-            "serial_number": 0
-          }
-        ],
-        "remarks": {
-          "network": "fd97:1208:0:2::1/64",
-          "extra_network": [
-            "192.168.128.5/32",
-            "10.42.1.0/24"
-          ]
-        }
-      },
-      {
         "common_name": "cn2-box",
         "endpoints": [
           {

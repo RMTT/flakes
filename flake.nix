@@ -2,7 +2,7 @@
   description = "mt's configuration of machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-fresh.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-testing.url = "github:rmtt/nixpkgs";
 

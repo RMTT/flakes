@@ -1,6 +1,3 @@
-// auto launch
-spawn-at-startup "xwayland-satellite" ":0"
-
 window-rule {
   // floating windows
     match app-id="org.telegram.desktop"

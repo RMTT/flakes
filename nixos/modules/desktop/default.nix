@@ -1,6 +1,15 @@
-{ lib, pkgs, config, ... }: {
-  imports =
-    [ ./desktop.nix ./pipewire.nix ./niri.nix ];
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+{
+  imports = [
+    ./desktop.nix
+    ./pipewire.nix
+    ./niri.nix
+  ];
 
   config = {
     services.printing = {
@@ -21,15 +30,16 @@
     '';
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
-    services.displayManager.sddm = {
+
+    services.greetd = {
       enable = true;
-      wayland.enable = true;
-      theme = "sddm-astronaut-theme";
-      package = lib.mkForce pkgs.kdePackages.sddm;
-      extraPackages = with pkgs; [
-        sddm-astronaut
-        kdePackages.qtvirtualkeyboard
-      ];
+      useTextGreeter = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember-user-session -r";
+          user = "greeter";
+        };
+      };
     };
 
     services.geoclue2 = {

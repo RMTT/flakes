@@ -42,8 +42,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "RMTT";
     repo = "aronet";
-    rev = "aed06830e5a2586298ec7ea86544d9cebc49d8d9";
-    hash = "sha256-QMXanx7jf6kjd/eLLHlPEZfTzUknrxUdILe/1LIhMbk=";
+    rev = "883a90aca53b0827eef270a5dded7abbea5784f7";
+    hash = "sha256-coead1GuiHbVieWftGFdTtACpt9QpaDjZ1+ZzJ6UzPg=";
     nativeBuildInputs = [ git meson cacert ];
     postFetch = ''
       cd "$out"

@@ -67,7 +67,7 @@ with lib; {
                 toString config.services.prometheus.exporters.node.port
               }"
 
-              "cn2-la.infra.rmtt.host:${
+              "cn2-box.infra.rmtt.host:${
                 toString config.services.prometheus.exporters.node.port
               }"
             ];
