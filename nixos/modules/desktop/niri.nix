@@ -1,8 +1,18 @@
-{ pkgs, config, lib, ... }:
-let cfg = config.desktop.niri;
-in with lib; {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.desktop.niri;
+in
+with lib;
+{
 
-  options = { desktop.niri.enable = mkEnableOption "enable niri"; };
+  options = {
+    desktop.niri.enable = mkEnableOption "enable niri";
+  };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
@@ -12,7 +22,6 @@ in with lib; {
       kitty
       alacritty
       xwayland-satellite
-      gammastep
       wl-clipboard-rs
 
       kdePackages.qtwayland

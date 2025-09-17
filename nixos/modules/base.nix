@@ -1,7 +1,15 @@
 # Base configuratioj
-{ pkgs, lib, config, ... }:
-let cfg = config.base;
-in with lib; {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+let
+  cfg = config.base;
+in
+with lib;
+{
   options.base = {
     gl.enable = mkOption {
       type = types.bool;
@@ -20,14 +28,21 @@ in with lib; {
       "https://cache.garnix.io"
       "https://mirrors.ustc.edu.cn/nix-channels/store"
     ];
-    nix.settings.trusted-public-keys =
-      [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
-    nix.settings.trusted-users = [ "root" "mt" ];
+    nix.settings.trusted-public-keys = [
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+    ];
+    nix.settings.trusted-users = [
+      "root"
+      "mt"
+    ];
     nix.optimise.automatic = true;
     nix.gc.automatic = true;
 
     # enable flakes
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     # bootloader
     boot.loader.systemd-boot.enable = true;
@@ -36,8 +51,14 @@ in with lib; {
     boot.loader.systemd-boot.configurationLimit = 10;
     boot.loader.grub.configurationLimit = 10;
 
-    boot.kernelModules = [ "wireguard" "ip_vs" ];
-    boot.supportedFilesystems = [ "ntfs" "btrfs" ];
+    boot.kernelModules = [
+      "wireguard"
+      "ip_vs"
+    ];
+    boot.supportedFilesystems = [
+      "ntfs"
+      "btrfs"
+    ];
 
     # common initrd options
     boot.initrd.availableKernelModules = [
@@ -53,7 +74,9 @@ in with lib; {
     ];
 
     # sysctl
-    boot.kernel.sysctl = { "net.core.devconf_inherit_init_net" = 1; };
+    boot.kernel.sysctl = {
+      "net.core.devconf_inherit_init_net" = 1;
+    };
 
     # timezone
     time.timeZone = "Asia/Shanghai";
@@ -144,17 +167,18 @@ in with lib; {
     # enable ssh
     services.openssh = {
       enable = true;
-      settings = { PasswordAuthentication = false; };
+      settings = {
+        PasswordAuthentication = false;
+      };
     };
 
     # cpu governor
-    powerManagement.cpuFreqGovernor = mkIf
-      (config.hardware.cpu.intel.updateMicrocode
-        || config.hardware.cpu.amd.updateMicrocode)
-      ((lib.strings.optionalString config.hardware.cpu.intel.updateMicrocode
-        "ondemand")
-        + (lib.strings.optionalString config.hardware.cpu.amd.updateMicrocode
-          "schedutil"));
+    powerManagement.cpuFreqGovernor =
+      mkIf (config.hardware.cpu.intel.updateMicrocode || config.hardware.cpu.amd.updateMicrocode)
+        (
+          (lib.strings.optionalString config.hardware.cpu.intel.updateMicrocode "ondemand")
+          + (lib.strings.optionalString config.hardware.cpu.amd.updateMicrocode "schedutil")
+        );
 
     # enable acpid
     services.acpid.enable = true;
@@ -174,9 +198,13 @@ in with lib; {
     };
 
     # main user
-    security.sudo = { wheelNeedsPassword = false; };
+    security.sudo = {
+      wheelNeedsPassword = false;
+    };
     users.mutableUsers = true;
-    users.groups.mt = { gid = 1000; };
+    users.groups.mt = {
+      gid = 1000;
+    };
     users.users.mt = {
       isNormalUser = true;
       home = "/home/mt";
@@ -195,8 +223,7 @@ in with lib; {
         (mkIf config.virtualisation.libvirtd.enable "libvirt")
         (mkIf config.virtualisation.virtualbox.host.enable "vboxusers")
       ];
-      initialHashedPassword =
-        "$y$j9T$v3KSiMJEpJdcbN4osJbMF0$Qfgg9i/ozgLjDhOg/WZmSrg8vuiNQSrSWivWKvjATN7";
+      initialHashedPassword = "$y$j9T$v3KSiMJEpJdcbN4osJbMF0$Qfgg9i/ozgLjDhOg/WZmSrg8vuiNQSrSWivWKvjATN7";
       openssh.authorizedKeys.keyFiles = [ ../../secrets/ssh_key.pub ];
     };
 

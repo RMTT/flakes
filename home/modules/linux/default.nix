@@ -1,5 +1,10 @@
-{ pkgs, ... }: {
-  imports = [ ./niri.nix ./fonts.nix ];
+{ pkgs, ... }:
+{
+  imports = [
+    ./niri.nix
+    ./fonts.nix
+    ./runner.nix
+  ];
 
   gtk = {
     enable = true;

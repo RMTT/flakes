@@ -1,6 +1,14 @@
-{ pkgs, config, lib, ... }:
-let cfg = config.desktop;
-in with lib; {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.desktop;
+in
+with lib;
+{
   options = { };
 
   config = {
@@ -80,6 +88,8 @@ in with lib; {
       joypixels
       noto-fonts-emoji
       nerd-fonts.fira-code
+      inter
+      roboto
     ];
     fonts.fontconfig = {
       cache32Bit = true;
@@ -99,8 +109,12 @@ in with lib; {
           "Sarasa UI K"
           "Noto Sans CJK SC"
         ];
-        monospace =
-          [ "Sarasa Mono SC" "Sarasa Mono TC" "Sarasa Mono J" "Sarasa Mono K" ];
+        monospace = [
+          "Sarasa Mono SC"
+          "Sarasa Mono TC"
+          "Sarasa Mono J"
+          "Sarasa Mono K"
+        ];
       };
     };
 

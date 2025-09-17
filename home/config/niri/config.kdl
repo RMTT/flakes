@@ -1,3 +1,17 @@
+spawn-at-startup "noctalia-shell"
+
+debug {
+  honor-xdg-activation-with-invalid-serial
+}
+
+layer-rule {
+    match namespace="^quickshell-overview$"
+    place-within-backdrop true
+}
+
+window-rule {
+  clip-to-geometry true
+}
 window-rule {
   // floating windows
     match app-id="org.telegram.desktop"
@@ -99,7 +113,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return { spawn "kitty"; }
-    Mod+R { spawn "fuzzel"; }
+    Mod+R { spawn "walker"; }
     Ctrl+Alt+L { spawn "hyprlock"; }
     Mod+E { spawn "nautilus"; }
 

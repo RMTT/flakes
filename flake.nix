@@ -10,6 +10,17 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-fresh";
+    walker.url = "github:abenz1267/walker";
+    walker.inputs.nixpkgs.follows = "nixpkgs-fresh";
+    quickshell = {
+      url = "github:outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs-fresh";
+    };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-fresh";
+      inputs.quickshell.follows = "quickshell";
+    };
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +31,14 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-fresh, flake-utils, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-fresh,
+      flake-utils,
+      ...
+    }@inputs:
     with flake-utils.lib;
     let
 
@@ -51,23 +69,31 @@
         mt = lib.mkUser "mt" system.x86_64-linux nixpkgs-fresh;
         darwin = lib.mkUser "mt" system.aarch64-darwin nixpkgs-fresh;
       };
-    in {
+    in
+    {
       templates = import ./templates;
 
       nixosConfigurations = nixosConfigurations;
       homeConfigurations = homeConfigurations;
-    } // eachSystem [ system.x86_64-linux ] (system:
+    }
+    // eachSystem [ system.x86_64-linux ] (
+      system:
       let
         pkgs = import nixpkgs {
           system = system;
           config.allowUnfree = true;
         };
-      in {
+      in
+      {
         formatter = pkgs.nixpkgs-fmt;
-        packages = import ./packages pkgs;
-        devShells.default = pkgs.mkShell {
-          packages =
-            [ (pkgs.python3.withPackages (pypkgs: with pypkgs; [ requests ])) ];
+        packages = import ./packages {
+          pkgs = pkgs;
+          quickshell = inputs.quickshell;
+          noctalia = inputs.noctalia;
         };
-      });
+        devShells.default = pkgs.mkShell {
+          packages = [ (pkgs.python3.withPackages (pypkgs: with pypkgs; [ requests ])) ];
+        };
+      }
+    );
 }
