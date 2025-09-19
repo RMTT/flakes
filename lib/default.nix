@@ -9,7 +9,6 @@
 }@inputs:
 let
   modulePath = ../nixos/modules;
-  secretsPath = ../secrets/secrets.nix;
 
   modules = {
     base = modulePath + "/base.nix";
@@ -25,7 +24,7 @@ let
     globals = modulePath + "/globals";
     godel = modulePath + "/godel";
     netflow = modulePath + "/netflow";
-    secrets = secretsPath;
+    secrets = modulePath + "/secrets";
   };
 
   overlay-fresh = final: prev: {

@@ -23,6 +23,7 @@
       kubernetes
       kubernetes-helm
       kustomize
+      hugo
     ];
 
   };

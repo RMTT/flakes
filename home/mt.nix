@@ -1,4 +1,11 @@
-{ pkgs, config, lib, system, ... }: {
+{
+  pkgs,
+  config,
+  lib,
+  system,
+  ...
+}:
+{
   imports = [
     ./modules/base.nix
     ./modules/shell.nix
@@ -7,6 +14,7 @@
     ./modules/kitty.nix
     ./modules/gitui.nix
     ./modules/tmux.nix
+    ./modules/claude.nix
 
     # darwin modules
     (if (system == "aarch64-darwin") then ./modules/darwin else ./modules/linux)
@@ -16,7 +24,9 @@
   # configure gpg
   programs.gpg = {
     enable = true;
-    scdaemonSettings = { disable-ccid = true; };
+    scdaemonSettings = {
+      disable-ccid = true;
+    };
   };
   # enable gpg agent
   services.gpg-agent = {
@@ -30,8 +40,9 @@
   };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable =
-    lib.mkIf (config.nixpkgs.system == "aarch64-darwin") (lib.mkForce false);
+  programs.home-manager.enable = lib.mkIf (config.nixpkgs.system == "aarch64-darwin") (
+    lib.mkForce false
+  );
 
   # direnv configuration
   programs.direnv = {

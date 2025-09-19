@@ -141,7 +141,8 @@ with lib;
       moreutils
       sshuttle
       mtr
-      hugo
+      nix-tree
+      nix-du
     ];
 
     # set XDG viarables
@@ -224,7 +225,7 @@ with lib;
         (mkIf config.virtualisation.virtualbox.host.enable "vboxusers")
       ];
       initialHashedPassword = "$y$j9T$v3KSiMJEpJdcbN4osJbMF0$Qfgg9i/ozgLjDhOg/WZmSrg8vuiNQSrSWivWKvjATN7";
-      openssh.authorizedKeys.keyFiles = [ ../../secrets/ssh_key.pub ];
+      openssh.authorizedKeys.keyFiles = [ ./secrets/ssh_key.pub ];
     };
 
     # configure tmux
