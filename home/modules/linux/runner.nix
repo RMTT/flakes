@@ -21,4 +21,10 @@
       }
     '';
   };
+
+  systemd.user.services.elephant = {
+    Unit = {
+      After = [ "graphical-session.target" ];
+    };
+  };
 }

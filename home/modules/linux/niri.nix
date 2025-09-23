@@ -46,12 +46,13 @@
     enable = true;
     timeouts = [
       {
-        timeout = 599;
-        command = "${pkgs.niri}/bin/niri msg action power-off-monitors";
-      }
-      {
         timeout = 600;
         command = "${pkgs.noctalia}/bin/noctalia-shell ipc call lockScreen toggle";
+      }
+      {
+        timeout = 1800;
+        command = "${pkgs.niri}/bin/niri msg action power-off-monitors";
+        # close all monitor will cause systemd-logind starting suspend
       }
     ];
   };
