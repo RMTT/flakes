@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 with lib; {
-  imports = [ ./homebrew.nix ./homebrew.nix ./skhd.nix ];
+  imports = [ ./homebrew.nix ./skhd.nix ../kitty.nix ];
 
   config = {
     programs.home-manager.enable = lib.mkForce false;
@@ -12,6 +12,7 @@ with lib; {
       htop
       nixos-rebuild
       wget
+      kitty
 
       # dev tools
       autoconf

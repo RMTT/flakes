@@ -1,1 +1,2 @@
-cmd - return : open -a /Applications/Kitty.app
+cmd - return : kitty ~
+cmd - 0x32: kitten quick-access-terminal

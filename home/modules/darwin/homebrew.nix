@@ -9,7 +9,6 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (let
     "nextcloud"
     "obsidian"
     "telegram"
-    "kitty"
     "tailscale"
     "wechat"
     "iterm2" # for drop-down term(via hotkey profile)
@@ -18,6 +17,7 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (let
     "zotero"
     "firefox"
     "bitwarden"
+    "iina"
   ];
 
 in with lib; {
