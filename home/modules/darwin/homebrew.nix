@@ -3,7 +3,7 @@ with lib;
 mkIf (config.nixpkgs.system == "aarch64-darwin") (let
   taps = [ ];
 
-  brews = [ "koekeishiya/formulae/skhd" "kubernetes-cli" ];
+  brews = [ "koekeishiya/formulae/skhd" "kubernetes-cli" "node" ];
 
   casks = [
     "nextcloud"

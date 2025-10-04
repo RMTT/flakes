@@ -1,12 +1,4 @@
-{
-  self,
-  home-manager,
-  nur,
-  sops-nix,
-  disko,
-  nixpkgs-fresh,
-  ...
-}@inputs:
+{ self, home-manager, nur, sops-nix, disko, nixpkgs-fresh, ... }@inputs:
 let
   modulePath = ../nixos/modules;
 
@@ -34,17 +26,14 @@ let
     };
   };
 
-in
-{
-  mkSystem =
-    name: system: nixpkgs:
+in {
+  mkSystem = name: system: nixpkgs:
     let
-      collectFlakeInputs =
-        input:
-        [ input ] ++ builtins.concatMap collectFlakeInputs (builtins.attrValues (input.inputs or { }));
+      collectFlakeInputs = input:
+        [ input ] ++ builtins.concatMap collectFlakeInputs
+        (builtins.attrValues (input.inputs or { }));
       overlay-ownpkgs = final: prev: inputs.self.packages.${system};
-    in
-    nixpkgs.lib.nixosSystem {
+    in nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
         modules = modules;
@@ -56,55 +45,46 @@ in
         sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko
-        (
-          { ... }:
-          {
-            nixpkgs.overlays = [
-              overlay-fresh
-              overlay-ownpkgs
-            ];
+        ({ ... }: {
+          nixpkgs.overlays = [ overlay-fresh overlay-ownpkgs ];
 
-            # keep flake sources in system closure
-            # https://github.com/NixOS/nix/issues/3995
-            system.extraDependencies = builtins.concatMap collectFlakeInputs (builtins.attrValues inputs);
-          }
-        )
+          # keep flake sources in system closure
+          # https://github.com/NixOS/nix/issues/3995
+          system.extraDependencies =
+            builtins.concatMap collectFlakeInputs (builtins.attrValues inputs);
+        })
         {
           # nixpkgs will be added automatically
-          nix.registry = builtins.mapAttrs (name: value: { flake = value; }) (
-            builtins.removeAttrs inputs [ "nixpkgs" ]
-          );
+          nix.registry = builtins.mapAttrs (name: value: { flake = value; })
+            (builtins.removeAttrs inputs [ "nixpkgs" ]);
           networking.hostName = name;
         }
       ];
     };
 
-  mkUser =
-    name: system: nixpkgs:
-    let
-      overlay-ownpkgs = final: prev: inputs.self.packages.${system};
-    in
-    home-manager.lib.homeManagerConfiguration {
+  mkUser = name: system: nixpkgs:
+    let overlay-ownpkgs = final: prev: inputs.self.packages.${system};
+    in home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
-      extraSpecialArgs = {
-        system = system;
-      };
+      extraSpecialArgs = { system = system; };
       modules = [
         {
-          nixpkgs.overlays = [ overlay-ownpkgs ];
-          nixpkgs.config = {
-            allowUnfree = true;
-          };
+          nixpkgs.overlays =
+            if (system == "x86_64-linux") then [ overlay-ownpkgs ] else [ ];
+          nixpkgs.config = { allowUnfree = true; };
           programs.home-manager.enable = true;
         }
         inputs.walker.homeManagerModules.default
         nur.modules.homeManager.default
         {
           home.username = name;
-          home.homeDirectory = if (system == "aarch64-darwin") then "/Users/${name}" else "/home/${name}";
+          home.homeDirectory = if (system == "aarch64-darwin") then
+            "/Users/${name}"
+          else
+            "/home/${name}";
         }
         ../home/${name}.nix
       ];
