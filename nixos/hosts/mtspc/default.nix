@@ -94,7 +94,6 @@
   # default shell
   users.users.mt.shell = pkgs.zsh;
   programs.zsh.shellInit = ''
-    export PATH=~/node_modules/.bin:$PATH
     export ANTHROPIC_BASE_URL="$(cat ${config.sops.secrets.claude_base_url.path})"
     export ANTHROPIC_AUTH_TOKEN="$(cat ${config.sops.secrets.claude_token.path})"
   '';
