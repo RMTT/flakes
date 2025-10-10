@@ -100,6 +100,7 @@ with lib;
 
     # system packages
     environment.systemPackages = with pkgs; [
+      fd
       unrar
       smartmontools
       parted

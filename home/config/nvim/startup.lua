@@ -1,3 +1,4 @@
+function setup(lazy_rtp)
 local utility = require('utility')
 
 ---- Options ----
@@ -27,6 +28,8 @@ vim.o.directory = vim.fn.stdpath('data') .. '/swap'
 
 vim.o.shadafile = "NONE"
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.o.termguicolors = true
 
 -- make sure the dir is exist
@@ -47,10 +50,18 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 })
 ---- end ----
 
----- load plugins ----
-require('plugins')
----- end ----
+require("lazy").setup("plugins", {
+  performance = {
+    rtp = {
+      paths = { lazy_rtp }
+    }
+  }
+})
 
----- load mappings ----
+-- load lspconfig
+require('lsp')
+
 require('mapping')
----- end ----
+end
+
+return setup
