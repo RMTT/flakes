@@ -258,7 +258,6 @@ with lib;
         vaapiVdpau
         intel-vaapi-driver
         libvdpau-va-gl
-        amdvlk
       ];
     };
 
