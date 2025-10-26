@@ -79,6 +79,7 @@ in {
         }
         inputs.walker.homeManagerModules.default
         nur.modules.homeManager.default
+        sops-nix.homeManagerModules.sops
         {
           home.username = name;
           home.homeDirectory = if (system == "aarch64-darwin") then
