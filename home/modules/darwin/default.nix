@@ -15,6 +15,7 @@ with lib; {
       kitty
 
       # dev tools
+      cmake
       autoconf
       automake
       glibtool

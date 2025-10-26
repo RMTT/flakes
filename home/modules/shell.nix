@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
 
   # bash configuration
   programs.bash.enable = true;
@@ -34,7 +35,7 @@
     then
       eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
-                    		'';
+  '';
 
   # startship configuration
   programs.starship = {
