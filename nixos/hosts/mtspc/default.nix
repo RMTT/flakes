@@ -93,14 +93,6 @@
 
   # default shell
   users.users.mt.shell = pkgs.zsh;
-  programs.zsh.shellInit = ''
-    export ANTHROPIC_BASE_URL="$(cat ${config.sops.secrets.claude_base_url.path})"
-    export ANTHROPIC_AUTH_TOKEN="$(cat ${config.sops.secrets.claude_token.path})"
-    export CLAUDE_CODE_ENABLE_TELEMETRY=0
-    export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-    export DISABLE_ERROR_REPORTING=1
-    export DISABLE_TELEMETRY=1
-  '';
 
   # additional system packages
   environment.systemPackages = with pkgs; [
