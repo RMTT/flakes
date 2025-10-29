@@ -47,7 +47,7 @@
     timeouts = [
       {
         timeout = 600;
-        command = "${pkgs.noctalia}/bin/noctalia-shell ipc call lockScreen toggle";
+        command = "${pkgs.noctalia}/bin/noctalia-shell ipc call lockScreen lock";
       }
       # {
       #   timeout = 1800;
