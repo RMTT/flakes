@@ -113,8 +113,8 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return { spawn "kitty"; }
-    Mod+R { spawn "walker"; }
-    Ctrl+Alt+L { spawn "hyprlock"; }
+    Mod+R { spawn "vicinae" "toggle"; }
+    Ctrl+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
     Mod+E { spawn "nautilus"; }
 
     Mod+Shift+S { spawn "screenshot"; }

@@ -1,25 +1,44 @@
 # services order: gost + netflow -> netflow-update -> mosdns
 # workflow: after gost launched, it'd download subcriptions and this process doesn't need outer dns.
 # Then the proxy can be used to download other resources(netflow-update)
-# dns cache located in clash and mosdns
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   stateDir = "/var/lib/netflow";
   fwmark = "5000";
   cfg = config.services.netflow;
-in {
+in
+{
   options = {
-    services.netflow = { interface = lib.mkOption { type = lib.types.str; }; };
+    services.netflow = {
+      interface = lib.mkOption { type = lib.types.str; };
+    };
   };
-  imports = [ ./secrets.nix ../services/gost.nix ];
+  imports = [
+    ./secrets.nix
+    ../services/gost.nix
+  ];
   config = {
-    boot.kernelModules = [ "nf_tproxy_ipv6" "nf_tproxy_ipv4" "nft_tproxy" ];
+    boot.kernelModules = [
+      "nf_tproxy_ipv6"
+      "nf_tproxy_ipv4"
+      "nft_tproxy"
+    ];
 
-    services.gost = { enable = true; };
+    services.gost = {
+      enable = true;
+    };
 
     systemd.services.netflow = {
       wantedBy = [ "multi-user.target" ];
-      path = [ pkgs.iproute2 pkgs.coreutils ];
+      path = [
+        pkgs.iproute2
+        pkgs.coreutils
+      ];
       script = ''
         if [ ! -d "${stateDir}" ]; then
           mkdir -p ${stateDir}
@@ -40,7 +59,9 @@ in {
         fi
         cp ${./sets/reserve_domains.txt} "${stateDir}/reserve_domains.txt"
       '';
-      serviceConfig = { Type = "oneshot"; };
+      serviceConfig = {
+        Type = "oneshot";
+      };
     };
 
     systemd.services.netflow-update = {
@@ -51,7 +72,11 @@ in {
         "nftables.service"
       ];
       wantedBy = [ "multi-user.target" ];
-      path = [ pkgs.python3 pkgs.curl pkgs.nftables ];
+      path = [
+        pkgs.python3
+        pkgs.curl
+        pkgs.nftables
+      ];
       environment = {
         ALL_PROXY = "socks5://127.0.0.1:7891";
         HTTP_PROXY = "socks5://127.0.0.1:7891";
@@ -73,37 +98,42 @@ in {
         done
 
         # update domain list
-        curl -s 'https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf' -o ${stateDir}/chnlist.txt.new
+        curl -s -f -m 30 'https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf' -o ${stateDir}/chnlist.txt.new
+        if [ "$?" = "0" ]; then
+          python ${./convert.py} domain ${stateDir}/chnlist.txt.new ${stateDir}/chnlist.txt.new
 
-        python ${
-          ./convert.py
-        } domain ${stateDir}/chnlist.txt.new ${stateDir}/chnlist.txt.new
+          old_md5=$(md5sum ${stateDir}/chnlist.txt)
+          new_md5=$(md5sum ${stateDir}/chnlist.txt.new)
 
-        old_md5=$(md5sum ${stateDir}/chnlist.txt)
-        new_md5=$(md5sum ${stateDir}/chnlist.txt.new)
-
-        if [ "$old_md5" != "$new_md5" ]; then
-          mv ${stateDir}/chnlist.txt.new ${stateDir}/chnlist.txt
+          if [ "$old_md5" != "$new_md5" ]; then
+            mv ${stateDir}/chnlist.txt.new ${stateDir}/chnlist.txt
+          fi
         fi
 
         # update ip list
-        curl -s 'https://raw.githubusercontent.com/fernvenue/chn-cidr-list/master/ipv4.txt' -o ${stateDir}/ipv4_list.txt
-        curl -s 'https://raw.githubusercontent.com/fernvenue/chn-cidr-list/master/ipv6.txt' -o ${stateDir}/ipv6_list.txt
+        curl -s -f -m 30 'https://raw.githubusercontent.com/fernvenue/chn-cidr-list/master/ipv4.txt' -o ${stateDir}/ipv4_list.txt
+        if [ "$?" = "0" ]; then
+          python ${./convert.py} ip --set 'inet netflow direct4' ${stateDir}/ipv4_list.txt ${stateDir}/ipv4_list.nft
+          nft -f ${stateDir}/ipv4_list.nft
+        fi
 
-        python ${
-          ./convert.py
-        } ip --set 'inet netflow direct4' ${stateDir}/ipv4_list.txt ${stateDir}/ipv4_list.nft
-        nft -f ${stateDir}/ipv4_list.nft
 
-        python ${
-          ./convert.py
-        } ip --set 'inet netflow direct6' ${stateDir}/ipv6_list.txt ${stateDir}/ipv6_list.nft
-        nft -f ${stateDir}/ipv6_list.nft
+        curl -s -f -m 30 'https://raw.githubusercontent.com/fernvenue/chn-cidr-list/master/ipv6.txt' -o ${stateDir}/ipv6_list.txt
+        if [ "$?" = "0" ]; then
+          python ${./convert.py} ip --set 'inet netflow direct6' ${stateDir}/ipv6_list.txt ${stateDir}/ipv6_list.nft
+          nft -f ${stateDir}/ipv6_list.nft
+        fi
       '';
-      serviceConfig = { Type = "oneshot"; };
+      serviceConfig = {
+        Type = "oneshot";
+      };
     };
     systemd.timers.netflow-update = {
-      after = [ "netflow.service" "network-online.service" "gost.service" ];
+      after = [
+        "netflow.service"
+        "network-online.service"
+        "gost.service"
+      ];
       wantedBy = [ "multi-user.target" ];
       timerConfig = {
         OnCalendar = "daily";
@@ -113,14 +143,23 @@ in {
 
     # mosdns needs chnlist for work, so wait until netflow-update completing
     systemd.services.mosdns = {
-      after = [ "netflow.service" "gost.service" ];
+      after = [
+        "netflow.service"
+        "gost.service"
+      ];
       wantedBy = [ "multi-user.target" ];
       path = [ pkgs.mosdns ];
       script = "mosdns start -c ${./mosdns.yaml}";
-      serviceConfig = { Type = "simple"; };
+      serviceConfig = {
+        Type = "simple";
+      };
     };
     systemd.paths.chnlist = {
-      after = [ "gost.service" "netflow.service" "netflow-update.service" ];
+      after = [
+        "gost.service"
+        "netflow.service"
+        "netflow-update.service"
+      ];
       pathConfig = {
         PathChanged = "${stateDir}";
         Unit = "mosdns.service";
@@ -134,7 +173,7 @@ in {
         define FWMARK=${fwmark}
         define PROXY_MARK=5001
 
-        define proxy_protocols = { tcp }
+        define proxy_protocols = { tcp, udp }
 
         include "${./sets/reserve.nft}"
 
@@ -209,7 +248,6 @@ in {
       family = "inet";
     };
 
-    networking.firewall.extraReversePathFilterRules =
-      "meta mark ${fwmark} accept";
+    networking.firewall.extraReversePathFilterRules = "meta mark ${fwmark} accept";
   };
 }

@@ -20,7 +20,6 @@ plugins:
     - tag: forward_proxy
       args:
         upstreams:
-          - addr: https://1.1.1.1/dns-query
           - addr: https://8.8.8.8/dns-query
       type: forward
 

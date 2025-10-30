@@ -4,3 +4,8 @@ rmtt.tech
 
 
 fernvenue.com
+
+canada.ca
+gc.ca
+ca-central-1.amazonaws.com
+hcaptcha.com
