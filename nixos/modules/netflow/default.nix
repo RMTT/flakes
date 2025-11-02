@@ -29,8 +29,12 @@ in
       "nft_tproxy"
     ];
 
-    services.gost = {
+    # services.gost = {
+    #   enable = true;
+    # };
+    services.singbox = {
       enable = true;
+      configFile = config.sops.secrets.singbox.path;
     };
 
     systemd.services.netflow = {
