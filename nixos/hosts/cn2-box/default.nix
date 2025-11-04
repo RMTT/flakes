@@ -39,7 +39,7 @@ with lib;
       fs.normal.volumes = {
         "/" = {
           fsType = "ext4";
-          label = "@";
+          device = "e0e4c021-ac04-4a4f-8937-0b2bd63109e5";
           options = [
             "noatime"
             "data=writeback"
@@ -49,7 +49,7 @@ with lib;
           ];
         };
       };
-      fs.swap.label = "@swap";
+      fs.swap.device = "b9d2021e-473b-408e-8363-a9d06418c99c";
 
       networking.firewall.allowedTCPPorts = [
         80
