@@ -51,10 +51,27 @@ with lib;
       };
       fs.swap.label = "@swap";
 
+      networking.firewall.allowedTCPPorts = [
+        80
+        443
+      ];
+
+      services.uptime-kuma = {
+        enable = true;
+        settings = {
+          UPTIME_KUMA_HOST = "127.0.0.1";
+          UPTIME_KUMA_PORT = "3001";
+        };
+      };
+      systemd.services.uptime-kuma.path = [ pkgs.cloudflared ];
+
       services.godel = {
         enable = true;
         network = infra_network;
-        extra_network = [ "${infra_node_ip}/32" ];
+        extra_network = [
+          "${infra_node_ip}/32"
+          "10.42.3.0/24"
+        ];
         extra_ip = [ "${infra_node_ip}/32" ];
         mode = "netns";
         public = true;

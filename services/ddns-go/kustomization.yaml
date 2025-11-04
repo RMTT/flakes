@@ -1,8 +1,0 @@
-resources:
-  - namespace.yaml
-  - volume.yaml
-  - deployment.yaml
-
-namespace: ddns-go
-commonLabels:
-  app: ddns-go

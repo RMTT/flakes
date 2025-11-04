@@ -1,4 +1,5 @@
-{ modules, ... }: {
+{ modules, ... }:
+{
   imports = with modules; [ secrets ];
   sops.secrets.aronet = {
     mode = "0400";

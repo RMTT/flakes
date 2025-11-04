@@ -1,0 +1,16 @@
+resources:
+  - namespace.yaml
+
+labels:
+  - pairs:
+      app: open-webui
+
+namespace: open-webui
+
+helmCharts:
+  - name: open-webui
+    releaseName: open-webui
+    namespace: open-webui
+    repo: https://helm.openwebui.com/
+    version: 8.12.2
+    valuesFile: values.yaml.dec

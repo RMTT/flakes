@@ -49,13 +49,10 @@
 
       nixosConfigurations = {
         mtspc = lib.mkSystem "mtspc" system.x86_64-linux nixpkgs-fresh;
-        mtslaptop = lib.mkSystem "mtslaptop" system.x86_64-linux nixpkgs-fresh;
 
         homeserver = lib.mkSystem "homeserver" system.x86_64-linux nixpkgs;
 
         router = lib.mkSystem "router" system.x86_64-linux nixpkgs;
-
-        cn2-la = lib.mkSystem "cn2-la" system.x86_64-linux nixpkgs;
 
         cn2-box = lib.mkSystem "cn2-box" system.x86_64-linux nixpkgs;
 

@@ -80,7 +80,11 @@ with lib;
 
     # timezone
     time.timeZone = "Asia/Shanghai";
-    time.hardwareClockInLocalTime = true;
+    networking.timeServers = [
+      "ntp.aliyun.com"
+      "time.apple.com"
+      "time.asia.apple.com"
+    ];
 
     # locale
     i18n.defaultLocale = "en_US.UTF-8";

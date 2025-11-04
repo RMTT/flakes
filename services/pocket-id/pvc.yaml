@@ -1,12 +1,12 @@
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: chat-pgdata
+  name: pocket-id-data
+  namespace: pocket-id
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   storageClassName: local-path
   resources:
     requests:
-      storage: 1Gi
+      storage: 5Gi

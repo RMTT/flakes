@@ -7,5 +7,5 @@ helmCharts:
 - name: cloudnative-pg
   includeCRDs: true
   releaseName: cloudnative-pg
-  version: 0.22.1
+  version: 0.26.1
   repo: https://cloudnative-pg.github.io/charts

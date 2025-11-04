@@ -1,0 +1,12 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: open-webui
+spec:
+  instances: 1
+  affinity:
+    nodeSelector:
+      kubernetes.io/hostname: "homeserver"
+  storage:
+    storageClass: local-path
+    size: 2Gi

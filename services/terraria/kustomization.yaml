@@ -1,9 +1,0 @@
-resources:
-  - namespace.yaml
-  - deployment.yaml
-
-namespace: terraria
-labels:
-  - pairs:
-      app: terraria
-    includeSelectors: true
