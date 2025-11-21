@@ -41,6 +41,14 @@
       "ssd"
       "space_cache=v2"
     ];
+    "/toplevel" = [
+      "subvol=/"
+      "compress=zstd"
+      "rw"
+      "relatime"
+      "ssd"
+      "space_cache=v2"
+    ];
   };
   fs.boot.device = "8220-7E12";
   fs.swap.device = "ce573198-7727-4c4e-b119-b85e50341830";
@@ -103,10 +111,6 @@
   programs.steam = {
     enable = true;
     extest.enable = true;
-  };
-
-  virtualisation.docker = {
-    storageDriver = "btrfs";
   };
 
   virtualisation.libvirtd.enable = true;

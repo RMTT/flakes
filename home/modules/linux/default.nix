@@ -33,4 +33,8 @@
   home.file.".npmrc".text = ''
     prefix = ''${HOME}/.npm-packages
   '';
+
+  xresources.properties = {
+    "Xft.dpi" = 120;
+  };
 }

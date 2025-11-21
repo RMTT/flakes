@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   config = {
     # add development tools
     environment.systemPackages = with pkgs; [
@@ -25,6 +26,8 @@
       kubernetes-helm
       kustomize
       hugo
+      uv
+      python3
     ];
 
   };

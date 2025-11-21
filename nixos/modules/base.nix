@@ -121,7 +121,6 @@ with lib;
       inetutils
       fastfetch
       zsh
-      python3
       tmux
       ripgrep
       iptables
@@ -226,7 +225,7 @@ with lib;
         "users"
         "uinput"
         "i2c"
-        (mkIf config.virtualisation.libvirtd.enable "libvirt")
+        (mkIf config.virtualisation.libvirtd.enable "libvirtd")
         (mkIf config.virtualisation.virtualbox.host.enable "vboxusers")
       ];
       initialHashedPassword = "$y$j9T$v3KSiMJEpJdcbN4osJbMF0$Qfgg9i/ozgLjDhOg/WZmSrg8vuiNQSrSWivWKvjATN7";
