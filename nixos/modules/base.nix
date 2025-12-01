@@ -147,6 +147,7 @@ with lib;
       mtr
       nix-tree
       nix-du
+      tree
     ];
 
     # set XDG viarables

@@ -120,6 +120,10 @@
     openFirewall = true;
   };
 
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
   services.meshcentral.enable = true;
   services.logind.settings.Login = {
     IdleAction = "ignore";
