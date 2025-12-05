@@ -2,7 +2,6 @@
 {
   imports = [
     ./services/pppoe.nix
-    ./services/rke2.nix
     ./services/udp2raw.nix
     ./services/socat.nix
     ./services/aronet.nix

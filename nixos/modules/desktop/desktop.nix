@@ -24,7 +24,7 @@ with lib;
       zotero
       anki
       tela-icon-theme
-      bitwarden
+      bitwarden-desktop
       solaar
       virt-manager
       easyeffects
@@ -71,7 +71,7 @@ with lib;
         addons = with pkgs; [
           fcitx5-mozc
           fcitx5-gtk
-          fcitx5-chinese-addons
+          qt6Packages.fcitx5-chinese-addons
           fcitx5-material-color
           fcitx5-pinyin-moegirl
           fcitx5-pinyin-zhwiki
@@ -86,7 +86,7 @@ with lib;
       noto-fonts
       sarasa-gothic
       joypixels
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       nerd-fonts.fira-code
       inter
       roboto

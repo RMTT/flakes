@@ -2,7 +2,7 @@
   description = "mt's configuration of machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-fresh.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-testing.url = "github:rmtt/nixpkgs";
 
@@ -17,7 +17,6 @@
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-fresh";
-      inputs.quickshell.follows = "quickshell";
     };
 
     vicinae = {

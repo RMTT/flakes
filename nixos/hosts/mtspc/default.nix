@@ -122,7 +122,7 @@
 
   services.ollama = {
     enable = true;
-    acceleration = "cuda";
+    package = pkgs.ollama-cuda;
   };
   services.meshcentral.enable = true;
   services.logind.settings.Login = {
