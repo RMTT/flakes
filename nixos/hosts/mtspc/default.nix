@@ -73,6 +73,7 @@
   boot.initrd.kernelModules = [ "nvidia" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
     modesetting.enable = true;
     prime = {
       nvidiaBusId = "PCI:1:0:0";
