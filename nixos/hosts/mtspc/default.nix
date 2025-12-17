@@ -14,7 +14,6 @@
     desktop
     developments
     services
-    docker
 
     ./secrets
     ./vm.nix
@@ -125,8 +124,18 @@
     enable = true;
     package = pkgs.ollama-cuda;
   };
-  services.meshcentral.enable = true;
   services.logind.settings.Login = {
     IdleAction = "ignore";
   };
+
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings = {
+      iptables = false;
+      ip6tables = false;
+      ipv6 = true;
+      fixed-cidr-v6 = "2001:db8:ffff::/64";
+    };
+  };
+
 }

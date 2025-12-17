@@ -57,6 +57,8 @@
 
         de-hz = lib.mkSystem "de-hz" system.x86_64-linux nixpkgs;
 
+        rack = lib.mkSystem "rack" system.x86_64-linux nixpkgs;
+
         # for nixd language server
         nixd = lib.mkSystem "nixd" system.x86_64-linux nixpkgs;
 

@@ -2,6 +2,10 @@
 {
   config = {
     # add development tools
+    programs.wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+    };
     environment.systemPackages = with pkgs; [
       gcc
       gdb

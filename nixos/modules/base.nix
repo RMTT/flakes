@@ -148,6 +148,7 @@ with lib;
       nix-tree
       nix-du
       tree
+      zfs
     ];
 
     # set XDG viarables
@@ -226,6 +227,7 @@ with lib;
         "users"
         "uinput"
         "i2c"
+        "wireshark"
         (mkIf config.virtualisation.libvirtd.enable "libvirtd")
         (mkIf config.virtualisation.virtualbox.host.enable "vboxusers")
       ];

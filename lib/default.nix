@@ -18,7 +18,6 @@ let
     nvidia = modulePath + "/nvidia.nix";
     developments = modulePath + "/developments.nix";
     services = modulePath + "/services.nix";
-    docker = modulePath + "/docker.nix";
     wireguard = modulePath + "/wireguard.nix";
     gravity = modulePath + "/gravity";
     globals = modulePath + "/globals";

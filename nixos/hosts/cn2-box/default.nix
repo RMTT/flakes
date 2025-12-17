@@ -20,8 +20,7 @@ with lib;
 
   config =
     let
-      infra_node_ip = "192.168.128.6";
-      infra_network = "fd97:1208:0:3::1/64";
+      infra_node_ip = "100.100.128.2";
       wan = "eth0";
     in
     {
@@ -67,17 +66,9 @@ with lib;
 
       services.godel = {
         enable = true;
-        network = infra_network;
-        extra_network = [
-          "${infra_node_ip}/32"
-          "10.42.3.0/24"
-        ];
-        extra_ip = [ "${infra_node_ip}/32" ];
-        mode = "netns";
-        public = true;
-
+        extra_routes = "10.42.3.0/24";
         k3s = {
-          enable = true;
+          enable = false;
           node-ip = infra_node_ip;
           role = "agent";
         };

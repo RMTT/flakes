@@ -3,7 +3,7 @@
 
   sops.secrets.godel = {
     mode = "0400";
-    sopsFile = ./private;
+    sopsFile = ./authkey;
     format = "binary";
   };
   sops.secrets.k3s-token = {
