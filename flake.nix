@@ -59,6 +59,8 @@
 
         rack = lib.mkSystem "rack" system.x86_64-linux nixpkgs;
 
+        kube-runner = lib.mkSystem "kube-runner" system.x86_64-linux nixpkgs;
+
         # for nixd language server
         nixd = lib.mkSystem "nixd" system.x86_64-linux nixpkgs;
 

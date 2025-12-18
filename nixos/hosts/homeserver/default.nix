@@ -40,6 +40,14 @@
         "net.ipv6.route.max_size" = 409600;
       };
       networking.hostId = "33f2bdce";
+      boot.kernelParams = [ "intel_iommu=on" ];
+      boot.initrd.kernelModules = [
+        "vfio_pci"
+        "vfio"
+        "vfio_iommu_type1"
+
+        "i915"
+      ];
 
       # gpu setting
       services.xserver.videoDrivers = [ "i915" ];
@@ -127,17 +135,6 @@
         package = pkgs.incus;
         ui.enable = true;
       };
-
-      # services.godel = {
-      #   enable = true;
-      #   extra_routes = "10.42.1.0/24";
-      #   k3s = {
-      #     enable = false;
-      #     node-ip = infra_node_ip;
-      #     node-labels = [ "intel.feature.node.kubernetes.io/gpu=true" ];
-      #     role = "agent";
-      #   };
-      # };
 
       services.prometheus = {
         exporters.node.enable = true;
