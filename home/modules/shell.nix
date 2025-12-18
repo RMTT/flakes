@@ -35,6 +35,11 @@
     then
       eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
+
+    if [ "$TERM" = "xterm-kitty" ]; then
+      ssh="kitten ssh"
+    fi
+
   '';
 
   # startship configuration
