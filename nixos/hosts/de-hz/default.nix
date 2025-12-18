@@ -36,9 +36,9 @@ with lib;
 
       services.godel = {
         enable = true;
-        extra_routes = "10.42.2.0/24";
+        extra_routes = "10.42.3.0/24";
         k3s = {
-          enable = false;
+          enable = true;
           node-ip = infra_node_ip;
           role = "agent";
         };
