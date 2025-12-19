@@ -2,17 +2,11 @@
   pkgs,
   lib,
   config,
-  modules,
   modulesPath,
   ...
 }:
-with lib;
 {
-  imports = with modules; [
-    base
-    networking
-    globals
-    godel
+  imports = [
     ./disk-config.nix
     (modulesPath + "/profiles/qemu-guest.nix")
     ./secrets
@@ -29,10 +23,10 @@ with lib;
       hardware.cpu.intel.updateMicrocode = true;
       networking.useNetworkd = true;
 
+      machine.graphics.enable = false;
       boot.loader.systemd-boot.enable = lib.mkForce false;
       boot.loader.grub.enable = lib.mkForce true;
       boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
-      base.gl.enable = false;
 
       services.godel = {
         enable = true;

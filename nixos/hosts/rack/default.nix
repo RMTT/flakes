@@ -2,18 +2,12 @@
   pkgs,
   lib,
   config,
-  modules,
   modulesPath,
   ...
 }:
 with lib;
 {
-  imports = with modules; [
-    base
-    fs
-    networking
-    globals
-    godel
+  imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     ./secrets
     ./disk-config.nix
@@ -30,12 +24,12 @@ with lib;
       hardware.cpu.intel.updateMicrocode = true;
       networking.useNetworkd = true;
 
+      machine.graphics.enable = false;
       boot.loader.systemd-boot.enable = lib.mkForce false;
       boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
       boot.loader.grub = {
         enable = lib.mkForce true;
       };
-      base.gl.enable = false;
       zramSwap = {
         enable = true;
         memoryPercent = 25;

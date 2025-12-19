@@ -24,6 +24,7 @@
   programs.zsh.defaultKeymap = "viins";
   programs.zsh.localVariables = {
     SSH_AUTH_SOCK = "$(gpgconf --list-dirs agent-ssh-socket)";
+    GPG_TTY = "$(tty)";
   };
   programs.zsh.initContent = ''
     if command -v kubectl &> /dev/null
@@ -39,7 +40,6 @@
     if [ "$TERM" = "xterm-kitty" ]; then
       ssh="kitten ssh"
     fi
-
   '';
 
   # startship configuration

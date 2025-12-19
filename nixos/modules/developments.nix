@@ -1,6 +1,22 @@
-{ pkgs, ... }:
 {
-  config = {
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+let
+  cfg = config.machine.development;
+in
+with lib;
+{
+  options.machine.development = {
+    enable = mkOption {
+      type = types.bool;
+      description = "install development tools";
+      default = false;
+    };
+  };
+  config = mkIf cfg.enable {
     # add development tools
     programs.wireshark = {
       enable = true;

@@ -32,7 +32,6 @@ let
       config.allowUnfree = true;
     };
   };
-
 in
 {
   mkSystem =

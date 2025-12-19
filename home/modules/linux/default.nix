@@ -17,6 +17,7 @@
       package = pkgs.numix-icon-theme;
     };
   };
+  home.packages = with pkgs; [ gitui ];
 
   home.pointerCursor = {
     gtk.enable = true;

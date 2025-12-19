@@ -6,18 +6,18 @@
   ...
 }:
 let
-  cfg = config.base;
+  cfg = config.machine.base;
 in
 with lib;
 {
-  options.base = {
-    gl.enable = mkOption {
+  options.machine.base = {
+    enable = mkOption {
       type = types.bool;
       default = true;
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     # enable unfree pkgs
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.joypixels.acceptLicense = true;
@@ -25,15 +25,14 @@ with lib;
 
     # binary cache
     nix.settings.substituters = [
-      "https://cache.garnix.io"
       "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://nix-community.cachix.org"
     ];
     nix.settings.trusted-public-keys = [
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
     nix.settings.trusted-users = [
       "root"
-      "mt"
     ];
     nix.optimise.automatic = true;
     nix.gc.automatic = true;
@@ -58,6 +57,7 @@ with lib;
     boot.supportedFilesystems = [
       "ntfs"
       "btrfs"
+      "zfs"
     ];
 
     # common initrd options
@@ -204,37 +204,6 @@ with lib;
       '';
     };
 
-    # main user
-    security.sudo = {
-      wheelNeedsPassword = false;
-    };
-    users.mutableUsers = true;
-    users.groups.mt = {
-      gid = 1000;
-    };
-    users.users.mt = {
-      isNormalUser = true;
-      home = "/home/mt";
-      description = "mt";
-      group = "mt";
-      uid = 1000;
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-        (mkIf config.virtualisation.docker.enable "docker")
-        "video"
-        "kvm"
-        "users"
-        "uinput"
-        "i2c"
-        "wireshark"
-        (mkIf config.virtualisation.libvirtd.enable "libvirtd")
-        (mkIf config.virtualisation.virtualbox.host.enable "vboxusers")
-      ];
-      initialHashedPassword = "$y$j9T$v3KSiMJEpJdcbN4osJbMF0$Qfgg9i/ozgLjDhOg/WZmSrg8vuiNQSrSWivWKvjATN7";
-      openssh.authorizedKeys.keyFiles = [ ./secrets/ssh_key.pub ];
-    };
-
     # configure tmux
     programs.tmux = {
       enable = true;
@@ -254,20 +223,6 @@ with lib;
       enable = true;
       mode = "challenge-response";
     };
-
-    # opengl and hardware acc
-    hardware.graphics = mkIf cfg.gl.enable {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        libva
-        libva-vdpau-driver
-        intel-vaapi-driver
-        libvdpau-va-gl
-      ];
-    };
-
     services.fwupd.enable = true;
-
   };
 }

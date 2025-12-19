@@ -31,55 +31,28 @@
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    colmena.url = "github:zhaofengli/colmena";
+    colmena.inputs.nixpkgs.follows = "nixpkgs-fresh";
   };
 
   outputs =
     {
-      self,
       nixpkgs,
-      nixpkgs-fresh,
       flake-utils,
+      colmena,
       ...
     }@inputs:
     with flake-utils.lib;
-    let
-
-      lib = import ./lib inputs;
-
-      nixosConfigurations = {
-        mtspc = lib.mkSystem "mtspc" system.x86_64-linux nixpkgs-fresh;
-
-        homeserver = lib.mkSystem "homeserver" system.x86_64-linux nixpkgs;
-
-        router = lib.mkSystem "router" system.x86_64-linux nixpkgs;
-
-        cn2-box = lib.mkSystem "cn2-box" system.x86_64-linux nixpkgs;
-
-        de-hz = lib.mkSystem "de-hz" system.x86_64-linux nixpkgs;
-
-        rack = lib.mkSystem "rack" system.x86_64-linux nixpkgs;
-
-        kube-runner = lib.mkSystem "kube-runner" system.x86_64-linux nixpkgs;
-
-        # for nixd language server
-        nixd = lib.mkSystem "nixd" system.x86_64-linux nixpkgs;
-
-        # for testing
-        test = lib.mkSystem "test" system.x86_64-linux inputs.nixpkgs-testing;
-      };
-
-      homeConfigurations = {
-        mt = lib.mkUser "mt" system.x86_64-linux nixpkgs-fresh;
-        darwin = lib.mkUser "mt" system.aarch64-darwin nixpkgs-fresh;
-      };
-    in
-    {
+    rec {
       templates = import ./templates;
 
-      nixosConfigurations = nixosConfigurations;
-      homeConfigurations = homeConfigurations;
+      colmenaHive = import ./nixos/hive.nix inputs;
+      nixosConfigurations = colmenaHive.nodes;
+      nixosModules = import ./nixos/modules.nix;
+      homeConfigurations = import ./home inputs;
     }
-    // eachSystem [ system.x86_64-linux ] (
+    // eachSystem [ system.x86_64-linux system.aarch64-darwin ] (
       system:
       let
         pkgs = import nixpkgs {
@@ -89,11 +62,15 @@
       in
       {
         formatter = pkgs.nixpkgs-fmt;
-        packages = import ./packages {
-          pkgs = pkgs;
-          quickshell = inputs.quickshell;
-          noctalia = inputs.noctalia;
-        };
+        packages =
+          (import ./packages {
+            pkgs = pkgs;
+            quickshell = inputs.quickshell;
+            noctalia = inputs.noctalia;
+          })
+          // {
+            colmena = colmena.packages.${system}.colmena;
+          };
         devShells.default = pkgs.mkShell {
           packages = [ (pkgs.python3.withPackages (pypkgs: with pypkgs; [ requests ])) ];
         };

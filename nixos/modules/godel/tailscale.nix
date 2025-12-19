@@ -29,6 +29,9 @@ in
       ];
     };
     # for peer relay
-    networking.firewall.allowedUDPPorts = [ 40000 ];
+    networking.firewall.allowedUDPPorts = [
+      40000
+      3478
+    ];
   };
 }

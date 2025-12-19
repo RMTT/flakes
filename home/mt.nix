@@ -14,8 +14,8 @@
     ./modules/kitty.nix
     ./modules/gitui.nix
     ./modules/tmux.nix
-    ./modules/claude.nix
-    ./secrets
+    #    ./modules/claude.nix
+    #    ./secrets
 
     # darwin modules
     (if (system == "aarch64-darwin") then ./modules/darwin else ./modules/linux)

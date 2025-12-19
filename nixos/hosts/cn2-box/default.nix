@@ -2,18 +2,11 @@
   pkgs,
   lib,
   config,
-  modules,
   modulesPath,
   ...
 }:
-with lib;
 {
-  imports = with modules; [
-    base
-    fs
-    networking
-    globals
-    godel
+  imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     ./secrets
   ];
@@ -34,11 +27,9 @@ with lib;
       boot.loader.grub.device = "/dev/sda";
       boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
 
-      base.gl.enable = false;
-      fs.normal.volumes = {
+      machine.graphics.enable = false;
+      fileSystems = {
         "/" = {
-          fsType = "ext4";
-          device = "e0e4c021-ac04-4a4f-8937-0b2bd63109e5";
           options = [
             "noatime"
             "data=writeback"
@@ -46,9 +37,11 @@ with lib;
             "nobh"
             "errors=remount-ro"
           ];
+          fsType = "ext4";
+          device = "UUID=e0e4c021-ac04-4a4f-8937-0b2bd63109e5";
         };
       };
-      fs.swap.device = "b9d2021e-473b-408e-8363-a9d06418c99c";
+      swapDevices = [ { device = "/dev/disk/by-uuid/b9d2021e-473b-408e-8363-a9d06418c99c"; } ];
 
       networking.firewall.allowedTCPPorts = [
         80

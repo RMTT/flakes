@@ -1,6 +1,6 @@
-{ modules, ... }: {
-  imports = with modules; [ secrets ];
-
+{ ... }:
+{
+  machine.secrets.enable = true;
   sops.secrets.grafana-token = {
     mode = "0400";
     sopsFile = ./grafana-token;

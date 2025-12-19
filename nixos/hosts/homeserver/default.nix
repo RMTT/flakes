@@ -1,28 +1,16 @@
 {
   config,
   pkgs,
-  modules,
   lib,
   ...
 }:
 {
-  imports = with modules; [
-    base
-    fs
-    networking
-    services
-    globals
-    godel
-    gravity
+  imports =  [
     ./secrets
     ./disk-config.nix
   ];
 
   config =
-    let
-      infra_node_ip = "100.100.128.1/32";
-      wan = "enp2s0";
-    in
     {
       system.stateVersion = "25.05";
       zramSwap = {
@@ -30,16 +18,11 @@
         memoryPercent = 20;
       };
       hardware.cpu.intel.updateMicrocode = true;
-      boot.supportedFilesystems = {
-        btrfs = true;
-        zfs = true; # for incus
-      };
       services.zfs.trim.enable = true;
       boot.kernel.sysctl = {
         "vm.overcommit_memory" = 1;
         "net.ipv6.route.max_size" = 409600;
       };
-      networking.hostId = "33f2bdce";
       boot.kernelParams = [ "intel_iommu=on" ];
       boot.initrd.kernelModules = [
         "vfio_pci"
@@ -50,7 +33,8 @@
       ];
 
       # gpu setting
-      services.xserver.videoDrivers = [ "i915" ];
+      # services.xserver.videoDrivers = [ "i915" ];
+      machine.graphics.enable = false;
 
       networking.useNetworkd = true;
 

@@ -42,7 +42,6 @@ in
           };
 
       yaml = pkgs.formats.yaml { };
-      json = pkgs.formats.json { };
     in
     mkIf cfg.enable {
       services.k3s = {
@@ -58,7 +57,7 @@ in
       };
 
       systemd.services.k3s.path = with pkgs; [ nftables ];
-      networking.firewall.trustedSubnets.ipv4 = [
+      networking.firewall.trustedIpv4 = [
         # need pass pod id to let pod access api server which listend on the node-ip
         "10.42.0.0/16" # pod ip range
       ];

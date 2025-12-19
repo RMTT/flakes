@@ -13,14 +13,13 @@ with lib;
   ];
 
   config = {
-    programs.home-manager.enable = lib.mkForce false;
+    programs.home-manager.enable = true;
 
     home.packages = with pkgs; [
       nerd-fonts.fira-code
       sshuttle
       lima # for running x86 vms and containers
       htop
-      nixos-rebuild
       wget
       kitty
       age

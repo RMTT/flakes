@@ -1,11 +1,21 @@
-{ ... }:
+{ config, lib, ... }:
 let
   keyFilePath = "/var/lib/sops-nix/age";
+  cfg = config.machine.secrets;
 in
+with lib;
 {
-  sops.defaultSopsFile = ./keys.yaml;
-  sops.age.sshKeyPaths = [ ];
-  sops.gnupg.sshKeyPaths = [ ];
-  sops.age.keyFile = keyFilePath;
-  sops.age.generateKey = false;
+  options.machine.secrets = {
+    enable = mkOption {
+      type = types.bool;
+      description = "apply default secrets config";
+      default = false;
+    };
+  };
+
+  config = mkIf cfg.enable {
+    sops.defaultSopsFile = ./keys.yaml;
+    sops.age.keyFile = keyFilePath;
+    sops.age.generateKey = false;
+  };
 }

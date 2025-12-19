@@ -1,7 +1,5 @@
-{ modules, ... }: {
-
-  imports = with modules; [ secrets ];
-
+{  ... }: {
+  machine.secrets.enable = true;
   sops.secrets.wg-private = {
     mode = "0400";
     sopsFile = ./wg.key;
