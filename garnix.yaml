@@ -1,9 +1,0 @@
-builds:
-  exclude:
-  - packages.x86_64-linux.cider
-  - nixosConfigurations.nixd
-  - nixosConfigurations.test
-  include:
-  - 'packages.x86_64-linux.*'
-  - homeConfigurations.*
-  - nixosConfigurations.*
