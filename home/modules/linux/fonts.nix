@@ -1,4 +1,6 @@
-{ config, lib,... }: with lib; mkIf (config.nixpkgs.system == "x86_64-linux") {
+{ config, lib, ... }:
+with lib;
+mkIf (config.nixpkgs.system == "x86_64-linux") {
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
@@ -9,10 +11,19 @@
         "Sarasa Mono Slab J"
         "Sarasa Mono Slab K"
       ];
-      sansSerif =
-        [ "Sarasa UI SC" "Sarasa UI TC" "Sarasa UI J" "Sarasa UI K" "Noto Sans CJK SC" ];
-      monospace =
-        [ "Sarasa Mono SC" "Sarasa Mono TC" "Sarasa Mono J" "Sarasa Mono K" ];
+      sansSerif = [
+        "Sarasa UI SC"
+        "Sarasa UI TC"
+        "Sarasa UI J"
+        "Sarasa UI K"
+        "Noto Sans CJK SC"
+      ];
+      monospace = [
+        "Sarasa Mono SC"
+        "Sarasa Mono TC"
+        "Sarasa Mono J"
+        "Sarasa Mono K"
+      ];
     };
   };
 }

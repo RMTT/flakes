@@ -1,8 +1,6 @@
-{ modules, ... }: {
-
-  imports =
-    with modules; [ secrets ];
-
+{ ... }:
+{
+  machine.secrets.enable = true;
   sops.secrets.muconnect_key = {
     owner = "systemd-network";
     mode = "0400";

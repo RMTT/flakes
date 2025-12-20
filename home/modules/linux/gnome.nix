@@ -1,4 +1,6 @@
-{ config, lib,... }: with lib; mkIf (config.nixpkgs.system == "x86_64-linux") {
+{ config, lib, ... }:
+with lib;
+mkIf (config.nixpkgs.system == "x86_64-linux") {
 
   dconf.settings = {
     "org/gnome/shell" = {
@@ -19,7 +21,9 @@
     };
 
     # app-switcher
-    "org/gnome/shell/app-switcher" = { "current-workspace-only" = true; };
+    "org/gnome/shell/app-switcher" = {
+      "current-workspace-only" = true;
+    };
 
     # custom keybindings
     "org/gnome/settings-daemon/plugins/media-keys" = {
@@ -31,19 +35,17 @@
       "screensaver" = [ "<Control><Alt>l" ];
     };
 
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
-      {
-        "binding" = "<Super>Return";
-        "command" = "kitty";
-        "name" = "kitty";
-      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      "binding" = "<Super>Return";
+      "command" = "kitty";
+      "name" = "kitty";
+    };
 
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" =
-      {
-        binding = "<Super>e";
-        command = "nautilus";
-        name = "files";
-      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      binding = "<Super>e";
+      command = "nautilus";
+      name = "files";
+    };
 
     # kim panel
     "org/gnome/shell/extensions/kimpanel" = {
@@ -106,7 +108,10 @@
       switch-focus-mode = [ "" ];
       previous-workspace = [ "" ]; # will occupy 'super + grave'
       new-window = [ "<Super>n" ];
-      slurp-in = [ "<Super>i" "<Shift><Super>h" ];
+      slurp-in = [
+        "<Super>i"
+        "<Shift><Super>h"
+      ];
       move-down = [ "<Control><Super>k" ];
       move-left = [ "<Control><Super>h" ];
       move-right = [ "<Control><Super>l" ];

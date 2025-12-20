@@ -1,5 +1,10 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [ playerctl pavucontrol ddcui ];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    playerctl
+    pavucontrol
+    ddcui
+  ];
   programs.waybar = {
     enable = true;
     systemd = {
@@ -9,7 +14,10 @@
     settings.main = {
       "layer" = "top";
       "position" = "top";
-      "modules-left" = [ "niri/workspaces" "niri/window" ];
+      "modules-left" = [
+        "niri/workspaces"
+        "niri/window"
+      ];
       "modules-center" = [ "custom/music" ];
       "modules-right" = [
         "pulseaudio"
@@ -24,7 +32,9 @@
         "disable-scroll" = true;
         "sort-by-name" = true;
         "format" = " {icon} ";
-        "format-icons" = { "default" = ""; };
+        "format-icons" = {
+          "default" = "";
+        };
       };
       "niri/window" = {
         "icon" = true;
@@ -35,7 +45,9 @@
         "hide-if-empty" = true;
         "tooltip" = true;
       };
-      "cpu" = { format = " {usage}%"; };
+      "cpu" = {
+        format = " {usage}%";
+      };
       "tray" = {
         "icon-size" = 20;
         "spacing" = 4;
@@ -50,8 +62,7 @@
         "max-length" = 25;
       };
       "custom/brightness" = {
-        "exec" =
-          "ddcutil getvcp 10 -t | perl -nE 'if (/ C (\\d+) /) { say $1; }'";
+        "exec" = "ddcutil getvcp 10 -t | perl -nE 'if (/ C (\\d+) /) { say $1; }'";
         "exec-if" = "sleep 1";
         "format" = "{icon} {}%";
         "format-icons" = [ "" ];
@@ -71,7 +82,13 @@
       "pulseaudio" = {
         "format" = "{icon} {volume}%";
         "format-muted" = "";
-        "format-icons" = { "default" = [ "" "" " " ]; };
+        "format-icons" = {
+          "default" = [
+            ""
+            ""
+            " "
+          ];
+        };
         "on-click" = "pavucontrol";
       };
       "custom/lock" = {

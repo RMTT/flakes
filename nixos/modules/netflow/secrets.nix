@@ -1,10 +1,13 @@
-{ modules, ... }:
+{ config, lib, ... }:
+let
+  cfg = config.services.netflow;
+in
 {
-  imports = with modules; [ secrets ];
-
-  sops.secrets.singbox = {
-    mode = "0400";
-    sopsFile = ./config.json;
-    format = "binary";
+  config = lib.mkIf cfg.enable {
+    sops.secrets.singbox = {
+      mode = "0400";
+      sopsFile = ./config.json;
+      format = "binary";
+    };
   };
 }

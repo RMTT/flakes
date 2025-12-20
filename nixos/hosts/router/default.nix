@@ -1,19 +1,12 @@
 {
   pkgs,
   lib,
-  modules,
   config,
   ...
 }:
 with lib;
 {
-  imports = with modules; [
-    globals
-    services
-    base
-    fs
-    networking
-    netflow
+  imports = [
     ./secrets.nix
   ];
 
@@ -34,12 +27,12 @@ with lib;
     in
     {
       system.stateVersion = "23.05";
-      base.gl.enable = false;
+      machine.graphics.enable = false;
 
-      fs.normal.volumes = {
+      fileSystems = {
         "/" = {
+          device = "UUID=eaccf7c4-be7b-4961-a664-ec3159caac9d";
           fsType = "ext4";
-          label = "@";
           options = [
             "noatime"
             "data=writeback"
@@ -48,8 +41,11 @@ with lib;
             "errors=remount-ro"
           ];
         };
+        "/boot" = {
+          device = "UUID=CB80-3370";
+          fsType = "vfat";
+        };
       };
-      fs.boot.label = "@boot";
 
       hardware.cpu.intel.updateMicrocode = true;
 
@@ -150,12 +146,14 @@ with lib;
         openFirewall = true;
       };
 
-      services.netflow.interface = "wan";
+      services.netflow = {
+        enable = true;
+        interface = "wan";
+      };
       services.meshcentral.enable = true;
       services.tailscale = {
         enable = true;
         openFirewall = true;
       };
-
     };
 }

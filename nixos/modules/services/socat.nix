@@ -1,8 +1,14 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.services.socat;
 in
-with lib;{
+with lib;
+{
   options = {
     services.socat = {
       enable = mkEnableOption "Enable socat service";
@@ -18,18 +24,17 @@ with lib;{
   };
 
   config = mkIf cfg.enable {
-    systemd.services.socat =
-      {
-        enable = true;
-        description = "socat";
-        wantedBy = [ "multi-user.target" ];
+    systemd.services.socat = {
+      enable = true;
+      description = "socat";
+      wantedBy = [ "multi-user.target" ];
 
-        path = with pkgs; [ socat ];
+      path = with pkgs; [ socat ];
 
-        script = "socat ${cfg.listen},fork,reuseaddr ${cfg.remote}";
-        serviceConfig = {
-          Type = "exec";
-        };
+      script = "socat ${cfg.listen},fork,reuseaddr ${cfg.remote}";
+      serviceConfig = {
+        Type = "exec";
       };
+    };
   };
 }

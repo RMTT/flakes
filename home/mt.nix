@@ -28,6 +28,11 @@
     scdaemonSettings = {
       disable-ccid = true;
     };
+    settings = {
+      keyid-format = "LONG";
+      with-fingerprint = true;
+      with-keygrip = true;
+    };
   };
   # enable gpg agent
   services.gpg-agent = {
@@ -36,7 +41,7 @@
     enableSshSupport = true;
     enableExtraSocket = true;
     enableZshIntegration = true;
-    pinentry.package = pkgs.pinentry-curses;
+    pinentry.package = pkgs.pinentry-tty;
     extraConfig = "	allow-loopback-pinentry\n";
   };
 

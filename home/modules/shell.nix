@@ -5,7 +5,10 @@
   programs.bash.enable = true;
 
   # zsh configuration
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+  };
   programs.zsh.zplug.enable = true;
   programs.zsh.zplug.plugins = [
     { name = "zsh-users/zsh-autosuggestions"; }

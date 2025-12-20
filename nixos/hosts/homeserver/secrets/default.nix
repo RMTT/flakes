@@ -1,4 +1,5 @@
-{  ... }: {
+{ ... }:
+{
   machine.secrets.enable = true;
   sops.secrets.wg-private = {
     mode = "0400";
@@ -12,7 +13,9 @@
     format = "binary";
   };
 
-  sops.secrets.smtp-pass = { mode = "644"; };
+  sops.secrets.smtp-pass = {
+    mode = "644";
+  };
 
   sops.secrets.header = {
     mode = "0400";

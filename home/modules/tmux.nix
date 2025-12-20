@@ -27,11 +27,13 @@
       bind -n M-P previous-window
       bind -n M-N next-window
     '';
-    plugins = with pkgs.tmuxPlugins; [{
-      plugin = catppuccin;
-      extraConfig = ''
-        set -g @catppuccin_status_modules_right "application session date_time"
-          				'';
-    }];
+    plugins = with pkgs.tmuxPlugins; [
+      {
+        plugin = catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_status_modules_right "application session date_time"
+            				'';
+      }
+    ];
   };
 }

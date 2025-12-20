@@ -5,14 +5,10 @@
   ...
 }:
 let
-  cfg = config.desktop.niri;
+  cfg = config.machine.desktop;
 in
 with lib;
 {
-
-  options = {
-    desktop.niri.enable = mkEnableOption "enable niri";
-  };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [

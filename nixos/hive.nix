@@ -1,5 +1,6 @@
 {
   nixpkgs,
+  nixpkgs-fresh,
   colmena,
   ...
 }@inputs:
@@ -9,6 +10,17 @@ let
     inputs.self.packages.${system};
 
   commonModules = builtins.attrValues (import ./modules.nix);
+  commonKeys = {
+    "age" = {
+      keyCommand = [
+        "sops"
+        "decrypt"
+        "./keys/nixos_common.age"
+      ];
+      destDir = "/var/lib/sops-nix";
+    };
+  };
+
   collectFlakeInputs =
     input:
     [ input ] ++ builtins.concatMap collectFlakeInputs (builtins.attrValues (input.inputs or { }));
@@ -16,9 +28,16 @@ in
 colmena.lib.makeHive {
   meta = {
     name = "mt's machines";
-    nixpkgs = import nixpkgs {
+    nixpkgs = import nixpkgs rec {
       system = "x86_64-linux";
-      overlays = [ (overlay-ownpkgs "x86_64-linux") ];
+      overlays = [ (overlay-ownpkgs system) ];
+    };
+
+    nodeNixpkgs = {
+      mtspc = import nixpkgs-fresh rec {
+        system = "x86_64-linux";
+        overlays = [ (overlay-ownpkgs system) ];
+      };
     };
   };
 
@@ -43,6 +62,7 @@ colmena.lib.makeHive {
         targetPort = 22;
         targetUser = "mt";
         buildOnTarget = true;
+        keys = commonKeys;
       };
       imports = [ ./hosts/${name} ];
       networking.hostName = name;
@@ -56,6 +76,7 @@ colmena.lib.makeHive {
         targetPort = 22;
         targetUser = "mt";
         buildOnTarget = true;
+        keys = commonKeys;
       };
       imports = [ ./hosts/${name} ];
       networking.hostName = name;
@@ -69,6 +90,7 @@ colmena.lib.makeHive {
         targetPort = 22;
         targetUser = "mt";
         buildOnTarget = true;
+        keys = commonKeys;
       };
       imports = [ ./hosts/${name} ];
       networking.hostName = name;
@@ -82,9 +104,35 @@ colmena.lib.makeHive {
         targetPort = 22;
         targetUser = "mt";
         buildOnTarget = true;
+        keys = commonKeys;
       };
       imports = [ ./hosts/${name} ];
       networking.hostName = name;
       networking.hostId = "33f2bdce";
+    };
+  router =
+    { name, ... }:
+    {
+      deployment = {
+        targetHost = "${name}.java-crocodile.ts.net";
+        targetPort = 22;
+        targetUser = "mt";
+        buildOnTarget = true;
+        keys = commonKeys;
+      };
+      imports = [ ./hosts/${name} ];
+      networking.hostName = name;
+      networking.hostId = "b551a88a";
+    };
+  mtspc =
+    { name, ... }:
+    {
+      deployment = {
+        allowLocalDeployment = true;
+        targetHost = null;
+      };
+      imports = [ ./hosts/${name} ];
+      networking.hostName = name;
+      networking.hostId = "6260b68c";
     };
 }

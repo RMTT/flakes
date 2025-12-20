@@ -7,15 +7,17 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
     brews = [
       "koekeishiya/formulae/skhd"
       "kubernetes-cli"
+      "bitwarden-cli"
       "node"
       "gitui"
     ];
 
     casks = [
+      "yubico-authenticator"
       "nextcloud"
       "obsidian"
       "telegram"
-      "tailscale"
+      "tailscale-app"
       "wechat"
       "iterm2" # for drop-down term(via hotkey profile)
       "kicad"
@@ -31,6 +33,9 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
   {
     home.sessionPath = [ "/opt/homebrew/bin" ];
 
+    home.sessionVariables = {
+      HOMEBREW_BUNDLE_FILE = "~/.Brewfile";
+    };
     home.file.".Brewfile" = {
       text =
         (concatMapStrings (

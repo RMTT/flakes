@@ -1,9 +1,22 @@
-{ config, pkgs, lib, inputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 with lib;
-let cfg = config.services.gravity;
+let
+  cfg = config.services.gravity;
 
-in {
-  imports = [ ./strongswan.nix ./bird.nix ./divi.nix ./networkd.nix ];
+in
+{
+  imports = [
+    ./strongswan.nix
+    ./bird.nix
+    ./divi.nix
+    ./networkd.nix
+  ];
 
   options.services.gravity = {
     enable = mkEnableOption "gravity overlay network, next generation";
@@ -20,16 +33,18 @@ in {
         default = 13000;
       };
       endpoints = mkOption {
-        type = types.listOf (types.submodule {
-          options = {
-            serialNumber = mkOption { type = types.str; };
-            addressFamily = mkOption { type = types.str; };
-            address = mkOption {
-              type = types.nullOr types.str;
-              default = null;
+        type = types.listOf (
+          types.submodule {
+            options = {
+              serialNumber = mkOption { type = types.str; };
+              addressFamily = mkOption { type = types.str; };
+              address = mkOption {
+                type = types.nullOr types.str;
+                default = null;
+              };
             };
-          };
-        });
+          }
+        );
       };
     };
     reload = {
@@ -61,7 +76,10 @@ in {
       };
 
       systemd.services.gravity-rules = {
-        path = with pkgs; [ iproute2 coreutils ];
+        path = with pkgs; [
+          iproute2
+          coreutils
+        ];
         script = ''
           ip -4 ru del pref 0 || true
           ip -6 ru del pref 0 || true
@@ -84,7 +102,11 @@ in {
     (mkIf cfg.reload.enable {
       systemd.tmpfiles.rules = [ "d /var/lib/gravity 0755 root root - -" ];
       systemd.services.gravity-registry = {
-        path = with pkgs; [ curl jq coreutils ];
+        path = with pkgs; [
+          curl
+          jq
+          coreutils
+        ];
         script = ''
           set -euo pipefail
           for filename in registry.json combined.json
@@ -99,29 +121,32 @@ in {
         serviceConfig.Type = "oneshot";
       };
       systemd.timers.gravity-registry = {
-        timerConfig = { OnCalendar = "*:0/15"; };
+        timerConfig = {
+          OnCalendar = "*:0/15";
+        };
         wantedBy = [ "timers.target" ];
       };
     })
-    (mkIf cfg.ipsec.enable (let
-      ranet = pkgs.rustPlatform.buildRustPackage rec {
-        pname = "ranet";
-        version = "v0.11.0";
+    (mkIf cfg.ipsec.enable (
+      let
+        ranet = pkgs.rustPlatform.buildRustPackage rec {
+          pname = "ranet";
+          version = "v0.11.0";
 
-        src = pkgs.fetchFromGitHub {
-          owner = "NickCao";
-          repo = pname;
-          rev = version;
-          hash = "sha256-GB8FXnHzaM06MivfpYEFFIp4q0WfH3a7+jmoC3Tpwbs=";
+          src = pkgs.fetchFromGitHub {
+            owner = "NickCao";
+            repo = pname;
+            rev = version;
+            hash = "sha256-GB8FXnHzaM06MivfpYEFFIp4q0WfH3a7+jmoC3Tpwbs=";
+          };
+
+          cargoHash = "sha256-fiSJaOdhSX7fakNlrfHH8bePXMUx8zOifq7dZuRlXNU=";
+          checkFlags = [ "--skip=address::test::remote" ];
         };
-
-        cargoHash = "sha256-fiSJaOdhSX7fakNlrfHH8bePXMUx8zOifq7dZuRlXNU=";
-        checkFlags = [ "--skip=address::test::remote" ];
-      };
-    in {
-      environment.systemPackages = [ pkgs.strongswan ];
-      environment.etc."ranet/config.json".source =
-        (pkgs.formats.json { }).generate "config.json" {
+      in
+      {
+        environment.systemPackages = [ pkgs.strongswan ];
+        environment.etc."ranet/config.json".source = (pkgs.formats.json { }).generate "config.json" {
           organization = cfg.ipsec.organization;
           common_name = cfg.ipsec.commonName;
           endpoints = builtins.map (ep: {
@@ -143,25 +168,38 @@ in {
             '';
           }) cfg.ipsec.endpoints;
         };
-      systemd.services.gravity-ipsec = let
-        command =
-          "ranet -v /var/run/gravity.vici -c /etc/ranet/config.json -r /var/lib/gravity/registry.json -k ${cfg.ipsec.privateKey}";
-      in {
-        path = [ ranet pkgs.iproute2 ];
-        script = "${command} up";
-        reload = "${command} up";
-        preStop = "${command} down";
-        serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = true;
-        };
-        unitConfig = { AssertFileNotEmpty = "/var/lib/gravity/registry.json"; };
-        bindsTo = [ "strongswan-gravity.service" ];
-        wants = [ "network-online.target" "strongswan-gravity.service" ];
-        after = [ "network-online.target" "strongswan-gravity.service" ];
-        wantedBy = [ "multi-user.target" ];
-        reloadTriggers = [ config.environment.etc."ranet/config.json".source ];
-      };
-    }))
+        systemd.services.gravity-ipsec =
+          let
+            command = "ranet -v /var/run/gravity.vici -c /etc/ranet/config.json -r /var/lib/gravity/registry.json -k ${cfg.ipsec.privateKey}";
+          in
+          {
+            path = [
+              ranet
+              pkgs.iproute2
+            ];
+            script = "${command} up";
+            reload = "${command} up";
+            preStop = "${command} down";
+            serviceConfig = {
+              Type = "oneshot";
+              RemainAfterExit = true;
+            };
+            unitConfig = {
+              AssertFileNotEmpty = "/var/lib/gravity/registry.json";
+            };
+            bindsTo = [ "strongswan-gravity.service" ];
+            wants = [
+              "network-online.target"
+              "strongswan-gravity.service"
+            ];
+            after = [
+              "network-online.target"
+              "strongswan-gravity.service"
+            ];
+            wantedBy = [ "multi-user.target" ];
+            reloadTriggers = [ config.environment.etc."ranet/config.json".source ];
+          };
+      }
+    ))
   ]);
 }

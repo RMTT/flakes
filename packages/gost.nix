@@ -1,6 +1,8 @@
 { buildGoModule, fetchFromGitHub }:
-let version = "3.1.0";
-in buildGoModule {
+let
+  version = "3.1.0";
+in
+buildGoModule {
   pname = "gost";
   inherit version;
 
@@ -13,5 +15,7 @@ in buildGoModule {
 
   vendorHash = "sha256-lWuLvYF9Sl+k8VnsujvRmj7xb9zst+g//Gkg7VwtWkg=";
 
-  meta = { mainProgram = "gost"; };
+  meta = {
+    mainProgram = "gost";
+  };
 }

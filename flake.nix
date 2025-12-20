@@ -61,7 +61,7 @@
         };
       in
       {
-        formatter = pkgs.nixpkgs-fmt;
+        formatter = pkgs.nixfmt;
         packages =
           (import ./packages {
             pkgs = pkgs;

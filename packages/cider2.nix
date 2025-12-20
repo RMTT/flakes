@@ -1,4 +1,8 @@
-{ appimageTools, fetchurl, writeScript }:
+{
+  appimageTools,
+  fetchurl,
+  writeScript,
+}:
 
 let
   pname = "Cider";
@@ -12,7 +16,8 @@ let
   ciderBin = writeScript "cider" ''
     exec Cider  ''${NIXOS_OZONE_WL:+''${WAYLAND_DISPLAY:+--ozone-platform=wayland --enable-wayland-ime=true --wayland-text-input-version=3}}  "$@"
   '';
-in appimageTools.wrapType2 {
+in
+appimageTools.wrapType2 {
   inherit pname src version;
 
   extraInstallCommands = ''
@@ -25,10 +30,8 @@ in appimageTools.wrapType2 {
     		'';
 
   meta = {
-    description =
-      "A new look into listening and enjoying Apple Music in style and performance.";
+    description = "A new look into listening and enjoying Apple Music in style and performance.";
     homepage = "https://cider.sh/";
     platforms = [ "x86_64-linux" ];
   };
 }
-

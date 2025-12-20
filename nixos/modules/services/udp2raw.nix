@@ -1,6 +1,14 @@
-{ lib, config, pkgs, ... }:
-let cfg = config.services.udp2raw;
-in with lib; {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.services.udp2raw;
+in
+with lib;
+{
   options = {
     services.udp2raw = {
       enable = mkEnableOption "Enable udp2raw service";
@@ -47,30 +55,34 @@ in with lib; {
   };
 
   config = mkIf cfg.enable {
-    systemd.services.udp2raw = let
-      execStr = "${cfg.package}/bin/udp2raw ${
+    systemd.services.udp2raw =
+      let
+        execStr = "${cfg.package}/bin/udp2raw ${
           if cfg.role == "server" then "-s" else "-c"
-        } -l ${cfg.localAddress}:${
-          toString cfg.localPort
-        } -r ${cfg.remoteAddress}:${toString cfg.remotePort}";
-    in {
-      enable = true;
-      description = "udp2raw";
-      wants = [ "network-online.target" ];
-      after = [ "network-online.target" ];
-      wantedBy = [ "multi-user.target" ];
+        } -l ${cfg.localAddress}:${toString cfg.localPort} -r ${cfg.remoteAddress}:${toString cfg.remotePort}";
+      in
+      {
+        enable = true;
+        description = "udp2raw";
+        wants = [ "network-online.target" ];
+        after = [ "network-online.target" ];
+        wantedBy = [ "multi-user.target" ];
 
-      path = with pkgs; [ iptables bash ];
+        path = with pkgs; [
+          iptables
+          bash
+        ];
 
-      preStart = "${execStr} --clear || true";
-      postStop = "${execStr} --clear || true";
-      script = ''
-        pass=$(<${cfg.passwordFile})
-        ${execStr} -k $pass -a --fix-gro ${cfg.extraArgs}'';
-      serviceConfig = { Type = "exec"; };
-    };
+        preStart = "${execStr} --clear || true";
+        postStop = "${execStr} --clear || true";
+        script = ''
+          pass=$(<${cfg.passwordFile})
+          ${execStr} -k $pass -a --fix-gro ${cfg.extraArgs}'';
+        serviceConfig = {
+          Type = "exec";
+        };
+      };
 
-    networking.firewall.allowedTCPPorts =
-      mkIf cfg.openFirewall [ cfg.localPort ];
+    networking.firewall.allowedTCPPorts = mkIf cfg.openFirewall [ cfg.localPort ];
   };
 }

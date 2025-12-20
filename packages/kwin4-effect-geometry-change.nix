@@ -1,6 +1,13 @@
-{ lib, fetchFromGitHub, libsForQt5, stdenv }:
-let plasma-framework = libsForQt5.plasma-framework;
-in stdenv.mkDerivation rec {
+{
+  lib,
+  fetchFromGitHub,
+  libsForQt5,
+  stdenv,
+}:
+let
+  plasma-framework = libsForQt5.plasma-framework;
+in
+stdenv.mkDerivation rec {
   pname = "kwin_geometry_change";
   version = "1.3";
 
@@ -25,8 +32,7 @@ in stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description =
-      "A KWin animation for windows moved or resized by programs or scripts";
+    description = "A KWin animation for windows moved or resized by programs or scripts";
     license = licenses.gpl3Only;
     inherit (plasma-framework.meta) platforms;
   };

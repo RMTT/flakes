@@ -1,7 +1,9 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.services.pppoe;
-in {
+let
+  cfg = config.services.pppoe;
+in
+{
   options = {
     services.pppoe = {
       enable = mkEnableOption "Enable PPPoE, also start dhcpcd to get ipv6";
@@ -54,7 +56,7 @@ in {
           WithoutRA = "solicit";
           UseDNS = false;
         };
-        routes = [{ Gateway = "::"; }];
+        routes = [ { Gateway = "::"; } ];
         dhcpPrefixDelegationConfig = {
           UplinkInterface = "ppp0";
           SubnetId = 0;

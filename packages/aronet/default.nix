@@ -1,10 +1,41 @@
-{ stdenv, fetchFromGitHub, meson, ncurses, readline, ninja, automake, autoconf
-, libtool, gnumake, pkg-config, gettext, perl, gperf, flex, bison, openssl, git
-, python3, systemd, cacert, iproute2, rustc, cargo, rustPlatform }:
+{
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  ncurses,
+  readline,
+  ninja,
+  automake,
+  autoconf,
+  libtool,
+  gnumake,
+  pkg-config,
+  gettext,
+  perl,
+  gperf,
+  flex,
+  bison,
+  openssl,
+  git,
+  python3,
+  systemd,
+  cacert,
+  iproute2,
+  rustc,
+  cargo,
+  rustPlatform,
+}:
 stdenv.mkDerivation rec {
   pname = "aronet";
   version = "v0.1-beta1";
-  buildInputs = [ iproute2 openssl ncurses readline gettext systemd ];
+  buildInputs = [
+    iproute2
+    openssl
+    ncurses
+    readline
+    gettext
+    systemd
+  ];
   nativeBuildInputs = [
     ninja
     automake
@@ -44,7 +75,11 @@ stdenv.mkDerivation rec {
     repo = "aronet";
     rev = "883a90aca53b0827eef270a5dded7abbea5784f7";
     hash = "sha256-coead1GuiHbVieWftGFdTtACpt9QpaDjZ1+ZzJ6UzPg=";
-    nativeBuildInputs = [ git meson cacert ];
+    nativeBuildInputs = [
+      git
+      meson
+      cacert
+    ];
     postFetch = ''
       cd "$out"
       for prj in subprojects/*.wrap; do

@@ -1,6 +1,18 @@
-{ stdenv, lib, fetchFromGitHub, meson, ninja, pkg-config, xdg-desktop-portal
-, gtk3, gnome-settings-daemon, gnome-desktop, glib, wrapGAppsHook3
-, gsettings-desktop-schemas, }:
+{
+  stdenv,
+  lib,
+  fetchFromGitHub,
+  meson,
+  ninja,
+  pkg-config,
+  xdg-desktop-portal,
+  gtk3,
+  gnome-settings-daemon,
+  gnome-desktop,
+  glib,
+  wrapGAppsHook3,
+  gsettings-desktop-schemas,
+}:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "xdg-desktop-portal-gtk";
@@ -13,7 +25,12 @@ stdenv.mkDerivation (finalAttrs: {
     sha256 = "sha256-L9kt3HAoEezYARH5JekyXhxf9Xkbzy1U2srXD7Yg/a8=";
   };
 
-  nativeBuildInputs = [ meson ninja pkg-config wrapGAppsHook3 ];
+  nativeBuildInputs = [
+    meson
+    ninja
+    pkg-config
+    wrapGAppsHook3
+  ];
 
   buildInputs = [
     glib

@@ -25,6 +25,7 @@ with lib;
       age
 
       # dev tools
+      iproute2mac
       cmake
       autoconf
       automake

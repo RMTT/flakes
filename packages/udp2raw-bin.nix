@@ -1,4 +1,5 @@
-{ stdenv }: stdenv.mkDerivation rec{
+{ stdenv }:
+stdenv.mkDerivation rec {
   pname = "udp2raw";
   version = "20230206.0";
 
@@ -12,8 +13,8 @@
     	'';
 
   installPhase = ''
-    		mkdir -p $out/bin
-				cp udp2raw_amd64 $out/bin/udp2raw
+        		mkdir -p $out/bin
+    				cp udp2raw_amd64 $out/bin/udp2raw
   '';
 
   dontConfigure = true;

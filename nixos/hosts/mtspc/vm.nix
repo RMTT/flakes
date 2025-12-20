@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   virtualisation.vmVariant = {
     virtualisation.qemu.options = [
       "-device virtio-vga-gl"
@@ -10,11 +11,13 @@
       memorySize = 4096;
       cores = 3;
       diskSize = 20 * 1024;
-      forwardPorts = [{
-        from = "host";
-        host.port = 2222;
-        guest.port = 22;
-      }];
+      forwardPorts = [
+        {
+          from = "host";
+          host.port = 2222;
+          guest.port = 22;
+        }
+      ];
     };
 
     desktop.niri.enable = lib.mkForce false;

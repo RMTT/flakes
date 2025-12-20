@@ -1,12 +1,13 @@
-{ lib
-, stdenv
-, buildGoModule
-, fetchFromGitHub
-, makeWrapper
-, getent
-, iproute2
-, iptables
-, shadow
+{
+  lib,
+  stdenv,
+  buildGoModule,
+  fetchFromGitHub,
+  makeWrapper,
+  getent,
+  iproute2,
+  iptables,
+  shadow,
 }:
 
 let
@@ -40,7 +41,14 @@ buildGoModule {
   doCheck = false;
 
   postInstall = lib.optionalString stdenv.isLinux ''
-    wrapProgram $out/bin/derper --prefix PATH : ${lib.makeBinPath [ iproute2 iptables getent shadow ]}
+    wrapProgram $out/bin/derper --prefix PATH : ${
+      lib.makeBinPath [
+        iproute2
+        iptables
+        getent
+        shadow
+      ]
+    }
   '';
 
   meta = with lib; {

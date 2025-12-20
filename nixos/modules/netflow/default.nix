@@ -20,16 +20,18 @@ let
   fwmark = "5000";
   cfg = config.services.netflow;
 in
+with lib;
 {
-  options = {
-    services.netflow = {
-      interface = lib.mkOption { type = lib.types.str; };
-    };
-  };
   imports = [
     ./secrets.nix
   ];
-  config = {
+
+  options.services.netflow = {
+    enable = mkEnableOption "enable netflow";
+    interface = lib.mkOption { type = lib.types.str; };
+  };
+
+  config = mkIf cfg.enable {
     boot.kernelModules = [
       "nf_tproxy_ipv6"
       "nf_tproxy_ipv4"

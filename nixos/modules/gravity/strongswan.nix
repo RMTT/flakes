@@ -1,7 +1,14 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.services.gravity;
-in {
+let
+  cfg = config.services.gravity;
+in
+{
   options = {
     services.gravity.strongswan = {
       port-nat-t = mkOption {
@@ -27,15 +34,18 @@ in {
       wantedBy = [ "multi-user.target" ];
       wants = [ "network-online.target" ];
       after = [ "network-online.target" ];
-      path = with pkgs; [ kmod iproute2 iptables util-linux ];
+      path = with pkgs; [
+        kmod
+        iproute2
+        iptables
+        util-linux
+      ];
       environment = {
         STRONGSWAN_CONF = pkgs.writeTextFile {
           name = "strongswan.conf";
           text = ''
             charon {
-              interfaces_use = ${
-                lib.strings.concatStringsSep "," cfg.strongswan.interfaces
-              }
+              interfaces_use = ${lib.strings.concatStringsSep "," cfg.strongswan.interfaces}
               port = 0
               port_nat_t = ${toString cfg.strongswan.port-nat-t}
               retransmit_timeout = 30

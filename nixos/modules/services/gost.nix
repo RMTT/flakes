@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.services.gost;
-in {
+let
+  cfg = config.services.gost;
+in
+{
   options = {
     services.gost = {
       enable = mkEnableOption "enable gost";
@@ -28,8 +35,7 @@ in {
         RuntimeDirectory = "gost";
         RuntimeDirectoryMode = "0700";
         WorkingDirectory = "/var/lib/gost";
-        ExecStart =
-          [ "${lib.getExe pkgs.gost} -api ${cfg.listen} -C gost.yaml" ];
+        ExecStart = [ "${lib.getExe pkgs.gost} -api ${cfg.listen} -C gost.yaml" ];
       };
       wantedBy = [ "multi-user.target" ];
     };
@@ -37,9 +43,7 @@ in {
     systemd.services.gost-ui = {
       serviceConfig = {
         ExecStart = [
-          "${
-            lib.getExe pkgs.caddy
-          } file-server --root ${pkgs.gost-ui} --listen :9090"
+          "${lib.getExe pkgs.caddy} file-server --root ${pkgs.gost-ui} --listen :9090"
         ];
       };
       wantedBy = [ "multi-user.target" ];

@@ -25,7 +25,7 @@ with lib;
 
     # binary cache
     nix.settings.substituters = [
-      "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
     ];
     nix.settings.trusted-public-keys = [
@@ -55,9 +55,7 @@ with lib;
       "ip_vs"
     ];
     boot.supportedFilesystems = [
-      "ntfs"
       "btrfs"
-      "zfs"
     ];
 
     # common initrd options

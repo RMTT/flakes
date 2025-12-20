@@ -5,13 +5,11 @@
   ...
 }:
 let
-  cfg = config.desktop;
+  cfg = config.machine.desktop;
 in
 with lib;
 {
-  options = { };
-
-  config = {
+  config = mkIf cfg.enable {
     security.rtkit.enable = true;
 
     # many gtk apps need dconf
