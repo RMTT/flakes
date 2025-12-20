@@ -38,9 +38,9 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       flake-utils,
-      colmena,
       ...
     }@inputs:
     with flake-utils.lib;
@@ -62,15 +62,11 @@
       in
       {
         formatter = pkgs.nixfmt;
-        packages =
-          (import ./packages {
-            pkgs = pkgs;
-            quickshell = inputs.quickshell;
-            noctalia = inputs.noctalia;
-          })
-          // {
-            colmena = colmena.packages.${system}.colmena;
-          };
+        packages = (import ./packages { pkgs = pkgs; }) // {
+          quickshell = inputs.quickshell.packages.${system}.default;
+          noctalia = inputs.noctalia.packages.${system}.default;
+          colmena = inputs.colmena.packages.${system}.colmena;
+        };
         devShells.default = pkgs.mkShell {
           packages = [ (pkgs.python3.withPackages (pypkgs: with pypkgs; [ requests ])) ];
         };
