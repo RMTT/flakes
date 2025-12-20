@@ -23,7 +23,7 @@ return {
       end,
     })
     local claude   = Terminal:new({
-      cmd = "claude --resume",
+      cmd = "claude",
       hidden = true,
       direction = "float",
       on_open = function(term)
