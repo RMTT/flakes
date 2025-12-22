@@ -39,6 +39,8 @@ in
             node-label = cfg.node-labels;
             cluster-init = true;
             flannel-backend = "host-gw";
+            etcd-s3 = true;
+            etcd-s3-config-secret = "k3s-etcd-snapshot-s3-config";
           };
 
       yaml = pkgs.formats.yaml { };
