@@ -5,10 +5,6 @@
   ...
 }:
 {
-
-  imports = [
-    ./hyprlock.nix
-  ];
   xdg.configFile = {
     niri = {
       enable = true;

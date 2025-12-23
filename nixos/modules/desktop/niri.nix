@@ -14,7 +14,6 @@ with lib;
     environment.systemPackages = with pkgs; [
       niri
       fuzzel
-      hyprlock
       kitty
       alacritty
       xwayland-satellite

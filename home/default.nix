@@ -29,7 +29,7 @@ in
       inputs.vicinae.homeManagerModules.default
       {
         home.username = "mt";
-        home.homeDirectory = if (system == "aarch64-darwin") then "/Users/mt" else "/home/mt}";
+        home.homeDirectory = if (system == "aarch64-darwin") then "/Users/mt" else "/home/mt";
       }
       ./mt.nix
     ];

@@ -59,7 +59,7 @@
 
       services.godel = {
         enable = true;
-        extra_routes = "10.42.2.0/24";
+        extra_routes = "10.42.1.0/24";
         k3s = {
           enable = true;
           node-ip = infra_node_ip;

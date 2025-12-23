@@ -68,7 +68,7 @@ colmena.lib.makeHive {
       networking.hostName = name;
       networking.hostId = "196875cc";
     };
-  rack =
+  kube-master =
     { name, ... }:
     {
       deployment = {
@@ -81,20 +81,6 @@ colmena.lib.makeHive {
       imports = [ ./hosts/${name} ];
       networking.hostName = name;
       networking.hostId = "d21a8b00";
-    };
-  de-hz =
-    { name, ... }:
-    {
-      deployment = {
-        targetHost = "${name}.rmtt.host";
-        targetPort = 22;
-        targetUser = "mt";
-        buildOnTarget = true;
-        keys = commonKeys;
-      };
-      imports = [ ./hosts/${name} ];
-      networking.hostName = name;
-      networking.hostId = "6cf6ea73";
     };
   homeserver =
     { name, ... }:
@@ -124,6 +110,7 @@ colmena.lib.makeHive {
       networking.hostName = name;
       networking.hostId = "b551a88a";
     };
+
   mtspc =
     { name, ... }:
     {

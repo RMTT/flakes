@@ -44,6 +44,5 @@ with lib;
           role = "server";
         };
       };
-
     };
 }
