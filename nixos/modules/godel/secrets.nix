@@ -1,5 +1,10 @@
-{ ... }:
-{
+{ lib, config, ... }:
+with lib;
+let
+  cfg = config.services.godel;
+in
+mkIf cfg.enable {
+
   sops.secrets.godel = {
     mode = "0400";
     sopsFile = ./authkey;

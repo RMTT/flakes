@@ -2,18 +2,12 @@
   pkgs,
   lib,
   config,
-  modules,
   modulesPath,
   ...
 }:
 with lib;
 {
-  imports = with modules; [
-    base
-    fs
-    networking
-    globals
-    godel
+  imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
   ];
@@ -25,14 +19,17 @@ with lib;
     {
       system.stateVersion = "25.11";
 
-      hardware.cpu.amd.updateMicrocode = true;
       networking.useNetworkd = true;
-      base.gl.enable = false;
-      virtualisation.incus.agent.enable = true;
-
+      machine.graphics.enable = false;
+      services.qemuGuest.enable = true;
+      zramSwap = {
+        enable = true;
+        memoryPercent = 20;
+      };
+      machine.secrets.enable = true;
       services.godel = {
         enable = true;
-        extra_routes = "10.42.1.0/24";
+        extra_routes = "10.42.2.0/24";
         k3s = {
           enable = true;
           node-ip = infra_node_ip;

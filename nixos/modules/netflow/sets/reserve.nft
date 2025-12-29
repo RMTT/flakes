@@ -27,4 +27,6 @@ define reserve_v6 = {
   2001::/32,
   # muconnect
   2001:db8:169::/48,
+  # china telecom
+  240e::/18
 }

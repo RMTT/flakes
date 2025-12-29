@@ -82,7 +82,7 @@ colmena.lib.makeHive {
       networking.hostName = name;
       networking.hostId = "d21a8b00";
     };
-  homeserver =
+  kube-runner =
     { name, ... }:
     {
       deployment = {
@@ -96,7 +96,7 @@ colmena.lib.makeHive {
       networking.hostName = name;
       networking.hostId = "33f2bdce";
     };
-  router =
+  home-router =
     { name, ... }:
     {
       deployment = {
@@ -110,7 +110,6 @@ colmena.lib.makeHive {
       networking.hostName = name;
       networking.hostId = "b551a88a";
     };
-
   mtspc =
     { name, ... }:
     {
