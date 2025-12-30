@@ -15,16 +15,25 @@ with lib;
   config =
     let
       infra_node_ip = "100.100.128.1";
+      home_node_ip = "198.19.19.4/24";
     in
     {
       system.stateVersion = "25.11";
 
       networking.useNetworkd = true;
+      networking.useDHCP = false;
       machine.graphics.enable = false;
       services.qemuGuest.enable = true;
       zramSwap = {
         enable = true;
         memoryPercent = 20;
+      };
+
+      systemd.network.networks.wan = {
+        matchConfig.Name = "ens18";
+        address = [ home_node_ip ];
+        gateway = [ "198.19.19.1" ];
+        dns = [ "198.19.19.1" ];
       };
       machine.secrets.enable = true;
       services.godel = {

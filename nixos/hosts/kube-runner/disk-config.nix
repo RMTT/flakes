@@ -17,7 +17,7 @@
                 mountOptions = [ "umask=0077" ];
               };
             };
-            luks = {
+            root = {
               size = "100%";
               content = {
                 type = "filesystem";

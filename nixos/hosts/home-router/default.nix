@@ -78,6 +78,26 @@ with lib;
         "lan"
         "tailscale0"
       ];
+      systemd.network.netdevs = {
+        lan = {
+          netdevConfig = {
+            Name = "lan";
+            Kind = "bridge";
+          };
+          bridgeConfig = {
+            VLANFiltering = true;
+          };
+        };
+        lab = {
+          netdevConfig = {
+            Name = "lan.lab";
+            Kind = "vlan";
+          };
+          vlanConfig = {
+            Id = 1024;
+          };
+        };
+      };
       systemd.network = {
         networks = {
           wan = {
@@ -107,17 +127,31 @@ with lib;
               ActivationPolicy = "always-up";
             };
             networkConfig = {
-              Address = "${lan_gateway}/${toString lan_ip_prefix}";
+              Address = [
+                "${lan_gateway}/${toString lan_ip_prefix}"
+              ];
               ConfigureWithoutCarrier = "yes";
               IgnoreCarrierLoss = "yes";
               IPv6AcceptRA = "no";
               IPv6SendRA = "yes";
               DHCPPrefixDelegation = "yes";
+              VLAN = [ "lan.lab" ];
             };
             dhcpPrefixDelegationConfig = {
               UplinkInterface = "wan";
               SubnetId = 1;
               Announce = "yes";
+            };
+          };
+          lab = {
+            name = "lan.lab";
+            linkConfig = {
+              ActivationPolicy = "always-up";
+            };
+            networkConfig = {
+              Address = [
+                "198.19.19.1/24"
+              ];
             };
           };
         };
@@ -135,7 +169,10 @@ with lib;
       # enable nat from lan
       networking.nat = {
         enable = true;
-        internalIPs = [ "${lan_gateway}/${toString lan_ip_prefix}" ];
+        internalIPs = [
+          "${lan_gateway}/${toString lan_ip_prefix}"
+          "198.19.19.0/24"
+        ];
         externalInterface = "wan";
       };
 
