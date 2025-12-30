@@ -21,4 +21,11 @@
   };
   nix.gc.automatic = true;
   nix.package = pkgs.nix;
+
+  programs.docker-cli = {
+    enable = true;
+    settings = {
+      "detachKeys" = "ctrl-a";
+    };
+  };
 }
