@@ -69,6 +69,7 @@
     ];
     boot.initrd.kernelModules = [ "nvidia" ];
     boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+    hardware.nvidia-container-toolkit.enable = true;
     hardware.nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.beta;
       modesetting.enable = true;
@@ -135,6 +136,14 @@
         ipv6 = true;
         fixed-cidr-v6 = "2001:db8:ffff::/64";
       };
+    };
+    services.netflow = {
+      enable = true;
+    };
+    services.meshcentral.enable = true;
+    virtualisation.incus = {
+      enable = true;
+      ui.enable = true;
     };
   };
 }

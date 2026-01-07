@@ -50,6 +50,9 @@ colmena.lib.makeHive {
       inputs.disko.nixosModules.disko
       {
         system.extraDependencies = builtins.concatMap collectFlakeInputs (builtins.attrValues inputs);
+        # pin registry
+        nix.registry = builtins.mapAttrs (name: value: { flake = value; }) inputs;
+        nix.channel.enable = false;
       }
     ];
   };
@@ -95,20 +98,6 @@ colmena.lib.makeHive {
       imports = [ ./hosts/${name} ];
       networking.hostName = name;
       networking.hostId = "33f2bdce";
-    };
-  home-router =
-    { name, ... }:
-    {
-      deployment = {
-        targetHost = "${name}.java-crocodile.ts.net";
-        targetPort = 22;
-        targetUser = "mt";
-        buildOnTarget = true;
-        keys = commonKeys;
-      };
-      imports = [ ./hosts/${name} ];
-      networking.hostName = name;
-      networking.hostId = "b551a88a";
     };
   mtspc =
     { name, ... }:

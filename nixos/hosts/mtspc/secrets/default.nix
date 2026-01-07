@@ -1,4 +1,4 @@
 { ... }:
 {
-
+  machine.secrets.enable = true;
 }

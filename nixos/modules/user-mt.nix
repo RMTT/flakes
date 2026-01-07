@@ -35,14 +35,13 @@ with lib;
         "wheel"
         "networkmanager"
         (mkIf config.virtualisation.docker.enable "docker")
+        (mkIf config.virtualisation.incus.enable "incus-admin")
         "video"
         "kvm"
         "users"
         "uinput"
         "i2c"
         "wireshark"
-        (mkIf config.virtualisation.libvirtd.enable "libvirtd")
-        (mkIf config.virtualisation.virtualbox.host.enable "vboxusers")
       ];
       initialHashedPassword = "$y$j9T$v3KSiMJEpJdcbN4osJbMF0$Qfgg9i/ozgLjDhOg/WZmSrg8vuiNQSrSWivWKvjATN7";
       openssh.authorizedKeys.keyFiles = [ ./secrets/ssh_key.pub ];

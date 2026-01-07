@@ -32,7 +32,7 @@ with lib;
       systemd.network.networks.wan = {
         matchConfig.Name = "ens18";
         address = [ home_node_ip ];
-        gateway = [ "198.19.19.1" ];
+        gateway = [ "198.19.19.10" ];
         dns = [ "198.19.19.1" ];
       };
       machine.secrets.enable = true;

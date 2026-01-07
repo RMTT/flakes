@@ -58,6 +58,7 @@
         pkgs = import nixpkgs {
           system = system;
           config.allowUnfree = true;
+          config.cudaSupport = true;
         };
       in
       {
