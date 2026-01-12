@@ -1,10 +1,9 @@
-hostname: ENC[AES256_GCM,data:L+hwoMO4fitLdvk=,iv:2kSf0LRNzbKxumfM0Ec/YfR0lkKO5aGcZVwYKMj1Do4=,tag:RHUTNj3Bz9DfAv4vyE0lvg==,type:str]
+hostname: ENC[AES256_GCM,data:nGwyBdXinsotOK4=,iv:w5RFATModMC0ckzMZGDlqSmwAg+8c/YYY2TnEpnfRQg=,tag:2EG0hsaF+jf86PHtWbrxOw==,type:str]
 app_url: ENC[AES256_GCM,data:jB9aIPUq+DBO3R8fUw==,iv:dOAsk7WmHGzrX/NX+9qec9x3BFs19Ks1ydZjdeaZfWw=,tag:EMF8WXMm3d3e1phFYFWI5A==,type:str]
-db_connection_string: ENC[AES256_GCM,data:sHaHVhIreGmIgIukepUFMo3UJWsWIZhwoDigHm+0tZViGRRRyT71CeScYuIyQYQP6oOsnZ3VuofCCsSu6IUKEacwQpCeOmsh5+6P1klFh8Egbq0LiAPNu6r5YCSoZ6R61mtx4g4Lb7aAKWZlJ8OL51NcpbvOMTkuMh9msZ4jvD+AgKLj,iv:vqVC5fD2mSp/oGeQs9E9ljoKd2AIMKHQtcglA+ON1TY=,tag:W3JjDbn6t+fXPaiQ0Lu7pQ==,type:str]
 encryption_key: ENC[AES256_GCM,data:jbyEBBIjusaOzuJ1bEE+rLSrv4F7fQG8eVIfKbVix3G3zw3jS3yejnbCTiA=,iv:YcS8kahkoV1fpjQFNjTgIN29Qbfj5kPjoDRJgic/nUs=,tag:D2VXZiVr3iXWDl79mhA5DA==,type:str]
 sops:
-    lastmodified: "2026-01-11T14:39:28Z"
-    mac: ENC[AES256_GCM,data:ekFCbb+cr0mtm34KHlImLHfxBB0x72a1HvlkHtzUiVMNwtHjUJvU2g+TQ9DsTvBTUhCO6gXNH/0Evx0AKXWBakrMHz8+H/9oyHZClUdAWtedc3p5ji8oSxA0H043u9CsbREX5Ey/kkoYG13SlIWkLmfTh8xXaC4Ad0FPbqnAVWM=,iv:bKv2HFgZ9kLJreysNwHKXLhaQN44pedEkdUiqcYjTdI=,tag:kB0wfyBq29tXbye7Mpvi8w==,type:str]
+    lastmodified: "2026-01-12T14:34:11Z"
+    mac: ENC[AES256_GCM,data:QnnuvNIeHmtjswOYzoWAIafsVw2Rdi562fyU2VHzZSCKdfwA7X4M/YvBFuEQ96n6biMokKSmGFjDZzG/EeRh/pDbJuVLmTJuu1KZ7id7bLJEGZK3jQO/lptlV5z5f2hhHkP7cQXAILhq+TwX0F0ATXPT3kExR4svHwb/wakFtqc=,iv:uQ4LnIRQpDigh+6yTM1ei3CuGDCF6ocTPSZgy+yOrus=,tag:n9ruDxPnNSsoNNAHjeKuhA==,type:str]
     pgp:
         - created_at: "2026-01-11T14:34:03Z"
           enc: |-
