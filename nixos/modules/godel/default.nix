@@ -4,7 +4,7 @@
 {
   imports = [
     ./k3s.nix
-    ./tailscale.nix
+    ./overlay.nix
     ./secrets.nix
   ];
 }

@@ -1,7 +1,0 @@
-namespace: postgresql
-
-resources:
-  - namespace.yaml
-  - open-webui.yaml
-  - pocket-id.yaml
-  - secrets.yaml.dec

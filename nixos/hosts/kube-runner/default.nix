@@ -10,11 +10,12 @@ with lib;
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
+    ./secrets
   ];
 
   config =
     let
-      infra_node_ip = "100.100.128.1";
+      infra_node_ip = "198.19.198.1";
       home_node_ip = "198.19.19.4/24";
     in
     {
@@ -33,12 +34,15 @@ with lib;
         matchConfig.Name = "ens18";
         address = [ home_node_ip ];
         gateway = [ "198.19.19.10" ];
-        dns = [ "198.19.19.1" ];
+        dns = [ "198.19.19.10" ];
       };
       machine.secrets.enable = true;
+
+      networking.firewall.extraOutputRules = "ip daddr 40.160.254.25 drop";
       services.godel = {
         enable = true;
-        extra_routes = "10.42.2.0/24";
+        extra_routes = [ "10.42.1.0/24" ];
+        ip = infra_node_ip;
         k3s = {
           enable = true;
           node-ip = infra_node_ip;

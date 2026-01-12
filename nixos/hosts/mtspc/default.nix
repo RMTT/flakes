@@ -56,7 +56,6 @@
     };
     boot.kernelParams = [
       "amd_pstate=guided"
-      #   "fbcon=map:1" # show tty console at external monitor
     ];
     hardware.cpu.amd.updateMicrocode = true;
 
@@ -106,14 +105,14 @@
     environment.systemPackages = with pkgs; [
       config.boot.kernelPackages.perf
       moonlight-qt
+      virt-manager
+      virt-viewer
     ];
 
     programs.steam = {
       enable = true;
       extest.enable = true;
     };
-
-    virtualisation.libvirtd.enable = true;
 
     services.tailscale = {
       enable = true;
@@ -141,6 +140,7 @@
       enable = true;
     };
     services.meshcentral.enable = true;
+    virtualisation.libvirtd.enable = true;
     virtualisation.incus = {
       enable = true;
       ui.enable = true;

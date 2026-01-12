@@ -1,0 +1,11 @@
+apiVersion: v2
+name: cert-issuer-manager
+description: Helm chart for cert-manager with Cloudflare DNS01 ClusterIssuer
+type: application
+version: 0.0.1
+appVersion: v1.19.2
+dependencies:
+  - name: cert-manager
+    repository: https://charts.jetstack.io
+    version: v1.19.2
+    alias: certmanager

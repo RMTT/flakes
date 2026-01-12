@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pocket-id
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: pocket-id
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pocket-id
+  template:
+    metadata:
+      labels:
+        app: pocket-id
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: {{.Values.hostname}}
+      containers:
+        - name: pocket-id
+          image: ghcr.io/pocket-id/pocket-id:v2.2
+          ports:
+            - name: http
+              containerPort: 1411
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: pocket-id-config
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+          readinessProbe:
+            exec:
+              command:
+              - /app/pocket-id
+              - healthcheck
+            initialDelaySeconds: 10
+            periodSeconds: 300
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pocket-id-data

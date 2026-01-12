@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pocket-id
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: pocket-id
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-all
+    traefik.ingress.kubernetes.io/router.entryPoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - {{.Values.app_url}}
+      secretName: pocket-id-tls
+  rules:
+    - host: key.rmtt.tech
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pocket-id
+                port:
+                  number: 80

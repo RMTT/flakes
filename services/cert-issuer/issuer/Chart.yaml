@@ -1,0 +1,5 @@
+apiVersion: v2
+name: cert-issuer
+description: Helm chart for cert-manager with Cloudflare DNS01 ClusterIssuer
+type: application
+version: 0.0.1

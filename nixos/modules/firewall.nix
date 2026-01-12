@@ -18,6 +18,11 @@ in
         type = types.listOf types.str;
         default = [ ];
       };
+
+      extraOutputRules = mkOption {
+        type = types.str;
+        default = "";
+      };
     };
   };
 
@@ -36,6 +41,18 @@ in
           ${optionalString (subnetsV4 != "") "ip saddr { ${subnetsV4} } accept"}
           ${optionalString (subnetsV6 != "") "ip6 saddr { ${subnetsV6} } accept"}
         '';
+      };
+
+      networking.nftables.tables = {
+        mynixos-fw = {
+          family = "inet";
+          content = ''
+            chain output {
+              type filter hook output priority 0; policy accept;
+              ${cfg.extraOutputRules}
+            }
+          '';
+        };
       };
     };
 }

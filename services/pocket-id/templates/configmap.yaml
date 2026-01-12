@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: pocket-id-config
+    namespace: {{ .Release.Namespace }}
+data:
+    APP_URL: https://{{.Values.app_url}}
+    # Enable trust proxy if behind reverse proxy (Traefik, NGINX, etc)
+    TRUST_PROXY: "true"
+    # Database provider (sqlite or postgres)
+    DB_PROVIDER: postgres
+    DB_CONNECTION_STRING: {{.Values.db_connection_string}}
+    KEYS_STORAGE: database
+    ENCRYPTION_KEY: {{.Values.encryption_key}}

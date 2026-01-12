@@ -2,8 +2,9 @@
   ...
 }:
 {
-  services.vicinae = {
+  programs.vicinae = {
     enable = true;
-    autoStart = true;
+    systemd.enable = true;
+    systemd.autoStart = true;
   };
 }

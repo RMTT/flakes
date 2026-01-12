@@ -47,16 +47,6 @@ with lib;
       kustomize
       hugo
       uv
-      (python3.withPackages (
-        ps: with ps; [
-          numpy
-          scipy
-          jupyterlab
-          pandas
-          statsmodels
-          scikit-learn
-        ]
-      ))
       mystmd
     ];
 

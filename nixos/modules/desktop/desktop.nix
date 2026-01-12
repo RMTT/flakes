@@ -24,7 +24,6 @@ with lib;
       tela-icon-theme
       bitwarden-desktop
       solaar
-      virt-manager
       easyeffects
       motrix
       firefox

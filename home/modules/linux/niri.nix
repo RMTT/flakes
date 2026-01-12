@@ -28,8 +28,7 @@
     grim
     satty
     (pkgs.writeScriptBin "screenshot" ''grim -g "$(slurp)" -t ppm - | satty --filename -'')
-    quickshell
-    noctalia
+    noctalia-shell
     brightnessctl
     gpu-screen-recorder
     wlsunset
@@ -43,7 +42,7 @@
     timeouts = [
       {
         timeout = 600;
-        command = "${pkgs.noctalia}/bin/noctalia-shell ipc call lockScreen lock";
+        command = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call lockScreen lock";
       }
       # {
       #   timeout = 1800;

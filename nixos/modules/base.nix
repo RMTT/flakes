@@ -147,6 +147,8 @@ with lib;
       nix-du
       tree
       zfs
+      lsof
+      python3
     ];
 
     # set XDG viarables

@@ -26,7 +26,6 @@ in
       }
       inputs.nur.modules.homeManager.default
       inputs.sops-nix.homeManagerModules.sops
-      inputs.vicinae.homeManagerModules.default
       {
         home.username = "mt";
         home.homeDirectory = if (system == "aarch64-darwin") then "/Users/mt" else "/home/mt";

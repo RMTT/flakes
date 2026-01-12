@@ -1,0 +1,9 @@
+certmanager:
+    installCRDs: true
+    podDnsPolicy: Default
+    nodeSelector:
+        kubernetes.io/hostname: kube-master
+    extraArgs:
+        - --enable-certificate-owner-ref=true
+        - --dns01-recursive-nameservers-only
+        - --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53

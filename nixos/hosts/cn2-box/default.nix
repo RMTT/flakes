@@ -13,7 +13,7 @@
 
   config =
     let
-      infra_node_ip = "100.100.128.2";
+      infra_node_ip = "198.19.198.3";
       wan = "eth0";
     in
     {
@@ -59,7 +59,8 @@
 
       services.godel = {
         enable = true;
-        extra_routes = "10.42.1.0/24";
+        extra_routes = [ "10.42.5.0/24" ];
+        ip = infra_node_ip;
         k3s = {
           enable = true;
           node-ip = infra_node_ip;

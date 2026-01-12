@@ -89,7 +89,7 @@ colmena.lib.makeHive {
     { name, ... }:
     {
       deployment = {
-        targetHost = "${name}.java-crocodile.ts.net";
+        targetHost = "${name}.home.rmtt.host";
         targetPort = 22;
         targetUser = "mt";
         buildOnTarget = true;

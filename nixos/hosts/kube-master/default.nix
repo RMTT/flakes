@@ -15,7 +15,7 @@ with lib;
 
   config =
     let
-      infra_node_ip = "100.100.128.4";
+      infra_node_ip = "198.19.198.2";
       wan = "ens3";
     in
     {
@@ -37,7 +37,8 @@ with lib;
 
       services.godel = {
         enable = true;
-        extra_routes = "10.42.0.0/24";
+        extra_routes = [ "10.42.0.0/24" ];
+        ip = infra_node_ip;
         k3s = {
           enable = true;
           node-ip = infra_node_ip;

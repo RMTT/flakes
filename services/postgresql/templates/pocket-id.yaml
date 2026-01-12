@@ -2,13 +2,12 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: pocket-id
+  namespace: {{.Release.Namespace}}
 spec:
   instances: 1
-
   affinity:
     nodeSelector:
-      kubernetes.io/hostname: "homeserver"
-
+      kubernetes.io/hostname: "kube-master"
   storage:
     storageClass: local-path
     size: 5Gi

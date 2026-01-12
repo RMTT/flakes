@@ -10,19 +10,6 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-fresh";
-    quickshell = {
-      url = "github:outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs-fresh";
-    };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs-fresh";
-    };
-
-    vicinae = {
-      url = "github:vicinaehq/vicinae";
-      inputs.nixpkgs.follows = "nixpkgs-fresh";
-    };
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -64,8 +51,6 @@
       {
         formatter = pkgs.nixfmt;
         packages = (import ./packages { pkgs = pkgs; }) // {
-          quickshell = inputs.quickshell.packages.${system}.default;
-          noctalia = inputs.noctalia.packages.${system}.default;
           colmena = inputs.colmena.packages.${system}.colmena;
         };
         devShells.default = pkgs.mkShell {

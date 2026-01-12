@@ -11,16 +11,12 @@ cert-issuer
 
 ### Architecture
 
-+ network infrastructure: godel(based on ipsec). All nodes that be used to deploy services should be inserted into godel
++ network infrastructure: godel(based on wireguard). All nodes that be used to deploy services should be inserted into godel
 + runtime: k3s
 
 ### Database for apps
 
 Apps needing a database to work should create postgresql instance under `services/postgresql`
-
-### TLS Cert for apps
-
-TLS Certificates should be placed under `services/cert-manager/certs`. For example, the certificate name of domain a.xx.com should be a.xx.com, and it's tls secret name should be a.xx.com-tls. BTW, use `reflector` to copy secrets between namespace
 
 ### Notes
 

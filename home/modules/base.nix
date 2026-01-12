@@ -2,7 +2,14 @@
 {
   xdg.configFile."nixpkgs/config.nix".source = ../config/nixpkgs-config.nix;
 
-  home.packages = with pkgs; [ colmena ];
+  home.packages = with pkgs; [
+    colmena
+    (pkgs.wrapHelm pkgs.kubernetes-helm {
+      plugins = with pkgs.kubernetes-helmPlugins; [
+        helm-secrets
+      ];
+    })
+  ];
 
   nix.settings = {
     extra-substituters = [
