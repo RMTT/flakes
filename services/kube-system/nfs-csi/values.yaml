@@ -1,0 +1,23 @@
+csi-driver-nfs:
+  customLabels:
+    app: csi-driver-nfs
+  node.nodeSelector:
+    kubernetes.io/hostname: kube-runner
+  storageClass.create: true
+  storageClasses:
+  - name: nas
+    parameters:
+      server: nas.home.rmtt.host
+      share: /mnt/main/kubernetes
+    reclaimPolicy: Retain
+    volumeBindingMode: Immediate
+    mountOptions:
+      - nfsvers=4.1
+  - name: nas-with-backup
+    parameters:
+      server: nas.home.rmtt.host
+      share: /mnt/main/kubernetes-with-backup
+    reclaimPolicy: Retain
+    volumeBindingMode: Immediate
+    mountOptions:
+      - nfsvers=4.1

@@ -1,0 +1,10 @@
+apiVersion: v2
+name: operators
+description: Helm chart for nfs-csi
+type: application
+version: 0.0.1
+
+dependencies:
+  - name: csi-driver-nfs
+    version: 4.12.1
+    repository: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
