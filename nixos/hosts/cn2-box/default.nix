@@ -13,7 +13,7 @@
 
   config =
     let
-      infra_node_ip = "198.19.198.3";
+      infra_node_ip = "198.19.19.20";
       wan = "eth0";
     in
     {
@@ -48,19 +48,12 @@
         443
       ];
 
-      services.uptime-kuma = {
-        enable = true;
-        settings = {
-          UPTIME_KUMA_HOST = "127.0.0.1";
-          UPTIME_KUMA_PORT = "3001";
-        };
-      };
-      systemd.services.uptime-kuma.path = [ pkgs.cloudflared ];
-
       services.godel = {
-        enable = true;
-        extra_routes = [ "10.42.5.0/24" ];
-        ip = infra_node_ip;
+        overlay = {
+          enable = true;
+          extra_routes = [ "10.42.1.0/24" ];
+          ip = infra_node_ip;
+        };
         k3s = {
           enable = true;
           node-ip = infra_node_ip;

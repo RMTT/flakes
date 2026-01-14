@@ -38,8 +38,9 @@ with lib;
 
       obsidian
       kicad
-      nextcloud-client
       libreoffice-qt6
+      insync
+      insync-nautilus
     ];
     programs.appimage = {
       enable = true;

@@ -35,14 +35,24 @@ with lib;
         memoryPercent = 25;
       };
 
+      services.uptime-kuma = {
+        enable = true;
+        settings = {
+          UPTIME_KUMA_HOST = "127.0.0.1";
+          UPTIME_KUMA_PORT = "3001";
+        };
+      };
+
+      systemd.services.uptime-kuma.path = [ pkgs.cloudflared ];
+
       services.godel = {
         enable = true;
         extra_routes = [ "10.42.0.0/24" ];
         ip = infra_node_ip;
         k3s = {
-          enable = true;
+          enable = false;
           node-ip = infra_node_ip;
-          role = "server";
+          role = "agent";
         };
       };
     };

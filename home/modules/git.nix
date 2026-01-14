@@ -3,7 +3,6 @@
   programs.git = {
     enable = true;
     ignores = [
-      ".envrc"
       ".direnv"
       "compile_commands.json"
       ".cache"

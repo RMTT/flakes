@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/lib.sh"
+
+read -r ns release <<<"$(get_ns_release "$(pwd)")"
+
+if helm list -n "$ns" 2>/dev/null | grep -q "^$release "; then
+	log_info "Will uninstall release '$release' from namespace '$ns'"
+	confirm "Continue?" || exit 0
+
+	helm uninstall "$release" --namespace "$ns"
+	log_info "Uninstalled $release"
+else
+	log_warn "Release '$release' not found in namespace '$ns'"
+	exit 1
+fi

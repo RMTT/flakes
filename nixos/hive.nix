@@ -71,7 +71,7 @@ colmena.lib.makeHive {
       networking.hostName = name;
       networking.hostId = "196875cc";
     };
-  kube-master =
+  ovhv1 =
     { name, ... }:
     {
       deployment = {

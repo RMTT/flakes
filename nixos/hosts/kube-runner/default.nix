@@ -15,8 +15,7 @@ with lib;
 
   config =
     let
-      infra_node_ip = "198.19.198.1";
-      home_node_ip = "198.19.19.4/24";
+      home_node_ip = "198.19.19.4";
     in
     {
       system.stateVersion = "25.11";
@@ -32,7 +31,7 @@ with lib;
 
       systemd.network.networks.wan = {
         matchConfig.Name = "ens18";
-        address = [ home_node_ip ];
+        address = [ "${home_node_ip}/24" ];
         gateway = [ "198.19.19.10" ];
         dns = [ "198.19.19.10" ];
       };
@@ -40,14 +39,16 @@ with lib;
 
       networking.firewall.extraOutputRules = "ip daddr 40.160.254.25 drop";
       services.godel = {
-        enable = true;
-        extra_routes = [ "10.42.1.0/24" ];
-        ip = infra_node_ip;
+        overlay = {
+          enable = true;
+          extra_routes = [ "10.42.0.0/24" ];
+          ip = home_node_ip;
+        };
         k3s = {
           enable = true;
-          node-ip = infra_node_ip;
+          node-ip = home_node_ip;
           node-labels = [ "intel.feature.node.kubernetes.io/gpu=true" ];
-          role = "agent";
+          role = "server";
         };
       };
     };

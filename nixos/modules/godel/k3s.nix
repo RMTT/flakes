@@ -27,7 +27,7 @@ in
       k3s-config =
         if (cfg.role == "agent") then
           {
-            server = "https://kube-master.infra.rmtt.host:6443";
+            server = "https://kube-runner.infra.rmtt.host:6443";
             node-label = cfg.node-labels;
           }
         else
@@ -35,17 +35,21 @@ in
             cluster-cidr = "10.42.0.0/16";
             service-cidr = "10.43.0.0/16";
             write-kubeconfig-mode = "0644";
-            tls-san = [ "kube-master.infra.rmtt.host" ];
+            tls-san = [ "kube-runner.infra.rmtt.host" ];
             node-label = cfg.node-labels;
             cluster-init = true;
             flannel-backend = "host-gw";
-            etcd-s3 = true;
-            etcd-s3-config-secret = "k3s-etcd-snapshot-s3-config";
           };
 
       yaml = pkgs.formats.yaml { };
     in
     mkIf cfg.enable {
+      sops.secrets.k3s-token = {
+        mode = "0400";
+        sopsFile = ./k3s-token;
+        format = "binary";
+      };
+
       services.k3s = {
         enable = true;
         configPath = (yaml.generate "k3s-config" k3s-config);

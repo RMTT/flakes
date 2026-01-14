@@ -41,7 +41,7 @@
     fi
 
     if [ "$TERM" = "xterm-kitty" ]; then
-      ssh="kitten ssh"
+      alias ssh="kitten ssh"
     fi
   '';
 

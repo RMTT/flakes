@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/lib.sh"
+
+check_chart "$(pwd)" || exit 1
+
+read -r ns release <<<"$(get_ns_release "$(pwd)")"
+
+values_args=()
+if [[ -f "values.yaml" ]]; then
+	values_args+=(-f values.yaml)
+	log_info "Using values.yaml"
+fi
+
+log_info "Will install release '$release' in namespace '$ns'"
+confirm "Continue?" || exit 0
+
+helm secrets install "$release" . \
+	"${values_args[@]}" \
+	--namespace "$ns" \
+	--create-namespace \
+	--wait \
+	--timeout 5m
+
+log_info "Installed $release"

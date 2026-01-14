@@ -14,7 +14,6 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
 
     casks = [
       "yubico-authenticator"
-      "nextcloud"
       "obsidian"
       "telegram"
       "tailscale-app"

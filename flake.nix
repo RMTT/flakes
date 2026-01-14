@@ -53,9 +53,6 @@
         packages = (import ./packages { pkgs = pkgs; }) // {
           colmena = inputs.colmena.packages.${system}.colmena;
         };
-        devShells.default = pkgs.mkShell {
-          packages = [ (pkgs.python3.withPackages (pypkgs: with pypkgs; [ requests ])) ];
-        };
       }
     );
 }

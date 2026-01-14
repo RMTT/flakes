@@ -41,7 +41,6 @@ with lib;
       go
       tldr
       trace-cmd
-      guestfs-tools
       kubernetes
       kubernetes-helm
       kustomize

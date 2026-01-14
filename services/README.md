@@ -13,6 +13,7 @@ cert-issuer
 
 + network infrastructure: godel(based on wireguard). All nodes that be used to deploy services should be inserted into godel
 + runtime: k3s
++ deploy tools: helm + helm-secrets
 
 All services under this folder should keep consistency:
 1. the first hierarchy of diectories shoule be the namespace name

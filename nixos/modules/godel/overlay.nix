@@ -1,16 +1,11 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.services.godel;
-  hosts = import ./hosts.nix;
-  currentNodeName = config.networking.hostName;
-  allNodes = hosts.nodes;
-  currentNode = hosts.nodes.${currentNodeName};
-  currentPeers = hosts.peers.${currentNodeName};
+  cfg = config.services.godel.overlay;
 in
 {
   options = {
-    services.godel = {
+    services.godel.overlay = {
       enable = mkEnableOption "enable godel service";
       ip = mkOption {
         type = types.str;
