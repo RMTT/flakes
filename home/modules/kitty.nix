@@ -11,7 +11,9 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
     };
+    enableGitIntegration = true;
     settings = {
+      kitty_mod = "ctrl+shift";
       disable_ligatures = "never";
       hide_window_decorations = "yes";
       macos_option_as_alt = "both";

@@ -13,7 +13,7 @@
 
   config =
     let
-      infra_node_ip = "198.19.19.20";
+      infra_node_ip = "198.19.198.3";
       wan = "eth0";
     in
     {
@@ -51,7 +51,7 @@
       services.godel = {
         overlay = {
           enable = true;
-          extra_routes = [ "10.42.1.0/24" ];
+          extra_routes = [ "10.42.2.0/24" ];
           ip = infra_node_ip;
         };
         k3s = {
@@ -59,9 +59,6 @@
           node-ip = infra_node_ip;
           role = "agent";
         };
-      };
-      services.prometheus = {
-        exporters.node.enable = true;
       };
     };
 }

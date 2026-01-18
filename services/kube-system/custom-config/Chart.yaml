@@ -1,0 +1,5 @@
+apiVersion: v2
+name: custom-config
+description: Helm chart for custom k3s configuration
+type: application
+version: 0.0.1

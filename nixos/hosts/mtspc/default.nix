@@ -119,10 +119,10 @@
       openFirewall = true;
     };
 
-    services.ollama = {
-      enable = true;
-      package = pkgs.ollama-cuda;
-    };
+    # services.ollama = {
+    #   enable = true;
+    #   package = pkgs.ollama-cuda;
+    # };
     services.logind.settings.Login = {
       IdleAction = "ignore";
     };
@@ -140,7 +140,6 @@
       enable = true;
     };
     services.meshcentral.enable = true;
-    virtualisation.libvirtd.enable = true;
     virtualisation.incus = {
       enable = true;
       ui.enable = true;

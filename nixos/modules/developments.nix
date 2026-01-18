@@ -25,7 +25,6 @@ with lib;
     environment.systemPackages = with pkgs; [
       gcc
       gdb
-      poetry
       jdk
       cmake
       gradle

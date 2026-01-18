@@ -8,9 +8,8 @@
 with lib;
 {
   imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
+    (modulesPath + "/virtualisation/proxmox-lxc.nix")
     ./secrets
-    ./disk-config.nix
   ];
 
   config =
@@ -23,17 +22,20 @@ with lib;
 
       hardware.cpu.intel.updateMicrocode = true;
       networking.useNetworkd = true;
+      boot.loader.systemd-boot.enable = mkForce false;
 
       machine.graphics.enable = false;
-      boot.loader.systemd-boot.enable = lib.mkForce false;
-      boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
-      boot.loader.grub = {
-        enable = lib.mkForce true;
-      };
       zramSwap = {
         enable = true;
         memoryPercent = 25;
       };
+      nix.settings = {
+        sandbox = false;
+      };
+      proxmoxLXC.privileged = true;
+      services.fstrim.enable = false; # Let Proxmox host handle fstrim
+
+      environment.systemPackages = with pkgs; [ kmod ];
 
       services.uptime-kuma = {
         enable = true;
@@ -46,11 +48,15 @@ with lib;
       systemd.services.uptime-kuma.path = [ pkgs.cloudflared ];
 
       services.godel = {
-        enable = true;
-        extra_routes = [ "10.42.0.0/24" ];
-        ip = infra_node_ip;
+        overlay = {
+          enable = true;
+          ip = infra_node_ip;
+          extra_args = [ "--disable-p2p=true" ];
+          connect_via = "udp";
+          extra_routes = [ "10.42.1.0/24" ];
+        };
         k3s = {
-          enable = false;
+          enable = true;
           node-ip = infra_node_ip;
           role = "agent";
         };

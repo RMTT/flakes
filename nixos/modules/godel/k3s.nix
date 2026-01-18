@@ -35,7 +35,10 @@ in
             cluster-cidr = "10.42.0.0/16";
             service-cidr = "10.43.0.0/16";
             write-kubeconfig-mode = "0644";
-            tls-san = [ "kube-runner.infra.rmtt.host" ];
+            tls-san = [
+              "kube-runner.infra.rmtt.host"
+              "kube-runner.home.rmtt.host"
+            ];
             node-label = cfg.node-labels;
             cluster-init = true;
             flannel-backend = "host-gw";
@@ -50,6 +53,7 @@ in
         format = "binary";
       };
 
+      networking.firewall.allowedTCPPorts = [ 6443 ];
       services.k3s = {
         enable = true;
         configPath = (yaml.generate "k3s-config" k3s-config);

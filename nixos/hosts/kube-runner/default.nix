@@ -16,6 +16,7 @@ with lib;
   config =
     let
       home_node_ip = "198.19.19.4";
+      infra_node_ip = "198.19.198.1";
     in
     {
       system.stateVersion = "25.11";
@@ -37,16 +38,15 @@ with lib;
       };
       machine.secrets.enable = true;
 
-      networking.firewall.extraOutputRules = "ip daddr 40.160.254.25 drop";
       services.godel = {
         overlay = {
           enable = true;
           extra_routes = [ "10.42.0.0/24" ];
-          ip = home_node_ip;
+          ip = infra_node_ip;
         };
         k3s = {
           enable = true;
-          node-ip = home_node_ip;
+          node-ip = infra_node_ip;
           node-labels = [ "intel.feature.node.kubernetes.io/gpu=true" ];
           role = "server";
         };

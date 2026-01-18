@@ -6,7 +6,7 @@ source "$SCRIPT_DIR/lib.sh"
 
 read -r ns release <<<"$(get_ns_release "$(pwd)")"
 
-if helm list -n "$ns" 2>/dev/null | grep -q "^$release "; then
+if helm list -n "$ns" 2>/dev/null | grep -q "^$release"; then
 	log_info "Will uninstall release '$release' from namespace '$ns'"
 	confirm "Continue?" || exit 0
 
