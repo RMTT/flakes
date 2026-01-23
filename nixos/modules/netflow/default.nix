@@ -9,20 +9,32 @@ let
 in
 with lib;
 {
-  imports = [
-    ./secrets.nix
-  ];
-
   options.services.netflow = {
     enable = mkEnableOption "enable netflow";
   };
 
   config = mkIf cfg.enable {
-    services.singbox = {
-      enable = true;
-      configFile = config.sops.secrets.singbox.path;
-    };
+    # services.singbox = {
+    #   enable = true;
+    #   configFile = config.sops.secrets.singbox.path;
+    # };
+    # networking.firewall.trustedInterfaces = [ "sing-box" ];
+    # sops.secrets.singbox = {
+    #   mode = "0400";
+    #   sopsFile = ./config.json;
+    #   format = "binary";
+    # };
 
-    networking.firewall.trustedInterfaces = [ "sing-box" ];
+    sops.secrets.mihomo = {
+      mode = "0400";
+      sopsFile = ./config.yaml;
+      format = "binary";
+    };
+    services.mihomo = {
+      enable = true;
+      tunMode = true;
+      configFile = config.sops.secrets.mihomo.path;
+    };
+    networking.firewall.trustedInterfaces = [ "Meta" ];
   };
 }

@@ -39,7 +39,8 @@
   # enable gpg agent
   services.gpg-agent = {
     enable = true;
-    defaultCacheTtl = 1800;
+    defaultCacheTtl = 3600;
+    maxCacheTtl = 7200;
     enableSshSupport = true;
     enableExtraSocket = true;
     enableZshIntegration = true;
