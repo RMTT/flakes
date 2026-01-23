@@ -9,14 +9,14 @@
     ];
     signing = {
       signByDefault = true;
-      key = "d.rong@outlook.com";
+      key = "iamrmttt@gmail.com";
     };
     settings = {
       init.defaultBranch = "main";
       credential."https://github.com".helper = "!/usr/bin/env gh auth git-credential";
       credential."https://gist.github.com".helper = "!/usr/bin/env gh auth git-credential";
       user.name = "RMT";
-      user.email = "d.rong@outlook.com";
+      user.email = "iamrmttt@gmail.com";
     };
   };
 }

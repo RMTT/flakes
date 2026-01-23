@@ -149,6 +149,7 @@ with lib;
       zfs
       lsof
       python3
+      opensc
     ];
 
     # set XDG viarables
@@ -215,14 +216,9 @@ with lib;
     };
 
     # yubikey related
-    services.udev.packages = with pkgs; [ yubikey-personalization ];
+    services.udev.packages = [ pkgs.yubikey-personalization ];
     services.pcscd.enable = true;
 
-    # enable yubikey otp
-    security.pam.yubico = {
-      enable = true;
-      mode = "challenge-response";
-    };
     services.fwupd.enable = true;
   };
 }
