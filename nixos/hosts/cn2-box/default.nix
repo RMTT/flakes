@@ -46,6 +46,7 @@
       networking.firewall.allowedTCPPorts = [
         80
         443
+        18080
       ];
 
       services.godel = {
@@ -59,6 +60,11 @@
           node-ip = infra_node_ip;
           role = "agent";
         };
+      };
+
+      services.singbox = {
+        enable = true;
+        configFile = config.sops.secrets.singbox.path;
       };
     };
 }

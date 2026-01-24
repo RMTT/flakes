@@ -46,6 +46,7 @@ with lib;
       hugo
       uv
       mystmd
+      nerdctl
     ];
 
   };

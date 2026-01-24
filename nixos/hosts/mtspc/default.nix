@@ -119,10 +119,6 @@
       openFirewall = true;
     };
 
-    # services.ollama = {
-    #   enable = true;
-    #   package = pkgs.ollama-cuda;
-    # };
     services.logind.settings.Login = {
       IdleAction = "ignore";
     };
@@ -130,8 +126,7 @@
     virtualisation.docker = {
       enable = true;
       daemon.settings = {
-        iptables = false;
-        ip6tables = false;
+        storage-driver = "overlay2";
         ipv6 = true;
         fixed-cidr-v6 = "2001:db8:ffff::/64";
       };

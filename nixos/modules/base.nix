@@ -149,7 +149,6 @@ with lib;
       zfs
       lsof
       python3
-      opensc
     ];
 
     # set XDG viarables
