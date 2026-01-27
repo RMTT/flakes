@@ -14,11 +14,11 @@ in
         type = types.listOf types.str;
         default = [ ];
       };
-      connect_via = mkOption {
-        type = types.str;
-        default = "tcp";
-      };
       extra_routes = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+      };
+      peers = mkOption {
         type = types.listOf types.str;
         default = [ ];
       };
@@ -29,17 +29,6 @@ in
     networking.useNetworkd = true;
 
     # -- tailscale
-    # systemd.network.netdevs."godel" = {
-    #   netdevConfig = {
-    #     Kind = "dummy";
-    #     Name = "godel";
-    #   };
-    # };
-    # systemd.network.networks."godel" = {
-    #   matchConfig.Name = "godel";
-    #   address = [ "${cfg.ip}/32" ];
-    # };
-    #
     # sops.secrets.ts-authkey = {
     #   mode = "0400";
     #   sopsFile = ./ts-authkey;
@@ -88,7 +77,7 @@ in
             "tcp://0.0.0.0:11010"
             "udp://0.0.0.0:11010"
           ];
-          peers = [ "${cfg.connect_via}://cn2-box.rmtt.host:11010" ];
+          peers = cfg.peers;
         };
       };
     };

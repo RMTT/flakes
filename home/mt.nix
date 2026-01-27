@@ -14,7 +14,7 @@
     ./modules/kitty.nix
     ./modules/gitui.nix
     ./modules/tmux.nix
-    ./modules/claude.nix
+    ./modules/ai.nix
     ./secrets
 
     # darwin modules

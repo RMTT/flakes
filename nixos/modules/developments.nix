@@ -22,6 +22,10 @@ with lib;
       enable = true;
       package = pkgs.wireshark;
     };
+    programs.nix-ld = {
+      enable = true;
+      libraries = with pkgs; [ ];
+    };
     environment.systemPackages = with pkgs; [
       gcc
       gdb

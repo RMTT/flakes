@@ -52,7 +52,9 @@ with lib;
           enable = true;
           ip = infra_node_ip;
           extra_args = [ "--disable-p2p=true" ];
-          connect_via = "udp";
+          peers = [
+            "udp://cn2-box.rmtt.host:11010"
+          ];
           extra_routes = [ "10.42.1.0/24" ];
         };
         k3s = {

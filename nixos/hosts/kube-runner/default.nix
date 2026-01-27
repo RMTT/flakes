@@ -43,6 +43,13 @@ with lib;
           enable = true;
           extra_routes = [ "10.42.0.0/24" ];
           ip = infra_node_ip;
+          extra_args = [
+            "--disable-p2p"
+            "--manual-routes=198.19.198.0/24,10.42.0.0/16"
+          ];
+          peers = [
+            "udp://198.19.19.1:11010"
+          ];
         };
         k3s = {
           enable = true;

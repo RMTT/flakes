@@ -61,10 +61,5 @@
           role = "agent";
         };
       };
-
-      services.singbox = {
-        enable = true;
-        configFile = config.sops.secrets.singbox.path;
-      };
     };
 }

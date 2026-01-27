@@ -22,8 +22,8 @@ return {
                     { noremap = true, silent = true })
             end,
         })
-        local claude   = Terminal:new({
-            cmd = "claude",
+        local ai   = Terminal:new({
+            cmd = "opencode",
             hidden = true,
             direction = "float",
             on_open = function(term)
@@ -42,7 +42,7 @@ return {
         end
 
         function ClaudeTerm_toggle()
-            claude:toggle()
+            ai:toggle()
         end
 
         vim.api.nvim_set_keymap("n", "<A-g>", "<cmd>lua Gitui_toggle()<CR>", { noremap = true, silent = true })
