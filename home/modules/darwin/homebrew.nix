@@ -7,9 +7,9 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
     brews = [
       "koekeishiya/formulae/skhd"
       "kubernetes-cli"
-      "bitwarden-cli"
       "node"
       "gitui"
+      "anomalyco/tap/opencode"
     ];
 
     casks = [
@@ -25,6 +25,7 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
       "firefox"
       "bitwarden"
       "iina"
+      "google-drive"
     ];
 
   in
