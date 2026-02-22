@@ -2,7 +2,6 @@ spawn-at-startup "noctalia-shell"
 
 debug {
   honor-xdg-activation-with-invalid-serial
-  ignore-drm-device "/dev/dri/renderD128"
 }
 
 layer-rule {
