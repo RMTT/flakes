@@ -33,23 +33,15 @@ with lib;
       systemd.network.networks.wan = {
         matchConfig.Name = "ens18";
         address = [ "${home_node_ip}/24" ];
-        gateway = [ "198.19.19.10" ];
-        dns = [ "198.19.19.10" ];
+        gateway = [ "198.19.19.1" ];
+        dns = [ "198.19.19.1" ];
       };
       machine.secrets.enable = true;
 
       services.godel = {
         overlay = {
           enable = true;
-          extra_routes = [ "10.42.0.0/24" ];
           ip = infra_node_ip;
-          extra_args = [
-            "--disable-p2p"
-            "--manual-routes=198.19.198.0/24,10.42.0.0/16"
-          ];
-          peers = [
-            "udp://198.19.19.1:11010"
-          ];
         };
         k3s = {
           enable = true;

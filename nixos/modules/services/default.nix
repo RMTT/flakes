@@ -6,5 +6,6 @@
     ./aronet.nix
     ./gost.nix
     ./singbox.nix
+    ./ssserver.nix
   ];
 }

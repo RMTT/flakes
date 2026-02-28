@@ -49,11 +49,18 @@
         18080
       ];
 
+      services.ssserver = {
+        enable = true;
+        port = 48388;
+        method = "2022-blake3-aes-256-gcm";
+        openFirewall = true;
+        passwordFile = config.sops.secrets.ss.path;
+      };
       services.godel = {
         overlay = {
           enable = true;
-          extra_routes = [ "10.42.2.0/24" ];
           ip = infra_node_ip;
+          mode = "server";
         };
         k3s = {
           enable = true;
