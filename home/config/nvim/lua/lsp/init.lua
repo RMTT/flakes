@@ -1,6 +1,7 @@
 require 'efm'
 require 'nix'
 require 'lua_ls'
+require 'web'
 
 vim.lsp.enable({
   'gopls',
@@ -12,5 +13,9 @@ vim.lsp.enable({
   'bashls',
   'ruff',
   'lua_ls',
-  'pyright'
+  'pyright',
+  'ts_ls',
+  'cssls',
+  'html',
+  'eslint'
 })

@@ -42,6 +42,7 @@ with lib;
     programs.gnome-disks.enable = true;
 
     services.upower.enable = true;
+    services.power-profiles-daemon.enable = true;
 
     services.displayManager.sessionPackages = with pkgs; [ niri ];
 

@@ -41,6 +41,8 @@ in
         tree-sitter
         clang-tools
         efm-langserver
+        typescript-language-server
+        vscode-langservers-extracted
         gopls
         black
         shellcheck

@@ -41,7 +41,7 @@ with lib;
       };
 
       extraArgs = mkOption {
-        types = types.str;
+        type = types.str;
         default = "";
       };
 

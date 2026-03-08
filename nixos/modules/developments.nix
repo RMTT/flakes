@@ -51,6 +51,7 @@ with lib;
       uv
       mystmd
       nerdctl
+      act
     ];
 
   };

@@ -7,5 +7,6 @@
     ./gost.nix
     ./singbox.nix
     ./ssserver.nix
+    ./sblite.nix
   ];
 }

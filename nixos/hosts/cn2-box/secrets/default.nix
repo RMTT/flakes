@@ -6,8 +6,4 @@
     sopsFile = ./godel;
     format = "binary";
   };
-  sops.secrets.ss = {
-    sopsFile = ./godel;
-    format = "binary";
-  };
 }

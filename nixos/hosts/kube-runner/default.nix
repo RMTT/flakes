@@ -33,8 +33,8 @@ with lib;
       systemd.network.networks.wan = {
         matchConfig.Name = "ens18";
         address = [ "${home_node_ip}/24" ];
-        gateway = [ "198.19.19.1" ];
-        dns = [ "198.19.19.1" ];
+        gateway = [ "198.19.19.10" ];
+        dns = [ "198.19.19.10" ];
       };
       machine.secrets.enable = true;
 
@@ -42,6 +42,7 @@ with lib;
         overlay = {
           enable = true;
           ip = infra_node_ip;
+          tunnel = true;
         };
         k3s = {
           enable = true;

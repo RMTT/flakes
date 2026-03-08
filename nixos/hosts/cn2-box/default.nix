@@ -46,21 +46,38 @@
       networking.firewall.allowedTCPPorts = [
         80
         443
-        18080
       ];
 
-      services.ssserver = {
-        enable = true;
-        port = 48388;
-        method = "2022-blake3-aes-256-gcm";
-        openFirewall = true;
-        passwordFile = config.sops.secrets.ss.path;
+      systemd.network = {
+        netdevs."10-ipv6net" = {
+          netdevConfig = {
+            Name = "ipv6net";
+            Kind = "sit";
+          };
+          tunnelConfig = {
+            Independent = true;
+            Local = "104.194.71.122";
+            Remote = "207.246.106.118";
+            TTL = 255;
+          };
+        };
+        networks."10-ipv6net" = {
+          matchConfig.Name = "ipv6net";
+          address = [
+            "2607:8700:5501:183a::2/64"
+          ];
+          routes = [
+            { routeConfig.Gateway = "2607:8700:5501:183a::1"; }
+          ];
+        };
       };
+
       services.godel = {
         overlay = {
           enable = true;
           ip = infra_node_ip;
           mode = "server";
+          tunnel = true;
         };
         k3s = {
           enable = true;

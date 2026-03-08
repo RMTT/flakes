@@ -131,9 +131,12 @@
         fixed-cidr-v6 = "2001:db8:ffff::/64";
       };
     };
-    services.netflow = {
-      enable = true;
-    };
+    # services.netflow = {
+    #   enable = true;
+    # };
+    services.sblite.enable = true;
+    networking.firewall.trustedInterfaces = [ "sing-box" ];
+
     services.meshcentral.enable = true;
     virtualisation.incus = {
       enable = true;

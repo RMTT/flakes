@@ -4,4 +4,5 @@
   aronet = pkgs.callPackage ./aronet { };
   gost = pkgs.callPackage ./gost.nix { };
   gost-ui = pkgs.callPackage ./gost-ui.nix { };
+  sblite = pkgs.callPackage ./sblite.nix { };
 }
