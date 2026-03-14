@@ -5,7 +5,6 @@
   modulesPath,
   ...
 }:
-with lib;
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -42,7 +41,6 @@ with lib;
         overlay = {
           enable = true;
           ip = infra_node_ip;
-          tunnel = true;
         };
         k3s = {
           enable = true;

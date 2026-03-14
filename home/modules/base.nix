@@ -34,7 +34,7 @@
   programs.docker-cli = {
     enable = true;
     settings = {
-      "detachKeys" = "ctrl-a";
+      "detachKeys" = "ctrl-x";
     };
   };
 }

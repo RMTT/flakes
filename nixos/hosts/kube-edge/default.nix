@@ -20,7 +20,6 @@ with lib;
     {
       system.stateVersion = "25.05";
 
-      hardware.cpu.intel.updateMicrocode = true;
       networking.useNetworkd = true;
       boot.loader.systemd-boot.enable = mkForce false;
 
@@ -33,6 +32,8 @@ with lib;
         sandbox = false;
       };
       proxmoxLXC.privileged = true;
+      proxmoxLXC.manageNetwork = true;
+      networking.useHostResolvConf = false;
       services.fstrim.enable = false; # Let Proxmox host handle fstrim
 
       environment.systemPackages = with pkgs; [ kmod ];

@@ -77,7 +77,6 @@
           enable = true;
           ip = infra_node_ip;
           mode = "server";
-          tunnel = true;
         };
         k3s = {
           enable = true;
