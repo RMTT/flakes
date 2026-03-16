@@ -28,9 +28,6 @@ in
         package.path = package.path .. ";${../config/nvim}/?.lua;${configPath}/?.lua;${configPath}/?/init.lua;${configPath}/lsp/?.lua;${configPath}/plugins/?.lua"
         require('startup')('${../config/nvim}')
       '';
-      plugins = with pkgs.vimPlugins; [
-        lazy-nvim
-      ];
       # install luanguage servers
       extraPackages = with pkgs; [
         ripgrep

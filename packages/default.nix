@@ -5,4 +5,5 @@
   gost = pkgs.callPackage ./gost.nix { };
   gost-ui = pkgs.callPackage ./gost-ui.nix { };
   sblite = pkgs.callPackage ./sblite.nix { };
+  superpowers = pkgs.callPackage ./superpowers.nix { };
 }

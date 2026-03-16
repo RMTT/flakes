@@ -9,12 +9,12 @@ let
   srcs = {
     x86_64-linux = {
       url = "https://github.com/RMTT/sb-lite/releases/download/v${version}/sblite-amd64-linux.tar.gz";
-      sha256 = "14ya6fm7gbq4grbzy808dln9mk6kxw300bnfdzz8h81ljrxfyvb0";
+      sha256 = "09407w48vsj3nqdbgh8kmq9xpzxfqk5iddy0cmjglh44pjsygh67";
       binaryName = "sblite-amd64-linux";
     };
     aarch64-linux = {
       url = "https://github.com/RMTT/sb-lite/releases/download/v${version}/sblite-arm64-linux.tar.gz";
-      sha256 = "0sfqglqdz87cy8fib3iy80p7ciq8rwww3hmnj7f1knakm7i747ck";
+      sha256 = "1x4f3ybnmpp69a9q4vaj7awgmcrd8pjjlww1bmxa8v3czvifq2a9";
       binaryName = "sblite-arm64-linux";
     };
   };

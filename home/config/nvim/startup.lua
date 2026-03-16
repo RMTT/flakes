@@ -1,3 +1,29 @@
+function install_lazy(lazy_rtp)
+    local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+    if not (vim.uv or vim.loop).fs_stat(lazypath) then
+        local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+        local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+        if vim.v.shell_error ~= 0 then
+            vim.api.nvim_echo({
+                { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+                { out,                            "WarningMsg" },
+                { "\nPress any key to exit..." },
+            }, true, {})
+            vim.fn.getchar()
+            os.exit(1)
+        end
+    end
+    vim.opt.rtp:prepend(lazypath)
+
+    require("lazy").setup("plugins", {
+        performance = {
+            rtp = {
+                paths = { lazy_rtp }
+            }
+        }
+    })
+end
+
 function setup(lazy_rtp)
     local utility = require('utility')
 
@@ -50,18 +76,12 @@ function setup(lazy_rtp)
     })
     ---- end ----
 
-    require("lazy").setup("plugins", {
-        performance = {
-            rtp = {
-                paths = { lazy_rtp }
-            }
-        }
-    })
-
     -- load lspconfig
     require('lsp')
 
     require('mapping')
+
+    install_lazy(lazy_rtp)
 end
 
 return setup

@@ -27,9 +27,10 @@ with lib;
       easyeffects
       motrix
       firefox
+      google-chrome
       xsettingsd
       vlc
-      xorg.xrdb
+      xrdb
       yubioath-flutter
       yubikey-manager
       yubikey-touch-detector
