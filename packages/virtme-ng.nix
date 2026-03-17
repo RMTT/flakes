@@ -2,11 +2,14 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  python3,
+  python3Packages,
   rustPlatform,
   pkg-config,
   qemu,
   virtiofsd,
+  rustc,
+  cargo,
+  makeWrapper,
 }:
 
 stdenv.mkDerivation rec {
@@ -17,37 +20,63 @@ stdenv.mkDerivation rec {
     owner = "arighi";
     repo = "virtme-ng";
     rev = "v${version}";
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Placeholder
+    hash = "sha256-5vJ+wyCA0XKXtEzEGim1OoTBDFTS2BjJSIzkLvTYHn8=";
+  };
+
+  cargoDeps = rustPlatform.fetchCargoVendor {
+    inherit src pname version;
+    hash = "sha256-3+MDf6pescqPnsQBOODZJ7ic2tqxh5LPvHIMouUkhjI=";
+    sourceRoot = "${src.name}/virtme_ng_init";
   };
 
   nativeBuildInputs = [
     pkg-config
-    python3
+    python3Packages.python
+    python3Packages.setuptools
     rustPlatform.cargoSetupHook
-    rustPlatform.rust.rustc
-    rustPlatform.rust.cargo
+    rustc
+    cargo
+    makeWrapper
   ];
 
   buildInputs = [
-    python3
+    python3Packages.python
+    python3Packages.argcomplete
     qemu
     virtiofsd
   ];
 
-  cargoDeps = rustPlatform.fetchCargoVendor {
-    inherit src pname version;
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Placeholder
-  };
+  postPatch = ''
+    cp ${./Cargo.lock} Cargo.lock
+    sed -i 's|"/usr/share/bash-completion/completions"|"share/bash-completion/completions"|g' setup.py
+    sed -i 's|"/usr/share/man/man1"|"share/man/man1"|g' setup.py
+    sed -i 's|name="virtme-ng"|name="virtme_ng"|g' setup.py
+    sed -i 's|"virtme-ng = virtme_ng.run:main"|"virtme_ng = virtme_ng.run:main"|g' setup.py
+    rm Makefile
+  '';
 
-  # Assuming standard build procedure based on typical Rust/Python projects
   buildPhase = ''
-    cargo build --release
     python3 setup.py build
   '';
 
   installPhase = ''
-    python3 setup.py install --root=$out --prefix=/
-    install -Dm755 target/release/virtme-ng $out/bin/virtme-ng
+    python3 setup.py install --prefix=$out
+  '';
+
+  # Wrap the console scripts to set PYTHONPATH
+  postInstall = ''
+    # Find the egg-info directory dynamically
+    for f in $out/lib/python3.13/site-packages/*.egg-info; do
+      if [ -d "$f" ]; then
+        mv "$f" "$out/lib/python3.13/site-packages/virtme-ng-1.40.dist-info"
+      fi
+    done
+    # Patch the console scripts
+    for script in $out/bin/*; do
+      sed -i 's|virtme-ng|virtme_ng|g' "$script"
+      sed -i 's|virtme_ng==1.40|virtme-ng==1.40|g' "$script"
+      wrapProgram "$script" --set PYTHONPATH "$PYTHONPATH:$out/lib/python3.13/site-packages"
+    done
   '';
 
   meta = {
