@@ -6,4 +6,5 @@
   gost-ui = pkgs.callPackage ./gost-ui.nix { };
   sblite = pkgs.callPackage ./sblite.nix { };
   superpowers = pkgs.callPackage ./superpowers.nix { };
+  virtme-ng = pkgs.callPackage ./virtme-ng.nix { };
 }
