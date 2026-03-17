@@ -13,6 +13,7 @@ in
     networking.firewall = {
       trustedIpv4 = [
         "192.168.6.1/24" # local net of home
+        "198.19.19.1/24" # homelab net
         "100.64.0.0/10" # tailscale
       ];
       trustedIpv6 = [

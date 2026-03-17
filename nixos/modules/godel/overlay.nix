@@ -77,6 +77,7 @@ in
         charon {
           port = 0
           port_nat_t = 41821
+          retransmit_limit = 0
         }
       '';
       includes = [ config.sops.secrets.swanctl.path ];

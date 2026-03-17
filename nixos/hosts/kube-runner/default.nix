@@ -32,8 +32,8 @@
       systemd.network.networks.wan = {
         matchConfig.Name = "ens18";
         address = [ "${home_node_ip}/24" ];
-        gateway = [ "198.19.19.10" ];
-        dns = [ "198.19.19.10" ];
+        gateway = [ "198.19.19.1" ];
+        dns = [ "198.19.19.1" ];
       };
       machine.secrets.enable = true;
 

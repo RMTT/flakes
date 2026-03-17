@@ -99,6 +99,20 @@ colmena.lib.makeHive {
       networking.hostName = name;
       networking.hostId = "33f2bdce";
     };
+  labrouter =
+    { name, ... }:
+    {
+      deployment = {
+        targetHost = "${name}.home.rmtt.host";
+        targetPort = 22;
+        targetUser = "mt";
+        buildOnTarget = true;
+        keys = commonKeys;
+      };
+      imports = [ ./hosts/${name} ];
+      networking.hostName = name;
+      networking.hostId = "c6602989";
+    };
   mtspc =
     { name, ... }:
     {

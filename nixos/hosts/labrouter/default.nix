@@ -29,14 +29,24 @@ with lib;
       proxmoxLXC.manageNetwork = true;
       networking.useHostResolvConf = false;
       services.fstrim.enable = false; # Let Proxmox host handle fstrim
+      # have to suppress these units, since they do not work inside LXC
+      systemd.suppressedSystemUnits = [
+        "sys-kernel-debug.mount"
+      ];
 
       environment.systemPackages = with pkgs; [ kmod ];
 
-      #  services.godel = {
-      #    overlay = {
-      #      enable = true;
-      #      ip = infra_node_ip;
-      #    };
-      # };
+      services.godel = {
+        overlay = {
+          enable = true;
+          ip = infra_node_ip;
+        };
+      };
+
+      services.sblite = {
+        enable = true;
+        listenAddress = "198.19.19.1:8180";
+      };
+      networking.firewall.trustedInterfaces = [ "sing-box" ];
     };
 }

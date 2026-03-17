@@ -35,7 +35,6 @@ with lib;
       proxmoxLXC.manageNetwork = true;
       networking.useHostResolvConf = false;
       services.fstrim.enable = false; # Let Proxmox host handle fstrim
-
       environment.systemPackages = with pkgs; [ kmod ];
 
       services.uptime-kuma = {
