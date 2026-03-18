@@ -3,6 +3,7 @@
   xdg.configFile."nixpkgs/config.nix".source = ../config/nixpkgs-config.nix;
 
   home.packages = with pkgs; [
+    ansible
     colmena
     (pkgs.wrapHelm pkgs.kubernetes-helm {
       plugins = with pkgs.kubernetes-helmPlugins; [

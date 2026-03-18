@@ -1,20 +1,21 @@
 {
   lib,
-  stdenv,
-  fetchFromGitHub,
   python3Packages,
+  fetchFromGitHub,
   rustPlatform,
   pkg-config,
   qemu,
   virtiofsd,
   rustc,
   cargo,
-  makeWrapper,
 }:
 
-stdenv.mkDerivation rec {
+python3Packages.buildPythonApplication rec {
   pname = "virtme-ng";
   version = "1.40";
+
+  pyproject = true;
+  build-system = [ python3Packages.setuptools ];
 
   src = fetchFromGitHub {
     owner = "arighi";
@@ -31,53 +32,35 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     pkg-config
-    python3Packages.python
     python3Packages.setuptools
+    python3Packages.argparse-manpage
     rustPlatform.cargoSetupHook
     rustc
     cargo
-    makeWrapper
   ];
 
-  buildInputs = [
-    python3Packages.python
+  propagatedBuildInputs = [
     python3Packages.argcomplete
+    python3Packages.requests
     qemu
     virtiofsd
   ];
 
+  # Use cargoSetupHook properly
   postPatch = ''
     cp ${./Cargo.lock} Cargo.lock
     sed -i 's|"/usr/share/bash-completion/completions"|"share/bash-completion/completions"|g' setup.py
     sed -i 's|"/usr/share/man/man1"|"share/man/man1"|g' setup.py
-    sed -i 's|name="virtme-ng"|name="virtme_ng"|g' setup.py
-    sed -i 's|"virtme-ng = virtme_ng.run:main"|"virtme_ng = virtme_ng.run:main"|g' setup.py
     rm Makefile
   '';
 
-  buildPhase = ''
-    python3 setup.py build
-  '';
+  # Disable cargo hook during unpack to prevent issues
+  dontCargoSetupPostUnpackHook = true;
+  cargoRoot = ".";
 
-  installPhase = ''
-    python3 setup.py install --prefix=$out
-  '';
-
-  # Wrap the console scripts to set PYTHONPATH
-  postInstall = ''
-    # Find the egg-info directory dynamically
-    for f in $out/lib/python3.13/site-packages/*.egg-info; do
-      if [ -d "$f" ]; then
-        mv "$f" "$out/lib/python3.13/site-packages/virtme-ng-1.40.dist-info"
-      fi
-    done
-    # Patch the console scripts
-    for script in $out/bin/*; do
-      sed -i 's|virtme-ng|virtme_ng|g' "$script"
-      sed -i 's|virtme_ng==1.40|virtme-ng==1.40|g' "$script"
-      wrapProgram "$script" --set PYTHONPATH "$PYTHONPATH:$out/lib/python3.13/site-packages"
-    done
-  '';
+  # virtme_ng_init gets built inside setup.py (which invokes cargo).
+  # We should ensure RUSTFLAGS and others are set up properly,
+  # or rely on cargoSetupHook.
 
   meta = {
     description = "Quickly build and run kernels inside a virtualized snapshot of your live system";
