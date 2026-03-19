@@ -25,6 +25,7 @@ with lib;
       age
 
       # dev tools
+      uv
       iproute2mac
       cmake
       autoconf

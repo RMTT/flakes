@@ -77,7 +77,7 @@ in
         charon {
           port = 0
           port_nat_t = 41821
-          retransmit_limit = 0
+          retransmit_tries = 99
         }
       '';
       includes = [ config.sops.secrets.swanctl.path ];
@@ -106,6 +106,7 @@ in
                 remote_ts = entry.subnets;
                 start_action = if (cfg.mode == "server") then "trap" else "start";
                 close_action = if (cfg.mode == "server") then "trap" else "start";
+                dpd_action = if (cfg.mode == "server") then "clear" else "restart";
                 updown = "${updown}";
               };
             };

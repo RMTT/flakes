@@ -8,6 +8,9 @@
   virtiofsd,
   rustc,
   cargo,
+  flex,
+  bison,
+  bc,
 }:
 
 python3Packages.buildPythonApplication rec {
@@ -44,6 +47,9 @@ python3Packages.buildPythonApplication rec {
     python3Packages.requests
     qemu
     virtiofsd
+    flex
+    bison
+    bc
   ];
 
   # Use cargoSetupHook properly

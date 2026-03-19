@@ -48,10 +48,10 @@ with lib;
       kubernetes-helm
       kustomize
       hugo
-      uv
       mystmd
       nerdctl
       act
+      virtme-ng
     ];
 
   };
