@@ -7,4 +7,5 @@
   sblite = pkgs.callPackage ./sblite.nix { };
   superpowers = pkgs.callPackage ./superpowers.nix { };
   virtme-ng = pkgs.callPackage ./virtme-ng.nix { };
+  impeccable = pkgs.callPackage ./impeccable.nix { };
 }

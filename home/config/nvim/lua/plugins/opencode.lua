@@ -31,11 +31,6 @@ return {
         local snacks_terminal_opts = {
             win = {
                 position = 'float',
-                auto_insert = true,
-                on_win = function(win)
-                    -- Set up keymaps and cleanup for an arbitrary terminal
-                    require('opencode.terminal').setup(win.win)
-                end,
             },
         }
         vim.g.opencode_opts = {

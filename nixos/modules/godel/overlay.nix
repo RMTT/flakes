@@ -74,6 +74,11 @@ in
     services.strongswan-swanctl = {
       enable = true;
       strongswan.extraConfig = ''
+        charon-systemd {
+          journal {
+            default = 1
+          }
+        }
         charon {
           port = 0
           port_nat_t = 41821

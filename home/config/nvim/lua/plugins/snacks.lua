@@ -9,7 +9,7 @@ return {
                 relative = "editor",
                 width = 0.7,
                 height = 0.7,
-                border = "rounded", -- Use a rounded border style
+                border = "rounded",
                 auto_close = true,
             },
         }

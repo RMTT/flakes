@@ -19,6 +19,7 @@
   xdg.configFile."opencode/plugins/superpowers.js".source =
     "${pkgs.superpowers}/.opencode/plugins/superpowers.js";
   xdg.configFile."opencode/skills/superpowers".source = "${pkgs.superpowers}/skills";
+  xdg.configFile."opencode/skills/impeccable".source = "${pkgs.impeccable}/skills";
 
   home.packages = with pkgs; [ uv ];
 

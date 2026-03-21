@@ -47,6 +47,8 @@ in
         shfmt
         nixd
         nixfmt
+        # for markdown render
+        (python3.withPackages (ps: with ps; [ pylatexenc ]))
       ];
     };
 }
