@@ -1,0 +1,46 @@
+replicaCount: 1
+
+image:
+  repository: ollama/ollama
+  tag: "0.20.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 11434
+
+ingressRoute:
+  enabled: true
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`ollama.rmtt.tech`)
+      middlewares:
+        - name: ip-whitelist-private
+          namespace: kube-system
+  tls:
+    certResolver: cloudflare
+
+persistence:
+  enabled: true
+  size: 100Gi
+  storageClassName: "local-path"
+  accessModes:
+    - ReadWriteOnce
+
+resources:
+  requests:
+    cpu: "1000m"
+    memory: 4Gi
+    gpu.intel.com/i915: "1"
+  limits:
+    cpu: "4000m"
+    memory: 8Gi
+    gpu.intel.com/i915: "1"
+
+nodeSelector:
+  kubernetes.io/hostname: kube-runner
+
+env:
+- name: OLLAMA_VULKAN
+  value: "1"

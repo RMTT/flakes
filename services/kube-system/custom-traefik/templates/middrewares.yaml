@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: ip-whitelist-private
+spec:
+  ipAllowList:
+    sourceRange:
+      - 198.19.19.0/24
+      - 198.19.198.0/24
+      - 198.19.6.0/24
+      - 100.64.0.0/10

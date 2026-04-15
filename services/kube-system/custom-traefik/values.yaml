@@ -1,0 +1,19 @@
+cloudflare:
+    token: ENC[AES256_GCM,data:exQGQLk5EP9XKwNnVD5mGWM6Lngum3+hKbQfq/pEuBh+PXHHpjIpp1xF0bbVbwAjA4NK700=,iv:QQd9FT7RYBgM8NFgpE7RUVtAdmlhHsxfGQ+wIIf4FUM=,tag:K1IOICnJXMYskLViBLaR3Q==,type:str]
+sops:
+    lastmodified: "2026-04-04T08:44:41Z"
+    mac: ENC[AES256_GCM,data:llN0AijCmjlFAgc1mzqoRVynfaXt9qLBWUJtCb4L1fbr4D5o7kBw0f14TDf4Ffp6FMXpBC539QSfYvygIhRGQekjMKcCbvjW2Q5f4s8jWctp67S0QJkhHDwp7HCU9NPH/K7UtBTouf+ucu2QxuQV9jA0wMHS8Pb0V3bqxMtfogw=,iv:UHG3mBf7s9XO13XGzRM+ijT027bSq3TCH3+XVWBc/bQ=,tag:2XCuDGZ88Kz9LmViLC70Fg==,type:str]
+    pgp:
+        - created_at: "2026-04-04T08:44:41Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hF4D36+3H3ly1I0SAQdASgwj1LDhdtVGlEgj0XWWwbWJA+7rkwcXwlreebOAsV4w
+            aNjnGqxh4xm9TdHblUPhpGclF7qp4uuxH17kO9fWYkPRiwmETfNkIjtvcLLXqM7f
+            0l4B04X5wlrOriurg6CVnQAQ6roePJX63IDMqbxDSydU0T9on9Z+HH5washiw1kt
+            XdVlBGSjTaOqqWP2FkowwHSjgDqOHE1Aa+oVOFFt149OdW8Ob5Es9fugfUnAE1Zu
+            =L/L9
+            -----END PGP MESSAGE-----
+          fp: BD15904159AF89DEB3A61039DFAFB71F7972D48D
+    unencrypted_suffix: _unencrypted
+    version: 3.12.2

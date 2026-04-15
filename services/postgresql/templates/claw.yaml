@@ -1,0 +1,41 @@
+# apiVersion: postgresql.cnpg.io/v1
+# kind: Cluster
+# metadata:
+#   name: claw
+#   namespace: {{.Release.Namespace}}
+# spec:
+#   instances: 1
+#   affinity:
+#     nodeSelector:
+#       kubernetes.io/hostname: kube-runner
+#   storage:
+#     storageClass: local-path
+#     size: 100Gi
+# ---
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: Gateway
+# metadata:
+#   name: claw-pg-gateway
+#   namespace: {{.Release.Namespace}}
+# spec:
+#   gatewayClassName: traefik
+#   listeners:
+#   - name: postgres-claw
+#     protocol: TCP
+#     port: 5432
+#     allowedRoutes:
+#       kinds:
+#       - kind: TCPRoute
+# ---
+# apiVersion: gateway.networking.k8s.io/v1alpha2
+# kind: TCPRoute
+# metadata:
+#   name: postgres-route
+#   namespace: {{.Release.Namespace}}
+# spec:
+#   parentRefs:
+#   - name: claw-pg-gateway
+#   rules:
+#   - backendRefs:
+#     - name: claw-rw
+#       port: 5432

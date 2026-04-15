@@ -1,0 +1,6 @@
+apiVersion: v2
+name: ollama
+description: Helm chart for Ollama with Intel iGPU scheduling
+type: application
+version: 0.0.1
+appVersion: "0.11.4"

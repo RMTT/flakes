@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    certResolver: cloudflare
+  routes:
+    - match: Host(`k3s.proxy.rmtt.tech`)
+      kind: Rule
+      middlewares:
+        - name: ip-whitelist-private
+          namespace: kube-system
+      services:
+        - name: api@internal
+          kind: TraefikService

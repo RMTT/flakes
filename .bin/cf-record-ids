@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+
+from typing import List
+import urllib.request
+import json
+import os
+
+API_TOKEN = os.getenv("CLOUDFLARE_API_TOKEN")
+ZONES = {
+    "rmtt.tech": os.environ.get("cf_zone_rmtt_tech"),
+    "rmtt.fun": os.environ.get("cf_zone_rmtt_fun"),
+    "rmtt.host": os.environ.get("cf_zone_rmtt_host"),
+}
+
+headers = {"Authorization": f"Bearer {API_TOKEN}", "Content-Type": "application/json"}
+
+OUTPUT_FILE = "cf_ids.yaml"
+
+
+def get_records(zone_name, zone_id) -> List | None:
+    url = (
+        f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records?per_page=100"
+    )
+
+    req = urllib.request.Request(url)
+    req.add_header("Authorization", f"Bearer {API_TOKEN}")
+    req.add_header("Content-Type", "application/json")
+
+    with urllib.request.urlopen(req) as response:
+        data = json.loads(response.read().decode("utf-8"))
+
+        if not data.get("success"):
+            print(f"❌ get {zone_name} failed: {data.get('errors')}")
+            return
+
+        records = data.get("result", [])
+        return records
+
+
+if __name__ == "__main__":
+    records = []
+    for name, zid in ZONES.items():
+        r = get_records(name, zid)
+        if r:
+            records.extend(r)
+
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        for r in records:
+            if r["type"] == "A":
+                f.write(f"{r['name']}: {r['id']}\n")

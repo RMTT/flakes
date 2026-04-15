@@ -1,0 +1,35 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "plugin": ["@mohak34/opencode-notifier@latest" ,"superpowers@git+https://github.com/obra/superpowers.git" ],
+    "keybinds": {
+        "command_list": "<leader>p",
+        "history_previous": "ctrl+p",
+        "history_next": "ctrl+n"
+    },
+    "mcp": {
+        "context7": {
+            "type": "remote",
+            "url": "https://mcp.context7.com/mcp",
+            "headers": {
+                "CONTEXT7_API_KEY": "{env:MCP_CONTEXT7}"
+            }
+        },
+        "github": {
+            "type": "remote",
+            "url": "https://api.githubcopilot.com/mcp",
+            "headers": {
+                "Authorization": "Bearer {env:MCP_GITHUB}"
+            }
+        },
+        "exa": {
+            "type": "remote",
+            "url": "https://mcp.exa.ai/mcp?exaApiKey={env:MCP_EXA}",
+            "headers": {}
+        },
+        "nixos": {
+            "type": "local",
+            "command": ["uvx", "mcp-nixos"],
+            "enabled": true
+        }
+    }
+}

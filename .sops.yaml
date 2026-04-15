@@ -1,0 +1,27 @@
+keys:
+  - &admin BD15904159AF89DEB3A61039DFAFB71F7972D48D
+
+  # age for different hosts
+  - &mtspc-age age18ty94l69h64jrwsrq59052a6zeh8k0sue5n4ycc2sm63e9k5pa4qd08qh6
+  - &cn2-box-age age1xsexrshfte590ec343puza8m7l9442u79hau6dpdu7ndjhaeav4slqhqwx
+  - &kube-runner-age age1y498pq4h0mauklsvxfjmte3jchnupk5s83pu493k3kzm5su444sqnlpdgl
+  - &labrouter-age age1ctwzkp0rnk83z87tprrej6zl5hvpq3h7ugdms5y6kzlq7kej648svc4yuz
+
+  # age for home-manager 
+  - &mtspc-home-age age1xtfuvxeye5qa35n8wmwgnsacz5amkntkz3cn5v25u5vfsr9c2e8qyetnsg
+
+creation_rules:
+  - path_regex: services/.*
+    pgp: *admin
+  - path_regex: home/.*
+    age: *mtspc-home-age
+    pgp: *admin
+  - path_regex: nixos/.*
+    pgp: *admin
+    age: 
+      - *cn2-box-age
+      - *kube-runner-age
+      - *labrouter-age
+  - path_regex: dns/.*
+    pgp: *admin
+  - pgp: *admin # default

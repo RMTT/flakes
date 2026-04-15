@@ -1,0 +1,5 @@
+cloudnative-pg:
+  enabled: true
+  includeCRDs: true
+  nodeSelector:
+    kubernetes.io/hostname: kube-runner

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+TARGET_DIR=$(realpath .)
+
+echo "scan target: $TARGET_DIR"
+
+git ls-files | while read -r file; do
+    if [[ "$file" == *".sops.yaml" ]]; then
+        continue
+    fi
+
+    STATUS_JSON=$(sops filestatus "$file" 2>/dev/null)
+    if [[ -n "$STATUS_JSON" ]] && [[ "$(echo "$STATUS_JSON" | jq '.encrypted')" == "true" ]]; then
+        sops updatekeys -y "$file"
+    fi
+done
