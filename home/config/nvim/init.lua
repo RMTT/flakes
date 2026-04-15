@@ -76,5 +76,9 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldtext = ""
 
+if vim.g.neovide then
+    require('neovide')
+end
+
 require('mapping')
 require('mypack').init()

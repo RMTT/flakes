@@ -53,6 +53,7 @@ with lib;
       gitui
       terraform
       cf-terraforming
+      neovide
     ];
 
   };

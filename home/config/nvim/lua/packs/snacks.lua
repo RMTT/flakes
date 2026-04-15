@@ -35,7 +35,7 @@ return {
                 win = {
                     border = "rounded",
                 },
-            }
+            },
         }
         require("snacks").setup(opts)
 
