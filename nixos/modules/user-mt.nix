@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.machine.users.mt;
 in
@@ -27,6 +32,7 @@ with lib;
       description = "mt";
       group = "mt";
       uid = 1000;
+      shell = pkgs.zsh;
       extraGroups = [
         "wheel"
         "networkmanager"

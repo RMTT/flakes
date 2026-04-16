@@ -13,16 +13,13 @@
   config = {
     system.stateVersion = "23.05";
 
-    boot.initrd.availableKernelModules = [
-      "nvme"
-      "xhci_pci"
-      "uas"
-      "usbhid"
-      "sd_mod"
+    boot.kernelModules = [
+      "kvm-amd"
+      "k10temp"
     ];
-    boot.kernelModules = [ "kvm-amd" ];
     machine.graphics.enable = true;
 
+    hardware.enableAllFirmware = true;
     boot.initrd.systemd.enable = true;
     boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/87bae457-3808-4edd-aef4-2017cc04c566";
     fileSystems."/" = {
@@ -78,15 +75,13 @@
     machine.desktop.enable = true;
     machine.development.enable = true;
 
-    # default shell
-    users.users.mt.shell = pkgs.zsh;
-
     # additional system packages
     environment.systemPackages = with pkgs; [
       perf
       moonlight-qt
       virt-manager
       virt-viewer
+      amdgpu_top
     ];
 
     programs.steam = {
@@ -97,10 +92,6 @@
     services.tailscale = {
       enable = true;
       openFirewall = true;
-    };
-
-    services.logind.settings.Login = {
-      IdleAction = "ignore";
     };
 
     virtualisation.docker = {
@@ -115,9 +106,5 @@
     networking.firewall.trustedInterfaces = [ "sing-box" ];
 
     services.meshcentral.enable = true;
-    virtualisation.incus = {
-      enable = true;
-      ui.enable = true;
-    };
   };
 }

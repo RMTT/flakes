@@ -37,6 +37,9 @@ colmena.lib.makeHive {
       inputs.home-manager.nixosModules.home-manager
       inputs.disko.nixosModules.disko
       inputs.determinate.nixosModules.default
+      {
+          nix.registry = builtins.mapAttrs (_: value: { flake = value; }) inputs;
+      }
     ];
   };
 
