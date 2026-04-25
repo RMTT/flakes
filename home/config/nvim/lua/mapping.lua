@@ -23,3 +23,34 @@ vim.api.nvim_set_keymap('v', '<space>P', '"+P', { noremap = true, silent = true 
 
 ---- close buffer and window ----
 vim.api.nvim_set_keymap('n', '<A-w>', ':bd<CR>', { noremap = true, silent = true })
+
+
+-- copy location inside file
+local function copy_file_location(is_visual)
+    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
+    local location = ''
+
+    if is_visual then
+        local start_line = vim.fn.getpos("'<")[2]
+        local end_line = vim.fn.getpos("'>")[2]
+
+        if start_line > end_line then
+            start_line, end_line = end_line, start_line
+        end
+
+        location = string.format('%s: L%d-L%d', filename, start_line, end_line)
+    else
+        location = string.format('%s: L%d', filename, vim.api.nvim_win_get_cursor(0)[1])
+    end
+
+    vim.fn.setreg('+', location)
+    vim.notify('Copied ' .. location)
+end
+
+vim.keymap.set('n', '<space>go', function()
+    copy_file_location(false)
+end, { silent = true, desc = 'Copy file location' })
+
+vim.keymap.set('v', '<space>go', function()
+    copy_file_location(true)
+end, { silent = true, desc = 'Copy file range' })

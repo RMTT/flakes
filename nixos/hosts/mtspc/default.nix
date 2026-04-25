@@ -106,5 +106,7 @@
     networking.firewall.trustedInterfaces = [ "sing-box" ];
 
     services.meshcentral.enable = true;
+
+    programs.librepods.enable = true;
   };
 }

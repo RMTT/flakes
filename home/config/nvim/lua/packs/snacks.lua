@@ -46,5 +46,9 @@ return {
         vim.keymap.set({ "n", "t" }, "<A-g>", function()
             toggle_float_term("gitui")
         end, { noremap = true, silent = true, desc = "Toggle gitui" })
+
+        vim.keymap.set({ "n", "t" }, "<A-c>", function()
+            toggle_float_term("opencode")
+        end, { noremap = true, silent = true, desc = "Toggle opencode" })
     end
 }

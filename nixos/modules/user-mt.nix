@@ -45,6 +45,7 @@ with lib;
         (mkIf config.hardware.i2c.enable "i2c")
         "wireshark"
         (mkIf config.virtualisation.libvirtd.enable "libvirtd")
+        (mkIf config.programs.librepods.enable "librepods")
       ];
       initialHashedPassword = "$y$j9T$v3KSiMJEpJdcbN4osJbMF0$Qfgg9i/ozgLjDhOg/WZmSrg8vuiNQSrSWivWKvjATN7";
       openssh.authorizedKeys.keyFiles = [ ./secrets/ssh_key.pub ];

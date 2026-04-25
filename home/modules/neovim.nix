@@ -8,6 +8,7 @@
     viAlias = true;
     withPython3 = true;
     withNodeJs = true;
+    withRuby = true;
     initLua = builtins.readFile ../config/nvim/init.lua;
     # install luanguage servers
     extraPackages = with pkgs; [
