@@ -34,6 +34,8 @@ with lib;
       insync
       insync-nautilus
     ];
+    programs.sniffnet.enable = true;
+
     programs.appimage = {
       enable = true;
       binfmt = true;
