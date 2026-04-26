@@ -61,6 +61,8 @@
       package = config.boot.kernelPackages.nvidiaPackages.beta;
       dynamicBoost.enable = true;
       modesetting.enable = true;
+      powerManagement.enable = true;
+      powerManagement.finegrained = true;
       prime = {
         nvidiaBusId = "PCI:1:0:0";
         amdgpuBusId = "PCI:5:0:0";
