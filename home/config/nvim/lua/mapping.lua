@@ -31,8 +31,8 @@ local function copy_file_location(is_visual)
     local location = ''
 
     if is_visual then
-        local start_line = vim.fn.getpos("'<")[2]
-        local end_line = vim.fn.getpos("'>")[2]
+        local start_line = vim.fn.getpos("v")[2]
+        local end_line = vim.fn.getpos(".")[2]
 
         if start_line > end_line then
             start_line, end_line = end_line, start_line
