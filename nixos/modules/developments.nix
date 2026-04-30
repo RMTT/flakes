@@ -35,7 +35,6 @@ with lib;
       nodejs
       clang-tools
       pkg-config
-      pgcli
       yq-go
       gh
       distrobox
