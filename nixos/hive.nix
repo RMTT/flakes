@@ -37,6 +37,7 @@ colmena.lib.makeHive {
       inputs.home-manager.nixosModules.home-manager
       inputs.disko.nixosModules.disko
       inputs.determinate.nixosModules.default
+      inputs.hermes-agent.nixosModules.default
       {
           nix.registry = builtins.mapAttrs (_: value: { flake = value; }) inputs;
       }
@@ -93,6 +94,19 @@ colmena.lib.makeHive {
       imports = [ ./hosts/${name} ];
       networking.hostName = name;
       networking.hostId = "c6602989";
+    };
+  agent =
+    { name, ... }:
+    {
+      deployment = {
+        targetHost = "${name}.infra.rmtt.host";
+        targetPort = 22;
+        targetUser = "mt";
+        buildOnTarget = false;
+      };
+      imports = [ ./hosts/${name} ];
+      networking.hostName = name;
+      networking.hostId = "879d840f";
     };
   mtspc =
     { name, ... }:
