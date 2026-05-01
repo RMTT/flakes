@@ -76,6 +76,7 @@
 
     machine.desktop.enable = true;
     machine.development.enable = true;
+    users.users.mt.shell = pkgs.zsh;
 
     # additional system packages
     environment.systemPackages = with pkgs; [

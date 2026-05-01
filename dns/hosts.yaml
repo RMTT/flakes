@@ -12,7 +12,7 @@
   zone: rmtt.tech
   value: 198.19.19.1
   push: false
-- name: claw
+- name: agent
   zone: rmtt.tech
   value: 198.19.19.1
   push: false
@@ -34,7 +34,7 @@
   push: false
  
 
-# following records have same value in public and private net
+# following records have same value in public and private net, those hosts are basically host ips.
 - name: homerouter.infra
   zone: rmtt.host
   value: 198.19.19.254
@@ -67,7 +67,7 @@
   zone: rmtt.host
   value: 198.19.19.6
   push: true
-- name: claw.infra
+- name: agent.infra
   zone: rmtt.host
   value: 198.19.19.7
   push: true

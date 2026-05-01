@@ -13,7 +13,6 @@ with lib;
   };
 
   config = mkIf cfg.enable {
-    sops.defaultSopsFile = ./keys.yaml;
     sops.age.generateKey = false;
   };
 }

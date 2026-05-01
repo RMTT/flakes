@@ -32,7 +32,6 @@ with lib;
       description = "mt";
       group = "mt";
       uid = 1000;
-      shell = pkgs.zsh;
       extraGroups = [
         "wheel"
         "networkmanager"
