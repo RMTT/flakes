@@ -84,6 +84,7 @@
       moonlight-qt
       virt-manager
       virt-viewer
+      winboat
       amdgpu_top
     ];
 
@@ -97,6 +98,7 @@
       openFirewall = true;
     };
 
+    virtualisation.libvirtd.enable = true;
     virtualisation.docker = {
       enable = true;
       daemon.settings = {

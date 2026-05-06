@@ -47,6 +47,7 @@ with lib;
       loupe
       gnome-text-editor
       gnome-system-monitor
+      gnome-firmware
     ];
 
     # qt theme
