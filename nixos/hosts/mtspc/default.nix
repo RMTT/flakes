@@ -86,6 +86,7 @@
       virt-viewer
       winboat
       amdgpu_top
+      qdiskinfo
     ];
 
     programs.steam = {
