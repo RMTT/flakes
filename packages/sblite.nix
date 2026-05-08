@@ -4,17 +4,17 @@
 }:
 
 let
-  version = "0.1.4";
+  version = "0.1.5";
 
   srcs = {
     x86_64-linux = {
       url = "https://github.com/RMTT/sb-lite/releases/download/v${version}/sblite-amd64-linux.tar.gz";
-      sha256 = "09407w48vsj3nqdbgh8kmq9xpzxfqk5iddy0cmjglh44pjsygh67";
+      sha256 = "1a8vrrfnfjzlfirwiq8wf3cyj6xwbcqymgkvy2245whk0z3wa1sy";
       binaryName = "sblite-amd64-linux";
     };
     aarch64-linux = {
       url = "https://github.com/RMTT/sb-lite/releases/download/v${version}/sblite-arm64-linux.tar.gz";
-      sha256 = "1x4f3ybnmpp69a9q4vaj7awgmcrd8pjjlww1bmxa8v3czvifq2a9";
+      sha256 = "1w3wvahg6vx8dbi8v6bk9i0kfv1ind92f4k96nasijd0z0fafv98";
       binaryName = "sblite-arm64-linux";
     };
   };

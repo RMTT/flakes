@@ -5,7 +5,7 @@ keys:
   - &mtspc-age age18ty94l69h64jrwsrq59052a6zeh8k0sue5n4ycc2sm63e9k5pa4qd08qh6
   - &cn2-box-age age1xsexrshfte590ec343puza8m7l9442u79hau6dpdu7ndjhaeav4slqhqwx
   - &kube-runner-age age1y498pq4h0mauklsvxfjmte3jchnupk5s83pu493k3kzm5su444sqnlpdgl
-  - &labrouter-age age1ctwzkp0rnk83z87tprrej6zl5hvpq3h7ugdms5y6kzlq7kej648svc4yuz
+  - &labrouter-age age1007spu04juhrg4hf2ascwfqv2y5ln7z6z6lu2zhq0egsrtz35pvstl3qdq
   - &agent-age age1xh8kkfq4mkvzavzq8vufaxdugwp9tg0p4geupelujn3048mynvnspj4phw
 
   # age for home-manager 

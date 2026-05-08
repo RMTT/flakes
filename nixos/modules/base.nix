@@ -134,6 +134,9 @@ with lib;
       tpm2-pkcs11
     ];
 
+    programs.nix-ld = {
+      enable = true;
+    };
     # set XDG viarables
     environment.sessionVariables = rec {
       XDG_CACHE_HOME = "$HOME/.cache";
