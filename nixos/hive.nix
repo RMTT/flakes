@@ -26,6 +26,12 @@ colmena.lib.makeHive {
           (overlay-ownpkgs system)
         ];
       };
+      labrouter = import nixpkgs rec {
+        system = "aarch64-linux";
+        overlays = [
+          (overlay-ownpkgs system)
+        ];
+      };
     };
   };
 
@@ -39,7 +45,7 @@ colmena.lib.makeHive {
       inputs.determinate.nixosModules.default
       inputs.hermes-agent.nixosModules.default
       {
-          nix.registry = builtins.mapAttrs (_: value: { flake = value; }) inputs;
+        nix.registry = builtins.mapAttrs (_: value: { flake = value; }) inputs;
       }
     ];
   };
@@ -89,7 +95,7 @@ colmena.lib.makeHive {
         targetHost = "${name}.infra.rmtt.host";
         targetPort = 22;
         targetUser = "mt";
-        buildOnTarget = true;
+        buildOnTarget = false;
       };
       imports = [ ./hosts/${name} ];
       networking.hostName = name;

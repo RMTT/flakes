@@ -8,12 +8,15 @@
 with lib;
 {
   imports = [
-    (modulesPath + "/virtualisation/proxmox-lxc.nix")
+    (modulesPath + "/virtualisation/lxc-container.nix")
     ./secrets
   ];
 
   config = {
     system.stateVersion = "26.05";
+    documentation.enable = false;
+    documentation.nixos.enable = false;
+    hardware.enableAllFirmware = false;
 
     networking.useNetworkd = true;
     boot.loader.systemd-boot.enable = mkForce false;
@@ -21,10 +24,10 @@ with lib;
     nix.settings = {
       sandbox = false;
     };
-    proxmoxLXC.privileged = true;
-    proxmoxLXC.manageNetwork = true;
+    # proxmoxLXC.privileged = true;
+    # proxmoxLXC.manageNetwork = true;
     networking.useHostResolvConf = false;
-    services.fstrim.enable = false; # Let Proxmox host handle fstrim
+    services.fstrim.enable = false;
     # have to suppress these units, since they do not work inside LXC
     systemd.suppressedSystemUnits = [
       "sys-kernel-debug.mount"

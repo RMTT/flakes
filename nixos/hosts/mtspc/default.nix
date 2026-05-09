@@ -18,6 +18,8 @@
       "k10temp"
     ];
     machine.graphics.enable = true;
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+    boot.binfmt.addEmulatedSystemsToNixSandbox = true;
 
     hardware.enableAllFirmware = true;
     boot.initrd.systemd.enable = true;

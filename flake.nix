@@ -62,7 +62,7 @@
       nixosModules = import ./nixos/modules.nix;
       homeConfigurations = import ./home inputs;
     }
-    // eachSystem [ system.x86_64-linux system.aarch64-darwin ] (system: {
+    // eachSystem [ system.x86_64-linux system.aarch64-linux ] (system: {
       packages = import ./packages {
         inherit inputs system;
       };
