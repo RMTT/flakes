@@ -1,6 +1,0 @@
-builds:
-  exclude:
-  - nixosConfigurations.iso
-  include:
-  - 'packages.x86_64-linux.*'
-  - nixosConfigurations.*
