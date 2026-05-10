@@ -26,12 +26,6 @@ colmena.lib.makeHive {
           (overlay-ownpkgs system)
         ];
       };
-      labrouter = import nixpkgs rec {
-        system = "aarch64-linux";
-        overlays = [
-          (overlay-ownpkgs system)
-        ];
-      };
     };
   };
 

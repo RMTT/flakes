@@ -13,9 +13,9 @@ env:
     .#nixosConfigurations.kube-runner.config.system.build.toplevel
     .#nixosConfigurations.agent.config.system.build.toplevel
     .#nixosConfigurations.mtspc.config.system.build.toplevel
+    .#nixosConfigurations.labrouter.config.system.build.toplevel
 
   ARM_TARGETS: >-
-    .#nixosConfigurations.labrouter.config.system.build.toplevel
 
 jobs:
   build-x86_64:

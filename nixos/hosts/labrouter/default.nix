@@ -8,7 +8,7 @@
 with lib;
 {
   imports = [
-    (modulesPath + "/virtualisation/lxc-container.nix")
+    (modulesPath + "/virtualisation/proxmox-lxc.nix")
     ./secrets
   ];
 
@@ -16,7 +16,6 @@ with lib;
     system.stateVersion = "26.05";
     documentation.enable = false;
     documentation.nixos.enable = false;
-    hardware.enableAllFirmware = false;
 
     networking.useNetworkd = true;
     boot.loader.systemd-boot.enable = mkForce false;
@@ -24,8 +23,7 @@ with lib;
     nix.settings = {
       sandbox = false;
     };
-    # proxmoxLXC.privileged = true;
-    # proxmoxLXC.manageNetwork = true;
+    proxmoxLXC.manageNetwork = true;
     networking.useHostResolvConf = false;
     services.fstrim.enable = false;
     # have to suppress these units, since they do not work inside LXC
