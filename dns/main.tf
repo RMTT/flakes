@@ -4,6 +4,10 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "~> 5"
     }
+    adguard = {
+      source = "gmichels/adguard"
+      version = "~> 1.7.0"
+    }
     sops = {
       source  = "carlpett/sops"
       version = "~> 0.5"
@@ -17,6 +21,14 @@ data "sops_file" "secrets" {
 
 provider "cloudflare" {
   api_token = data.sops_file.secrets.data["CLOUDFLARE_API_TOKEN"]
+}
+
+provider "adguard" {
+  host     = "homerouter.java-crocodile.ts.net:3000"
+  username = data.sops_file.secrets.data["adguard_username"]
+  password = data.sops_file.secrets.data["adguard_password"]
+  scheme   = "http"
+  insecure = false
 }
 
 variable "cf_record_id_file" {
@@ -44,10 +56,20 @@ locals {
   }
 
   raw_list = yamldecode(file("${path.module}/hosts.yaml"))
+  all_dns = {
+    for x in local.raw_list : "${x.name}.${x.zone}" => x
+  }
   filtered_dns = {
     for x in local.raw_list : "${x.name}.${x.zone}" => x
     if x.push == true
   }
+}
+
+resource "adguard_rewrite" "dynamic" {
+  for_each = { for x in local.all_dns : "${x.name}.${x.zone}" => x }
+
+  domain = each.key
+  answer = each.value.value
 }
 
 import {

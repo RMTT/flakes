@@ -70,7 +70,6 @@
         infra-ip = infra_node_ip;
         overlay = {
           enable = true;
-          xfrm = true;
         };
         k3s = {
           enable = true;
