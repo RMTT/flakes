@@ -10,6 +10,7 @@ with lib;
   imports = [
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
     ./secrets
+    ./homepage.nix
   ];
 
   config = {
@@ -33,6 +34,12 @@ with lib;
 
     environment.systemPackages = with pkgs; [ kmod ];
 
+    networking.interfaces.homelab.ipv4.routes = [
+      {
+        address = "198.19.19.0";
+        prefixLength = 24;
+      }
+    ];
     services.godel = {
       overlay.enable = true;
       hostsRecord.enable = true;
@@ -47,24 +54,22 @@ with lib;
     services.resolved.enable = mkForce false;
     services.dnsmasq = {
       enable = true;
-      resolveLocalQueries = true;
       settings = {
         listen-address = [
           "127.0.0.1"
-          "::"
+          "198.19.19.1"
         ];
-        interface = [ "eth0" ];
         local = [
           "/rmtt.tech/"
           "/rmtt.fun/"
           "/home.rmtt.host/"
           "/infra.rmtt.host/"
         ];
+        bind-dynamic = true;
         local-service = false;
         no-dhcp-interface = "*";
         no-resolv = true;
         no-hosts = false;
-        log-queries = true;
         bogus-priv = true;
         server = [
           "1.1.1.1"
@@ -103,5 +108,6 @@ with lib;
       environmentFiles = [ config.sops.secrets.traefik-env.path ];
       dynamicConfigFile = ./secrets/traefik-dynamic.toml;
     };
+
   };
 }

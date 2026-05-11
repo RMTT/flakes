@@ -4,6 +4,10 @@
   zone: rmtt.tech
   value: 198.19.19.1
   push: false
+- name: homepage
+  zone: rmtt.tech
+  value: 198.19.19.1
+  push: false
 - name: pbs
   zone: rmtt.tech
   value: 198.19.19.1
