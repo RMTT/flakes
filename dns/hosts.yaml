@@ -2,31 +2,31 @@
 # public value of those records should be configured in cloudflare
 - name: nas
   zone: rmtt.tech
-  value: 198.19.19.1
+  value: 198.19.19.8
   push: false
 - name: homepage
   zone: rmtt.tech
-  value: 198.19.19.1
+  value: 198.19.19.8
   push: false
 - name: pbs
   zone: rmtt.tech
-  value: 198.19.19.1
+  value: 198.19.19.8
   push: false
 - name: homeserver
   zone: rmtt.tech
-  value: 198.19.19.1
+  value: 198.19.19.8
   push: false
 - name: agent
   zone: rmtt.tech
-  value: 198.19.19.1
+  value: 198.19.19.8
   push: false
 - name: status
   zone: rmtt.tech
-  value: 198.19.19.1
+  value: 198.19.19.8
   push: false
 - name: router.proxy
   zone: rmtt.tech
-  value: 198.19.19.1
+  value: 198.19.19.8
   push: false
 - name: ollama
   zone: rmtt.tech
@@ -41,7 +41,7 @@
 # following records have same value in public and private net, those hosts are basically host ips.
 - name: homerouter.infra
   zone: rmtt.host
-  value: 198.19.19.254
+  value: 198.19.19.1
   push: true
 - name: homerouter.home
   zone: rmtt.host
@@ -57,7 +57,7 @@
   push: true
 - name: labrouter.infra
   zone: rmtt.host
-  value: 198.19.19.1
+  value: 198.19.19.8
   push: true
 - name: kube-runner.infra
   zone: rmtt.host

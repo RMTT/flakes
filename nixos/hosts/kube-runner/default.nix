@@ -32,7 +32,7 @@
         matchConfig.Name = "ens18";
         address = [ "${infra_node_ip}/24" ];
         gateway = [ "198.19.19.1" ];
-        dns = [ "198.19.19.1" ];
+        dns = [ "1.1.1.1" ];
       };
       machine.secrets.enable = true;
 

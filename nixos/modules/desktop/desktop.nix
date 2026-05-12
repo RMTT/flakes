@@ -22,6 +22,7 @@ with lib;
       solaar
       easyeffects
       firefox
+      google-chrome
       xsettingsd
       vlc
       xrdb

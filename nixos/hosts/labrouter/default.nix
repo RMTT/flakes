@@ -34,12 +34,6 @@ with lib;
 
     environment.systemPackages = with pkgs; [ kmod ];
 
-    services.sblite = {
-      enable = true;
-      listenAddress = "198.19.19.1:8180";
-    };
-    networking.firewall.trustedInterfaces = [ "sing-box" ];
-
     services.traefik = {
       enable = true;
       staticConfigOptions = {
