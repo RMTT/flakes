@@ -23,7 +23,8 @@ with lib;
       package = pkgs.wireshark;
     };
     environment.systemPackages = with pkgs; [
-      gcc
+      qemu
+      clang
       gdb
       cmake
       gnumake
@@ -50,6 +51,5 @@ with lib;
       cf-terraforming
       neovide
     ];
-
   };
 }

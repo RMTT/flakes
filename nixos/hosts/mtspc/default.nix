@@ -7,7 +7,6 @@
 {
   imports = [
     ./secrets
-    ./vm.nix
   ];
 
   config = {

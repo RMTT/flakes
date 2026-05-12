@@ -88,7 +88,7 @@ with lib;
       parted
       bind
       htop
-      gitFull
+      git
       git-lfs
       ipvsadm
       file

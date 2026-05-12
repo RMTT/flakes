@@ -24,4 +24,11 @@ in
 
   noctalia-shell = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
   colmena = inputs.colmena.packages.${system}.colmena;
+
+  # aarch64 vm
+  armer = import ./armer.nix {
+    nixpkgs = inputs.nixpkgs;
+    hostPkgs = pkgs;
+    inherit system;
+  };
 }
