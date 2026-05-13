@@ -7,11 +7,11 @@
 }:
 {
   imports = [
-    (modulesPath + "/virtualisation/oci-image.nix")
-    ./disko.nix
+    (modulesPath + "/virtualisation/oci-common.nix")
   ];
 
   config = {
+    oci.efi = true;
     machine.graphics.enable = false;
     machine.bootloader.enable = false;
     system.stateVersion = "26.05";

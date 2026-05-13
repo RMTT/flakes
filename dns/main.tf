@@ -10,13 +10,18 @@ terraform {
     }
     sops = {
       source  = "carlpett/sops"
-      version = "~> 0.5"
+      version = "~> 1.4.1"
     }
   }
 }
 
 data "sops_file" "secrets" {
   source_file = "keys.yaml"
+}
+
+data "sops_file" "hosts" {
+  source_file = "hosts"
+  input_type = "raw"
 }
 
 provider "cloudflare" {
@@ -55,7 +60,7 @@ locals {
     if lookup(local.cf_ids, domain, null) != null
   }
 
-  raw_list = yamldecode(file("${path.module}/hosts.yaml"))
+  raw_list = nonsensitive(yamldecode(data.sops_file.hosts.raw))
   all_dns = {
     for x in local.raw_list : "${x.name}.${x.zone}" => x
   }

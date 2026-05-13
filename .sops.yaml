@@ -14,9 +14,11 @@ keys:
 creation_rules:
   - path_regex: services/.*
     pgp: *admin
+
   - path_regex: home/.*
     age: *mtspc-home-age
     pgp: *admin
+
   - path_regex: nixos/hosts/kube-runner/.*
     pgp: *admin
     age: *kube-runner-age
@@ -35,6 +37,8 @@ creation_rules:
       - *cn2-box-age
       - *kube-runner-age
       - *labrouter-age
+
   - path_regex: dns/.*
     pgp: *admin
+
   - pgp: *admin # default
