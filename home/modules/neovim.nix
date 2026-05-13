@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 {
   xdg.configFile."nvim/lua".source = ../config/nvim/lua;
+  xdg.configFile."nvim/lsp".source = ../config/nvim/lsp;
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -20,7 +21,7 @@
       tree-sitter
       clang-tools
       efm-langserver
-      typescript-language-server
+      vtsls
       vscode-langservers-extracted
       gopls
       black

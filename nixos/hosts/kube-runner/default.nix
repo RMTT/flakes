@@ -19,6 +19,7 @@
     {
       system.stateVersion = "25.11";
 
+      nixpkgs.hostPlatform = "x86_64-linux";
       networking.useNetworkd = true;
       networking.useDHCP = false;
       machine.graphics.enable = false;

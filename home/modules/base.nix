@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     ansible
-    colmena
     (pkgs.wrapHelm pkgs.kubernetes-helm {
       plugins = with pkgs.kubernetes-helmPlugins; [
         helm-secrets

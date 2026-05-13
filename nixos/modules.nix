@@ -13,4 +13,5 @@
   desktop = ./modules/desktop;
   netflow = ./modules/netflow;
   services = ./modules/services;
+  bootloader = ./modules/bootloader.nix;
 }

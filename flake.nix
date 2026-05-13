@@ -4,13 +4,11 @@
   nixConfig = {
     extra-substituters = [
       "https://noctalia.cachix.org"
-      "https://colmena.cachix.org"
       "https://nix-community.cachix.org"
       "https://mts-flakes.cachix.org"
     ];
     extra-trusted-public-keys = [
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-      "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "mts-flakes.cachix.org-1:Gk59/na1GIp86A3aQODDwSDti43n+gIereKJ6a12dpk="
     ];
@@ -35,9 +33,6 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    colmena.url = "github:zhaofengli/colmena";
-    colmena.inputs.nixpkgs.follows = "nixpkgs-fresh";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     noctalia = {
@@ -56,9 +51,8 @@
       ...
     }@inputs:
     with flake-utils.lib;
-    rec {
-      colmenaHive = import ./nixos/hive.nix inputs;
-      nixosConfigurations = colmenaHive.nodes;
+    {
+      nixosConfigurations = import ./nixos inputs;
       nixosModules = import ./nixos/modules.nix;
       homeConfigurations = import ./home inputs;
     }

@@ -81,4 +81,5 @@ if vim.g.neovide then
 end
 
 require('mapping')
+require('lsp')
 require('mypack').init()

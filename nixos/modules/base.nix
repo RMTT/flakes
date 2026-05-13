@@ -18,13 +18,6 @@ with lib;
   };
 
   config = mkIf cfg.enable {
-    # bootloader
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-
-    boot.loader.systemd-boot.configurationLimit = 10;
-    boot.loader.grub.configurationLimit = 10;
-
     boot.kernelModules = [
       "wireguard"
       "ip_vs"
@@ -137,6 +130,11 @@ with lib;
     programs.nix-ld = {
       enable = true;
     };
+
+    programs.ssh = {
+      hostKeyAlgorithms = [ "+ssh-rsa" ];
+    };
+
     # set XDG viarables
     environment.sessionVariables = rec {
       XDG_CACHE_HOME = "$HOME/.cache";

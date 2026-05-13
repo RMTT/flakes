@@ -21,6 +21,7 @@
       hardware.cpu.amd.updateMicrocode = true;
       networking.useNetworkd = true;
 
+      nixpkgs.hostPlatform = "x86_64-linux";
       boot.loader.systemd-boot.enable = lib.mkForce false;
       boot.loader.grub.enable = lib.mkForce true;
       boot.loader.grub.device = "/dev/sda";

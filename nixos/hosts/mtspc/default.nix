@@ -17,6 +17,7 @@
       "k10temp"
     ];
     machine.graphics.enable = true;
+    nixpkgs.hostPlatform = "x86_64-linux";
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
     boot.binfmt.addEmulatedSystemsToNixSandbox = true;
 
