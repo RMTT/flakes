@@ -16,6 +16,7 @@ env:
     .#nixosConfigurations.labrouter.config.system.build.toplevel
 
   ARM_TARGETS: >-
+    .#nixosConfigurations.oracle.config.system.build.toplevel
 
 jobs:
   build-x86_64:
