@@ -6,11 +6,13 @@
   ...
 }:
 with lib;
+let
+  infra-ip = "198.19.19.8";
+in
 {
   imports = [
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
     ./secrets
-    ./homepage.nix
   ];
 
   config = {
@@ -65,6 +67,9 @@ with lib;
       environmentFiles = [ config.sops.secrets.traefik-env.path ];
       dynamicConfigFile = ./secrets/traefik-dynamic.toml;
     };
-
+    services.godel = {
+      infra-ip = infra-ip;
+      prometheus.node-exporter.enable = true;
+    };
   };
 }

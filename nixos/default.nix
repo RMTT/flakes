@@ -15,9 +15,10 @@ let
     inputs.determinate.nixosModules.default
     inputs.hermes-agent.nixosModules.default
     (
-      { config, ... }:
+      { config, lib, ... }:
       {
         nixpkgs.overlays = [ (overlay-ownpkgs config.nixpkgs.hostPlatform.system) ];
+        nix.registry = lib.mkForce (lib.mapAttrs (_: value: { flake = value; }) inputs);
       }
     )
   ];
@@ -34,6 +35,9 @@ let
         ++ extraModules
         ++ [
           ./hosts/${name}
+          {
+            networking.hostName = name;
+          }
         ];
     };
 in

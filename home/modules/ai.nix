@@ -14,7 +14,7 @@
   sops.secrets.mcp_github = {
     mode = "0400";
   };
-  xdg.configFile."opencode/opencode.jsonc".source = ../config/opencode/opencode.jsonc;
+  xdg.configFile."opencode/opencode.json".source = ../config/opencode/opencode.json;
   xdg.configFile."opencode/AGENTS.md".source = ../config/opencode/AGENTS.md;
 
   home.packages = with pkgs; [ uv ];

@@ -62,7 +62,7 @@
             "2607:8700:5501:183a::2/64"
           ];
           routes = [
-            { routeConfig.Gateway = "2607:8700:5501:183a::1"; }
+            { Gateway = "2607:8700:5501:183a::1"; }
           ];
         };
       };
@@ -71,14 +71,18 @@
         infra-ip = infra_node_ip;
         overlay = {
           enable = true;
+          extraRoutes = [ "198.19.20.0/24" ];
+        };
+        prometheus.node-exporter.enable = true;
+        wireguard = {
+          enable = true;
+          privateKeyFile = config.sops.secrets.godel-wg.path;
+          nat.enable = true;
         };
         k3s = {
           enable = true;
           interface = "godel";
           role = "agent";
-        };
-        uptime = {
-          enable = true;
         };
       };
 

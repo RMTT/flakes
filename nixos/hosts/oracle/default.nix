@@ -5,9 +5,13 @@
   modulesPath,
   ...
 }:
+let
+  infra_ip = "198.19.20.1";
+in
 {
   imports = [
     (modulesPath + "/virtualisation/oci-common.nix")
+    ./secrets
   ];
 
   config = {
@@ -18,6 +22,27 @@
     nixpkgs.hostPlatform = "aarch64-linux";
 
     boot.kernelParams = [ "net.ifnames=0" ];
-    networking.hostName = "oracle";
+
+    services.vnstat.enable = true;
+
+    services.godel = {
+      infra-ip = infra_ip;
+      overlay.enable = false;
+      prometheus.server.enable = true;
+      prometheus.node-exporter.enable = true;
+      grafana.enable = true;
+      wireguard = {
+        enable = true;
+        privateKeyFile = config.sops.secrets.godel-wg.path;
+      };
+      uptime = {
+        enable = true;
+      };
+    };
+
+    services.cloudflare-tunnel = {
+      enable = true;
+      tokenFile = config.sops.secrets.tunnel.path;
+    };
   };
 }

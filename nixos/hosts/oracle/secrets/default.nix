@@ -10,4 +10,9 @@
     sopsFile = ./godel-wg;
     format = "binary";
   };
+  sops.secrets.grafana-secret = {
+    sopsFile = ./grafana-secret;
+    format = "binary";
+    owner = "grafana";
+  };
 }

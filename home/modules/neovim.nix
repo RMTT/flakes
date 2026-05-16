@@ -30,6 +30,7 @@
       shfmt
       nixd
       nixfmt
+      jq
       terraform-ls
       # for markdown render
       (python3.withPackages (ps: with ps; [ pylatexenc ]))

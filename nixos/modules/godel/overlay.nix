@@ -13,27 +13,26 @@ in
   options = {
     services.godel.overlay = {
       enable = mkEnableOption "enable godel service";
+      extraRoutes = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+      };
     };
   };
 
   config = mkIf cfg.enable {
-    systemd.network.netdevs."10-godel" = {
-      netdevConfig = {
-        Name = "godel";
-        Kind = "dummy";
+    services.tailscale =
+      let
+        routes = [ "${godelCfg.infra-ip}/32" ] ++ cfg.extraRoutes;
+      in
+      {
+        enable = true;
+        openFirewall = true;
+        useRoutingFeatures = "both";
+        extraSetFlags = [
+          "--accept-routes"
+          "--advertise-routes=${lib.concatStringsSep "," routes}"
+        ];
       };
-    };
-    systemd.network.networks."10-godel" = {
-      matchConfig.Name = "godel";
-      address = [ "${godelCfg.infra-ip}/32" ];
-      networkConfig = {
-        LinkLocalAddressing = "no";
-      };
-    };
-    services.tailscale = {
-      enable = true;
-      openFirewall = true;
-      useRoutingFeatures = "both";
-    };
   };
 }

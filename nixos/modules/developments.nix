@@ -23,13 +23,14 @@ with lib;
       package = pkgs.wireshark;
     };
     environment.systemPackages = with pkgs; [
+      nodejs # typescript and javascript
+      uv # python
       qemu
       clang
       gdb
       cmake
       gnumake
       google-cloud-sdk
-      nodejs
       clang-tools
       pkg-config
       yq-go

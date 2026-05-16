@@ -39,6 +39,7 @@
 
       services.godel = {
         infra-ip = infra_node_ip;
+        prometheus.node-exporter.enable = true;
         k3s = {
           enable = true;
           role = "server";

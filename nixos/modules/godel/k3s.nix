@@ -61,7 +61,7 @@ in
         enable = true;
         configPath = (yaml.generate "k3s-config" k3s-config);
         role = cfg.role;
-        manifests = {
+        manifests = mkIf (cfg.role == "server") {
           traefik-custom.source = ./traefik-custom.yaml;
         };
         extraFlags =

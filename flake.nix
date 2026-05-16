@@ -55,6 +55,7 @@
       nixosConfigurations = import ./nixos inputs;
       nixosModules = import ./nixos/modules.nix;
       homeConfigurations = import ./home inputs;
+      snip = import ./nixos/snip.nix inputs;
     }
     // eachSystem [ system.x86_64-linux system.aarch64-linux ] (system: {
       packages = import ./packages {
