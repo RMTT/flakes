@@ -69,7 +69,10 @@ in
             if (cfg.role == "agent") then
               [ "--token-file ${config.sops.secrets.k3s-token.path}" ]
             else
-              [ "--disable servicelb" ]
+              [
+                "--disable servicelb"
+                "--supervisor-metrics"
+              ]
           )
           ++ [
             "--node-ip ${godelCfg.infra-ip}"

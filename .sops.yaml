@@ -42,6 +42,10 @@ creation_rules:
     age:
       - *kube-runner-age
       - *oracle-age
+  - path_regex: nixos/modules/godel/prometheus/.*
+    pgp: *admin
+    age:
+      - *oracle-age
 
   - path_regex: dns/.*
     pgp: *admin

@@ -13,19 +13,22 @@ in
     node-exporter = {
       enable = mkEnableOption "Prometheus node exporter";
     };
-
-    blackbox-exporter = {
-      enable = mkEnableOption "Prometheus blackbox exporter";
-    };
   };
 
   config = mkMerge [
     (mkIf cfg.server.enable {
+      sops.secrets.prometheus-k3s-token = {
+        sopsFile = ./k3s-token;
+        format = "binary";
+        owner = "prometheus";
+      };
+
       services.prometheus = {
         enable = true;
         listenAddress = "${godelCfg.infra-ip}";
         port = 9090;
         retentionTime = "60d";
+        checkConfig = "syntax-only";
         extraFlags = [
           "--storage.tsdb.wal-compression"
           "--storage.tsdb.retention.size=50GB"
@@ -46,57 +49,18 @@ in
             ];
           }
           {
-            job_name = "blackbox_http";
-            scrape_interval = "3m";
-            metrics_path = "/probe";
-            params.module = [ "http_2xx" ];
+            job_name = "kubernetes-cadvisor";
+            scheme = "https";
+            scrape_interval = "1m";
+            metrics_path = "/metrics/cadvisor";
+            tls_config.insecure_skip_verify = true;
+            bearer_token_file = "${config.sops.secrets.prometheus-k3s-token.path}";
             static_configs = [
               {
                 targets = [
-                  "https://grafana.rmtt.tech"
+                  "kube-runner.infra.rmtt.host:10250"
+                  "oracle.infra.rmtt.host:10250"
                 ];
-              }
-            ];
-            relabel_configs = [
-              {
-                source_labels = [ "__address__" ];
-                target_label = "__param_target";
-              }
-              {
-                source_labels = [ "__param_target" ];
-                target_label = "instance";
-              }
-              {
-                target_label = "__address__";
-                replacement = "${godelCfg.infra-ip}:9115";
-              }
-            ];
-          }
-          {
-            job_name = "blackbox_icmp";
-            scrape_interval = "3m";
-            metrics_path = "/probe";
-            params.module = [ "icmp" ];
-            static_configs = [
-              {
-                targets = [
-                  "oracle.infra.rmtt.host"
-                  "kube-runner.infra.rmtt.host"
-                ];
-              }
-            ];
-            relabel_configs = [
-              {
-                source_labels = [ "__address__" ];
-                target_label = "__param_target";
-              }
-              {
-                source_labels = [ "__param_target" ];
-                target_label = "instance";
-              }
-              {
-                target_label = "__address__";
-                replacement = "${godelCfg.infra-ip}:9115";
               }
             ];
           }
