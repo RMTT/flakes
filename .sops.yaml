@@ -35,12 +35,13 @@ creation_rules:
   - path_regex: nixos/hosts/oracle/.*
     pgp: *admin
     age: *oracle-age
-  - path_regex: nixos/modules/godel/.*
+
+  # godel sub modules
+  - path_regex: nixos/modules/godel/k3s/.*
     pgp: *admin
     age:
-      - *cn2-box-age
       - *kube-runner-age
-      - *labrouter-age
+      - *oracle-age
 
   - path_regex: dns/.*
     pgp: *admin

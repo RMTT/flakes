@@ -79,11 +79,6 @@
           privateKeyFile = config.sops.secrets.godel-wg.path;
           nat.enable = true;
         };
-        k3s = {
-          enable = true;
-          interface = "godel";
-          role = "agent";
-        };
       };
 
       services.cloudflare-tunnel = {

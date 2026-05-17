@@ -35,6 +35,11 @@ in
         enable = true;
         privateKeyFile = config.sops.secrets.godel-wg.path;
       };
+      k3s = {
+        enable = true;
+        interface = "godel";
+        role = "agent";
+      };
       uptime = {
         enable = true;
       };
