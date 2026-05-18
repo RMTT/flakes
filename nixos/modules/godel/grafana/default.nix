@@ -40,6 +40,10 @@ in
             name = "Nodes";
             options.path = "${import ./node-exporter-full.nix pkgs}";
           }
+          {
+            name = "Kubernetes";
+            options.path = "${./kubernetes.json}";
+          }
         ];
         datasources.settings.datasources = [
           {

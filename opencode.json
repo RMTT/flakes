@@ -8,14 +8,6 @@
         "mcp-nixos"
       ]
     },
-    "kubectl-mcp-server": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "kubectl-mcp-server"
-      ]
-    },
     "grafana": {
       "type": "local",
       "command": [
