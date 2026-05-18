@@ -50,7 +50,11 @@ let
           };
 
           virtualisation.forwardPorts = [
-            { from = "host"; host.port = 2222; guest.port = 22; }
+            {
+              from = "host";
+              host.port = 2222;
+              guest.port = 22;
+            }
           ];
           virtualisation.graphics = false;
           virtualisation.diskSize = 20480;
@@ -68,4 +72,4 @@ let
     ];
   };
 in
-  system.config.system.build.vm
+system.config.system.build.vm

@@ -17,6 +17,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-fresh.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-host.url = "nixpkgs";
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
@@ -61,5 +62,6 @@
       packages = import ./packages {
         inherit inputs system;
       };
+      devShells.default = import ./shell.nix inputs.nixpkgs-host;
     });
 }

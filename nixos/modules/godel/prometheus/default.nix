@@ -53,16 +53,32 @@ in
             scheme = "https";
             scrape_interval = "1m";
             metrics_path = "/metrics/cadvisor";
-            tls_config.insecure_skip_verify = true;
-            bearer_token_file = "${config.sops.secrets.prometheus-k3s-token.path}";
-            static_configs = [
+            kubernetes_sd_configs = [
               {
-                targets = [
-                  "kube-runner.infra.rmtt.host:10250"
-                  "oracle.infra.rmtt.host:10250"
-                ];
+                role = "node";
+                api_server = "https://kube-runner.infra.rmtt.host:6443";
+                tls_config.insecure_skip_verify = true;
+                authorization.credentials_file = "${config.sops.secrets.prometheus-k3s-token.path}";
               }
             ];
+            tls_config.insecure_skip_verify = true;
+            bearer_token_file = "${config.sops.secrets.prometheus-k3s-token.path}";
+          }
+          {
+            job_name = "kubernetes-nodes";
+            scheme = "https";
+            scrape_interval = "1m";
+            metrics_path = "/metrics";
+            kubernetes_sd_configs = [
+              {
+                role = "node";
+                api_server = "https://kube-runner.infra.rmtt.host:6443";
+                tls_config.insecure_skip_verify = true;
+                authorization.credentials_file = "${config.sops.secrets.prometheus-k3s-token.path}";
+              }
+            ];
+            tls_config.insecure_skip_verify = true;
+            bearer_token_file = "${config.sops.secrets.prometheus-k3s-token.path}";
           }
         ];
       };

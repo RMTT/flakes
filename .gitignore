@@ -13,3 +13,4 @@ build
 *.tfvars
 *.tfvars.json
 cf_ids.yaml
+.venv
