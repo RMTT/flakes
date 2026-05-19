@@ -30,6 +30,7 @@ helm secrets upgrade "$release" . \
 	--namespace "$ns" \
 	--install \
 	--wait \
-	--timeout 5m
+	--timeout 5m \
+	"$@"
 
 log_info "Upgraded $release"

@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nextcloud
+  annotations:
+    helm.sh/resource-policy: keep
+spec:
+  secretName: nextcloud-tls
+  renewBefore: 360h
+  issuerRef:
+    name: cloudflare
+    kind: ClusterIssuer
+  dnsNames:
+    - {{ .Values.nextcloud.nextcloud.host }}

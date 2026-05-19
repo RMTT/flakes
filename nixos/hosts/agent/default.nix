@@ -34,25 +34,5 @@ with lib;
     virtualisation.docker = {
       enable = true;
     };
-    services.hermes-agent = {
-      enable = true;
-      user = "mt";
-      group = "mt";
-      createUser = false;
-      environmentFiles = [ config.sops.secrets.env.path ];
-      addToSystemPackages = true;
-      extraPackages = with pkgs; [ docker ];
-      settings = {
-        toolsets = [ "all" ];
-        memory = {
-          memory_enabled = true;
-          user_profile_enabled = true;
-        };
-        terminal = {
-          backend = "docker";
-          cwd = config.services.hermes-agent.workingDirectory;
-        };
-      };
-    };
   };
 }

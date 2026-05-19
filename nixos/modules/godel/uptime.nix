@@ -16,7 +16,7 @@ in
       enable = true;
       settings = {
         web = {
-          port = 8080;
+          port = 8090;
           address = "${godelCfg.infra-ip}";
         };
         storage = {

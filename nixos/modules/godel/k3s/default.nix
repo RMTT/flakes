@@ -61,9 +61,6 @@ in
         enable = true;
         configPath = (yaml.generate "k3s-config" k3s-config);
         role = cfg.role;
-        manifests = mkIf (cfg.role == "server") {
-          traefik-custom.source = ./traefik-custom.yaml;
-        };
         extraFlags =
           (
             if (cfg.role == "agent") then
@@ -71,6 +68,7 @@ in
             else
               [
                 "--disable servicelb"
+                "--disable traefik"
                 "--supervisor-metrics"
               ]
           )

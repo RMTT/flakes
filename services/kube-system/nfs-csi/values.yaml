@@ -7,9 +7,11 @@ csi-driver-nfs:
   storageClasses:
   - name: nas
     parameters:
-      server: nas.home.rmtt.host
+      server: nas.infra.rmtt.host
       share: /mnt/main/kubernetes
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
     mountOptions:
-      - nfsvers=4.1
+      - nfsvers=4.2
+      - async
+      - noatime

@@ -17,7 +17,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-fresh.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-host.url = "nixpkgs";
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
@@ -40,8 +39,6 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-fresh";
     };
-
-    hermes-agent.url = "github:NousResearch/hermes-agent";
   };
 
   outputs =
@@ -62,6 +59,6 @@
       packages = import ./packages {
         inherit inputs system;
       };
-      devShells.default = import ./shell.nix inputs.nixpkgs-host;
+      devShells.default = import ./shell.nix nixpkgs;
     });
 }

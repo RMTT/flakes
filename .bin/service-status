@@ -12,7 +12,7 @@ echo ""
 
 if helm list -n "$ns" 2>/dev/null | grep -q "^$release"; then
 	log_info "Release status:"
-	helm status "$release" -n "$ns"
+	helm status "$release" -n "$ns" "$@"
 else
 	log_warn "Release '$release' not found in namespace '$ns'"
 	exit 1

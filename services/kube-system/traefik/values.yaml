@@ -1,0 +1,43 @@
+traefik:
+  additionalArguments:
+    - "--api.insecure=true"
+    - "--api.dashboard=true"
+
+  # enabled traefik on every node 
+  # to reduce latency
+  deployment:
+    kind: DaemonSet
+    dnsPolicy: ClusterFirstWithHostNet
+  persistence:
+    enabled: false
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  service:
+    spec:
+      type: ClusterIP
+
+  metrics:
+    prometheus: null
+  # let traefik listen to host's port
+  # avoid bypassing firewall rule
+  hostNetwork: true
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: [ALL]
+      add:
+        - NET_BIND_SERVICE
+  podSecurityContext: null
+  ports:
+    websecure:
+      port: 443
+    web:
+      port: 80
+    metrics: null
+  providers:
+    kubernetesCRD:
+      allowCrossNamespace: true
+

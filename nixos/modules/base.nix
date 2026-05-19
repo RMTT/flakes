@@ -75,6 +75,7 @@ with lib;
     # system packages
     environment.systemPackages = with pkgs; [
       fd
+      nfs-utils
       net-tools
       unrar
       smartmontools

@@ -30,6 +30,7 @@ helm secrets install "$release" . \
 	--namespace "$ns" \
 	--create-namespace \
 	--wait \
-	--timeout 5m
+	--timeout 5m \
+	"$@"
 
 log_info "Installed $release"

@@ -36,7 +36,6 @@
         dns = [ "1.1.1.1" ];
       };
       machine.secrets.enable = true;
-
       services.godel = {
         infra-ip = infra_node_ip;
         prometheus.node-exporter.enable = true;

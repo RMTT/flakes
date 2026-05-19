@@ -1,5 +1,0 @@
-apiVersion: v2
-name: postgresql
-description: postgresql databases based on cloudnative-pg
-type: application
-version: 0.0.1
