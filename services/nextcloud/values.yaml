@@ -36,6 +36,9 @@ nextcloud:
       usernameKey: username
       passwordKey: password
 
+  service:
+    type: NodePort
+    nodePort: 30000
   cronjob:
     enabled: true
 
