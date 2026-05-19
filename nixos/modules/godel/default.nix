@@ -9,6 +9,7 @@
     ./overlay.nix
     ./prometheus
     ./uptime.nix
+    ./traefik.nix
     ./wireguard
   ];
 

@@ -6,8 +6,6 @@ nextcloud:
   nextcloud:
     host: cloud.rmtt.tech
     trustedDomains: "cloud.rmtt.tech"
-    defaultConfigs:
-      redis.config.php: false
     # make defaultConfigs works
     configs:
       custom.config.php: |-
@@ -48,6 +46,9 @@ nextcloud:
     enabled: false
   redis:
     enabled: false
+  externalRedis:
+    enabled: true
+    host: nextcloud-redis
 
   ## Enable persistence using Persistent Volume Claims
   persistence:

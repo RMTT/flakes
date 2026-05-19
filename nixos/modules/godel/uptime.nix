@@ -50,15 +50,6 @@ in
             ];
           }
           {
-            name = "Labrouter";
-            group = "infra connectivity";
-            url = "icmp://labrouter.infra.rmtt.host";
-            interval = "3m";
-            conditions = [
-              "[CONNECTED] == true"
-            ];
-          }
-          {
             name = "Homeserver";
             group = "infra connectivity";
             url = "icmp://homeserver.infra.rmtt.host";

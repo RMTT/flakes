@@ -9,6 +9,7 @@ in
 {
   sblite = pkgs.callPackage ./sblite.nix { };
   virtme-ng = pkgs.callPackage ./virtme-ng { };
+  traefik = pkgs.callPackage ./traefik.nix { };
 
   noctalia-shell = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
 

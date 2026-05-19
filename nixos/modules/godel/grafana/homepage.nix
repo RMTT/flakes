@@ -39,15 +39,15 @@ let
       desc = "Local DNS of Home";
     }
     {
-      name = "Traefik on labrouter";
-      url = "https://router.proxy.rmtt.tech";
+      name = "Traefik on oracle";
+      url = "https://oracle.proxy.rmtt.tech";
       icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/traefik-proxy.svg";
       desc = "Traefik for proxing service in homelab hosts";
     }
     {
-      name = "Traefik on k3s";
-      url = "https://k3s.proxy.rmtt.tech";
-      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/traefik-proxy.svg";
+      name = "Traefik on kube-runner";
+      url = "https://kube-runner.proxy.rmtt.tech";
+      icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/nextcloud.svg";
       desc = "Traefik for proxing service in k3s cluster";
     }
   ];
@@ -64,6 +64,12 @@ let
       url = "https://grafana.rmtt.tech";
       icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/grafana.svg";
       desc = "Grafana dashboard of homelab";
+    }
+    {
+      name = "Nextcloud";
+      url = "https://grafana.rmtt.tech";
+      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/grafana.svg";
+      desc = "Cloud Storage";
     }
   ];
 

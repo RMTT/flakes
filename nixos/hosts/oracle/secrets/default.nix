@@ -15,4 +15,8 @@
     format = "binary";
     owner = "grafana";
   };
+  sops.secrets.traefik-env = {
+    sopsFile = ./traefik-env;
+    format = "binary";
+  };
 }

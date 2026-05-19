@@ -43,7 +43,6 @@ in
                   "oracle.infra.rmtt.host:9100"
                   "cn2-box.infra.rmtt.host:9100"
                   "kube-runner.infra.rmtt.host:9100"
-                  "labrouter.infra.rmtt.host:9100"
                 ];
               }
             ];

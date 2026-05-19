@@ -44,6 +44,11 @@
           role = "server";
           interface = "ens18";
         };
+        traefik = {
+          enable = true;
+          configFile = ./secrets/traefik-dynamic.toml;
+          envFile = config.sops.secrets.traefik-env.path;
+        };
       };
     };
 }
