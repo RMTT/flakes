@@ -13,6 +13,7 @@ let
     inputs.home-manager.nixosModules.home-manager
     inputs.disko.nixosModules.disko
     inputs.determinate.nixosModules.default
+    inputs.celler.nixosModules.cellerd
     (
       { config, lib, ... }:
       {
@@ -44,7 +45,6 @@ in
   oracle = mkNixOS "oracle" { };
   cn2-box = mkNixOS "cn2-box" { };
   kube-runner = mkNixOS "kube-runner" { };
-  labrouter = mkNixOS "labrouter" { };
   agent = mkNixOS "agent" { };
 
   mtspc = mkNixOS "mtspc" {

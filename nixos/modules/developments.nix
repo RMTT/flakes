@@ -30,7 +30,6 @@ with lib;
       gdb
       cmake
       gnumake
-      google-cloud-sdk
       clang-tools
       pkg-config
       yq-go
@@ -49,8 +48,8 @@ with lib;
       virtme-ng
       gitui
       terraform
-      cf-terraforming
       neovide
+      rustup
     ];
   };
 }

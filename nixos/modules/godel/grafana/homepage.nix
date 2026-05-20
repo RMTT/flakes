@@ -67,8 +67,8 @@ let
     }
     {
       name = "Nextcloud";
-      url = "https://grafana.rmtt.tech";
-      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/grafana.svg";
+      url = "https://cloud.rmtt.tech";
+      icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/nextcloud.svg";
       desc = "Cloud Storage";
     }
   ];

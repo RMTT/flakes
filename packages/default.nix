@@ -12,6 +12,7 @@ in
   traefik = pkgs.callPackage ./traefik.nix { };
 
   noctalia-shell = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  celler = inputs.celler.packages.${system}.default;
 
   # aarch64 vm
   armer = import ./armer.nix {

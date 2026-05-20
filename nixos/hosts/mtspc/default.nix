@@ -89,6 +89,7 @@
       winboat
       amdgpu_top
       qdiskinfo
+      celler
     ];
 
     programs.steam = {

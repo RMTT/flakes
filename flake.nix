@@ -39,6 +39,8 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-fresh";
     };
+
+    celler.url = "github:blitz/celler";
   };
 
   outputs =

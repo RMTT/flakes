@@ -54,5 +54,19 @@ in
       enable = true;
       tokenFile = config.sops.secrets.tunnel.path;
     };
+
+    services.cellerd = {
+      enable = true;
+      environmentFile = "${config.sops.secrets.celler-env.path}";
+      settings = {
+        listen = "[::]:8100";
+        chunking = {
+          nar-size-threshold = 131072;
+          min-size = 65536;
+          avg-size = 131072;
+          max-size = 262144;
+        };
+      };
+    };
   };
 }

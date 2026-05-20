@@ -19,4 +19,8 @@
     sopsFile = ./traefik-env;
     format = "binary";
   };
+  sops.secrets.celler-env= {
+    sopsFile = ./celler-env;
+    format = "binary";
+  };
 }

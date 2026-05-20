@@ -18,6 +18,7 @@ with lib;
     networking.useNetworkd = true;
     boot.loader.systemd-boot.enable = mkForce false;
     machine.graphics.enable = false;
+    machine.development.enable = true;
     nixpkgs.hostPlatform = "x86_64-linux";
     nix.settings = {
       sandbox = false;
