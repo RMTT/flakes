@@ -12,7 +12,6 @@ env:
     .#nixosConfigurations.cn2-box.config.system.build.toplevel
     .#nixosConfigurations.kube-runner.config.system.build.toplevel
     .#nixosConfigurations.agent.config.system.build.toplevel
-    .#nixosConfigurations.mtspc.config.system.build.toplevel
     .#nixosConfigurations.labrouter.config.system.build.toplevel
 
   ARM_TARGETS: >-
