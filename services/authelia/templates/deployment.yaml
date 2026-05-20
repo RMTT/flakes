@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authelia
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: authelia
+  template:
+    metadata:
+      labels:
+        app: authelia
+    spec:
+      enableServiceLinks: false
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      initContainers:
+        - name: seed-users
+          image: busybox
+          command: ['sh', '-c', 'if [ ! -f /config/users_database.yml ]; then cp /seed/users_database.yml /config/users_database.yml; fi']
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: seed-users
+              mountPath: /seed
+              readOnly: true
+      containers:
+        - name: authelia
+          image: authelia/authelia:4.39
+          ports:
+            - containerPort: 9091
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 9091
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 9091
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: config-file
+              mountPath: /config/configuration.yml
+              subPath: configuration.yml
+            - name: data
+              mountPath: /data
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: authelia-config-pvc
+        - name: config-file
+          secret:
+            secretName: authelia-config
+        - name: seed-users
+          secret:
+            secretName: authelia-users
+        - name: data
+          persistentVolumeClaim:
+            claimName: authelia-pvc
+        - name: tmp
+          emptyDir: {}

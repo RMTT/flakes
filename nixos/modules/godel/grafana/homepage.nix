@@ -71,6 +71,18 @@ let
       icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/nextcloud.svg";
       desc = "Cloud Storage";
     }
+    {
+      name = "Authelia";
+      url = "https://auth.rmtt.tech";
+      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/authelia.svg";
+      desc = "Authentic provider";
+    }
+    {
+      name = "Karakeep";
+      url = "https://karakeep.rmtt.tech";
+      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/karakeep.svg";
+      desc = "Bookmarks and RSS subscriptions";
+    }
   ];
 
   cssStyle = ''

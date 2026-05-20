@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karakeep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karakeep-web
+  template:
+    metadata:
+      labels:
+        app: karakeep-web
+    spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: web
+          image: ghcr.io/karakeep-app/karakeep:0.32.0
+          ports:
+            - containerPort: 3000
+          env:
+            - name: BROWSER_WEB_URL
+              value: http://chrome:9222
+            - name: DATA_DIR
+              value: /data
+            - name: NEXTAUTH_URL
+              value: "https://karakeep.rmtt.tech"
+            - name: MEILI_ADDR
+              value: http://meilisearch:7700
+            - name: DISABLE_PASSWORD_AUTH
+              value: "true"
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-env
+                  key: NEXTAUTH_SECRET
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-env
+                  key: OPENAI_API_KEY
+            - name: OPENAI_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-env
+                  key: OPENAI_BASE_URL
+            - name: INFERENCE_TEXT_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-env
+                  key: INFERENCE_TEXT_MODEL
+            - name: INFERENCE_IMAGE_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-env
+                  key: INFERENCE_IMAGE_MODEL
+            - name: EMBEDDING_TEXT_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-env
+                  key: EMBEDDING_TEXT_MODEL
+            - name: OAUTH_WELLKNOWN_URL
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-env
+                  key: OAUTH_WELLKNOWN_URL
+            - name: OAUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-env
+                  key: OAUTH_CLIENT_ID
+            - name: OAUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-env
+                  key: OAUTH_CLIENT_SECRET
+            - name: OAUTH_PROVIDER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-env
+                  key: OAUTH_PROVIDER_NAME
+            - name: OAUTH_ALLOW_DANGEROUS_EMAIL_ACCOUNT_LINKING
+              value: "true"
+          volumeMounts:
+            - mountPath: /data
+              name: data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: karakeep-pvc
