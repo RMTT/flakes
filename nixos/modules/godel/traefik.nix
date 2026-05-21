@@ -24,6 +24,9 @@ in
           insecure = true;
         };
         entryPoints = {
+          traefik = {
+            address = ":9000";
+          };
           web = {
             address = ":80";
           };

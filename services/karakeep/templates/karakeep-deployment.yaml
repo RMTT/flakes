@@ -84,6 +84,12 @@ spec:
                   key: OAUTH_PROVIDER_NAME
             - name: OAUTH_ALLOW_DANGEROUS_EMAIL_ACCOUNT_LINKING
               value: "true"
+            - name: CRAWLER_FULL_PAGE_SCREENSHOT
+              value: "true"
+            - name: CRAWLER_SCREENSHOT_TIMEOUT_SEC
+              value: "30"
+            - name: CRAWLER_STORE_PDF
+              value: "true"
           volumeMounts:
             - mountPath: /data
               name: data

@@ -22,10 +22,10 @@ spec:
       initContainers:
         - name: seed-users
           image: busybox
-          command: ['sh', '-c', 'if [ ! -f /config/users_database.yml ]; then cp /seed/users_database.yml /config/users_database.yml; fi']
+          command: ['sh', '-c', 'if [ ! -f /data/users_database.yml ]; then cp /seed/users_database.yml /data/users_database.yml; fi']
           volumeMounts:
-            - name: config
-              mountPath: /config
+            - name: data
+              mountPath: /data
             - name: seed-users
               mountPath: /seed
               readOnly: true
@@ -54,14 +54,14 @@ spec:
             - name: config-file
               mountPath: /config/configuration.yml
               subPath: configuration.yml
+              readOnly: true
             - name: data
               mountPath: /data
             - name: tmp
               mountPath: /tmp
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: authelia-config-pvc
+          emptyDir: {}
         - name: config-file
           secret:
             secretName: authelia-config

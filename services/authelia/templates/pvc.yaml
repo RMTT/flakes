@@ -1,22 +1,4 @@
-{{- if .Values.persistence.config.enabled -}}
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: authelia-config-pvc
-  annotations:
-    helm.sh/resource-policy: keep
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: {{ .Values.persistence.config.size | quote }}
-  {{- if .Values.persistence.config.storageClassName }}
-  storageClassName: {{ .Values.persistence.config.storageClassName | quote }}
-  {{- end }}
----
-{{- end }}
-{{- if .Values.persistence.data.enabled -}}
+{{- if .Values.persistence.enabled -}}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -28,8 +10,8 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.persistence.data.size | quote }}
-  {{- if .Values.persistence.data.storageClassName }}
-  storageClassName: {{ .Values.persistence.data.storageClassName | quote }}
+      storage: {{ .Values.persistence.size | quote }}
+  {{- if .Values.persistence.storageClassName }}
+  storageClassName: {{ .Values.persistence.storageClassName | quote }}
   {{- end }}
 {{- end }}

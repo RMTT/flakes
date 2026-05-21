@@ -10,18 +10,17 @@ secrets:
     oauthClientSecret: ENC[AES256_GCM,data:SbuGHptOk8+MxfKLki/92vdRYLrphPhyR1Rytw==,iv:GX9ivn+lGfFAMz0/b0CCEbyVDQlqPsygUmAzmz3NwA8=,tag:jReHgVDPSuPNBTrYgD5oWQ==,type:str]
     oauthProviderName: ENC[AES256_GCM,data:lKhOTu7R4IQ=,iv:xUKsYDdDmOdc1DZ/ceUVlc+JkiHpN71ogpp4/K6kaBY=,tag:EwUYk5l2iW6CBYvjl80Xdw==,type:str]
 nodeSelector:
-    kubernetes.io/hostname: ENC[AES256_GCM,data:M+5zKVG+F6tyoYs=,iv:lWKO1gtXjpHhrXdZKfhkptQ3LPZdKmOJTXcT4nKItKw=,tag:HaB0MC8DoBC7gVkWDu3wZg==,type:str]
+    kubernetes.io/hostname: ENC[AES256_GCM,data:nOyxo8Wl,iv:M5mCrGL1F/zehWKnytAF3KWxRwQyCNqMtyGK/okIudI=,tag:HhFlLZKElewTSjpCpwjTgw==,type:str]
 persistence:
     karakeep:
         enabled: ENC[AES256_GCM,data:OVcm/w==,iv:ldvIfrq0RsFiOxhR04Q4sbPjnl8lJBmSXpa93sJl4y8=,tag:aAZzSViLdN7j4YQ/BQisGA==,type:bool]
         size: ENC[AES256_GCM,data:3n92,iv:fsoi+hhC2HFF0leB/Oo6vYQg062o/HwZQ3OXbZmieZs=,tag:218f52vzg5mv9CZu0AIeiA==,type:str]
-        storageClassName: ENC[AES256_GCM,data:rjdF,iv:dR8DkNsF/ulWJa8OzisE7FeKbG4nBtW34Nbvnuu/Ous=,tag:n3LhZiwGxbkDBD7y771S1w==,type:str]
     meilisearch:
         enabled: ENC[AES256_GCM,data:M5+bag==,iv:gTNBLrOMApBf7xaXxEnUZsIeWw0fCi8G1hXGj5UoEa4=,tag:i9edkUxCnYO8eIgXPjItDQ==,type:bool]
         size: ENC[AES256_GCM,data:f3nB,iv:JPkVadVSVw1exgMpcvVRv+jWDmAkGgistvhu6GfRNYs=,tag:93WoWD5E1Efj8JpFjN0ehA==,type:str]
 sops:
-    lastmodified: "2026-05-20T15:24:36Z"
-    mac: ENC[AES256_GCM,data:88ELu4LSOpVdtsgfg/+ylKwXsKo3I2h8hSnCsRacDtKrDfsjGtERnIZAyrHqg6UrIpRL9L3uIf9bm0bUOFGckkNAVcojJ+F+wv3TwTmK3W8sQb2T7zpSiaBCp/OckC1cI4FtjxhH6rcOkns1Z3Phr6dXVFQQ7uswClQT4EZvWNk=,iv:Nou2SFqs8Ak2rQU/NHt4Ob7IW4s65WgF83KhGcX7/SA=,tag:f+hBBnq6eWtn18BUUZF14g==,type:str]
+    lastmodified: "2026-05-21T05:44:39Z"
+    mac: ENC[AES256_GCM,data:lmXT4z3eEyGRxCVZh22OlNdik+BWo2j3HR1eEhljJ62Bvjnzwf2+Wi71I5YaaRj+lEBxZOHEzHDcJ39yw2OkRvP3tWLbQ367vxlGhk2WjpGpchqI0CmQ1NpVvMSWRsoOm5IdUwSJafC3oDr4rj04mGsw9ne9wbmU2rnS5ZTX5eI=,iv:50xu4y4pbcDGBRw1jChtbF1jSYYs4gYwEjORuvAIoWI=,tag:rZwcSmrirsFFL4AC5FmNMQ==,type:str]
     pgp:
         - created_at: "2026-05-20T13:35:03Z"
           enc: |-

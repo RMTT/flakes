@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-local-dns
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: nodelocal-dns
+    app.kubernetes.io/instance: {{ .Release.Name }}
+data:
+  Corefile: |
+    {{ .Values.clusterDomain }}:53 {
+        errors
+        cache {
+            success 9984 {{ .Values.cache.successTTL }}
+            denial 9984 {{ .Values.cache.denialTTL }}
+        }
+        reload
+        loop
+        bind {{ .Values.localDNS }} {{ .Values.clusterDNS }}
+        forward . __PILLAR__CLUSTER__DNS__ {
+            force_tcp
+        }
+        health {{ .Values.localDNS }}:8080
+    }
+    in-addr.arpa:53 {
+        errors
+        cache 30
+        reload
+        loop
+        bind {{ .Values.localDNS }} {{ .Values.clusterDNS }}
+        forward . __PILLAR__CLUSTER__DNS__ {
+            force_tcp
+        }
+    }
+    ip6.arpa:53 {
+        errors
+        cache 30
+        reload
+        loop
+        bind {{ .Values.localDNS }} {{ .Values.clusterDNS }}
+        forward . __PILLAR__CLUSTER__DNS__ {
+            force_tcp
+        }
+    }
+    .:53 {
+        errors
+        cache 30
+        reload
+        loop
+        bind {{ .Values.localDNS }} {{ .Values.clusterDNS }}
+        forward . __PILLAR__UPSTREAM__SERVERS__
+    }

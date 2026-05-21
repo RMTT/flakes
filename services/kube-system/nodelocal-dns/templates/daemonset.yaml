@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-local-dns
+  labels:
+    k8s-app: node-local-dns
+    app.kubernetes.io/name: nodelocal-dns
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 10%
+  selector:
+    matchLabels:
+      k8s-app: node-local-dns
+  template:
+    metadata:
+      labels:
+        k8s-app: node-local-dns
+    spec:
+      priorityClassName: system-node-critical
+      serviceAccountName: node-local-dns
+      hostNetwork: true
+      dnsPolicy: Default
+      tolerations:
+        - key: "CriticalAddonsOnly"
+          operator: "Exists"
+        - effect: "NoExecute"
+          operator: "Exists"
+        - effect: "NoSchedule"
+          operator: "Exists"
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: node-cache
+          image: {{ .Values.image }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          args:
+            - "-localip"
+            - "{{ .Values.localDNS }},{{ .Values.clusterDNS }}"
+            - "-conf"
+            - "/etc/Corefile"
+            - "-upstreamsvc"
+            - "kube-dns-upstream"
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          ports:
+            - containerPort: 53
+              name: dns
+              protocol: UDP
+            - containerPort: 53
+              name: dns-tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              host: {{ .Values.localDNS }}
+              path: /health
+              port: 8080
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/coredns
+            - name: kube-dns-config
+              mountPath: /etc/kube-dns
+      volumes:
+        - name: kube-dns-config
+          configMap:
+            name: kube-dns
+            optional: true
+        - name: config-volume
+          configMap:
+            name: node-local-dns
+            items:
+              - key: Corefile
+                path: Corefile.base

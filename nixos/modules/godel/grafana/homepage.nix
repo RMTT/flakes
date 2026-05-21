@@ -47,7 +47,7 @@ let
     {
       name = "Traefik on kube-runner";
       url = "https://kube-runner.proxy.rmtt.tech";
-      icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/nextcloud.svg";
+      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/traefik-proxy.svg";
       desc = "Traefik for proxing service in k3s cluster";
     }
   ];
