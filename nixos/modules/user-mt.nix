@@ -46,13 +46,8 @@ with lib;
         (mkIf config.virtualisation.libvirtd.enable "libvirtd")
         (mkIf config.programs.librepods.enable "librepods")
       ];
-      passwordFile = config.sops.secrets.mt-password.path;
       openssh.authorizedKeys.keyFiles = [ ./secrets/ssh_key.pub ];
     };
 
-    sops.secrets.mt-password = {
-      sopsFile = ./secrets/mt-password;
-      neededForUsers = true;
-    };
   };
 }
