@@ -12,7 +12,7 @@ keys:
   - &mtspc-home-age age1xtfuvxeye5qa35n8wmwgnsacz5amkntkz3cn5v25u5vfsr9c2e8qyetnsg
 
   # age for godel 
-  - godel-age: &godel-age
+  - godel-k3s-age: &godel-k3s-age
     - *kube-runner-age
     - *oracle-age
 
@@ -41,11 +41,10 @@ creation_rules:
   # godel sub modules
   - path_regex: nixos/modules/godel/k3s/.*
     pgp: *admin
-    age: *godel-age
+    age: *godel-k3s-age
   - path_regex: nixos/modules/godel/prometheus/.*
     pgp: *admin
-    age:
-      - *oracle-age
+    age: *oracle-age
 
   - path_regex: dns/.*
     pgp: *admin

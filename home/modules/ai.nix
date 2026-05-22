@@ -15,7 +15,9 @@
     mode = "0400";
   };
   xdg.configFile."opencode/opencode.json".source = ../config/opencode/opencode.json;
-  xdg.configFile."opencode/AGENTS.md".source = ../config/opencode/AGENTS.md;
+  xdg.configFile."opencode/AGENTS.md".source = ../config/agents/AGENTS.md;
+  home.file.".gemini/GEMINI.md".source = ../config/agents/AGENTS.md;
+  home.file.".gemini/antigravity-cli/mcp_config.json".source = ../config/agents/mcp_config.json;
 
   home.packages = with pkgs; [ uv ];
 
