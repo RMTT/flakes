@@ -89,7 +89,14 @@ let
       icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/n8n.svg";
       desc = "Workflow";
     }
+    {
+      name = "Miniflux";
+      url = "https://miniflux.rmtt.tech";
+      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/miniflux.svg";
+      desc = "RSS Reader";
+    }
   ];
+
 
   cssStyle = ''
     <style>

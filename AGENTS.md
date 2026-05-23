@@ -17,7 +17,7 @@ Welcome to the infrastructure and homelab configuration repository. This project
 - **Always verify options:** Before writing NixOS or Home Manager configurations, use the `nixos_nix` tool to search and verify options and packages. Do not guess option paths as they change.
 - **Flake Evaluation:** Ensure any changes to `flake.nix` or `.nix` files are valid Nix code. Suggest evaluating the flake with `nix flake check` or `nix eval` when appropriate.
 - **Formatting:** Keep Nix code clean and well-indented. Follow existing patterns.
-- **Secrets:** The project uses `sops-nix` for secret management. Never hardcode plaintext secrets into `.nix` files.
+- **Secrets:** The project uses `sops-nix` for secret management. Never hardcode plaintext secrets into `.nix` files. Do not try to decrypt sops encrypted files; instead, tell the user what needs to be added.
 
 ### 2. Testing and Deployment
 - **NixOS:** Deployments or checks are performed with `nixos-rebuild build --flake .#<machine_name>` or `nixos-rebuild switch`.
@@ -47,3 +47,8 @@ Tip: When manipulating kubernetes cluster, must get granted from user first. For
   1. Create a subdirectory under `services/`.
   2. Include a `README.md` documenting the service.
   3. Ensure all manifests are properly labeled for observability (Prometheus/Grafana).
+  4. Always use a NodePort service for applications and add a Traefik entry under `nixos/hosts` (e.g. in `traefik-dynamic.toml` under the relevant host).
+  5. Add an entry for the application in the homepage dashboard configuration under `nixos/modules/godel/grafana/homepage.nix`.
+  6. Always add a nodeSelector for application deployments.
+
+
