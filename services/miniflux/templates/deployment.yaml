@@ -39,10 +39,33 @@ spec:
           env:
             - name: LISTEN_ADDR
               value: "0.0.0.0:8080"
+            - name: BASE_URL
+              value: "https://miniflux.rmtt.tech"
             - name: CREATE_ADMIN
               value: "1"
             - name: RUN_MIGRATIONS
               value: "1"
+            {{- if .Values.secrets.oidcClientSecret }}
+            - name: OAUTH2_PROVIDER
+              value: "oidc"
+            - name: OAUTH2_CLIENT_ID
+              value: "miniflux"
+            - name: OAUTH2_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-secrets
+                  key: oidc-client-secret
+            - name: OAUTH2_OIDC_DISCOVERY_ENDPOINT
+              value: "https://auth.rmtt.tech"
+            - name: OAUTH2_OIDC_PROVIDER_NAME
+              value: "Authelia"
+            - name: OAUTH2_REDIRECT_URL
+              value: "https://miniflux.rmtt.tech/oauth2/oidc/callback"
+            - name: OAUTH2_USER_CREATION
+              value: "1"
+            {{- end }}
+
+
             - name: ADMIN_USERNAME
               valueFrom:
                 secretKeyRef:

@@ -8,10 +8,11 @@ nodeSelector:
 secrets:
     adminUsername: ENC[AES256_GCM,data:PCo=,iv:WcouqDfGsqsvHfSP3PXTs0+qvWfTLg0ubZEhrLLPk78=,tag:QKxtKUF/JqKX21vrbAPgew==,type:str]
     adminPassword: ENC[AES256_GCM,data:VxWHcduqNj3QZLA=,iv:FqnxI0Ty0XFsht+v7CaxMxvANEjXPXk7GWKqeZGXHcc=,tag:I2u2zH7dmsz0qFXBhpYxtw==,type:str]
+    oidcClientSecret: ENC[AES256_GCM,data:nDNs2QtfC4cdZNogL0LkOca0JBN4Fp+r/sRPp9Dbswq/AQAwLOFntcAHAoBL/rsi6JvhI7RtnolmFrJlqg6VSA==,iv:4i6muRdTwIQR1J/lnhMRv9OFDVd0Ras02PUjZzw482w=,tag:UuWdepyuY0CV35Xtxeq4+A==,type:str]
 env: []
 sops:
-    lastmodified: "2026-05-23T09:20:07Z"
-    mac: ENC[AES256_GCM,data:QyoC1cQDhbdSD3ugw5lT7GA/pH3bKv4rnQ4tVBDMUg19i5gaR2wAiuoDxQt9HD3BAgCNeZrWid1wCGLm6LijdqivE9vxJnBXPQyc9rs/wT7A3sOb6MFlSJ++p5bNSY65HHzIJvWY/oQum7E/yL/fjLc81E+LsH+9aoNqbn51pyg=,iv:nDOoIlkrs8ru1E9Op1vWKfnQwZWf+EdqHyjgh3miR9s=,tag:stxcZwDzPDotT0qGdzX5gg==,type:str]
+    lastmodified: "2026-05-23T10:38:40Z"
+    mac: ENC[AES256_GCM,data:qyenrzot5ApBafPCZi3E7IQ8C/wDoMsXA7qlB14IfRqXTcnClnBRJobkJkOZrIL2RFNTPo0FxVeR78e9ybbSyoTue50WfzmOzDNljhtXtNtgGMC8D64ipgx/RyN6nzitxVhJm+qQEETNHx2zgEb0PdGMOO9/Ij25GxHs7iG6TTg=,iv:QMB0sbOjAWT+Kysk9TPcZ7LyGYqo3s8BqqkW2xbe4eo=,tag:wd+vrx8kF3sL0puMdjqNDA==,type:str]
     pgp:
         - created_at: "2026-05-23T09:19:39Z"
           enc: |-

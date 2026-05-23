@@ -50,5 +50,7 @@ Tip: When manipulating kubernetes cluster, must get granted from user first. For
   4. Always use a NodePort service for applications and add a Traefik entry under `nixos/hosts` (e.g. in `traefik-dynamic.toml` under the relevant host).
   5. Add an entry for the application in the homepage dashboard configuration under `nixos/modules/godel/grafana/homepage.nix`.
   6. Always add a nodeSelector for application deployments.
+  7. After adding a service, remind the user to add its DNS record under `./dns`.
+
 
 
