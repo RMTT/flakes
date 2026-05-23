@@ -1,0 +1,20 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: n8n-db
+  annotations:
+    "helm.sh/resource-policy": keep
+spec:
+  instances: 1
+  storage:
+    storageClass: {{ .Values.database.storageClassName | quote }}
+    size: {{ .Values.database.size | quote }}
+  bootstrap:
+    initdb:
+      database: n8n
+      owner: n8n
+  {{- if .Values.nodeSelector }}
+  affinity:
+    nodeSelector:
+      {{- toYaml .Values.nodeSelector | nindent 6 }}
+  {{- end }}

@@ -83,6 +83,12 @@ let
       icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/karakeep.svg";
       desc = "Bookmarks and RSS subscriptions";
     }
+    {
+      name = "n8n";
+      url = "https://n8n.rmtt.tech";
+      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/n8n.svg";
+      desc = "Workflow";
+    }
   ];
 
   cssStyle = ''

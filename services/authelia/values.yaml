@@ -54,6 +54,18 @@ oidcClients:
       access_token_signed_response_alg: ENC[AES256_GCM,data:0+VMlQ==,iv:UIb69JTIYtSIux6ZTopWet0++nyMrqaJ+5QzgDeKhs8=,tag:qYMR3Q3LiSuPnOKBvjAuBQ==,type:str]
       userinfo_signed_response_alg: ENC[AES256_GCM,data:jUEnTQ==,iv:n0l3F/hAgPwmJPKuwJdncaltmFP0o/rA/ZqzTogW5H0=,tag:1QSjC0qWNXoxw7QwXuLBjQ==,type:str]
       token_endpoint_auth_method: ENC[AES256_GCM,data:tMUdl/RHBOemLHd9Tkydl6jF,iv:62TmisFndrvVDX2JCnNCl6ye0n5BMDl4eiFWZeJa7ZU=,tag:Dv2f0IbGdEEUSYPs9zbwQw==,type:str]
+    - client_id: ENC[AES256_GCM,data:6ebj,iv:Qp9dOypZtblcTD7Y9KYhV6M8rc5j7Q3uEojhgbod4Lk=,tag:NjiUaJoJOXAlYj18JdejZQ==,type:str]
+      client_name: ENC[AES256_GCM,data:PoToNqXnUf1/JStcgUPURDly34RBbeg=,iv:pWOkwBkm4Fj+o6lMd+8VZYkgOIhvUV0SEfTXr3HlLrU=,tag:NcJJmL1fXpxCrTNchK1H6A==,type:str]
+      client_secret: ENC[AES256_GCM,data:bX0omasKKVFHJ68sgjQS8LLgCPn4gCDqwLvy+YUoMKw1kv4xGRYN,iv:A56Zzvv0wOk2mniRvCcxIaeZuTAblwl+1iaNTHaoI4g=,tag:GDw3WM+r3HAsbeea+IX4fQ==,type:str]
+      public: ENC[AES256_GCM,data:g+r/Y7U=,iv:sMB7J3/FftvlVZ46yOmtINb9Ehac4/WeaG92/AnJdIc=,tag:fJpGTjuq4djm230bt8oJIw==,type:bool]
+      authorization_policy: ENC[AES256_GCM,data:JXwVkcvFTNnygg==,iv:ySD50GPsQAx8fudzPQomsbiAd7wi1nyp2/DImtLLbJ8=,tag:MPpt+umF6P0IkMIvW9GjAA==,type:str]
+      redirect_uris:
+        - ENC[AES256_GCM,data:7r0DlYjgyVGmTyJ5ikn08ITyoBC85BLxn1TOSW6tc/lvBUNuBTja5AUChas=,iv:KJkrugSTr25uIsWSNGXQwoiexYE0LwdEdPWXtX0o9Os=,tag:6uMXltROt3HMfhZ3TbgX+w==,type:str]
+      scopes:
+        - ENC[AES256_GCM,data:Bo4mQilm,iv:muNz5GI0s3MOtcDq1m0RqVQd8yMFll4MwaC6uyVvVk0=,tag:9jiUWQe0SCUpG1qESP7omQ==,type:str]
+        - ENC[AES256_GCM,data:HXI4x3PFCQ==,iv:h4uRZwn8H8fU3c3gElUoDsN7TtWg//X0L9+iFhEOgxc=,tag:IXqETIPIGmqf7dO3XcVBYQ==,type:str]
+        - ENC[AES256_GCM,data:8CRoCH0=,iv:7IS2G+sM7KplbcCCACjKvFn6Ki/ll3NRL5CGH7WKhWY=,tag:Ccy16iWdApqKtRRNHgeERQ==,type:str]
+        - ENC[AES256_GCM,data:z9ugkp8g,iv:0pUNg0VPeLgz06+86dAw2iplJWyIntUOSZz18/EJVA0=,tag:IS5mYY+OUN+I0Uz+shEpkw==,type:str]
 nodeSelector:
     kubernetes.io/hostname: ENC[AES256_GCM,data:lxIJRQyK29SZrIs=,iv:EIn0gyPeboGkfF4YTDvkXaI8ipohZgfdcYKX317qWq4=,tag:WLZb2sap4Gz1VSS1dsmAbQ==,type:str]
 service:
@@ -63,8 +75,8 @@ persistence:
     size: ENC[AES256_GCM,data:qTTw,iv:nSIF6JsOFz4/KNviouApdolHnwL6H+/5vwWJnR6reak=,tag:k8p0Xcxd2ZeQW4id19QZGw==,type:str]
     storageClassName: ENC[AES256_GCM,data:sHdPK03puAO0rA==,iv:ePmzI/evzladR1LfCLfL1JC2AVtZUacswxoyDyMNwl0=,tag:flib58O6E5dYtR7F+JazBw==,type:str]
 sops:
-    lastmodified: "2026-05-21T05:55:04Z"
-    mac: ENC[AES256_GCM,data:DyA5vKy4WAhEvxdv5zCFpnUDjCIiO3KBf2ol8ln5Alv++cMxHdQ3mRlblVh9iecwilFoIgiHzfeJLZ85ufpiHoyMv8IKdq3ICVVPfccnkAOmj+f+VN/8ouSulf2hsqTJjGYPCJKB1gk3tsiUMiPhNCmDwE2eZLHST2wWIXg1iqk=,iv:qwdGOO0wL3alepkQrmS8nyUeBbdtQ6vpx4pvCZVUKos=,tag:QPZOM5AMujpYzM5wFPMEeQ==,type:str]
+    lastmodified: "2026-05-23T05:31:19Z"
+    mac: ENC[AES256_GCM,data:pFTViCaZ8kDrHeOCgwM2TTZkruSkfQlkpwmPqX+5mkPwHAyqyCvT/zMvwC3gspccjiBMA/iUnS4eiXVBD7yVhsg4g2Q6f7wZSNYccx1SGTm9tevtJQp0g3AkwOF+L/7aWeFcwsXfaTy2lsHJ9dAk7eB5KmakvzhE0Mu5x/eOxuw=,iv:gN3iyNpMiG9wHRdifhbOgCCQuE3FuVoGuUr1GjCZCoE=,tag:Zt7fau182cKcsuDTaqc0tg==,type:str]
     pgp:
         - created_at: "2026-05-20T14:27:28Z"
           enc: |-
