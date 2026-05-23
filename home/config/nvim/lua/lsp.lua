@@ -13,7 +13,8 @@ vim.lsp.enable({
     'cssls',
     'html',
     'eslint',
-    'terraform-ls'
+    'terraform-ls',
+    'dartls'
 })
 
 vim.lsp.codelens.enable(true)

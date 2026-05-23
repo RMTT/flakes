@@ -85,7 +85,7 @@ let
     }
     {
       name = "n8n";
-      url = "https://n8n.rmtt.tech";
+      url = "https://workflow.rmtt.tech";
       icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/n8n.svg";
       desc = "Workflow";
     }
