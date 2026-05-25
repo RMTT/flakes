@@ -18,6 +18,7 @@
   glib,
   gtk3,
   libGL,
+  libglvnd,
   libappindicator-gtk3,
   libdrm,
   libnotify,
@@ -84,6 +85,7 @@ stdenv.mkDerivation {
     glib
     gtk3
     libGL
+    libglvnd
     libappindicator-gtk3
     libdrm
     libnotify
@@ -125,7 +127,7 @@ stdenv.mkDerivation {
     mkdir -p $out/bin
     makeWrapper $out/opt/OpenCode/@opencode-aidesktop $out/bin/opencode-desktop \
       --prefix PATH : ${lib.makeBinPath [ xdg-utils ]} \
-      --prefix LD_LIBRARY_PATH : $out/opt/OpenCode
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libglvnd libGL ]}:$out/opt/OpenCode
 
     # Install icons
     for size in $(find usr/share/icons -mindepth 2 -maxdepth 2 -type d -printf '%f\n' 2>/dev/null); do
