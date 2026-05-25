@@ -50,7 +50,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
         vim.keymap.set('n', 'gr', require 'telescope.builtin'.lsp_references, opts)
         vim.keymap.set('n', '<A-f>', function()
-            vim.lsp.buf.format { async = true }
+            -- formatting vis conform which use lsp as fallback
+            require("conform").format()
         end, opts)
     end,
 })

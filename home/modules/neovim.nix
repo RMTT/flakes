@@ -34,6 +34,8 @@
       terraform-ls
       # for markdown render
       (python3.withPackages (ps: with ps; [ pylatexenc ]))
+      eslint
+      prettier
     ];
   };
 }

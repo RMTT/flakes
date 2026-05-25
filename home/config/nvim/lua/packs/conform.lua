@@ -7,7 +7,10 @@ return {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
                 json = { "jq" },
-            }
+            },
+            default_format_opts = {
+                lsp_format = "fallback",
+            },
         })
     end
 }
