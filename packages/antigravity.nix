@@ -128,7 +128,7 @@ stdenv.mkDerivation {
     mkdir -p $out/bin
     makeWrapper $out/opt/antigravity/antigravity $out/bin/antigravity \
       --prefix PATH : ${lib.makeBinPath [ xdg-utils ]} \
-      --prefix LD_LIBRARY_PATH : $out/opt/antigravity
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libnotify libappindicator-gtk3 ]}:$out/opt/antigravity
 
     # Extract and install icon from app.asar
     asar extract-file resources/app.asar icon.png icon.png
