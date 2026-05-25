@@ -91,6 +91,7 @@
       qdiskinfo
       celler
       antigravity
+      opencode-desktop
     ];
 
     programs.steam = {

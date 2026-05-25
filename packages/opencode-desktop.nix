@@ -52,10 +52,10 @@ let
   };
 
   desktopItem = makeDesktopItem {
-    name = "opencode-desktop";
+    name = "OpenCode";
     desktopName = "OpenCode";
     exec = "opencode-desktop %U";
-    icon = "opencode-desktop";
+    icon = "OpenCode";
     terminal = false;
     type = "Application";
     startupWMClass = "OpenCode";
@@ -134,7 +134,7 @@ stdenv.mkDerivation {
       if [ -f "usr/share/icons/hicolor/$size/apps/@opencode-aidesktop.png" ]; then
         mkdir -p "$out/share/icons/hicolor/$size/apps"
         cp "usr/share/icons/hicolor/$size/apps/@opencode-aidesktop.png" \
-           "$out/share/icons/hicolor/$size/apps/opencode-desktop.png"
+           "$out/share/icons/hicolor/$size/apps/OpenCode.png"
       fi
     done
 
