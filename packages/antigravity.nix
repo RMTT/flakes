@@ -1,6 +1,9 @@
 {
   stdenv,
   fetchurl,
+  copyDesktopItems,
+  makeDesktopItem,
+  asar,
   autoPatchelfHook,
   makeWrapper,
   lib,
@@ -50,6 +53,18 @@ let
     url = "https://storage.googleapis.com/antigravity-public/antigravity-hub/${version}/linux-x64/Antigravity.tar.gz";
     hash = "sha256-rR4EU1FJsHwnAw6x6tQPTv2jiMs5AgvLuazN+0nkTMU=";
   };
+
+  desktopItem = makeDesktopItem {
+    name = "antigravity";
+    desktopName = "Antigravity";
+    exec = "antigravity %U";
+    icon = "antigravity";
+    terminal = false;
+    type = "Application";
+    startupWMClass = "Antigravity";
+    categories = [ "Development" "Utility" ];
+    comment = "Antigravity Hub client application";
+  };
 in
 stdenv.mkDerivation {
   inherit pname version src;
@@ -57,6 +72,8 @@ stdenv.mkDerivation {
   nativeBuildInputs = [
     autoPatchelfHook
     makeWrapper
+    copyDesktopItems
+    asar
   ];
 
   buildInputs = [
@@ -97,6 +114,8 @@ stdenv.mkDerivation {
     libxcb
   ];
 
+  desktopItems = [ desktopItem ];
+
   sourceRoot = "Antigravity-x64";
 
   installPhase = ''
@@ -110,6 +129,11 @@ stdenv.mkDerivation {
     makeWrapper $out/opt/antigravity/antigravity $out/bin/antigravity \
       --prefix PATH : ${lib.makeBinPath [ xdg-utils ]} \
       --prefix LD_LIBRARY_PATH : $out/opt/antigravity
+
+    # Extract and install icon from app.asar
+    asar extract-file resources/app.asar icon.png icon.png
+    mkdir -p $out/share/icons/hicolor/256x256/apps
+    cp icon.png $out/share/icons/hicolor/256x256/apps/antigravity.png
 
     runHook postInstall
   '';

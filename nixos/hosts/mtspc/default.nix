@@ -90,6 +90,7 @@
       amdgpu_top
       qdiskinfo
       celler
+      antigravity
     ];
 
     programs.steam = {

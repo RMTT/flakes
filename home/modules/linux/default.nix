@@ -32,6 +32,9 @@
     prefix = ''${HOME}/.npm-packages
   '';
 
+  services.easyeffects = {
+    enable = true;
+  };
   xresources.properties = {
     "Xft.dpi" = 120;
   };

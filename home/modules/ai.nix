@@ -14,12 +14,35 @@
   sops.secrets.mcp_github = {
     mode = "0400";
   };
-  xdg.configFile."opencode/opencode.json".source = ../config/opencode/opencode.json;
+  sops.templates.antigravity-mcp = {
+    path = "${config.home.homeDirectory}/.gemini/config/mcp_config.json";
+    content = ''
+      {
+        "mcpServers": {
+          "github": {
+            "serverUrl": "https://api.githubcopilot.com/mcp/",
+            "headers": {
+              "Authorization": "Bearer ${config.sops.placeholder.mcp_github}"
+            }
+          },
+          "context7": {
+            "command": "npx",
+            "args": [
+              "-y",
+              "@upstash/context7-mcp",
+              "--api-key",
+              "${config.sops.placeholder.mcp_context7}"
+            ]
+          }
+        }
+      }
+
+    '';
+  };
+
+  xdg.configFile."opencode/opencode.json".source = ../config/agents/opencode/opencode.json;
   xdg.configFile."opencode/AGENTS.md".source = ../config/agents/AGENTS.md;
   home.file.".gemini/GEMINI.md".source = ../config/agents/AGENTS.md;
-  home.file.".gemini/antigravity-cli/mcp_config.json".source = ../config/agents/mcp_config.json;
-
-  home.packages = with pkgs; [ uv ];
 
   programs.zsh.initContent = ''
     export MCP_CONTEXT7="$(cat ${config.sops.secrets.mcp_context7.path})"
