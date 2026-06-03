@@ -41,6 +41,7 @@ with lib;
         "kvm"
         "users"
         "uinput"
+        "input"
         (mkIf config.hardware.i2c.enable "i2c")
         "wireshark"
         (mkIf config.virtualisation.libvirtd.enable "libvirtd")

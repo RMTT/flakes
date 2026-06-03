@@ -97,6 +97,14 @@
     programs.steam = {
       enable = true;
       extest.enable = true;
+      gamescopeSession = {
+        enable = true;
+      };
+    };
+    programs.gamescope = {
+      enable = true;
+      args = [
+      ];
     };
 
     services.tailscale = {
@@ -119,5 +127,9 @@
     services.meshcentral.enable = true;
 
     programs.librepods.enable = true;
+    services.crossmacro = {
+      enable = true;
+      users = [ "mt" ];
+    };
   };
 }
