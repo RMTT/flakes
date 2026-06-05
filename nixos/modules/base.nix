@@ -126,6 +126,7 @@ with lib;
       ssh-to-age
       opensc
       tpm2-pkcs11
+      nh
     ];
 
     programs.nix-ld = {
