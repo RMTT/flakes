@@ -10,6 +10,7 @@
       enable = true;
       source = ../../config/niri;
     };
+    satty.source = ../../config/satty;
   };
 
   home.packages = with pkgs; [

@@ -1,0 +1,2 @@
+[general]
+early-exit = ["all"]

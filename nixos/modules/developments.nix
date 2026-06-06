@@ -50,6 +50,7 @@ with lib;
       terraform
       neovide
       rustup
+      dix
     ];
   };
 }
