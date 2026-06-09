@@ -3,4 +3,4 @@ name: miniflux
 description: A Helm chart for self-hosting Miniflux feed reader
 type: application
 version: 0.1.0
-appVersion: "2.3.0"
+appVersion: "2.3.1"
