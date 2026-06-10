@@ -125,7 +125,7 @@ stdenv.mkDerivation {
 
     # Create the bin wrapper
     mkdir -p $out/bin
-    makeWrapper $out/opt/OpenCode/@opencode-aidesktop $out/bin/opencode-desktop \
+    makeWrapper $out/opt/OpenCode/opencode-desktop $out/bin/opencode-desktop \
       --prefix PATH : ${lib.makeBinPath [ xdg-utils ]} \
       --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libglvnd libGL ]}:$out/opt/OpenCode
 

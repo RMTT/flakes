@@ -32,6 +32,7 @@ in
       dns = [ "1.1.1.1" ];
     };
 
+    services.qemuGuest.enable = true;
     boot.supportedFilesystems = [ "nfs" ];
     virtualisation.docker.enable = true;
     fileSystems."/mnt/cloud" = {

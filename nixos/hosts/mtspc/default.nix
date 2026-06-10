@@ -19,6 +19,7 @@
     ];
     machine.graphics.enable = true;
     machine.networking.useNetworkd = false;
+    machine.users.mt.hashedPassword = "$y$j9T$kabN1LYK8AhA4BJ6EgtwI0$fgyMHQ22A6y8VU9zNlPXOgkWvVcHkt3miKOHQS7N2F.";
     nixpkgs.hostPlatform = "x86_64-linux";
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
     boot.binfmt.addEmulatedSystemsToNixSandbox = true;
