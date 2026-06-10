@@ -46,6 +46,7 @@ in
   cn2-box = mkNixOS "cn2-box" { };
   kube-runner = mkNixOS "kube-runner" { };
   agent = mkNixOS "agent" { };
+  nextcloud = mkNixOS "nextcloud" { };
 
   mtspc = mkNixOS "mtspc" {
     nixpkgs = inputs.nixpkgs-fresh;

@@ -16,13 +16,18 @@ with lib;
         type = types.bool;
         default = true;
       };
+      useNetworkd = mkOption {
+        type = types.bool;
+        default = true;
+      };
     };
   };
 
   config = mkIf cfg.enable {
     networking.iproute2.enable = true;
     networking.nftables.enable = true;
-    systemd.network = mkIf config.networking.useNetworkd {
+    networking.useNetworkd = cfg.useNetworkd;
+    systemd.network = mkIf cfg.useNetworkd {
       wait-online.anyInterface = true;
     };
 
@@ -32,7 +37,7 @@ with lib;
       "net.ipv4.conf.all.route_localnet" = mkDefault 1;
     };
 
-    networking.networkmanager = mkIf (!config.networking.useNetworkd) {
+    networking.networkmanager = mkIf (!cfg.useNetworkd) {
       enable = true;
       dns = "systemd-resolved";
     };

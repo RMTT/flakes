@@ -20,10 +20,11 @@
       system.stateVersion = "25.11";
 
       nixpkgs.hostPlatform = "x86_64-linux";
-      networking.useNetworkd = true;
       networking.useDHCP = false;
       machine.graphics.enable = false;
       services.qemuGuest.enable = true;
+      machine.bootloader.systemd-boot.enable = true;
+      machine.users.mt.hashedPassword = "$y$j9T$q1VIDTHKt/ShoEFdo.gMc0$RRX0FIaJ4hAVhVtOqXwLHG9xUsxz2h/1Ctr3ownx.27";
       zramSwap = {
         enable = true;
         memoryPercent = 20;

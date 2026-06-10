@@ -17,7 +17,6 @@ in
   config = {
     oci.efi = true;
     machine.graphics.enable = false;
-    machine.bootloader.enable = false;
     system.stateVersion = "26.05";
     nixpkgs.hostPlatform = "aarch64-linux";
 

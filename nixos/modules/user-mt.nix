@@ -9,11 +9,13 @@ let
 in
 with lib;
 {
-
   options.machine.users.mt = {
     enable = mkOption {
       type = types.bool;
       default = true;
+    };
+    hashedPassword = mkOption {
+      type = types.str;
     };
   };
 
@@ -47,6 +49,7 @@ with lib;
         (mkIf config.virtualisation.libvirtd.enable "libvirtd")
         (mkIf config.programs.librepods.enable "librepods")
       ];
+      hashedPassword = cfg.hashedPassword;
       openssh.authorizedKeys.keyFiles = [ ./secrets/ssh_key.pub ];
     };
 

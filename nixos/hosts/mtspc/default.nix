@@ -12,11 +12,13 @@
   config = {
     system.stateVersion = "23.05";
 
+    machine.bootloader.systemd-boot.enable = true;
     boot.kernelModules = [
       "kvm-amd"
       "k10temp"
     ];
     machine.graphics.enable = true;
+    machine.networking.useNetworkd = false;
     nixpkgs.hostPlatform = "x86_64-linux";
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
     boot.binfmt.addEmulatedSystemsToNixSandbox = true;

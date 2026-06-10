@@ -10,5 +10,6 @@
     kube-runner.host = "kube-runner.infra.rmtt.host";
     labrouter.host = "labrouter.infra.rmtt.host";
     agent.host = "agent.infra.rmtt.host";
+    nextcloud.host = "nextcloud.infra.rmtt.host";
   };
 }

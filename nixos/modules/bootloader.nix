@@ -4,16 +4,41 @@ let
 in
 {
   options.machine.bootloader = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
+    grub = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      device = lib.mkOption {
+        type = lib.types.str;
+        default = "nodev"; # for UEFI
+        description = "nodev for UEFI or actual disk device for bios";
+      };
+    };
+    systemd-boot = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
-  config = lib.mkIf cfg.enable {
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+  config =
+    (lib.mkIf cfg.grub.enable {
+      boot.loader.efi.canTouchEfiVariables = true;
 
-    boot.loader.systemd-boot.configurationLimit = 10;
-    boot.loader.grub.configurationLimit = 10;
-  };
+      boot.loader.grub = {
+        configurationLimit = 10;
+        efiSupport = true;
+        device = cfg.grub.device;
+      };
+    })
+    // (lib.mkIf cfg.systemd-boot.enable {
+      boot.loader.efi.canTouchEfiVariables = true;
+
+      boot.loader.systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+        editor = false;
+      };
+    });
 }

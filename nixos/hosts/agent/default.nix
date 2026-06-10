@@ -16,7 +16,6 @@ with lib;
     system.stateVersion = "26.05";
 
     networking.useNetworkd = true;
-    boot.loader.systemd-boot.enable = mkForce false;
     machine.graphics.enable = false;
     machine.development.enable = true;
     nixpkgs.hostPlatform = "x86_64-linux";
