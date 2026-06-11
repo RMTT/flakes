@@ -43,7 +43,5 @@ creation_rules:
     pgp: *admin
     age: *oracle-age
 
-  - path_regex: dns/.*
-    pgp: *admin
 
   - pgp: *admin # default

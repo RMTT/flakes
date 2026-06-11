@@ -6,10 +6,4 @@ result
 build
 .claude
 .worktrees
-.terraform/
-*.tfstate
-*.tfstate.backup
-*.tfvars
-*.tfvars.json
-cf_ids.yaml
 .venv
