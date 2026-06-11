@@ -15,7 +15,8 @@ with lib;
       default = true;
     };
     hashedPassword = mkOption {
-      type = types.str;
+      type = types.nullOr types.str;
+      default = null;
     };
   };
 
