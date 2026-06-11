@@ -18,6 +18,7 @@ with lib;
     networking.useNetworkd = true;
     machine.graphics.enable = false;
     machine.development.enable = true;
+    machine.users.mt.hashedPassword = "$y$j9T$H5wxavXJIZ0LE9qbqAsMw/$k6vzXefc9AniNzapi0NGKdgyL82afXqHxzQwYOvFNA6";
     nixpkgs.hostPlatform = "x86_64-linux";
     machine.bootloader.systemd-boot.enable = lib.mkDefault true;
     nix.settings = {

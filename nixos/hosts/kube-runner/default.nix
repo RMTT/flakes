@@ -24,7 +24,11 @@
       machine.graphics.enable = false;
       services.qemuGuest.enable = true;
       machine.bootloader.systemd-boot.enable = true;
+<<<<<<< HEAD
       machine.users.mt.hashedPassword = lib.mkDefault "$y$j9T$q1VIDTHKt/ShoEFdo.gMc0$RRX0FIaJ4hAVhVtOqXwLHG9xUsxz2h/1Ctr3ownx.27";
+=======
+      machine.users.mt.hashedPassword = "$y$j9T$wd.PhKRHTbfe0WFQ4iqPv0$CMH7Ry3d7lcZJvF3N.o7x9EtoR7P6FCp6wq9JHAnvp2";
+>>>>>>> main
       zramSwap = {
         enable = true;
         memoryPercent = 20;

@@ -26,6 +26,7 @@
         enable = true;
         device = "/dev/sda";
       };
+      machine.users.mt.hashedPassword = "$y$j9T$7WSe/8Z5o/MjnsDZ578rS.$/U15tOTTptiayopi2AKSH3kQz98hH5/KUIDvUVHzsX6";
 
       machine.graphics.enable = false;
       fileSystems = {

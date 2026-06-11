@@ -1,15 +1,15 @@
 # Agent Guidelines
 
-Welcome to the infrastructure and homelab configuration repository. This project manages NixOS and Terrafrom configurations using Nix Flakes, as well as Kubernetes workloads and Grafana/Prometheus observability.
+Welcome to the infrastructure and homelab configuration repository. This project manages NixOS and Terrafrom configurations using Nix Flakes, as well as Grafana/Prometheus observability.
 
 ## Project Context
 - **Core Tooling:** Nix, NixOS, Home Manager, sops-nix, kubectl.
-- **Other domains:** Kubernetes, Grafana (OSS), Prometheus (PromQL).
+- **Other domains:** Grafana (OSS), Prometheus (PromQL).
 - **Structure:**
   - `nixos/`: Contains NixOS machine configurations and modules.
   - `home/`: Contains Home Manager configurations for users (e.g., `mt`).
   - `flake.nix`: The central entry point defining inputs and outputs.
-  - `.agents/skills/`: Custom skills for specific workflows (Kubernetes, Grafana, PromQL).
+  - `.agents/skills/`: Custom skills for specific workflows (Grafana, PromQL).
 
 ## Agent Directives
 
@@ -25,7 +25,6 @@ Welcome to the infrastructure and homelab configuration repository. This project
 - **Validation:** When fixing configuration errors, prefer small, incremental changes, verifying syntax before committing.
 
 ### 3. Skills and Specialization
-- **Kubernetes:** When dealing with k8s workloads, debugging pods, Helm charts, or manifests, **must** invoke the `kubernetes-specialist` skill.
 - **Observability:** When building dashboards or configuring Grafana, use the `dashboarding` and `grafana-oss` skills. When writing or debugging metric queries, use the `promql` skill.
 - **Skills Priority:** Always invoke skills if the task even remotely touches their domain.
 
@@ -33,24 +32,5 @@ Welcome to the infrastructure and homelab configuration repository. This project
 - **Idiomatic Nix:** Use built-ins, standard libraries (`flake-utils`, `lib`), and composition. Follow the existing module patterns seen in `nixos/default.nix` and `home/default.nix`.
 - **Clear Intent:** Write straightforward configurations. Add comments if a particular hardware quirk or specific option override is used.
 - **Safety first:** Do not make assumptions about packages. Always verify they exist in `nixpkgs` using the provided tools.
-
-### 5. Kubernetes Services
-
-Tip: When manipulating kubernetes cluster, must get granted from user first. For sensitive data, put it into values.yaml and encryt it with sops.
-
-- **Structure:** The `services/` directory is the root for Kubernetes service definitions. Each subdirectory represents a logical service (e.g., `postgresql/`, `ollama/`).
-- **Deployment & Management:** 
-  - Use the helper scripts located in `.bin/` for managing service lifecycle (e.g., `service-install`, `service-upgrade`, `service-status`).
-  - Always check `lib.sh` for common library functions before writing new deployment scripts.
-  - Manifests should follow the constraints in the `kubernetes-specialist` skill.
-- **Adding Services:**
-  1. Create a subdirectory under `services/`.
-  2. Include a `README.md` documenting the service.
-  3. Ensure all manifests are properly labeled for observability (Prometheus/Grafana).
-  4. Always use a NodePort service for applications and add a Traefik entry under `nixos/hosts` (e.g. in `traefik-dynamic.toml` under the relevant host).
-  5. Add an entry for the application in the homepage dashboard configuration under `nixos/modules/godel/grafana/homepage.nix`.
-  6. Always add a nodeSelector for application deployments.
-  7. After adding a service, remind the user to add its DNS record under `./dns`.
-
 
 

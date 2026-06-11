@@ -18,9 +18,6 @@ keys:
 
 
 creation_rules:
-  - path_regex: services/.*
-    pgp: *admin
-
   - path_regex: home/.*
     age: *mtspc-home-age
     pgp: *admin
