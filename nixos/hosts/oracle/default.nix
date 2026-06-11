@@ -19,6 +19,7 @@ in
     machine.graphics.enable = false;
     system.stateVersion = "26.05";
     nixpkgs.hostPlatform = "aarch64-linux";
+    machine.bootloader.systemd-boot.enable = lib.mkDefault true;
 
     boot.kernelParams = [ "net.ifnames=0" ];
 

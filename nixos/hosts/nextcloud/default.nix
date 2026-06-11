@@ -23,7 +23,7 @@ in
       enable = true;
       device = "/dev/sda";
     };
-    machine.users.mt.hashedPassword = "$y$j9T$zlx88hQ0JZWjA58N4URWj/$iQVlklQzqsOJWdIqAEZIkoXAxlKSs3HC967V0qT2Dx8";
+    machine.users.mt.hashedPassword = lib.mkDefault "$y$j9T$zlx88hQ0JZWjA58N4URWj/$iQVlklQzqsOJWdIqAEZIkoXAxlKSs3HC967V0qT2Dx8";
 
     systemd.network.networks.wan = {
       matchConfig.Name = "ens18";

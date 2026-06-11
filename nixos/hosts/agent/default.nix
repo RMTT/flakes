@@ -19,6 +19,7 @@ with lib;
     machine.graphics.enable = false;
     machine.development.enable = true;
     nixpkgs.hostPlatform = "x86_64-linux";
+    machine.bootloader.systemd-boot.enable = lib.mkDefault true;
     nix.settings = {
       sandbox = false;
     };
