@@ -51,6 +51,7 @@ with lib;
       neovide
       rustup
       dix
+      fluxcd
     ];
   };
 }

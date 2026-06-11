@@ -22,17 +22,17 @@ in
       };
     };
   };
-  config =
+  config = lib.mkMerge [
     (lib.mkIf cfg.grub.enable {
       boot.loader.efi.canTouchEfiVariables = true;
 
       boot.loader.grub = {
         configurationLimit = 10;
         efiSupport = true;
-        device = cfg.grub.device;
+        devices = [ cfg.grub.device ];
       };
     })
-    // (lib.mkIf cfg.systemd-boot.enable {
+    (lib.mkIf cfg.systemd-boot.enable {
       boot.loader.efi.canTouchEfiVariables = true;
 
       boot.loader.systemd-boot = {
@@ -40,5 +40,6 @@ in
         configurationLimit = 10;
         editor = false;
       };
-    });
+    })
+  ];
 }

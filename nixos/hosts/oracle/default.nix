@@ -17,6 +17,7 @@ in
   config = {
     oci.efi = true;
     machine.graphics.enable = false;
+    machine.users.mt.hashedPassword = "$y$j9T$3ODPssSOIWrWgJA15q8P1.$eUp2hFhQ4D6Gujz8twXsb3NFNoRB/OkGh5FSKTuOFA5";
     system.stateVersion = "26.05";
     nixpkgs.hostPlatform = "aarch64-linux";
 

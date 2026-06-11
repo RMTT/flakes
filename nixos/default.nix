@@ -6,7 +6,7 @@ let
     system: final: prev:
     inputs.self.packages.${system};
 
-  ownModules = builtins.attrValues (import ./modules.nix);
+  ownModules = builtins.attrValues (import ./modules);
   commonModules = ownModules ++ [
     inputs.nur.modules.nixos.default
     inputs.sops-nix.nixosModules.sops
