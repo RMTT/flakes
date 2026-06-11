@@ -25,7 +25,7 @@ in
 
   config = lib.mkMerge [
     (lib.mkIf cfg.grub.enable {
-      boot.loader.efi.canTouchEfiVariables = true;
+      boot.loader.efi.canTouchEfiVariables = lib.mkDefault true;
 
       boot.loader.grub = {
         enable = true;
@@ -35,7 +35,7 @@ in
       };
     })
     (lib.mkIf cfg.systemd-boot.enable {
-      boot.loader.efi.canTouchEfiVariables = true;
+      boot.loader.efi.canTouchEfiVariables = lib.mkDefault true;
 
       boot.loader.systemd-boot = {
         enable = true;
