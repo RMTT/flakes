@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
 
   # bash configuration
@@ -9,10 +9,10 @@
     enable = true;
     enableCompletion = true;
   };
+  home.packages = with pkgs; [ zsh-patina ];
   programs.zsh.zplug.enable = true;
   programs.zsh.zplug.plugins = [
     { name = "zsh-users/zsh-autosuggestions"; }
-    { name = "zdharma-continuum/fast-syntax-highlighting"; }
     { name = "zsh-users/zsh-completions"; }
     {
       name = "plugins/extract";
@@ -29,6 +29,11 @@
     if command -v kubectl &> /dev/null
     then
     	source <(kubectl completion zsh)
+    fi
+
+    if command -v zsh-patina &> /dev/null
+    then
+      eval "$(zsh-patina activate)"
     fi
 
     if [ -e /opt/homebrew ]
