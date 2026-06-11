@@ -1,7 +1,6 @@
 *.dec
 *.tar.gz
 *.tgz
-services/**/charts
 result
 *.qcow2
 build
