@@ -21,7 +21,7 @@ with lib;
 
       kdePackages.qtwayland
       kdePackages.qt6ct
-      libsForQt5.qt5.qtwayland
+      libsForQt5.qtwayland
       qadwaitadecorations
       qadwaitadecorations-qt6
       networkmanagerapplet

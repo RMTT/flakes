@@ -3,6 +3,7 @@ local utility = require('utility')
 ---- Options ----
 vim.o.mouse = 'a'
 vim.o.smartindent = true
+vim.o.autoindent = true
 vim.o.cindent = true
 vim.o.tabstop = 4
 vim.o.expandtab = true
