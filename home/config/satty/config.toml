@@ -1,2 +1,3 @@
 [general]
 early-exit = ["all"]
+copy-command = "wl-copy"
