@@ -43,11 +43,11 @@
 
 let
   pname = "opencode-desktop";
-  version = "1.17.0";
+  version = "1.17.4";
 
   src = fetchurl {
     url = "https://opencode.ai/zh/download/stable/linux-x64-deb";
-    hash = "sha256-42ZSkLsj+uoYDXzAmcPVSRS8uCwJMkWDEF5KSartSMo=";
+    hash = "sha256-tfOUHvbQS2xtQ6+tApJWA8GIUp2w7URdcNVlLeuYw8E=";
     name = "opencode-desktop-${version}-linux-amd64.deb";
   };
 
