@@ -126,7 +126,16 @@
     services.sblite.enable = true;
     networking.firewall.trustedInterfaces = [ "sing-box" ];
 
-    services.meshcentral.enable = true;
+    services.meshcentral = {
+      enable = true;
+      settings = {
+        domains = {
+          "" = {
+            NewAccounts = true;
+          };
+        };
+      };
+    };
 
     programs.librepods.enable = true;
     services.crossmacro = {

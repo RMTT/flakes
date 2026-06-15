@@ -4,8 +4,7 @@ keys:
   # age for different hosts
   - &mtspc-age age18ty94l69h64jrwsrq59052a6zeh8k0sue5n4ycc2sm63e9k5pa4qd08qh6
   - &cn2-box-age age1xsexrshfte590ec343puza8m7l9442u79hau6dpdu7ndjhaeav4slqhqwx
-  - &kube-runner-age age1y498pq4h0mauklsvxfjmte3jchnupk5s83pu493k3kzm5su444sqnlpdgl
-  - &agent-age age1xh8kkfq4mkvzavzq8vufaxdugwp9tg0p4geupelujn3048mynvnspj4phw
+  - &homeserver-age age18rc86zt9y9y46qyglhl8a6rw60x989n2uah5se25nn5jg7k7tpqsyfgcsv
   - &oracle-age age19l23k7uhlvazvrqvpwkyupzn3g03v8djr6xf0qpfe8a8l0gvrs8qc057fk
 
   # age for home-manager 
@@ -13,7 +12,7 @@ keys:
 
   # age for godel 
   - godel-k3s-age: &godel-k3s-age
-    - *kube-runner-age
+    - *homeserver-age
     - *oracle-age
 
 
@@ -22,15 +21,12 @@ creation_rules:
     age: *mtspc-home-age
     pgp: *admin
 
-  - path_regex: nixos/hosts/kube-runner/.*
+  - path_regex: nixos/hosts/homeserver/.*
     pgp: *admin
-    age: *kube-runner-age
+    age: *homeserver-age
   - path_regex: nixos/hosts/cn2-box/.*
     pgp: *admin
     age: *cn2-box-age
-  - path_regex: nixos/hosts/agent/.*
-    pgp: *admin
-    age: *agent-age
   - path_regex: nixos/hosts/oracle/.*
     pgp: *admin
     age: *oracle-age

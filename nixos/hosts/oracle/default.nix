@@ -25,6 +25,19 @@ in
 
     services.vnstat.enable = true;
 
+    services.restic.backups = {
+      k3s = {
+        paths = [ "/var/lib/rancher/k3s" ];
+        exclude = [ "/var/lib/rancher/k3s/data" ];
+        initialize = true;
+        passwordFile = config.sops.secrets.restic-pass.path;
+        repositoryFile = config.sops.secrets.restic-repo.path;
+        timerConfig = {
+          OnCalendar = "*-*-* 00/4:00:00";
+          Persistent = true;
+        };
+      };
+    };
     services.godel = {
       infra-ip = infra_ip;
       overlay.enable = false;

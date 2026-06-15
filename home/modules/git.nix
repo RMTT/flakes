@@ -18,6 +18,7 @@
       credential."https://gist.github.com".helper = "!/usr/bin/env gh auth git-credential";
       user.name = "RMT";
       user.email = "iamrmttt@gmail.com";
+      pull.rebase = true;
     };
   };
 }

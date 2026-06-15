@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   machine.secrets.enable = true;
 
@@ -19,8 +19,17 @@
     sopsFile = ./traefik-env;
     format = "binary";
   };
-  sops.secrets.celler-env= {
+  sops.secrets.celler-env = {
     sopsFile = ./celler-env;
+    format = "binary";
+  };
+
+  sops.secrets.restic-pass = {
+    sopsFile = ./restic-pass;
+    format = "binary";
+  };
+  sops.secrets.restic-repo = {
+    sopsFile = ./restic-repo;
     format = "binary";
   };
 }
