@@ -43,6 +43,14 @@ in
             cluster-init = true;
             flannel-backend = "vxlan";
             flannel-external-ip = true;
+
+            etcd-s3 = true;
+            etcd-s3-endpoint = "nas.infra.rmtt.host:30188";
+            etcd-s3-bucket = "k3s-etcd";
+            etcd-s3-region = "garage";
+            etcd-s3-insecure = true;
+            etcd-s3-retention = "30";
+            etcd-snapshot-schedule-cron = "0 * * * *"; # every hour
           };
 
       yaml = pkgs.formats.yaml { };
@@ -81,14 +89,6 @@ in
                 "--disable servicelb"
                 "--disable traefik"
                 "--supervisor-metrics"
-
-                "--etcd-s3"
-                "--etcd-s3-endpoint nas.infra.rmtt.host:30188"
-                "--etcd-s3-bucket k3s-etcd"
-                "--etcd-s3-region garage"
-                "--etcd-s3-insecure"
-                "--etcd-s3-retention 30"
-                "--etcd-snapshot-schedule-cron 0 */12 * * *"
               ]
             else
               [ ]
@@ -102,8 +102,6 @@ in
             "--flannel-iface ${cfg.interface}"
           ];
       };
-
-      systemd.services.k3s.path = with pkgs; [ nftables ];
       networking.firewall.trustedIpv4 = [
         # need pass pod id to let pod access api server which listend on the node-ip
         "10.42.0.0/16" # pod ip range

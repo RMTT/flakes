@@ -127,6 +127,7 @@ with lib;
       opensc
       tpm2-pkcs11
       nh
+      e2fsprogs
     ];
 
     programs.nix-ld = {

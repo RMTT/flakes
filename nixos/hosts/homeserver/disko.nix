@@ -8,6 +8,7 @@
           type = "gpt";
           partitions = {
             ESP = {
+              priority = 1;
               size = "500M";
               type = "EF00";
               content = {
@@ -18,7 +19,8 @@
               };
             };
             root = {
-              size = "100%";
+              priority = 2;
+              end = "-100G";
               content = {
                 type = "btrfs";
                 extraArgs = [ "-f" ];
@@ -44,6 +46,19 @@
                     mountpoint = "/nix";
                   };
                 };
+              };
+            };
+            cache = {
+              priority = 3;
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountOptions = [
+                  "defaults"
+                  "noatime"
+                ];
+                mountpoint = "/cache";
               };
             };
           };
