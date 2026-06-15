@@ -10,8 +10,7 @@ env:
 
   X86_TARGETS: >-
     .#nixosConfigurations.cn2-box.config.system.build.toplevel
-    .#nixosConfigurations.kube-runner.config.system.build.toplevel
-    .#nixosConfigurations.agent.config.system.build.toplevel
+    .#nixosConfigurations.homeserver.config.system.build.toplevel
     .#antigravity
     .#sblite
 
