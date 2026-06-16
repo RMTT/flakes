@@ -1,4 +1,4 @@
-spawn-at-startup "noctalia-shell"
+spawn-at-startup "noctalia"
 spawn-at-startup "fcitx5"
 
 debug {

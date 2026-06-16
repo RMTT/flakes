@@ -57,12 +57,6 @@ in
       listenPort = 51820;
       privateKeyFile = cfg.privateKeyFile;
       inherit peers;
-      postUp = optionalString cfg.nat.enable ''
-        iptables -t nat -A POSTROUTING -o godel -j MASQUERADE
-      '';
-      postDown = optionalString cfg.nat.enable ''
-        iptables -t nat -D POSTROUTING -o godel -j MASQUERADE
-      '';
     };
   };
 }

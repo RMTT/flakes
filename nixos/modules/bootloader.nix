@@ -28,7 +28,7 @@ in
 
       boot.loader.grub = {
         configurationLimit = 10;
-        efiSupport = true;
+        efiSupport = lib.mkIf (cfg.grub.device == "nodev") true;
         devices = [ cfg.grub.device ];
       };
     })

@@ -55,7 +55,7 @@
         prometheus.node-exporter.enable = true;
         k3s = {
           enable = true;
-          role = "server";
+          role = "agent";
           interface = wan_interface;
         };
         traefik = {

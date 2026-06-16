@@ -51,7 +51,7 @@ in
       k3s = {
         enable = true;
         interface = "godel";
-        role = "agent";
+        role = "server";
       };
       traefik = {
         enable = true;

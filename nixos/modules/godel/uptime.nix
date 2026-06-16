@@ -77,6 +77,33 @@ in
               "[STATUS] == 200"
             ];
           }
+          {
+            name = "Miniflux";
+            group = "services";
+            url = "https://miniflux.rmtt.tech";
+            interval = "3m";
+            conditions = [
+              "[STATUS] == 200"
+            ];
+          }
+          {
+            name = "Authelia";
+            group = "services";
+            url = "https://auth.rmtt.tech";
+            interval = "3m";
+            conditions = [
+              "[STATUS] == 200"
+            ];
+          }
+          {
+            name = "Karakeep";
+            group = "services";
+            url = "https://karakeep.rmtt.tech";
+            interval = "3m";
+            conditions = [
+              "[STATUS] == 200"
+            ];
+          }
         ];
       };
     };

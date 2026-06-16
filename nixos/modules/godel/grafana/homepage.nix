@@ -3,18 +3,6 @@ let
   # get icon url from https://dashboardicons.com/
   internalServices = [
     {
-      name = "Homeserver";
-      url = "https://homeserver.rmtt.tech";
-      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/proxmox-light.svg";
-      desc = "Proxmox VE for VM and CTs";
-    }
-    {
-      name = "Proxmox Backup";
-      url = "https://pbs.rmtt.tech";
-      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/proxmox-backup-server.svg";
-      desc = "Proxmox Backup Server";
-    }
-    {
       name = "TrueNAS";
       url = "https://nas.rmtt.tech";
       icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/truenas.svg";
@@ -45,8 +33,8 @@ let
       desc = "Traefik for proxing service in homelab hosts";
     }
     {
-      name = "Traefik on kube-runner";
-      url = "https://kube-runner.proxy.rmtt.tech";
+      name = "Traefik on homeserver";
+      url = "https://homeserver.proxy.rmtt.tech";
       icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/traefik-proxy.svg";
       desc = "Traefik for proxing service in k3s cluster";
     }
@@ -66,12 +54,6 @@ let
       desc = "Grafana dashboard of homelab";
     }
     {
-      name = "Nextcloud";
-      url = "https://cloud.rmtt.tech";
-      icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/nextcloud.svg";
-      desc = "Cloud Storage";
-    }
-    {
       name = "Authelia";
       url = "https://auth.rmtt.tech";
       icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/authelia.svg";
@@ -82,12 +64,6 @@ let
       url = "https://karakeep.rmtt.tech";
       icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/karakeep.svg";
       desc = "Bookmarks and RSS subscriptions";
-    }
-    {
-      name = "n8n";
-      url = "https://workflow.rmtt.tech";
-      icon = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/n8n.svg";
-      desc = "Workflow";
     }
     {
       name = "Miniflux";

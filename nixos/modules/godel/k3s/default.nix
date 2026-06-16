@@ -28,7 +28,7 @@ in
       k3s-config =
         if (cfg.role == "agent") then
           {
-            server = "https://homeserver.infra.rmtt.host:6443";
+            server = "https://k3s-master.infra.rmtt.host:6443";
             node-label = cfg.node-labels;
           }
         else
@@ -37,7 +37,7 @@ in
             service-cidr = "10.43.0.0/16";
             write-kubeconfig-mode = "0644";
             tls-san = [
-              "homeserver.infra.rmtt.host"
+              "k3s-master.infra.rmtt.host"
             ];
             node-label = cfg.node-labels;
             cluster-init = true;
@@ -98,7 +98,6 @@ in
             "--node-ip ${godelCfg.infra-ip}"
             "--node-external-ip ${godelCfg.infra-ip}"
             "--kube-proxy-arg 'nodeport-addresses=${godelCfg.infra-ip}/24'"
-            "--kube-proxy-arg 'proxy-mode=nftables'"
             "--flannel-iface ${cfg.interface}"
           ];
       };

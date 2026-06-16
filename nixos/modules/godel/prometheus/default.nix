@@ -41,8 +41,7 @@ in
               {
                 targets = [
                   "oracle.infra.rmtt.host:9100"
-                  "cn2-box.infra.rmtt.host:9100"
-                  "kube-runner.infra.rmtt.host:9100"
+                  "homeserver.infra.rmtt.host:9100"
                 ];
               }
             ];
@@ -55,7 +54,7 @@ in
             kubernetes_sd_configs = [
               {
                 role = "node";
-                api_server = "https://kube-runner.infra.rmtt.host:6443";
+                api_server = "https://homeserver.infra.rmtt.host:6443";
                 tls_config.insecure_skip_verify = true;
                 authorization.credentials_file = "${config.sops.secrets.prometheus-k3s-token.path}";
               }
@@ -71,7 +70,7 @@ in
             kubernetes_sd_configs = [
               {
                 role = "node";
-                api_server = "https://kube-runner.infra.rmtt.host:6443";
+                api_server = "https://homeserver.infra.rmtt.host:6443";
                 tls_config.insecure_skip_verify = true;
                 authorization.credentials_file = "${config.sops.secrets.prometheus-k3s-token.path}";
               }
@@ -87,7 +86,7 @@ in
             kubernetes_sd_configs = [
               {
                 role = "node";
-                api_server = "https://kube-runner.infra.rmtt.host:6443";
+                api_server = "https://homeserver.infra.rmtt.host:6443";
                 tls_config.insecure_skip_verify = true;
                 authorization.credentials_file = "${config.sops.secrets.prometheus-k3s-token.path}";
               }
