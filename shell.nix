@@ -14,6 +14,5 @@ pkgs.mkShellNoCC {
     python3Packages.pip
     uv
     terraform
-    kubectl
   ];
 }
