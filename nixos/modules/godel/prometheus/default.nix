@@ -54,7 +54,7 @@ in
             kubernetes_sd_configs = [
               {
                 role = "node";
-                api_server = "https://homeserver.infra.rmtt.host:6443";
+                api_server = "https://k3s-master.infra.rmtt.host:6443";
                 tls_config.insecure_skip_verify = true;
                 authorization.credentials_file = "${config.sops.secrets.prometheus-k3s-token.path}";
               }
@@ -70,7 +70,7 @@ in
             kubernetes_sd_configs = [
               {
                 role = "node";
-                api_server = "https://homeserver.infra.rmtt.host:6443";
+                api_server = "https://k3s-master.infra.rmtt.host:6443";
                 tls_config.insecure_skip_verify = true;
                 authorization.credentials_file = "${config.sops.secrets.prometheus-k3s-token.path}";
               }
@@ -86,7 +86,7 @@ in
             kubernetes_sd_configs = [
               {
                 role = "node";
-                api_server = "https://homeserver.infra.rmtt.host:6443";
+                api_server = "https://k3s-master.infra.rmtt.host:6443";
                 tls_config.insecure_skip_verify = true;
                 authorization.credentials_file = "${config.sops.secrets.prometheus-k3s-token.path}";
               }
