@@ -35,6 +35,9 @@ creation_rules:
   - path_regex: nixos/modules/godel/k3s/.*
     pgp: *admin
     age: *godel-k3s-age
+  - path_regex: nixos/modules/godel/alloy/.*
+    pgp: *admin
+    age: *oracle-age
   - path_regex: nixos/modules/godel/prometheus/.*
     pgp: *admin
     age: *oracle-age

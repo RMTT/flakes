@@ -45,11 +45,10 @@ in
             flannel-external-ip = true;
 
             etcd-s3 = true;
-            etcd-s3-endpoint = "nas.infra.rmtt.host:30188";
-            etcd-s3-bucket = "k3s-etcd";
-            etcd-s3-region = "garage";
+            etcd-s3-endpoint = "s3.us-east-005.backblazeb2.com";
+            etcd-s3-bucket = "mts-k3s-etcd-backup";
             etcd-s3-insecure = true;
-            etcd-s3-retention = "30";
+            etcd-s3-retention = "15";
             etcd-snapshot-schedule-cron = "0 * * * *"; # every hour
           };
 

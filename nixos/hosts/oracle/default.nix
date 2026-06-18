@@ -32,10 +32,15 @@ in
         initialize = true;
         passwordFile = config.sops.secrets.restic-pass.path;
         repositoryFile = config.sops.secrets.restic-repo.path;
+        environmentFile = config.sops.secrets.restic-env.path;
         timerConfig = {
           OnCalendar = "*-*-* 00/4:00:00";
           Persistent = true;
         };
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-last 7"
+        ];
       };
     };
     services.godel = {
@@ -66,20 +71,6 @@ in
     services.cloudflare-tunnel = {
       enable = true;
       tokenFile = config.sops.secrets.tunnel.path;
-    };
-
-    services.cellerd = {
-      enable = true;
-      environmentFile = "${config.sops.secrets.celler-env.path}";
-      settings = {
-        listen = "[::]:8100";
-        chunking = {
-          nar-size-threshold = 131072;
-          min-size = 65536;
-          avg-size = 131072;
-          max-size = 262144;
-        };
-      };
     };
   };
 }
