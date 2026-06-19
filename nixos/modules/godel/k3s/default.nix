@@ -47,7 +47,7 @@ in
             etcd-s3 = true;
             etcd-s3-endpoint = "s3.us-east-005.backblazeb2.com";
             etcd-s3-bucket = "mts-k3s-etcd-backup";
-            etcd-s3-insecure = true;
+            etcd-s3-insecure = false;
             etcd-s3-retention = "15";
             etcd-snapshot-schedule-cron = "0 * * * *"; # every hour
           };
