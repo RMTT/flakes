@@ -6,12 +6,12 @@
 }:
 with lib;
 let
-  cfg = config.services.godel.overlay;
+  cfg = config.services.godel.tailscale;
   godelCfg = config.services.godel;
 in
 {
   options = {
-    services.godel.overlay = {
+    services.godel.tailscale = {
       enable = mkEnableOption "enable godel service";
       extraRoutes = mkOption {
         type = types.listOf types.str;

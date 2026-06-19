@@ -5,7 +5,7 @@
 {
   imports = [
     ./k3s
-    ./overlay.nix
+    ./tailscale.nix
     ./uptime.nix
     ./traefik.nix
     ./wireguard

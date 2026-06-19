@@ -45,7 +45,6 @@ in
     };
     services.godel = {
       infra-ip = infra_ip;
-      overlay.enable = false;
       alloy.enable = true;
       wireguard = {
         enable = true;
@@ -55,6 +54,7 @@ in
         enable = true;
         interface = "godel";
         role = "server";
+        region = "oracle";
       };
       traefik = {
         enable = true;
