@@ -4,13 +4,12 @@
 }:
 {
   imports = [
-    ./grafana
     ./k3s
     ./overlay.nix
-    ./prometheus
     ./uptime.nix
     ./traefik.nix
     ./wireguard
+    ./alloy
   ];
 
   options = {

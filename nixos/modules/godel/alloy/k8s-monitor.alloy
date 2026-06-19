@@ -1,0 +1,76 @@
+discovery.kubernetes "k3s_nodes" {
+  role       = "node"
+  api_server = "https://k3s-master.infra.rmtt.host:6443"
+
+  tls_config {
+    insecure_skip_verify = true
+  }
+
+  authorization {
+    credentials_file = "/etc/alloy/k3s-token"
+  }
+}
+
+prometheus.relabel "k8s_metrics_slimming" {
+  forward_to = [prometheus.remote_write.metrics_service.receiver]
+
+  rule {
+    source_labels = ["__name__"]
+    regex = "(container_cpu_cfs_throttled_periods_total|container_fs_reads_bytes_total|container_fs_writes_bytes_total|container_memory_cache|container_memory_rss|container_network_receive_bytes_total|container_network_receive_errors_total|container_network_transmit_bytes_total|container_network_transmit_errors_total|container_oom_events_total|kubelet_desired_pods|kubelet_pleg_relist_duration_seconds_bucket|kubelet_pleg_relist_interval_seconds_bucket|kubelet_pod_start_duration_seconds_bucket|kubelet_running_pods|kubelet_runtime_operations_total|machine_cpu_cores|machine_memory_bytes|pod_cpu_usage_seconds_total|pod_memory_working_set_bytes)"
+    action = "keep"
+  }
+}
+
+prometheus.scrape "kubernetes_cadvisor" {
+  job_name        = "kubernetes-cadvisor"
+  scheme          = "https"
+  scrape_interval = "1m"
+  metrics_path    = "/metrics/cadvisor"
+  
+  targets         = discovery.kubernetes.k3s_nodes.targets
+  forward_to      = [prometheus.relabel.k8s_metrics_slimming.receiver]
+
+  tls_config {
+    insecure_skip_verify = true
+  }
+  
+  authorization {
+    credentials_file = "/etc/alloy/k3s-token"
+  }
+}
+
+prometheus.scrape "kubernetes_resources" {
+  job_name        = "kubernetes-resources"
+  scheme          = "https"
+  scrape_interval = "1m"
+  metrics_path    = "/metrics/resource"
+  
+  targets         = discovery.kubernetes.k3s_nodes.targets
+  forward_to      = [prometheus.relabel.k8s_metrics_slimming.receiver]
+
+  tls_config {
+    insecure_skip_verify = true
+  }
+  
+  authorization {
+    credentials_file = "/etc/alloy/k3s-token"
+  }
+}
+
+prometheus.scrape "kubernetes_nodes" {
+  job_name        = "kubernetes-nodes"
+  scheme          = "https"
+  scrape_interval = "1m"
+  metrics_path    = "/metrics"
+  
+  targets         = discovery.kubernetes.k3s_nodes.targets
+  forward_to      = [prometheus.relabel.k8s_metrics_slimming.receiver]
+
+  tls_config {
+    insecure_skip_verify = true
+  }
+  
+  authorization {
+    credentials_file = "/etc/alloy/k3s-token"
+  }
+}

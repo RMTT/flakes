@@ -46,9 +46,7 @@ in
     services.godel = {
       infra-ip = infra_ip;
       overlay.enable = false;
-      prometheus.server.enable = true;
-      prometheus.node-exporter.enable = true;
-      grafana.enable = true;
+      alloy.enable = true;
       wireguard = {
         enable = true;
         privateKeyFile = config.sops.secrets.godel-wg.path;

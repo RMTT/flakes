@@ -38,9 +38,6 @@ creation_rules:
   - path_regex: nixos/modules/godel/alloy/.*
     pgp: *admin
     age: *oracle-age
-  - path_regex: nixos/modules/godel/prometheus/.*
-    pgp: *admin
-    age: *oracle-age
 
 
   - pgp: *admin # default
