@@ -10,8 +10,8 @@ env:
 
   X86_TARGETS: >-
     .#nixosConfigurations.cn2-box.config.system.build.toplevel
-    .#nixosConfigurations.homeserver.config.system.build.toplevel
     .#antigravity
+    .#opencode-desktop
     .#sblite
 
   ARM_TARGETS: >-
