@@ -5,11 +5,12 @@
 {
   imports = [
     ./k3s
-    ./tailscale.nix
+    ./tailscale
     ./uptime.nix
     ./traefik.nix
     ./wireguard
     ./alloy
+    ./dummy.nix
   ];
 
   options = {

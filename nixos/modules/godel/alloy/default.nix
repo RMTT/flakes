@@ -55,7 +55,7 @@ in
       }
 
       ${
-        if (godelCfg.k3s.role == "server") then
+        if (godelCfg.k3s.enable && godelCfg.k3s.role == "server") then
           ''
             import.file "k8s_monitor" {
               filename = "/etc/alloy/k8s-monitor.alloy"

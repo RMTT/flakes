@@ -12,9 +12,11 @@ keys:
 
   # age for godel 
   - godel-k3s-age: &godel-k3s-age
-    - *homeserver-age
     - *oracle-age
-
+    - *cn2-box-age
+  - godel-alloy-age: &godel-alloy-age
+    - *oracle-age
+    - *cn2-box-age
 
 creation_rules:
   - path_regex: home/.*
@@ -37,7 +39,6 @@ creation_rules:
     age: *godel-k3s-age
   - path_regex: nixos/modules/godel/alloy/.*
     pgp: *admin
-    age: *oracle-age
-
+    age: *godel-alloy-age
 
   - pgp: *admin # default

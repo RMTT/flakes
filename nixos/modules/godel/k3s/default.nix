@@ -14,9 +14,18 @@ in
     services.godel.k3s = {
       enable = mkEnableOption "enable k3s";
       role = mkOption { type = types.str; };
-      interface = mkOption { type = types.str; };
+      interface = mkOption {
+        type = types.str;
+        default = "godel";
+      };
       region = mkOption {
         type = types.str;
+      };
+      cluster = mkOption {
+        type = types.enum [
+          "homelab"
+          "public"
+        ];
       };
     };
 
@@ -24,27 +33,25 @@ in
 
   config =
     let
+      serverUrl = if (cfg.cluster == "public") then "https://k3s-master.infra.rmtt.host:6443" else "";
       k3s-config = {
         node-label = [ "topology.kubernetes.io/region=${cfg.region}" ];
         token-file = "${config.sops.secrets.k3s-token.path}";
         node-ip = "${godelCfg.infra-ip}";
         node-external-ip = "${godelCfg.infra-ip}";
         kube-proxy-arg = [ "nodeport-addresses=${godelCfg.infra-ip}/24" ];
-        flannel-iface = "${cfg.interface}";
       }
       // optionalAttrs (cfg.role == "agent") {
-        server = "https://k3s-master.infra.rmtt.host:6443";
+        server = serverUrl;
       }
       // optionalAttrs (cfg.role == "server") {
+        cluster-init = true;
         cluster-cidr = "10.42.0.0/16";
         service-cidr = "10.43.0.0/16";
         write-kubeconfig-mode = "0644";
         tls-san = [
-          "k3s-master.infra.rmtt.host"
+          serverUrl
         ];
-        cluster-init = true;
-        flannel-backend = "vxlan";
-        flannel-external-ip = true;
 
         supervisor-metrics = true;
         disable = [
@@ -55,9 +62,17 @@ in
         etcd-s3 = true;
         etcd-s3-endpoint = "s3.us-east-005.backblazeb2.com";
         etcd-s3-bucket = "mts-k3s-etcd-backup";
+        etcd-s3-folder = cfg.cluster;
         etcd-s3-insecure = false;
         etcd-s3-retention = "15";
         etcd-snapshot-schedule-cron = "0 * * * *"; # every hour
+      }
+      // optionalAttrs (cfg.cluster == "homelab" && cfg.role == "server") {
+        flannel-backend = "vxlan";
+        flannel-iface = cfg.interface;
+      }
+      // optionalAttrs (cfg.cluster == "public" && cfg.role == "server") {
+        flannel-backend = "host-gw";
       };
 
       yaml = pkgs.formats.yaml { };

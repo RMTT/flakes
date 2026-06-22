@@ -44,7 +44,7 @@ in
 {
   oracle = mkNixOS "oracle" { };
   cn2-box = mkNixOS "cn2-box" { };
-  homeserver = mkNixOS "homeserver" { };
+  kube-runner = mkNixOS "kube-runner" { };
 
   mtspc = mkNixOS "mtspc" {
     nixpkgs = inputs.nixpkgs-fresh;

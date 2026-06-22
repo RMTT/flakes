@@ -64,28 +64,23 @@
       };
     };
 
-    networking.firewall.allowedUDPPorts = [ 51820 ];
-    networking.firewall.extraReversePathFilterRules = ''
-      udp dport 51820 accept comment  "Allow WireGuard Transit Bypass RPFilter"
-    '';
-    networking.nftables = {
-      enable = true;
-      ruleset = ''
-        table ip nixos-nat
-        delete table ip nixos-nat
-
-        table ip nixos-nat {
-          chain pre {
-            type nat hook prerouting priority dstnat; policy accept;
-            iifname "ens18" udp dport 51820 dnat to 147.224.201.181:51820 comment "WireGuard Transit DNAT"
-          }
-
-          chain post {
-            type nat hook postrouting priority srcnat; policy accept;
-            ip daddr 147.224.201.181 udp dport 51820 masquerade comment "WireGuard SNAT"
-          }
-        }
-      '';
+    services.godel = {
+      infra-ip = "198.19.20.2";
+      k3s = {
+        enable = true;
+        interface = "godel";
+        cluster = "public";
+        role = "agent";
+        region = "lax";
+      };
+      alloy.enable = true;
+      dummy.enable = true;
+      tailscale = {
+        enable = true;
+        extraRoutes = [
+          "10.42.1.0/24"
+        ];
+      };
     };
   };
 }

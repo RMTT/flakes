@@ -3,16 +3,20 @@
 	"sops": {
 		"age": [
 			{
-				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLbzhqZ3NMc3NEVHV2QnlV\nZXBFdVFEL0EyK3RhWWRCazlUQ2I0YXRUNEFNCjFTLzFpMFBCR3lYd2pGaHJpbzcx\nZDlrQkJ1NjRJUlNFUVhxOHUxbmhTU0kKLS0tIDdWdWV3c0FxcWpHbnkvNitRTnNW\nK3NISkhjQ1dlY2Z2S245R3Y4T3EyYjQKCMAxwNO4S+EBleVFol24bZF7xBqurswO\ncHqzamM9mgQ5TK465d0wcGje0Qa2ypH50Tt2j9wYBJCvWDNMzYNb2A==\n-----END AGE ENCRYPTED FILE-----\n",
+				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMc3hzVDFiR0tJOElnN0M4\ncEtNT0tjazBaZ1lvaTlkSWJIU0VnY3V6SzNZCkhxL1BiZkFkeEwxbDc0bVV2bWtY\nVmN6QjFkd1RLZzV1RHNMb0tURWhZVU0KLS0tIEF2bGtmdFdTZ2NjdGRHQjJWRXJQ\nQlJ3TUMxcEtwd0NaRFp3ZVVkRG1aNDQK9Etsk2KWEpY9rRTtoQDoStsyfBfFrz2w\nsfkI8Sw99/GZEmdWEcpTE+94Q5N6lubZlwi09jBPxMVeX7jrVJRcsg==\n-----END AGE ENCRYPTED FILE-----\n",
 				"recipient": "age19l23k7uhlvazvrqvpwkyupzn3g03v8djr6xf0qpfe8a8l0gvrs8qc057fk"
+			},
+			{
+				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBoakdCZDVncDR6S1owbUEy\nUDJwTXVySFo2QlFlbmhsLzVxcG9ldmtuTUhzClVBT0RHc1pwbngzRURXdXRXRmtt\nczdvTTJGNHdCRk90TzNCc3A2elV4Q3MKLS0tICtBYXVBR3NwdFBkSnk1bG4yZWZu\nUUY0M3Ztay9pbXZ1S2xyTkoyL1lXTWcK5PUUOoTCsv3k0Ec3AuQsoyUblNoN7mEm\nv9LMVJcs8toQc/8FEavQ9fUrsv0Lq1btaSqEbdD2MwwWZR7kKmJLZw==\n-----END AGE ENCRYPTED FILE-----\n",
+				"recipient": "age1xsexrshfte590ec343puza8m7l9442u79hau6dpdu7ndjhaeav4slqhqwx"
 			}
 		],
 		"lastmodified": "2026-06-19T03:06:58Z",
 		"mac": "ENC[AES256_GCM,data:iIbLetWJB0hLzzMnmSzZf4Tj9SWuSP5ZSL9TKnHqsJjRxXkye2Vry2uifLlntt0ZDJBnRf2lk1G5+17XY3dZSZNt3pb90up3zMdVQFeJzPJMkhzbqfyYK8zHdE55tfHF3o9GMyyKHorK8y5OFtJC7GuYUgpsmmBfzSUkcvFS11I=,iv:raUqyQUWfGuYyPR1PtnnKLger2+ENebZOILHBbS2sBI=,tag:G72EV/qbgozIloaMOC1hGA==,type:str]",
 		"pgp": [
 			{
-				"created_at": "2026-06-19T03:05:05Z",
-				"enc": "-----BEGIN PGP MESSAGE-----\n\nwV4D36+3H3ly1I0SAQdAuP70JkGE5hGNohGB8Xuk4lQth/bExMz0Wxy53wurYC4w\nbg9uba0U/vmlfdwkPP0pH+OYS7Dizyiv0XlmDqbTMH7Y5DfS8I076V6/RSqNymTr\n0lEBpk20VCSicyWsKzlKlHz7VasM+wCP7fmUDm0/Q1KQA6zm/tEwo6+POcAFpkDQ\n55GXGMskoZKNLIsWSM74QDtzrYjF8D4X20ZgupxRgeJyD/A=\n=nzwR\n-----END PGP MESSAGE-----",
+				"created_at": "2026-06-21T15:42:09Z",
+				"enc": "-----BEGIN PGP MESSAGE-----\n\nwV4D36+3H3ly1I0SAQdAc+cvVr0oTELN+XwKh4GMX2Ko+2u7x2mK/+p+Qo5vkwEw\n1HPWJ8plpdBbDG2lHI3xoejAElbx4eendcqwxaZKNiMvPMUCwYhPth+AcCim+ahi\n0lEBAtqbHOJSxo08prtVzTm8eVID/k9ji5qqAe3/eV1wWHTAmFVhEBVODQ+J9Tu9\ngORelKuiSqzfVzGDxMu0g0Gh2StC3T7h9xMnwjQ068FLDkk=\n=GkiQ\n-----END PGP MESSAGE-----",
 				"fp": "BD15904159AF89DEB3A61039DFAFB71F7972D48D"
 			}
 		],

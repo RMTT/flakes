@@ -2,10 +2,6 @@
 {
   machine.secrets.enable = true;
 
-  sops.secrets.tunnel = {
-    sopsFile = ./tunnel;
-    format = "binary";
-  };
   sops.secrets.godel-wg = {
     sopsFile = ./godel-wg;
     format = "binary";

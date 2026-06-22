@@ -7,6 +7,5 @@
       host = "oracle.rmtt.host";
       remoteBuild = true;
     };
-    homeserver.host = "homeserver.infra.rmtt.host";
   };
 }

@@ -46,13 +46,10 @@ in
     services.godel = {
       infra-ip = infra_ip;
       alloy.enable = true;
-      wireguard = {
-        enable = true;
-        privateKeyFile = config.sops.secrets.godel-wg.path;
-      };
       k3s = {
         enable = true;
         interface = "godel";
+        cluster = "public";
         role = "server";
         region = "oracle";
       };
@@ -64,6 +61,11 @@ in
       uptime = {
         enable = true;
       };
+      tailscale = {
+        enable = true;
+        extraRoutes = [ "10.42.0.0/24" ];
+      };
+      dummy.enable = true;
     };
 
     services.cloudflare-tunnel = {
