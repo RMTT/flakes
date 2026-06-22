@@ -38,7 +38,6 @@ in
         node-label = [ "topology.kubernetes.io/region=${cfg.region}" ];
         token-file = "${config.sops.secrets.k3s-token.path}";
         node-ip = "${godelCfg.infra-ip}";
-        node-external-ip = "${godelCfg.infra-ip}";
         kube-proxy-arg = [ "nodeport-addresses=${godelCfg.infra-ip}/24" ];
       }
       // optionalAttrs (cfg.role == "agent") {
@@ -46,17 +45,17 @@ in
       }
       // optionalAttrs (cfg.role == "server") {
         cluster-init = true;
+        supervisor-metrics = true;
         cluster-cidr = "10.42.0.0/16";
         service-cidr = "10.43.0.0/16";
+        service-node-port-range = "80-32767";
         write-kubeconfig-mode = "0644";
         tls-san = [
           serverUrl
         ];
 
-        supervisor-metrics = true;
         disable = [
           "servicelb"
-          "traefik"
         ];
 
         etcd-s3 = true;
@@ -93,6 +92,11 @@ in
         sopsFile = ./flux-age;
         format = "binary";
       };
+      sops.secrets.traefik-custom = {
+        mode = "0400";
+        sopsFile = ./traefik;
+        format = "binary";
+      };
 
       services.k3s = {
         enable = true;
@@ -100,9 +104,11 @@ in
         environmentFile = config.sops.secrets.k3s-env.path;
         manifests = mkIf (cfg.role == "server") {
           flux-age.source = config.sops.secrets.flux-age.path;
+          traefik-custom.source = config.sops.secrets.traefik-custom.path;
         };
         role = cfg.role;
       };
+
       networking.firewall.trustedIpv4 = [
         # need pass pod id to let pod access api server which listend on the node-ip
         "10.42.0.0/16" # pod ip range

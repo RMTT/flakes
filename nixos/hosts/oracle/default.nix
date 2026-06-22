@@ -53,11 +53,6 @@ in
         role = "server";
         region = "oracle";
       };
-      traefik = {
-        enable = true;
-        configFile = ./secrets/traefik-dynamic.toml;
-        envFile = config.sops.secrets.traefik-env.path;
-      };
       uptime = {
         enable = true;
       };
