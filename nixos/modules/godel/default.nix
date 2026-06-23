@@ -6,7 +6,6 @@
   imports = [
     ./k3s
     ./tailscale
-    ./uptime.nix
     ./traefik.nix
     ./wireguard
     ./alloy

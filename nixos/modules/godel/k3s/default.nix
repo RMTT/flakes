@@ -1,6 +1,5 @@
 {
-  pkgs,
-  config,
+  pkgs, config,
   lib,
   ...
 }:
@@ -44,6 +43,7 @@ in
         server = serverUrl;
       }
       // optionalAttrs (cfg.role == "server") {
+        flannel-backend = "wireguard-native";
         cluster-init = true;
         supervisor-metrics = true;
         cluster-cidr = "10.42.0.0/16";
@@ -66,13 +66,6 @@ in
         etcd-s3-insecure = false;
         etcd-s3-retention = "15";
         etcd-snapshot-schedule-cron = "0 * * * *"; # every hour
-      }
-      // optionalAttrs (cfg.cluster == "homelab" && cfg.role == "server") {
-        flannel-backend = "vxlan";
-        flannel-iface = cfg.interface;
-      }
-      // optionalAttrs (cfg.cluster == "public" && cfg.role == "server") {
-        flannel-backend = "host-gw";
       };
 
       yaml = pkgs.formats.yaml { };
@@ -104,6 +97,7 @@ in
         role = cfg.role;
       };
 
+      networking.firewall.allowedUDPPorts = [ 51820 ]; # for wireguard-native
       networking.firewall.trustedIpv4 = [
         # need pass pod id to let pod access api server which listend on the node-ip
         "10.42.0.0/16" # pod ip range

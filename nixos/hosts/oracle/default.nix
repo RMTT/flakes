@@ -48,17 +48,13 @@ in
       alloy.enable = true;
       k3s = {
         enable = true;
-        interface = "godel";
+        interface = "tailscale0";
         cluster = "public";
         role = "server";
         region = "oracle";
       };
-      uptime = {
-        enable = true;
-      };
       tailscale = {
         enable = true;
-        extraRoutes = [ "10.42.0.0/24" ];
       };
       dummy.enable = true;
     };

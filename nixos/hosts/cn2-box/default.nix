@@ -68,7 +68,7 @@
       infra-ip = "198.19.20.2";
       k3s = {
         enable = true;
-        interface = "godel";
+        interface = "tailscale0";
         cluster = "public";
         role = "agent";
         region = "lax";
@@ -77,9 +77,6 @@
       dummy.enable = true;
       tailscale = {
         enable = true;
-        extraRoutes = [
-          "10.42.1.0/24"
-        ];
       };
     };
   };
