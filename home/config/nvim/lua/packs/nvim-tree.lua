@@ -27,7 +27,9 @@ return {
                 }
             },
             view = {
-                adaptive_size = true,
+                width = {
+                    max = 50, -- limits the maximum width to 50 columns
+                }
             },
             git = {
                 enable = true,

@@ -56,6 +56,7 @@ in
 
         disable = [
           "servicelb"
+          "traefik"
         ];
 
         etcd-s3 = true;
@@ -92,11 +93,6 @@ in
         sopsFile = ./flux-age;
         format = "binary";
       };
-      sops.secrets.traefik-custom = {
-        mode = "0400";
-        sopsFile = ./traefik;
-        format = "binary";
-      };
 
       services.k3s = {
         enable = true;
@@ -104,7 +100,6 @@ in
         environmentFile = config.sops.secrets.k3s-env.path;
         manifests = mkIf (cfg.role == "server") {
           flux-age.source = config.sops.secrets.flux-age.path;
-          traefik-custom.source = config.sops.secrets.traefik-custom.path;
         };
         role = cfg.role;
       };

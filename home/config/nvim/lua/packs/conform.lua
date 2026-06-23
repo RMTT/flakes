@@ -7,6 +7,7 @@ return {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
                 json = { "jq" },
+                terraform = { "terraform_fmt" },
             },
             default_format_opts = {
                 lsp_format = "fallback",
