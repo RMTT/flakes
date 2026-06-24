@@ -9,11 +9,6 @@ git-hooks-nix.lib.${pkgs.system}.run {
       entry = "${pkgs.writeShellScript "sops-check" ''
         exit_code=0
         for file in "$@"; do
-          # Check if the file is default.nix
-          if [ "$(basename "$file")" = "default.nix" ]; then
-            continue
-          fi
-          
           # Check if the file actually exists
           if [ ! -f "$file" ]; then
             continue
