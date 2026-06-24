@@ -50,7 +50,7 @@ with lib;
         (mkIf config.programs.librepods.enable "librepods")
       ];
       hashedPassword = cfg.hashedPassword;
-      openssh.authorizedKeys.keyFiles = [ ./secrets/ssh_key.pub ];
+      openssh.authorizedKeys.keyFiles = [ ./ssh_key.pub ];
     };
 
   };

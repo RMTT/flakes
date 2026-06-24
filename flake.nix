@@ -42,6 +42,11 @@
       inputs.nixpkgs.follows = "nixpkgs-fresh";
     };
 
+    git-hooks-nix = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     celler.url = "github:blitz/celler";
   };
 
@@ -50,19 +55,42 @@
       self,
       nixpkgs,
       flake-utils,
+      git-hooks-nix,
       ...
     }@inputs:
     with flake-utils.lib;
     {
       nixosConfigurations = import ./nixos inputs;
-      nixosModules = import ./nixos/modules.nix;
+      nixosModules = import ./nixos/modules;
       homeConfigurations = import ./home inputs;
       snip = import ./nixos/snip.nix inputs;
     }
-    // eachSystem [ system.x86_64-linux system.aarch64-linux ] (system: {
-      packages = import ./packages {
-        inherit inputs system;
-      };
-      devShells.default = import ./shell.nix nixpkgs;
-    });
+    // eachSystem [ system.x86_64-linux system.aarch64-linux ] (
+      system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+        git-hooks = import ./git-hooks.nix { inherit pkgs git-hooks-nix; };
+      in
+      {
+        packages = import ./packages {
+          inherit inputs system;
+        };
+        checks = {
+          pre-commit-check = git-hooks;
+        };
+        devShells.default = pkgs.mkShellNoCC {
+          packages = with pkgs; [
+            nodejs
+            python3
+            python3Packages.pip
+            uv
+            terraform
+          ];
+          shellHook = git-hooks.shellHook;
+        };
+      }
+    );
 }

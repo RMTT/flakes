@@ -4,7 +4,7 @@
   ...
 }@inputs:
 let
-  system = builtins.currentSystem;
+  system = builtins.currentSystem or "x86_64-linux";
   overlay-ownpkgs = final: prev: inputs.self.packages.${system};
 in
 {

@@ -7,3 +7,4 @@ build
 .claude
 .worktrees
 .venv
+.pre-commit-config.yaml

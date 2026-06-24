@@ -44,8 +44,6 @@ in
 {
   oracle = mkNixOS "oracle" { };
   cn2-box = mkNixOS "cn2-box" { };
-  kube-runner = mkNixOS "kube-runner" { };
-
   mtspc = mkNixOS "mtspc" {
     nixpkgs = inputs.nixpkgs-fresh;
     extraModules = [
@@ -55,13 +53,6 @@ in
       inputs.nixos-hardware.nixosModules.common-pc-laptop
       inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
       inputs.nixos-hardware.nixosModules.common-gpu-amd
-    ];
-  };
-
-  iso = mkNixOS "iso" rec {
-    nixpkgs = inputs.nixpkgs;
-    extraModules = [
-      "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
     ];
   };
 }
