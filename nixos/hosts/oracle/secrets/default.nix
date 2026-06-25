@@ -10,19 +10,6 @@
     sopsFile = ./godel-wg;
     format = "binary";
   };
-  # sops.secrets.grafana-secret = {
-  #   sopsFile = ./grafana-secret;
-  #   format = "binary";
-  #   owner = "grafana";
-  # };
-  sops.secrets.traefik-env = {
-    sopsFile = ./traefik-env;
-    format = "binary";
-  };
-  sops.secrets.traefik-dynamic = {
-    sopsFile = ./traefik-dynamic.toml;
-    format = "binary";
-  };
 
   sops.secrets.restic-pass = {
     sopsFile = ./restic-pass;
