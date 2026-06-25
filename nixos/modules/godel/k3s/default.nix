@@ -73,17 +73,17 @@ in
     mkIf cfg.enable {
       sops.secrets.k3s-token = {
         mode = "0400";
-        sopsFile = ./k3s-token;
+        sopsFile = ./secrets/k3s-token;
         format = "binary";
       };
       sops.secrets.k3s-env = {
         mode = "0400";
-        sopsFile = ./k3s-env;
+        sopsFile = ./secrets/k3s-env;
         format = "binary";
       };
       sops.secrets.flux-age = {
         mode = "0400";
-        sopsFile = ./flux-age;
+        sopsFile = ./secrets/flux-age;
         format = "binary";
       };
 

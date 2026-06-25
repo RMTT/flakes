@@ -21,13 +21,13 @@ with lib;
     networking.firewall.trustedInterfaces = [ "sing-box" ];
     sops.secrets.singbox = {
       mode = "0400";
-      sopsFile = ./config.json;
+      sopsFile = ./secrets/config.json;
       format = "binary";
     };
 
     # sops.secrets.mihomo = {
     #   mode = "0400";
-    #   sopsFile = ./config.yaml;
+    #   sopsFile = ./secrets/config.yaml;
     #   format = "binary";
     # };
     # services.mihomo = {

@@ -11,11 +11,11 @@ in
 
   config = mkIf cfg.enable {
     sops.secrets.alloy-env = {
-      sopsFile = ./env;
+      sopsFile = ./secrets/env;
       format = "binary";
     };
     sops.secrets.alloy-k3s-token = {
-      sopsFile = ./k3s-token;
+      sopsFile = ./secrets/k3s-token;
       mode = "0444";
       format = "binary";
     };
