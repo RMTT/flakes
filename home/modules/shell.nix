@@ -26,6 +26,10 @@
   ];
   programs.zsh.defaultKeymap = "viins";
   programs.zsh.initContent = ''
+    if [[ "$TERM" == "xterm-kitty" ]] || [[ -n "$KITTY_PID" ]]; then
+      alias ssh="kitten ssh"
+    fi
+
     if command -v kubectl &> /dev/null
     then
     	source <(kubectl completion zsh)
