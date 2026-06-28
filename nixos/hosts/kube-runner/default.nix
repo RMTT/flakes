@@ -11,7 +11,7 @@ in
 {
   imports = [
     (modulesPath + "/virtualisation/oci-common.nix")
-    # ./secrets
+    ./secrets
   ];
 
   config = {
