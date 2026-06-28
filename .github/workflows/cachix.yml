@@ -16,6 +16,7 @@ env:
 
   ARM_TARGETS: >-
     .#nixosConfigurations.oracle.config.system.build.toplevel
+    .#nixosConfigurations.kube-runner.config.system.build.toplevel
 
 jobs:
   build-x86_64:
