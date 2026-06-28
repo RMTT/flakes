@@ -7,6 +7,7 @@
 }:
 let
   infra_ip = "198.19.20.3";
+  external_ip = "147.224.143.231";
 in
 {
   imports = [
@@ -44,11 +45,12 @@ in
     };
     services.godel = {
       infra-ip = infra_ip;
+      external-ip = external_ip;
       alloy.enable = true;
       k3s = {
         enable = true;
         cluster = "public";
-        role = "server";
+        role = "agent";
         region = "oracle";
       };
       tailscale = {

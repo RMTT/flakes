@@ -1,5 +1,6 @@
 {
-  pkgs, config,
+  pkgs,
+  config,
   lib,
   ...
 }:
@@ -36,14 +37,20 @@ in
       k3s-config = {
         node-label = [ "topology.kubernetes.io/region=${cfg.region}" ];
         token-file = "${config.sops.secrets.k3s-token.path}";
-        node-ip = "${godelCfg.infra-ip}";
+        node-ip = godelCfg.infra-ip;
         kube-proxy-arg = [ "nodeport-addresses=${godelCfg.infra-ip}/24" ];
+      }
+      // optionalAttrs (godelCfg.external-ip != null) {
+        node-external-ip = godelCfg.external-ip;
       }
       // optionalAttrs (cfg.role == "agent") {
         server = serverUrl;
       }
       // optionalAttrs (cfg.role == "server") {
         flannel-backend = "wireguard-native";
+        flannel-external-ip = true;
+        # always use node-ip as api server address
+        advertise-address = godelCfg.infra-ip;
         cluster-init = true;
         supervisor-metrics = true;
         cluster-cidr = "10.42.0.0/16";

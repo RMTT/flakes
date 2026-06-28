@@ -7,6 +7,7 @@
 }:
 let
   infra_ip = "198.19.20.1";
+  external_ip = "147.224.201.181";
 in
 {
   imports = [
@@ -45,6 +46,7 @@ in
     };
     services.godel = {
       infra-ip = infra_ip;
+      external-ip = external_ip;
       alloy.enable = true;
       k3s = {
         enable = true;
