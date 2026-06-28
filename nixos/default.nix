@@ -43,6 +43,7 @@ let
 in
 {
   oracle = mkNixOS "oracle" { };
+  kube-runner = mkNixOS "kube-runner" { };
   cn2-box = mkNixOS "cn2-box" { };
   mtspc = mkNixOS "mtspc" {
     nixpkgs = inputs.nixpkgs-fresh;

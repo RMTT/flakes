@@ -1,14 +1,15 @@
 return {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons', 'linrongbin16/lsp-progress.nvim' },
+    dependencies = { 'nvim-tree/nvim-web-devicons', 'linrongbin16/lsp-progress.nvim', "RMTT/sops.nvim" },
     config = function()
         local opts = {
             icon_enabled = true,
             theme = "catppuccin",
             sections = {
-                lualine_d = {
+                lualine_c = {
+                    "filename",
                     function()
-                        return require('lsp-progress').progress()
+                        return require('sops').status()
                     end,
                 },
             },

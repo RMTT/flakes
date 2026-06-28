@@ -6,21 +6,20 @@
   ...
 }:
 let
-  infra_ip = "198.19.20.1";
+  infra_ip = "198.19.20.3";
 in
 {
   imports = [
     (modulesPath + "/virtualisation/oci-common.nix")
-    ./secrets
+    # ./secrets
   ];
 
   config = {
     oci.efi = true;
     machine.graphics.enable = false;
-    machine.users.mt.hashedPassword = "$y$j9T$3ODPssSOIWrWgJA15q8P1.$eUp2hFhQ4D6Gujz8twXsb3NFNoRB/OkGh5FSKTuOFA5";
-    system.stateVersion = "26.05";
+    machine.users.mt.hashedPassword = "$y$j9T$lzgs19Wd4wTJZrfcu4Zcp0$0cBreYmJqGOMZBYU2KUN5w6l0AiFHEP.uu6FK.fm3T/";
+    system.stateVersion = "26.11";
     nixpkgs.hostPlatform = "aarch64-linux";
-
     boot.kernelParams = [ "net.ifnames=0" ];
 
     services.vnstat.enable = true;
@@ -56,11 +55,6 @@ in
         enable = true;
       };
       dummy.enable = true;
-    };
-
-    services.cloudflare-tunnel = {
-      enable = true;
-      tokenFile = config.sops.secrets.tunnel.path;
     };
   };
 }
