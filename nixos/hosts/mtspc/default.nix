@@ -50,6 +50,7 @@
 
     # kernel version
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    system.boot.loader.kernelFile = "vmlinuz"; # workaround
     boot.kernelParams = [
       "zswap.enabled=1"
       "zswap.compressor=zstd"
@@ -63,8 +64,8 @@
     };
     hardware.nvidia-container-toolkit.enable = true;
     hardware.nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
-      dynamicBoost.enable = true;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+      dynamicBoost.enable = false;
       modesetting.enable = true;
       powerManagement.enable = true;
       powerManagement.finegrained = true;
