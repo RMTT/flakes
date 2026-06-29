@@ -7,17 +7,6 @@
         "uvx",
         "mcp-nixos"
       ]
-    },
-    "grafana": {
-      "type": "local",
-      "command": [
-        "uvx",
-        "mcp-grafana"
-      ],
-      "environment": {
-        "GRAFANA_URL": "$GRAFANA_URL",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "$GRAFANA_SERVICE_ACCOUNT_TOKEN"
-      }
     }
   }
 }
