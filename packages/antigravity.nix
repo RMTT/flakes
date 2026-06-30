@@ -47,11 +47,11 @@
 
 let
   pname = "antigravity";
-  version = "2.1.4-6481382726303744";
+  version = "2.2.1-5287492581195776";
 
   src = fetchurl {
     url = "https://storage.googleapis.com/antigravity-public/antigravity-hub/${version}/linux-x64/Antigravity.tar.gz";
-    hash = "sha256-T/sDKgQQ0i/lDL32bXL1vXi+vvBYIp3AUktL3waaZZo=";
+    hash = "sha256-prp3BG+SqhziHYoMZ0lUca9MK+EbpiTl2TWCGWmyCYk=";
   };
 
   desktopItem = makeDesktopItem {
