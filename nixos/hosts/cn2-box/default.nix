@@ -67,22 +67,5 @@ in
         ];
       };
     };
-
-    services.godel = {
-      infra-ip = infra_ip;
-      external-ip = external_ip;
-      k3s = {
-        enable = true;
-        interface = "tailscale0";
-        cluster = "public";
-        role = "agent";
-        region = "lax";
-      };
-      alloy.enable = true;
-      dummy.enable = true;
-      tailscale = {
-        enable = true;
-      };
-    };
   };
 }

@@ -13,11 +13,9 @@ keys:
   # age for godel 
   - godel-k3s-age: &godel-k3s-age
     - *oracle-age
-    - *cn2-box-age
     - *kube-runner-age
   - godel-alloy-age: &godel-alloy-age
     - *oracle-age
-    - *cn2-box-age
     - *kube-runner-age
 
 creation_rules:
