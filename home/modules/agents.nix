@@ -47,8 +47,7 @@
         "$schema": "https://opencode.ai/config.json",
         "plugin": [
           "@mohak34/opencode-notifier@latest",
-          "opencode-gemini-auth@latest",
-          "superpowers@git+https://github.com/obra/superpowers.git"
+          "opencode-gemini-auth@latest"
         ],
         "keybinds": {
           "command_list": "<leader>p",
