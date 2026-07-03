@@ -1,12 +1,12 @@
 { pkgs, lib }:
 
 let
-  version = "1.17.8";
+  version = "1.17.13";
   src = pkgs.fetchFromGitHub {
     owner = "anomalyco";
     repo = "opencode";
     tag = "v${version}";
-    sha256 = "07rxmwn9w4zdyk8jjxgrfhzgbxa7jlbx2vyynf48692yh8a845w9";
+    sha256 = "sha256-hgwi/4g0ucXLcbiRJTAKlhSeSSqWRIXXWz1WscNC75Y=";
   };
 
   opencode' = pkgs.opencode.overrideAttrs (old: {
