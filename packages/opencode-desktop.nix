@@ -6,14 +6,14 @@ let
     owner = "anomalyco";
     repo = "opencode";
     tag = "v${version}";
-    sha256 = "sha256-BJedhjv4+Dn1pmuGd79qPwrO18nMUPUYDiyfrVbLUMk=";
+    sha256 = "sha256-Xm6PXDzRqHS66ERKTlhEfD9enrHOsZUaQPrfGD3/WqU=";
   };
 
   opencode' = pkgs.opencode.overrideAttrs (old: {
     inherit version src;
     node_modules = old.node_modules.overrideAttrs (oldModules: {
       inherit version src;
-      outputHash = "sha256-SUNfdHtASPh1mpxKvIKJ2GrDHAxmv7Gu7B7vr3PX5W4=";
+      outputHash = "sha256-9oSXcvvISB6WAqI6f/GBZ3i9IBwYrRQvKs82SLibJNo=";
     });
   });
 in
