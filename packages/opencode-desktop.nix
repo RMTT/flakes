@@ -6,7 +6,7 @@ let
     owner = "anomalyco";
     repo = "opencode";
     tag = "v${version}";
-    sha256 = "sha256-h4fmNEzRDBIXcFg58epM9Opot8n4zpE+8xy2J1/Q3UI=";
+    sha256 = "sha256-SBAKl0bsiSUDwvi+XCCgDL2SuP7NZAqx4iGyaMZz5N4=";
   };
 
   opencode' = pkgs.opencode.overrideAttrs (old: {
