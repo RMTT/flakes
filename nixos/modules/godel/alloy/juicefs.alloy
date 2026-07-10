@@ -72,7 +72,20 @@ discovery.relabel "juicefs_filter" {
 }
 
 // ==========================================
-// 3. Metric Scraper: Fetch the Metrics via the Proxied Targets
+// 3. Metric Filter: Slim down metrics to only those used by the Grafana Dashboard
+// ==========================================
+prometheus.relabel "juicefs_metrics_slimming" {
+  forward_to = [prometheus.remote_write.metrics_service.receiver]
+
+  rule {
+    source_labels = ["__name__"]
+    regex         = "juicefs_object_request_errors|juicefs_blockcache_blocks|juicefs_blockcache_bytes|juicefs_blockcache_hit_bytes|juicefs_blockcache_hits|juicefs_blockcache_miss|juicefs_blockcache_miss_bytes|juicefs_compact_size_histogram_bytes_count|juicefs_compact_size_histogram_bytes_sum|juicefs_cpu_usage|juicefs_fuse_open_handlers|juicefs_fuse_ops_durations_histogram_seconds_count|juicefs_fuse_ops_durations_histogram_seconds_sum|juicefs_fuse_read_size_bytes_sum|juicefs_fuse_written_size_bytes_sum|juicefs_go_goroutines|juicefs_memory|juicefs_object_request_data_bytes|juicefs_object_request_durations_histogram_seconds_count|juicefs_object_request_durations_histogram_seconds_sum|juicefs_object_request_errors|juicefs_staging_block_bytes|juicefs_staging_block_delay_seconds|juicefs_staging_blocks|juicefs_transaction_durations_histogram_seconds_count|juicefs_transaction_durations_histogram_seconds_sum|juicefs_transaction_restart|juicefs_uptime|juicefs_used_inodes|juicefs_used_space"
+    action        = "keep"
+  }
+}
+
+// ==========================================
+// 4. Metric Scraper: Fetch the Metrics via the Proxied Targets
 // ==========================================
 prometheus.scrape "juicefs_scraper" {
   // Use the finalized targets that have been filtered and rewritten by the relabel component
@@ -88,6 +101,6 @@ prometheus.scrape "juicefs_scraper" {
     credentials_file = "/etc/alloy/k3s-token"
   }
 
-  // Forward the successfully scraped metrics to the remote storage backend receiver
-  forward_to = [prometheus.remote_write.metrics_service.receiver]
+  // Forward the successfully scraped metrics to the relabel filter
+  forward_to = [prometheus.relabel.juicefs_metrics_slimming.receiver]
 }
