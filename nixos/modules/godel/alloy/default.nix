@@ -60,6 +60,10 @@ in
             import.file "k8s_monitor" {
               filename = "/etc/alloy/k8s-monitor.alloy"
             }
+
+            import.file "juicefs" {
+              filename = "/etc/alloy/juicefs.alloy"
+            }
           ''
         else
           ""
@@ -67,5 +71,6 @@ in
     '';
     environment.etc."alloy/node-exporter.alloy".source = ./node-exporter.alloy;
     environment.etc."alloy/k8s-monitor.alloy".source = ./k8s-monitor.alloy;
+    environment.etc."alloy/juicefs.alloy".source = ./juicefs.alloy;
   };
 }

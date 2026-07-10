@@ -1,0 +1,93 @@
+// 1. Service Discovery: Subscribe to all Pods from K3s API Server
+discovery.kubernetes "k3s_pods" {
+  role       = "pod"
+  api_server = "https://k3s-master.infra.rmtt.host:6443"
+
+  tls_config {
+    insecure_skip_verify = true
+  }
+
+  authorization {
+    credentials_file = "/etc/alloy/k3s-token"
+  }
+}
+
+// 2. Relabel Pipeline: Filter Targets & Transform Paths for API Proxying
+discovery.relabel "juicefs_filter" {
+  // Receive the raw Pod list from the K3s service discovery component
+  targets = discovery.kubernetes.k3s_pods.targets
+
+  // Step 1: Drop terminated or completed (Failed/Succeeded) Pods
+  rule {
+    source_labels = ["__meta_kubernetes_pod_phase"]
+    regex         = "(Failed|Succeeded)"
+    action        = "drop"
+  }
+
+  // Step 2: Precisely keep Pods that match the JuiceFS Mount Pod label
+  rule {
+    source_labels = [
+      "__meta_kubernetes_pod_label_app_kubernetes_io_name", 
+      "__meta_kubernetes_pod_labelpresent_app_kubernetes_io_name",
+    ]
+    separator     = ";"
+    regex         = "(juicefs-mount);true"
+    action        = "keep"
+  }
+
+  // Step 3: Keep only the specific container port named "metrics"
+  rule {
+    source_labels = ["__meta_kubernetes_pod_container_port_name"]
+    regex         = "metrics"
+    action        = "keep"
+  }
+
+  // Step 4: Inject a static label endpoint="metrics" for downstream dashboard compatibility
+  rule {
+    target_label = "endpoint"
+    replacement  = "metrics"
+    action       = "replace"
+  }
+
+  // Step 5: Rewrite the metrics path to route through the K3s API Server Proxy.
+  // Transforms the request path into: /api/v1/namespaces/<ns>/pods/<pod-name>:<port>/proxy/metrics
+  rule {
+    source_labels = [
+      "__meta_kubernetes_namespace",
+      "__meta_kubernetes_pod_name",
+      "__meta_kubernetes_pod_container_port_number",
+    ]
+    regex         = "(.+);(.+);(.+)"
+    target_label  = "__metrics_path__"
+    replacement   = "/api/v1/namespaces/${1}/pods/${2}:${3}/proxy/metrics"
+    action        = "replace"
+  }
+
+  // Step 6: Overwrite the target address to point directly to the K3s API Server物理 IP
+  rule {
+    target_label = "__address__"
+    replacement  = "k3s-master.infra.rmtt.host:6443"
+    action       = "replace"
+  }
+}
+
+// ==========================================
+// 3. Metric Scraper: Fetch the Metrics via the Proxied Targets
+// ==========================================
+prometheus.scrape "juicefs_scraper" {
+  // Use the finalized targets that have been filtered and rewritten by the relabel component
+  targets = discovery.relabel.juicefs_filter.output
+  scrape_interval = "1m"
+  
+  scheme  = "https"
+  
+  tls_config {
+    insecure_skip_verify = true
+  }
+  authorization {
+    credentials_file = "/etc/alloy/k3s-token"
+  }
+
+  // Forward the successfully scraped metrics to the remote storage backend receiver
+  forward_to = [prometheus.remote_write.metrics_service.receiver]
+}
