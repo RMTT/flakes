@@ -44,6 +44,7 @@ in
         ];
       };
     };
+    services.fail2ban.enable = true;
     services.godel = {
       infra-ip = infra_ip;
       external-ip = external_ip;
