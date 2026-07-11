@@ -5,12 +5,12 @@
 }:
 
 let
-  version = "0.1.5";
+  version = "0.1.6";
 
   srcs = {
     x86_64-linux = {
       url = "https://github.com/RMTT/sb-lite/releases/download/v${version}/sblite-amd64-linux.tar.gz";
-      sha256 = "1a8vrrfnfjzlfirwiq8wf3cyj6xwbcqymgkvy2245whk0z3wa1sy";
+      sha256 = "sha256-rnPfDHxKslSBCeYMMUPIyZaAxlo2qxRsN4L1AReIv98=";
       binaryName = "sblite-amd64-linux";
     };
     aarch64-linux = {

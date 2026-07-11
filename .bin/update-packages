@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+
+# Run from repository root
+cd "$(dirname "$0")/.."
+
+# Define packages to blacklist (skip during auto-update)
+blacklist=()
+# Append packages from BLACKLIST environment variable (space-separated)
+if [ -n "${BLACKLIST:-}" ]; then
+	read -r -a env_blacklist <<<"$BLACKLIST"
+	blacklist+=("${env_blacklist[@]}")
+fi
+
+# Get the list of all packages from the flake
+mapfile -t all_packages < <(nix flake show --json --accept-flake-config | jq -r 'if .inventory then .inventory.packages.output.children | to_entries[] | select(.value.children != null) | .value.children | keys[] elif .packages then .packages | to_entries[] | .value | keys[] else empty end')
+
+# Filter to packages defined locally in the packages/ directory and not blacklisted
+packages=()
+for pkg_name in "${all_packages[@]}"; do
+	# Only update packages that have local files under packages/
+	if [ ! -f "packages/$pkg_name.nix" ] && [ ! -d "packages/$pkg_name" ]; then
+		continue
+	fi
+
+	# Check if package is in blacklist
+	is_blacklisted=0
+	for blacklisted in "${blacklist[@]}"; do
+		if [ "$pkg_name" = "$blacklisted" ]; then
+			is_blacklisted=1
+			break
+		fi
+	done
+
+	if [ "$is_blacklisted" -eq 1 ]; then
+		echo "Skipping blacklisted package: $pkg_name"
+		continue
+	fi
+
+	packages+=("$pkg_name")
+done
+
+echo "Found packages: ${packages[*]}"
+
+has_errors=0
+for pkg in "${packages[@]}"; do
+	echo "========================================"
+	echo "Updating package: $pkg"
+	echo "========================================"
+	# Run nix-update with flake support, using the update script if present.
+	# We pass any additional arguments from the script invocation (e.g., --commit).
+	if ! nix run nixpkgs#nix-update -- --flake --use-update-script "$pkg" "$@"; then
+		echo "Error: Failed to update package $pkg"
+		has_errors=1
+	fi
+done
+
+if [ "$has_errors" -ne 0 ]; then
+	echo "Some packages failed to update."
+	exit 1
+fi

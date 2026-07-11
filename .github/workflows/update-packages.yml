@@ -1,0 +1,67 @@
+name: Auto Update Packages
+
+on:
+  schedule:
+    # Run daily at 3:00 AM UTC
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    inputs:
+      blacklist:
+        description: 'Space-separated list of packages to skip'
+        required: false
+        default: ''
+
+env:
+  BLACKLIST: "" # Add package names separated by spaces to skip during scheduled runs
+
+jobs:
+  update-packages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Fetch all history so push succeeds
+          fetch-depth: 0
+
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run Update Script
+        env:
+          BLACKLIST: ${{ github.event.inputs.blacklist || env.BLACKLIST }}
+        run: |
+          # Create and switch to temporary branch
+          git checkout -b auto-update-packages
+          .bin/update-packages --commit
+
+      - name: Push Changes and Create Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if there are any new commits compared to origin/main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "Updates detected. Pushing temporary branch..."
+            git push origin auto-update-packages --force
+
+            # Check if a PR already exists for this branch
+            existing_pr=$(gh pr list --head auto-update-packages --state open --json number -q '.[0].number')
+            if [ -z "$existing_pr" ]; then
+              echo "Opening pull request..."
+              gh pr create \
+                --title "chore(deps): auto-update packages" \
+                --body "Automated package updates." \
+                --base main \
+                --head auto-update-packages
+            else
+              echo "Pull request #$existing_pr already exists and was updated."
+            fi
+          else
+            echo "No updates detected."
+          fi
