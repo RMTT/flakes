@@ -7,6 +7,10 @@
   autoPatchelfHook,
   makeWrapper,
   lib,
+  writeShellScript,
+  curl,
+  gnugrep,
+  nix-update,
   alsa-lib,
   at-spi2-atk,
   atk,
@@ -62,7 +66,10 @@ let
     terminal = false;
     type = "Application";
     startupWMClass = "Antigravity";
-    categories = [ "Development" "Utility" ];
+    categories = [
+      "Development"
+      "Utility"
+    ];
     comment = "Antigravity Hub client application";
   };
 in
@@ -128,7 +135,12 @@ stdenv.mkDerivation {
     mkdir -p $out/bin
     makeWrapper $out/opt/antigravity/antigravity $out/bin/antigravity \
       --prefix PATH : ${lib.makeBinPath [ xdg-utils ]} \
-      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libnotify libappindicator-gtk3 ]}:$out/opt/antigravity
+      --prefix LD_LIBRARY_PATH : ${
+        lib.makeLibraryPath [
+          libnotify
+          libappindicator-gtk3
+        ]
+      }:$out/opt/antigravity
 
     # Extract and install icon from app.asar
     asar extract-file resources/app.asar icon.png icon.png
@@ -136,6 +148,12 @@ stdenv.mkDerivation {
     cp icon.png $out/share/icons/hicolor/256x256/apps/antigravity.png
 
     runHook postInstall
+  '';
+
+  passthru.updateScript = writeShellScript "update-antigravity" ''
+    set -euo pipefail
+    latest_version=$(${curl}/bin/curl -sL https://antigravity-hub-auto-updater-974169037036.us-central1.run.app/manifest/latest-x64-linux.yml | ${gnugrep}/bin/grep -oP 'antigravity-hub/\K[0-9a-zA-Z.-]+' | head -n1)
+    exec ${nix-update}/bin/nix-update --version "$latest_version" --flake "''${UPDATE_NIX_ATTRPATH:-antigravity}"
   '';
 
   meta = {

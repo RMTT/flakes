@@ -96,7 +96,6 @@
       celler
       antigravity
       opencode-desktop
-      trilium-desktop
     ];
 
     programs.steam = {

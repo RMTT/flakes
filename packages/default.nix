@@ -15,11 +15,4 @@ in
 
   noctalia-shell = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
   celler = inputs.celler.packages.${system}.default;
-
-  # aarch64 vm
-  armer = import ./armer.nix {
-    nixpkgs = inputs.nixpkgs;
-    hostPkgs = pkgs;
-    inherit system;
-  };
 }

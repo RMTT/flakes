@@ -1,6 +1,7 @@
 {
   stdenv,
   fetchurl,
+  nix-update-script,
 }:
 
 let
@@ -41,6 +42,11 @@ stdenv.mkDerivation {
     runHook postInstall
   '';
 
+  passthru.updateScript = nix-update-script {
+    extraArgs = [
+      "--flake"
+    ];
+  };
   meta = {
     description = "A lightweight proxy client based on sing-box";
     homepage = "https://github.com/RMTT/sb-lite";
