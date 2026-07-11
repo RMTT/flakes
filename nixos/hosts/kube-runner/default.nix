@@ -57,7 +57,10 @@ in
       tailscale = {
         enable = true;
       };
-      dummy.enable = true;
+      wireguard = {
+        enable = true;
+        privateKeyFile = config.sops.secrets.godel-wg.path;
+      };
     };
   };
 }

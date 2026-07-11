@@ -49,12 +49,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    networking.firewall.allowedUDPPorts = [ 51820 ];
+    networking.firewall.allowedUDPPorts = [ 54321 ];
     networking.firewall.trustedInterfaces = [ "godel" ];
 
     networking.wg-quick.interfaces."godel" = {
       address = [ "${godelCfg.infra-ip}/32" ];
-      listenPort = 51820;
+      listenPort = 54321;
       privateKeyFile = cfg.privateKeyFile;
       inherit peers;
     };
