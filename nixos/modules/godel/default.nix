@@ -10,6 +10,7 @@
     ./wireguard
     ./alloy
     ./dummy.nix
+    ./dns
   ];
 
   options = {

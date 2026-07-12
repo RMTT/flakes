@@ -17,6 +17,8 @@ keys:
   - godel-alloy-age: &godel-alloy-age
     - *oracle-age
     - *kube-runner-age
+  - godel-dns-age: &godel-dns-age
+    - *oracle-age
 
 creation_rules:
   - path_regex: home/.*
@@ -41,5 +43,8 @@ creation_rules:
   - path_regex: nixos/modules/godel/alloy/.*
     pgp: *admin
     age: *godel-alloy-age
+  - path_regex: nixos/modules/godel/dns/.*
+    pgp: *admin
+    age: *godel-dns-age
 
   - pgp: *admin # default

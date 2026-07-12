@@ -62,6 +62,7 @@ in
         enable = true;
         privateKeyFile = config.sops.secrets.godel-wg.path;
       };
+      dns.enable = true;
     };
 
     services.cloudflare-tunnel = {
