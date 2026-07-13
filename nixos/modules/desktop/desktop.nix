@@ -10,8 +10,6 @@ in
 with lib;
 {
   config = mkIf cfg.enable {
-    security.rtkit.enable = true;
-
     # many gtk apps need dconf
     programs.dconf.enable = true;
 
@@ -69,42 +67,6 @@ with lib;
     # fonts
     fonts.fontDir.enable = true;
     fonts.enableDefaultPackages = true;
-    fonts.packages = with pkgs; [
-      wqy_zenhei
-      noto-fonts
-      sarasa-gothic
-      joypixels
-      noto-fonts-color-emoji
-      nerd-fonts.fira-code
-      inter
-      roboto
-    ];
-    fonts.fontconfig = {
-      cache32Bit = true;
-      allowBitmaps = true;
-      defaultFonts = {
-        emoji = [ "JoyPixels" ];
-        serif = [
-          "Sarasa Mono Slab SC"
-          "Sarasa Mono Slab TC"
-          "Sarasa Mono Slab J"
-          "Sarasa Mono Slab K"
-        ];
-        sansSerif = [
-          "Sarasa UI SC"
-          "Sarasa UI TC"
-          "Sarasa UI J"
-          "Sarasa UI K"
-          "Noto Sans CJK SC"
-        ];
-        monospace = [
-          "Sarasa Mono SC"
-          "Sarasa Mono TC"
-          "Sarasa Mono J"
-          "Sarasa Mono K"
-        ];
-      };
-    };
 
     xdg.portal = {
       enable = true;

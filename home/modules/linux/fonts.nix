@@ -1,28 +1,52 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 mkIf (config.nixpkgs.system == "x86_64-linux") {
+  home.packages = with pkgs; [
+    wqy_zenhei
+    noto-fonts
+    sarasa-gothic
+    noto-fonts-color-emoji
+    nerd-fonts.fira-code
+    inter
+    roboto
+  ];
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      emoji = [ "JoyPixels" ];
+      emoji = [ "Noto Color Emoji" ];
       serif = [
-        "Sarasa Mono Slab SC"
-        "Sarasa Mono Slab TC"
-        "Sarasa Mono Slab J"
-        "Sarasa Mono Slab K"
+        "Noto Serif CJK SC" # Simplified Chinese
+        "Noto Serif CJK TC" # Traditional Chinese
+        "Noto Serif CJK HK"
+        "Noto Serif CJK JP" # Japanese
+        "Noto Serif CJK KR" # Korean
+
+        "Noto Serif" # fallback
       ];
       sansSerif = [
-        "Sarasa UI SC"
-        "Sarasa UI TC"
-        "Sarasa UI J"
-        "Sarasa UI K"
-        "Noto Sans CJK SC"
+        "Inter"
+
+        "Sarasa Gothic SC"
+        "Sarasa Gothic TC"
+        "Sarasa Gothic HC"
+        "Sarasa Gothic J"
+        "Sarasa Gothic K"
+
+        "Noto Sans" # fallback
       ];
       monospace = [
         "Sarasa Mono SC"
         "Sarasa Mono TC"
+        "Sarasa Mono HC"
         "Sarasa Mono J"
         "Sarasa Mono K"
+
+        "Noto Sans Mono" # fallback
       ];
     };
   };

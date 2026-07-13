@@ -103,29 +103,29 @@ with lib;
     };
 
     programs.gnupg.agent.pinentryPackage = mkForce pkgs.pinentry-gnome3;
-    xdg.mime = {
-      enable = true;
-      defaultApplications = {
-        "inode/directory" = "org.gnome.Nautilus.desktop";
-
-        "text/html" = "firefox.desktop";
-        "application/xhtml+xml" = "firefox.desktop";
-        "x-scheme-handler/http" = "firefox.desktop";
-        "x-scheme-handler/https" = "firefox.desktop";
-        "x-scheme-handler/about" = "firefox.desktop";
-
-        "application/pdf" = "org.gnome.Evince.desktop";
-
-        "image/jpeg" = "org.gnome.Loupe.desktop";
-        "image/png" = "org.gnome.Loupe.desktop";
-        "image/gif" = "org.gnome.Loupe.desktop";
-        "image/webp" = "org.gnome.Loupe.desktop";
-        "image/svg+xml" = "org.gnome.Loupe.desktop";
-        "image/bmp" = "org.gnome.Loupe.desktop";
-        "image/tiff" = "org.gnome.Loupe.desktop";
-
-        "text/plain" = "org.gnome.TextEditor.desktop";
-      };
-    };
+    # xdg.mime = {
+    #   enable = true;
+    #   defaultApplications = {
+    #     "inode/directory" = "org.gnome.Nautilus.desktop";
+    #
+    #     "text/html" = "firefox.desktop";
+    #     "application/xhtml+xml" = "firefox.desktop";
+    #     "x-scheme-handler/http" = "firefox.desktop";
+    #     "x-scheme-handler/https" = "firefox.desktop";
+    #     "x-scheme-handler/about" = "firefox.desktop";
+    #
+    #     "application/pdf" = "org.gnome.Evince.desktop";
+    #
+    #     "image/jpeg" = "org.gnome.Loupe.desktop";
+    #     "image/png" = "org.gnome.Loupe.desktop";
+    #     "image/gif" = "org.gnome.Loupe.desktop";
+    #     "image/webp" = "org.gnome.Loupe.desktop";
+    #     "image/svg+xml" = "org.gnome.Loupe.desktop";
+    #     "image/bmp" = "org.gnome.Loupe.desktop";
+    #     "image/tiff" = "org.gnome.Loupe.desktop";
+    #
+    #     "text/plain" = "org.gnome.TextEditor.desktop";
+    #   };
+    # };
   };
 }

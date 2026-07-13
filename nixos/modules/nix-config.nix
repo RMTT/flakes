@@ -14,8 +14,6 @@ in
   config = mkIf cfg.enable {
     # enable unfree pkgs
     nixpkgs.config.allowUnfree = true;
-    nixpkgs.config.joypixels.acceptLicense = true;
-    nixpkgs.config.segger-jlink.acceptLicense = true;
 
     nix.channel.enable = false;
 

@@ -37,7 +37,6 @@ in
       agent = {
         enable = true;
         enableSSHSupport = true;
-        pinentryPackage = mkDefault pkgs.pinentry-tty;
         enableExtraSocket = true;
       };
     };
