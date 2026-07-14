@@ -94,6 +94,8 @@ in
         format = "binary";
       };
 
+      environment.systemPackages = [ pkgs.juicefs ];
+
       services.k3s = {
         enable = true;
         configPath = (yaml.generate "k3s-config" k3s-config);

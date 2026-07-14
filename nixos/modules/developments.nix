@@ -25,6 +25,7 @@ with lib;
     environment.systemPackages = with pkgs; [
       nodejs # typescript and javascript
       uv # python
+      zellij
       qemu
       clang
       gdb

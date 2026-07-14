@@ -13,7 +13,7 @@
     ./modules/git.nix
     ./modules/kitty.nix
     ./modules/gitui.nix
-    ./modules/tmux.nix
+    ./modules/zellij.nix
     ./modules/agents.nix
     ./modules/kube.nix
     ./secrets
