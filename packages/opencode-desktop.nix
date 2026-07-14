@@ -13,7 +13,7 @@ let
     inherit version src;
     node_modules = old.node_modules.overrideAttrs (oldModules: {
       inherit version src;
-      outputHash = "sha256-kXdXw264JQdlNoZPv5GUyWZvb/A8h2CTRdiX79jyvys=";
+      outputHash = "sha256-3NAzmlzVBcLSRXxpNOyW5DKfD1i2HReST2jlKgrtOKc=";
     });
   });
 in
