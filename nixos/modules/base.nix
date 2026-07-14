@@ -201,5 +201,6 @@ with lib;
     };
 
     services.fwupd.enable = true;
+    environment.enableAllTerminfo = true;
   };
 }
