@@ -139,6 +139,8 @@ stdenv.mkDerivation {
         lib.makeLibraryPath [
           libnotify
           libappindicator-gtk3
+          libGL
+          mesa
         ]
       }:$out/opt/antigravity
 
