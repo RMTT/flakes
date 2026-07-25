@@ -49,12 +49,12 @@
 
 let
   pname = "opencode-desktop";
-  version = "1.18.3";
+  version = "1.18.5";
 
   srcs = {
     x86_64-linux = fetchurl {
       url = "https://github.com/anomalyco/opencode/releases/download/v${version}/opencode-desktop-linux-amd64.deb";
-      hash = "sha256-MRgYDApBWKmnc9B9BHLg5b/lF2Oe2ku0W/khHCl4464=";
+      hash = "sha256-f3M3UYbFYbxPRpKoITp9KwGHALHvw/vMZHrP6ICmAa8=";
     };
     aarch64-linux = fetchurl {
       url = "https://github.com/anomalyco/opencode/releases/download/v${version}/opencode-desktop-linux-arm64.deb";
