@@ -5,5 +5,6 @@
   };
   environment.systemPackages = with pkgs; [
     kdePackages.plasma-browser-integration
+    kdePackages.isoimagewriter
   ];
 }
