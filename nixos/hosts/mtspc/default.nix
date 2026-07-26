@@ -47,6 +47,7 @@
       ];
     };
     swapDevices = [ { device = "/dev/disk/by-uuid/08810e32-8ed9-4e3f-bdfa-70ddd9688756"; } ];
+    boot.resumeDevice = "/dev/disk/by-uuid/08810e32-8ed9-4e3f-bdfa-70ddd9688756";
 
     # kernel version
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
@@ -56,12 +57,13 @@
       "zswap.compressor=zstd"
       "zswap.max_pool_percent=20"
       "zswap.shrinker_enabled=1"
+
+      "pcie_aspm=force"
     ];
 
-    services = {
-      asusd.enable = lib.mkDefault true;
-      supergfxd.enable = lib.mkDefault true;
-    };
+    services.asusd.enable = lib.mkDefault true;
+    services.power-profiles-daemon.enable = false;
+    services.tlp.enable = true;
     hardware.nvidia-container-toolkit.enable = true;
     hardware.nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.production;
