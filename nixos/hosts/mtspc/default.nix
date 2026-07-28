@@ -59,11 +59,17 @@
       "zswap.shrinker_enabled=1"
 
       "pcie_aspm=force"
+      "amdgpu.gpu_recovery=1"
+      "amd_iommu=off"
+      "idle=nomwait"
     ];
+    boot.extraModprobeConfig = ''
+      options nvidia NVreg_EnableS0ixPowerManagement=1
+      options snd_hda_intel power_save=1
+      options iwlwifi power_save=1
+    '';
 
     services.asusd.enable = lib.mkDefault true;
-    services.power-profiles-daemon.enable = false;
-    services.tlp.enable = true;
     hardware.nvidia-container-toolkit.enable = true;
     hardware.nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.production;
@@ -81,6 +87,25 @@
       };
       open = true;
     };
+    services.power-profiles-daemon.enable = true;
+    powerManagement.enable = true;
+    powerManagement.powertop = {
+      enable = true;
+      postStart = ''
+        # find keyboard and mouse
+        for dev in /sys/bus/usb/devices/*; do
+          if [ -e "$dev/product" ]; then
+            product=$(cat "$dev/product" 2>/dev/null)
+            if echo "$product" | grep -iE "(keyboard|mouse|receiver|input|dongle)" > /dev/null; then
+              if [ -e "$dev/power/control" ]; then
+                echo "Disabling auto-suspend for $product ($dev)"
+                echo "on" > "$dev/power/control"
+              fi
+            fi
+          fi
+        done
+      '';
+    };
 
     machine.desktop.enable = true;
     machine.development.enable = true;
@@ -95,11 +120,16 @@
       winboat
       amdgpu_top
       qdiskinfo
-      celler
       antigravity
       opencode-desktop
+      powertop
     ];
 
+    programs.throne = {
+      enable = true;
+      tunMode.enable = true;
+      tunMode.setuid = true;
+    };
     programs.steam = {
       enable = true;
       extest.enable = true;
@@ -145,6 +175,15 @@
     services.crossmacro = {
       enable = true;
       users = [ "mt" ];
+    };
+    services.cardwire = {
+      enable = true;
+      settings = {
+        auto_apply_gpu_state = true;
+        experimental_nvidia_block = true;
+        battery_auto_switch = true;
+        battery_auto_switch_mode = "hybrid";
+      };
     };
   };
 }

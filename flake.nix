@@ -20,7 +20,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-fresh.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -37,17 +37,15 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs-fresh";
-    };
-
     git-hooks-nix = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    celler.url = "github:blitz/celler";
+    cardwire = {
+      url = "github:opengamingcollective/cardwire";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
