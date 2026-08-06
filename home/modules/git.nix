@@ -11,6 +11,7 @@
       format = "openpgp";
       signByDefault = true;
       key = "iamrmttt@gmail.com";
+      signer = "gpg";
     };
     settings = {
       init.defaultBranch = "main";
@@ -18,6 +19,7 @@
       credential."https://gist.github.com".helper = "!/usr/bin/env gh auth git-credential";
       user.name = "RMT";
       user.email = "iamrmttt@gmail.com";
+      user.signingKey = "iamrmttt@gmail.com";
       pull.rebase = true;
     };
   };

@@ -45,15 +45,4 @@ in
   oracle = mkNixOS "oracle" { };
   kube-runner = mkNixOS "kube-runner" { };
   cn2-box = mkNixOS "cn2-box" { };
-  mtspc = mkNixOS "mtspc" {
-    nixpkgs = inputs.nixpkgs-fresh;
-    extraModules = [
-      inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
-      inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
-      inputs.nixos-hardware.nixosModules.common-gpu-nvidia
-      inputs.nixos-hardware.nixosModules.common-pc-laptop
-      inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
-      inputs.nixos-hardware.nixosModules.common-gpu-amd
-    ];
-  };
 }

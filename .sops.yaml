@@ -2,13 +2,12 @@ keys:
   - &admin BD15904159AF89DEB3A61039DFAFB71F7972D48D
 
   # age for different hosts
-  - &mtspc-age age18ty94l69h64jrwsrq59052a6zeh8k0sue5n4ycc2sm63e9k5pa4qd08qh6
   - &cn2-box-age age1xsexrshfte590ec343puza8m7l9442u79hau6dpdu7ndjhaeav4slqhqwx
   - &oracle-age age19l23k7uhlvazvrqvpwkyupzn3g03v8djr6xf0qpfe8a8l0gvrs8qc057fk
   - &kube-runner-age age14qfw0xfzd9ngahkcn0p5vap69kjdym276hhp5ruy28m54mexapqqndltqj
 
   # age for home-manager 
-  - &mtspc-home-age age1xtfuvxeye5qa35n8wmwgnsacz5amkntkz3cn5v25u5vfsr9c2e8qyetnsg
+  - &mtspc-home-age age18fdq5xkucj87cahslxgsjmc9mpv5gdx7vghmq2qvnp7jgrxsgseqlxmx9f
 
   # age for godel 
   - godel-k3s-age: &godel-k3s-age

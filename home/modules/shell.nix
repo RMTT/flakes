@@ -60,8 +60,9 @@
       character.vimcmd_visual_symbol = "[<](bold yellow)";
 
       package.disabled = true;
-      gcloud.disabled = true;
       kubernetes.disabled = false;
+      shell.disabled = false;
+      shell.style = "cyan bold";
     };
   };
 }

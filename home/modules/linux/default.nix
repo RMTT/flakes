@@ -1,9 +1,8 @@
 { pkgs, config, ... }:
 {
   imports = [
-    # ./niri.nix
     ./fonts.nix
-    # ./runner.nix
+    ./packages.nix
   ];
 
   # make npm install -g works

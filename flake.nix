@@ -3,13 +3,11 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://noctalia.cachix.org"
       "https://nix-community.cachix.org"
       "https://mts-flakes.cachix.org"
       "https://install.determinate.systems"
     ];
     extra-trusted-public-keys = [
-      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "mts-flakes.cachix.org-1:Gk59/na1GIp86A3aQODDwSDti43n+gIereKJ6a12dpk="
       "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
@@ -35,15 +33,8 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
     git-hooks-nix = {
       url = "github:cachix/git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cardwire = {
-      url = "github:opengamingcollective/cardwire";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -86,6 +77,7 @@
             python3Packages.pip
             uv
             terraform
+            jq
           ];
           shellHook = git-hooks.shellHook;
         };

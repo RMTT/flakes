@@ -9,7 +9,7 @@ return {
             },
             options = {
                 nixos = {
-                    expr = '(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.mtspc.options',
+                    expr = '(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.oracle.options',
                 },
                 home_manager = {
                     expr = '(builtins.getFlake (builtins.toString ./.)).homeConfigurations.mt.options'
