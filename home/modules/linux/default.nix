@@ -3,6 +3,7 @@
   imports = [
     ./fonts.nix
     ./packages.nix
+    ./wsl.nix
   ];
 
   # make npm install -g works
@@ -13,7 +14,7 @@
     prefix = ''${HOME}/.npm-packages
   '';
 
-  services.easyeffects = {
-    enable = true;
-  };
+  # services.easyeffects = {
+  #   enable = true;
+  # };
 }
