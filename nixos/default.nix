@@ -13,7 +13,6 @@ let
     inputs.home-manager.nixosModules.home-manager
     inputs.disko.nixosModules.disko
     inputs.determinate.nixosModules.default
-    inputs.cardwire.nixosModules.default
     (
       { config, lib, ... }:
       {
