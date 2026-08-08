@@ -5,6 +5,9 @@
   ...
 }:
 {
+  home.sessionPath = [
+    "$HOME/.opencode/bin/"
+  ];
   sops.secrets.mcp_context7 = {
     mode = "0400";
   };

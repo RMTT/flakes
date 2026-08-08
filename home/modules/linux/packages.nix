@@ -4,5 +4,6 @@
     jq
     zellij
     nh
+    kubectl
   ];
 }
