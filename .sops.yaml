@@ -7,7 +7,7 @@ keys:
   - &kube-runner-age age14qfw0xfzd9ngahkcn0p5vap69kjdym276hhp5ruy28m54mexapqqndltqj
 
   # age for home-manager 
-  - &mtspc-home-age age18fdq5xkucj87cahslxgsjmc9mpv5gdx7vghmq2qvnp7jgrxsgseqlxmx9f
+  - &mtsmbp-home-age age1ppfa73ct2330dz4ztr58umx3ppmfaly0z63a5r56tzg7rzwtd32qucmzsr
 
   # age for godel 
   - godel-k3s-age: &godel-k3s-age
@@ -21,7 +21,7 @@ keys:
 
 creation_rules:
   - path_regex: home/.*
-    age: *mtspc-home-age
+    age: *mtsmbp-home-age
     pgp: *admin
 
   # paths per host

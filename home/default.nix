@@ -4,32 +4,31 @@
   ...
 }@inputs:
 let
-  system = builtins.currentSystem or "x86_64-linux";
-  overlay-ownpkgs = final: prev: inputs.self.packages.${system};
+  overlay-ownpkgs = platform: final: prev: inputs.self.packages.${platform};
 in
 {
-  mt = home-manager.lib.homeManagerConfiguration {
+  rmt = let platform = "aarch64-darwin";
+  in home-manager.lib.homeManagerConfiguration {
     pkgs = import nixpkgs-fresh {
-      inherit system;
+      system = platform;
       config.allowUnfree = true;
-    };
-    extraSpecialArgs = {
-      inherit system;
     };
     modules = [
       {
         nixpkgs.overlays = [
-          overlay-ownpkgs
+           (overlay-ownpkgs platform)
         ];
         programs.home-manager.enable = true;
       }
       inputs.nur.modules.homeManager.default
       inputs.sops-nix.homeManagerModules.sops
       {
-        home.username = "mt";
-        home.homeDirectory = if (system == "aarch64-darwin") then "/Users/mt" else "/home/mt";
+        home.username = "rmt";
+        home.homeDirectory =  "/Users/rmt" ;
+        home.stateVersion = "26.11";
       }
-      ./mt.nix
+      ./modules/base.nix
+      ./modules/darwin
     ];
   };
 }

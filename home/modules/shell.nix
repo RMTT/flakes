@@ -2,7 +2,7 @@
 {
 
   # bash configuration
-  programs.bash.enable = true;
+  # programs.bash.enable = true;
 
   # zsh configuration
   programs.zsh = {

@@ -5,27 +5,14 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
     taps = [ ];
 
     brews = [
-      "koekeishiya/formulae/skhd"
-      "kubernetes-cli"
-      "node"
-      "gitui"
-      "anomalyco/tap/opencode"
     ];
 
     casks = [
-      "yubico-authenticator"
-      "obsidian"
-      "telegram"
-      "tailscale-app"
-      "wechat"
-      "iterm2" # for drop-down term(via hotkey profile)
-      "kicad"
-      "PlayCover/playcover/playcover-community"
-      "zotero"
-      "firefox"
+      "google-chrome"
       "bitwarden"
-      "iina"
-      "google-drive"
+      "flashspace"
+      "font-fira-code-nerd-font"
+      "tailscale-app"
     ];
 
   in

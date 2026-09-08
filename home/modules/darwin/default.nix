@@ -1,6 +1,5 @@
 {
   lib,
-  config,
   pkgs,
   ...
 }:
@@ -8,39 +7,27 @@ with lib;
 {
   imports = [
     ./homebrew.nix
-    ../kitty.nix
+    ../ghostty.nix
+    ../gpg.nix
   ];
 
   config = {
     programs.home-manager.enable = true;
 
+    targets.darwin.copyApps.enable = true;
+    targets.darwin.linkApps.enable = false;
     home.packages = with pkgs; [
-      nerd-fonts.fira-code
+      nh
+      ssh-to-age
+      gitui
       sshuttle
       lima # for running x86 vms and containers
       htop
       wget
-      kitty
       age
-
-      # dev tools
-      uv
-      iproute2mac
-      cmake
-      autoconf
-      automake
-      glibtool
-      pkg-config
-      gettext
-      perl
-      gperf
-      flex
-      bison
-      rustup
-      bear
       sops
-
       (pkgs.python3.withPackages (python-pkgs: [ ]))
+      fastfetch
     ];
   };
 }
