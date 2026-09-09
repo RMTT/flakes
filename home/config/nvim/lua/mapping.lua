@@ -22,9 +22,9 @@ vim.keymap.set('v', '<space>P', '"+P', { noremap = true, silent = true, desc = '
 ---- end ----
 
 ---- resize window
-vim.keymap.set('n', '<M-=>', ':vertical resize +3<CR>',
+vim.keymap.set('n', '<A-=>', ':vertical resize +3<CR>',
     { noremap = true, silent = true, desc = 'increase width of windows' })
-vim.keymap.set('n', '<M-->', ':vertical resize -3<CR>',
+vim.keymap.set('n', '<A-->', ':vertical resize -3<CR>',
     { noremap = true, silent = true, desc = 'decrease width of windows' })
 
 

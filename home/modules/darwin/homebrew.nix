@@ -8,11 +8,17 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
     ];
 
     casks = [
+      "steam"
+      "hammerspoon"
       "google-chrome"
+      "google-drive"
       "bitwarden"
-      "flashspace"
       "font-fira-code-nerd-font"
       "tailscale-app"
+      "notion"
+      "zotero"
+      "opencode-desktop"
+      "antigravity"
     ];
 
   in
