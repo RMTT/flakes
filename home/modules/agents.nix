@@ -11,9 +11,6 @@
   sops.secrets.mcp_context7 = {
     mode = "0400";
   };
-  sops.secrets.mcp_exa = {
-    mode = "0400";
-  };
   sops.secrets.mcp_github = {
     mode = "0400";
   };
@@ -70,23 +67,20 @@
             "headers": {
               "Authorization": "Bearer ${config.sops.placeholder.mcp_github}"
             }
-          },
-          "exa": {
-            "type": "remote",
-            "url": "https://mcp.exa.ai/mcp?exaApiKey=${config.sops.placeholder.mcp_exa}",
-            "headers": {}
           }
         }
       }
     '';
   };
 
+  home.sessionVariables = {
+    OPENCODE_ENABLE_EXA = true;
+  };
   xdg.configFile."opencode/AGENTS.md".source = ../config/agents/AGENTS.md;
   home.file.".gemini/GEMINI.md".source = ../config/agents/AGENTS.md;
 
   programs.zsh.initContent = ''
     export MCP_CONTEXT7="$(cat ${config.sops.secrets.mcp_context7.path})"
-    export MCP_EXA="$(cat ${config.sops.secrets.mcp_exa.path})"
     export MCP_GITHUB="$(cat ${config.sops.secrets.mcp_github.path})"
   '';
 }

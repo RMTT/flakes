@@ -26,8 +26,11 @@ with lib;
       wget
       age
       sops
-      (pkgs.python3.withPackages (python-pkgs: [ ]))
       fastfetch
+
+
+      (pkgs.python3.withPackages (python-pkgs: [ ]))
+      nodejs
     ];
   };
 }

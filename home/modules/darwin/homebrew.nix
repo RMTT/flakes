@@ -19,6 +19,8 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
       "zotero"
       "opencode-desktop"
       "antigravity"
+      "Sanyam-G/switch/switch"
+      "appcleaner"
     ];
 
   in

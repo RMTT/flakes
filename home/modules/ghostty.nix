@@ -6,7 +6,7 @@
     settings = {
       font-family = "FiraCode Nerd Font Mono";
       keybind = [
-        "global:alt+grave_accent=toggle_quick_terminal"
+        "global:cmd+grave_accent=toggle_quick_terminal"
       ];
     };
   };
