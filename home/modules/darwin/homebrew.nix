@@ -2,9 +2,12 @@
 with lib;
 mkIf (config.nixpkgs.system == "aarch64-darwin") (
   let
-    taps = [ ];
+    taps = [
+      "Sanyam-G/switch"
+    ];
 
     brews = [
+      "ykman"
     ];
 
     casks = [
@@ -19,7 +22,8 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
       "zotero"
       "opencode-desktop"
       "antigravity"
-      "Sanyam-G/switch/switch"
+      "Sanyam-G/switch/switch" # for switch windows in current Space
+      "easy-move-plus-resize" # drag and resize window via shortcut
       "appcleaner"
     ];
 

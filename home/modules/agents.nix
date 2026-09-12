@@ -26,6 +26,9 @@
               "Authorization": "Bearer ${config.sops.placeholder.mcp_github}"
             }
           },
+          "notion": {
+            "serverUrl": "https://mcp.notion.com/mcp"
+          },
           "context7": {
             "command": "npx",
             "args": [

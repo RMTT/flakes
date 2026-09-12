@@ -31,6 +31,7 @@ with lib;
 
       (pkgs.python3.withPackages (python-pkgs: [ ]))
       nodejs
+      docker
     ];
   };
 }
