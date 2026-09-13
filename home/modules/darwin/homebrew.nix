@@ -14,7 +14,6 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
       "steam"
       "hammerspoon"
       "google-chrome"
-      "google-drive"
       "bitwarden"
       "font-fira-code-nerd-font"
       "tailscale-app"
@@ -23,8 +22,8 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
       "opencode-desktop"
       "antigravity"
       "Sanyam-G/switch/switch" # for switch windows in current Space
-      "easy-move-plus-resize" # drag and resize window via shortcut
       "appcleaner"
+      "cloudmounter"
     ];
 
   in

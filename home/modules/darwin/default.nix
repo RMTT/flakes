@@ -27,6 +27,7 @@ with lib;
       age
       sops
       fastfetch
+      usbutils
 
 
       (pkgs.python3.withPackages (python-pkgs: [ ]))
