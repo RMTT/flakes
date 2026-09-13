@@ -76,7 +76,6 @@
             python3
             python3Packages.pip
             uv
-            terraform
             jq
           ];
           shellHook = git-hooks.shellHook;
