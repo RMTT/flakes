@@ -32,6 +32,7 @@
       nixfmt
       jq
       terraform-ls
+      terraform
       # for markdown render
       (python3.withPackages (ps: with ps; [ pylatexenc ]))
       eslint
