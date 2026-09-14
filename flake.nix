@@ -54,7 +54,7 @@
       homeConfigurations = import ./home inputs;
       snip = import ./nixos/snip.nix inputs;
     }
-    // eachSystem [ system.x86_64-linux system.aarch64-linux system.aarch64-darwin] (
+    // eachSystem [ system.x86_64-linux system.aarch64-linux system.aarch64-darwin ] (
       system:
       let
         pkgs = import nixpkgs {
@@ -71,13 +71,7 @@
           pre-commit-check = git-hooks;
         };
         devShells.default = pkgs.mkShellNoCC {
-          packages = with pkgs; [
-            nodejs
-            python3
-            python3Packages.pip
-            uv
-            jq
-          ];
+          packages = with pkgs; [ ];
           shellHook = git-hooks.shellHook;
         };
       }

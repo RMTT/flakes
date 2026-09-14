@@ -43,5 +43,4 @@ in
 {
   oracle = mkNixOS "oracle" { };
   kube-runner = mkNixOS "kube-runner" { };
-  cn2-box = mkNixOS "cn2-box" { };
 }
