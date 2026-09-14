@@ -9,8 +9,6 @@ env:
   CACHIX_CACHE: mts-flakes
 
   X86_TARGETS: >-
-    .#nixosConfigurations.cn2-box.config.system.build.toplevel
-    .#sblite
 
   ARM_TARGETS: >-
     .#nixosConfigurations.oracle.config.system.build.toplevel
