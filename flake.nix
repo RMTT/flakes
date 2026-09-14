@@ -72,11 +72,6 @@
         };
         devShells.default = pkgs.mkShellNoCC {
           packages = with pkgs; [
-            nodejs
-            python3
-            python3Packages.pip
-            uv
-            jq
           ];
           shellHook = git-hooks.shellHook;
         };

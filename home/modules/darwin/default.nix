@@ -28,6 +28,8 @@ with lib;
       sops
       fastfetch
       usbutils
+      kubectl
+      fluxcd
 
 
       (pkgs.python3.withPackages (python-pkgs: [ ]))
