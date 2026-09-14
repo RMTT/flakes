@@ -11,7 +11,6 @@
   godel = ./godel;
   secrets = ./secrets;
   desktop = ./desktop;
-  netflow = ./netflow;
   services = ./services;
   bootloader = ./bootloader.nix;
 }
