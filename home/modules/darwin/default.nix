@@ -28,6 +28,7 @@ with lib;
       sops
       fastfetch
       usbutils
+      kubectl
 
 
       (pkgs.python3.withPackages (python-pkgs: [ ]))
