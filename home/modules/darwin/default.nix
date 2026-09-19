@@ -29,7 +29,7 @@ with lib;
       fastfetch
       usbutils
       kubectl
-
+      smartmontools
 
       (pkgs.python3.withPackages (python-pkgs: [ ]))
       nodejs
