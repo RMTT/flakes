@@ -7,6 +7,7 @@ with lib;
 {
   imports = [
     ./homebrew.nix
+    ./hammerspoon.nix
     ../ghostty.nix
     ../gpg.nix
   ];
