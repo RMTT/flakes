@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./shell.nix
@@ -15,7 +20,13 @@
   programs.docker-cli = {
     enable = true;
     settings = {
-      "detachKeys" = "ctrl-x";
+      detachKeys = "ctrl-x";
+      currentContext = "lima";
+    };
+    contexts = lib.mkIf pkgs.stdenv.isDarwin {
+      lima = {
+        Endpoints.docker.Host = "unix://${config.home.homeDirectory}/.lima/default/sock/docker.sock";
+      };
     };
   };
   programs.direnv = {
