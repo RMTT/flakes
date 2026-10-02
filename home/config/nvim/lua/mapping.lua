@@ -61,3 +61,6 @@ end, { silent = true, desc = 'Copy file location' })
 vim.keymap.set('v', '<space>go', function()
     copy_file_location(true)
 end, { silent = true, desc = 'Copy file range' })
+
+-- quit insert mode
+vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Exit insert mode' })
