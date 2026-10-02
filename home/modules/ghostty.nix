@@ -7,7 +7,7 @@
       font-family = "FiraCode Nerd Font Mono";
       link-url = true;
       keybind = [
-        "global:cmd+grave_accent=toggle_quick_terminal"
+        "global:alt+grave_accent=toggle_quick_terminal"
       ];
     };
   };

@@ -11,7 +11,6 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
     ];
 
     casks = [
-      "steam"
       "hammerspoon"
       "google-chrome"
       "bitwarden"
@@ -23,7 +22,7 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
       "antigravity"
       "Sanyam-G/switch/switch" # for switch windows in current Space
       "appcleaner"
-      "cloudmounter"
+      "omniwm"
     ];
 
   in
