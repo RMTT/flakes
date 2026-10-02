@@ -1,17 +1,16 @@
 { config, lib, ... }:
-with lib;
 let
   cfg = config.machine.nix-config;
 in
 {
   options.machine.nix-config = {
-    enable = mkOption {
-      type = types.bool;
+    enable = lib.mkOption {
+      type = lib.types.bool;
       default = true;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # enable unfree pkgs
     nixpkgs.config.allowUnfree = true;
 
@@ -28,7 +27,7 @@ in
       "mts-flakes.cachix.org-1:Gk59/na1GIp86A3aQODDwSDti43n+gIereKJ6a12dpk="
     ];
     nix.settings.trusted-users = [
-      (mkIf config.machine.users.mt.enable "mt")
+      (lib.mkIf config.machine.users.mt.enable "mt")
     ];
     nix.optimise.automatic = true;
     nix.gc.automatic = true;

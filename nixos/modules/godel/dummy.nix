@@ -3,7 +3,6 @@
   lib,
   ...
 }:
-with lib;
 let
   cfg = config.services.godel.dummy;
   godelCfg = config.services.godel;
@@ -11,11 +10,11 @@ in
 {
   options = {
     services.godel.dummy = {
-      enable = mkEnableOption "enable dummy device for godel";
+      enable = lib.mkEnableOption "enable dummy device for godel";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.network.netdevs = {
       godel = {
         netdevConfig = {

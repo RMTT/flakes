@@ -4,7 +4,6 @@
   lib,
   ...
 }:
-with lib;
 let
   cfg = config.services.godel.k3s;
   godelCfg = config.services.godel;
@@ -12,17 +11,17 @@ in
 {
   options = {
     services.godel.k3s = {
-      enable = mkEnableOption "enable k3s";
-      role = mkOption { type = types.str; };
-      interface = mkOption {
-        type = types.str;
+      enable = lib.mkEnableOption "enable k3s";
+      role = lib.mkOption { type = lib.types.str; };
+      interface = lib.mkOption {
+        type = lib.types.str;
         default = "godel";
       };
-      region = mkOption {
-        type = types.str;
+      region = lib.mkOption {
+        type = lib.types.str;
       };
-      cluster = mkOption {
-        type = types.enum [
+      cluster = lib.mkOption {
+        type = lib.types.enum [
           "homelab"
           "public"
         ];
@@ -40,13 +39,13 @@ in
         node-ip = godelCfg.infra-ip;
         kube-proxy-arg = [ "nodeport-addresses=${godelCfg.infra-ip}/24" ];
       }
-      // optionalAttrs (godelCfg.external-ip != null) {
+      // lib.optionalAttrs (godelCfg.external-ip != null) {
         node-external-ip = godelCfg.external-ip;
       }
-      // optionalAttrs (cfg.role == "agent") {
+      // lib.optionalAttrs (cfg.role == "agent") {
         server = serverUrl;
       }
-      // optionalAttrs (cfg.role == "server") {
+      // lib.optionalAttrs (cfg.role == "server") {
         flannel-backend = "wireguard-native";
         flannel-external-ip = true;
         # always use node-ip as api server address
@@ -77,7 +76,7 @@ in
 
       yaml = pkgs.formats.yaml { };
     in
-    mkIf cfg.enable {
+    lib.mkIf cfg.enable {
       sops.secrets.k3s-token = {
         mode = "0400";
         sopsFile = ./secrets/k3s-token;
@@ -100,7 +99,7 @@ in
         enable = true;
         configPath = (yaml.generate "k3s-config" k3s-config);
         environmentFile = config.sops.secrets.k3s-env.path;
-        manifests = mkIf (cfg.role == "server") {
+        manifests = lib.mkIf (cfg.role == "server") {
           flux-age.source = config.sops.secrets.flux-age.path;
         };
         role = cfg.role;

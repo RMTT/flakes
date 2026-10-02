@@ -1,15 +1,14 @@
 { lib, config, ... }:
-with lib;
 let
   cfg = config.machine.networking.firewall;
 in
 {
-  options.machine.networking.firewall.preset = mkOption {
-    type = types.bool;
+  options.machine.networking.firewall.preset = lib.mkOption {
+    type = lib.types.bool;
     default = true;
   };
 
-  config = mkIf cfg.preset {
+  config = lib.mkIf cfg.preset {
     networking.firewall = {
       trustedIpv4 = [
         "192.168.6.1/24" # local net of home

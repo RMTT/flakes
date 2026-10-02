@@ -4,8 +4,7 @@
   pkgs,
   ...
 }:
-with lib;
-mkIf (config.nixpkgs.system == "x86_64-linux") {
+lib.mkIf (config.nixpkgs.system == "x86_64-linux") {
   home.packages = with pkgs; [
     wqy_zenhei
     noto-fonts

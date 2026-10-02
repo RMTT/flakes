@@ -3,7 +3,6 @@
   pkgs,
   ...
 }:
-with lib;
 {
   imports = [
     ./homebrew.nix

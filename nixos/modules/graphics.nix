@@ -4,21 +4,20 @@
   config,
   ...
 }:
-with lib;
 let
   cfg = config.machine.graphics;
 in
 {
   options.machine.graphics = {
-    enable = mkOption {
-      type = types.bool;
+    enable = lib.mkOption {
+      type = lib.types.bool;
       default = true;
     };
 
   };
 
   # opengl and hardware acc
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;

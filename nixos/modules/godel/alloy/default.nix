@@ -1,15 +1,14 @@
 { config, lib, ... }:
-with lib;
 let
   cfg = config.services.godel.alloy;
   godelCfg = config.services.godel;
 in
 {
   options.services.godel.alloy = {
-    enable = mkEnableOption "Prometheus server";
+    enable = lib.mkEnableOption "Prometheus server";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     sops.secrets.alloy-env = {
       sopsFile = ./secrets/env;
       format = "binary";

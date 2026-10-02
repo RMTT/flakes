@@ -7,10 +7,9 @@
 let
   cfg = config.machine.desktop;
 in
-with lib;
 {
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       niri
       fuzzel
@@ -102,7 +101,7 @@ with lib;
       ];
     };
 
-    programs.gnupg.agent.pinentryPackage = mkForce pkgs.pinentry-gnome3;
+    programs.gnupg.agent.pinentryPackage = lib.mkForce pkgs.pinentry-gnome3;
     # xdg.mime = {
     #   enable = true;
     #   defaultApplications = {

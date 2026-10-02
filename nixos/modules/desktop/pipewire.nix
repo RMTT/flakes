@@ -2,9 +2,8 @@
 let
   cfg = config.machine.desktop;
 in
-with lib;
 {
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;

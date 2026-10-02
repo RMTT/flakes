@@ -7,9 +7,8 @@
 let
   cfg = config.machine.desktop;
 in
-with lib;
 {
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # many gtk apps need dconf
     programs.dconf.enable = true;
 

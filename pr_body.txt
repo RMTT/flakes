@@ -1,0 +1,11 @@
+🎯 **What:** Removed global `with lib;` from all Nix modules across the repository, replacing implicitly imported functions with explicitly qualified `lib.` prefixed versions (e.g., `lib.mkIf`, `lib.mkOption`, `lib.types`).
+
+💡 **Why:** `with lib;` makes the code harder to read and trace because it is not always clear where a function originates from. Replacing this with explicit `lib.` namespaces is a highly reliable refactoring that improves code clarity, discoverability, and long-term maintainability.
+
+✅ **Verification:**
+- Found all affected modules using `grep -rnw "with lib;" --include=\*.nix .`
+- Patched each file carefully to remove the statement and prepend `lib.` to corresponding imports.
+- Performed a final validation using `grep` targeting potential un-prefixed functions (`mkOption`, `mkIf`, `mkEnableOption`, `types`, etc.) to confirm no implicit references were left behind.
+- Changes were manually reviewed through diffs ensuring syntactical correctness and exact mapping.
+
+✨ **Result:** Clean, predictable Nix modules free of global scope pollution, setting a consistent and healthy standard for future configurations.

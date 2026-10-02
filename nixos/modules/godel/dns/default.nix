@@ -4,9 +4,9 @@ let
   godelCfg = config.services.godel;
 in
 {
-  options = with lib; {
+  options = {
     services.godel.dns = {
-      enable = mkEnableOption "enable bind9 dns";
+      enable = lib.mkEnableOption "enable bind9 dns";
     };
   };
 

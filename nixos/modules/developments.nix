@@ -7,16 +7,15 @@
 let
   cfg = config.machine.development;
 in
-with lib;
 {
   options.machine.development = {
-    enable = mkOption {
-      type = types.bool;
+    enable = lib.mkOption {
+      type = lib.types.bool;
       description = "install development tools";
       default = false;
     };
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # add development tools
     programs.wireshark = {
       enable = true;
