@@ -1,6 +1,5 @@
 { config, lib, ... }:
-with lib;
-mkIf (config.nixpkgs.system == "aarch64-darwin") (
+lib.mkIf (config.nixpkgs.system == "aarch64-darwin") (
   let
     taps = [
       "Sanyam-G/switch"
@@ -26,7 +25,6 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
     ];
 
   in
-  with lib;
   {
     home.sessionPath = [ "/opt/homebrew/bin" ];
 
@@ -35,7 +33,7 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
     };
     home.file.".Brewfile" = {
       text =
-        (concatMapStrings (
+        (lib.concatMapStrings (
           tap:
           ''tap "''
           + tap
@@ -44,7 +42,7 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
           ''
 
         ) taps)
-        + (concatMapStrings (
+        + (lib.concatMapStrings (
           brew:
           ''brew "''
           + brew
@@ -53,7 +51,7 @@ mkIf (config.nixpkgs.system == "aarch64-darwin") (
           ''
 
         ) brews)
-        + (concatMapStrings (
+        + (lib.concatMapStrings (
           cask:
           ''cask "''
           + cask

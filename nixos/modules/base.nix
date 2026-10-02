@@ -8,16 +8,15 @@
 let
   cfg = config.machine.base;
 in
-with lib;
 {
   options.machine.base = {
-    enable = mkOption {
-      type = types.bool;
+    enable = lib.mkOption {
+      type = lib.types.bool;
       default = true;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     boot.kernelModules = [
       "wireguard"
       "ip_vs"
@@ -167,7 +166,7 @@ with lib;
 
     # cpu governor
     powerManagement.cpuFreqGovernor =
-      mkIf (config.hardware.cpu.intel.updateMicrocode || config.hardware.cpu.amd.updateMicrocode)
+      lib.mkIf (config.hardware.cpu.intel.updateMicrocode || config.hardware.cpu.amd.updateMicrocode)
         (
           (lib.strings.optionalString config.hardware.cpu.intel.updateMicrocode "ondemand")
           + (lib.strings.optionalString config.hardware.cpu.amd.updateMicrocode "schedutil")

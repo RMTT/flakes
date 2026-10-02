@@ -7,19 +7,18 @@
 let
   cfg = config.machine.users.mt;
 in
-with lib;
 {
   options.machine.users.mt = {
-    enable = mkOption {
-      type = types.bool;
+    enable = lib.mkOption {
+      type = lib.types.bool;
       default = true;
     };
-    hashedPassword = mkOption {
-      type = types.str;
+    hashedPassword = lib.mkOption {
+      type = lib.types.str;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # main user
     security.sudo = {
       wheelNeedsPassword = false;
@@ -37,17 +36,17 @@ with lib;
       extraGroups = [
         "wheel"
         "networkmanager"
-        (mkIf config.virtualisation.docker.enable "docker")
-        (mkIf config.virtualisation.incus.enable "incus-admin")
+        (lib.mkIf config.virtualisation.docker.enable "docker")
+        (lib.mkIf config.virtualisation.incus.enable "incus-admin")
         "video"
         "kvm"
         "users"
         "uinput"
         "input"
-        (mkIf config.hardware.i2c.enable "i2c")
+        (lib.mkIf config.hardware.i2c.enable "i2c")
         "wireshark"
-        (mkIf config.virtualisation.libvirtd.enable "libvirtd")
-        (mkIf config.programs.librepods.enable "librepods")
+        (lib.mkIf config.virtualisation.libvirtd.enable "libvirtd")
+        (lib.mkIf config.programs.librepods.enable "librepods")
       ];
       hashedPassword = cfg.hashedPassword;
       openssh.authorizedKeys.keys = [

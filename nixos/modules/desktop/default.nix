@@ -4,7 +4,6 @@
   config,
   ...
 }:
-with lib;
 let
   cfg = config.machine.desktop;
 in
@@ -17,10 +16,10 @@ in
   ];
 
   options.machine.desktop = {
-    enable = mkEnableOption "enable desktop (based on niri)";
+    enable = lib.mkEnableOption "enable desktop (based on niri)";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.printing = {
       enable = true;
       drivers = with pkgs; [ fxlinuxprint ];

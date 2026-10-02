@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-with lib;
 let
   cfg = config.services.godel.tailscale;
   godelCfg = config.services.godel;
@@ -12,15 +11,15 @@ in
 {
   options = {
     services.godel.tailscale = {
-      enable = mkEnableOption "enable godel service";
-      extraRoutes = mkOption {
-        type = types.listOf types.str;
+      enable = lib.mkEnableOption "enable godel service";
+      extraRoutes = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
         default = [ ];
       };
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.tailscale =
       let
         routes = [ "${godelCfg.infra-ip}/32" ] ++ cfg.extraRoutes;

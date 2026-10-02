@@ -3,14 +3,14 @@ let
   cfg = config.services.godel.traefik;
 in
 {
-  options = with lib; {
+  options = {
     services.godel.traefik = {
-      enable = mkEnableOption "enable traefik";
-      configFile = mkOption {
-        type = types.path;
+      enable = lib.mkEnableOption "enable traefik";
+      configFile = lib.mkOption {
+        type = lib.types.path;
       };
-      envFile = mkOption {
-        type = types.path;
+      envFile = lib.mkOption {
+        type = lib.types.path;
       };
     };
   };

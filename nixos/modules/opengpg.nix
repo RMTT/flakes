@@ -4,19 +4,18 @@
   pkgs,
   ...
 }:
-with lib;
 let
   cfg = config.machine.opengpg;
 in
 {
   options.machine.opengpg = {
-    enable = mkOption {
-      type = types.bool;
+    enable = lib.mkOption {
+      type = lib.types.bool;
       default = true;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       sequoia-sq
       sequoia-wot

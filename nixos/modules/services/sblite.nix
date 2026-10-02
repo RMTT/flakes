@@ -5,29 +5,28 @@
   ...
 }:
 
-with lib;
 
 let
   cfg = config.services.sblite;
 in
 {
   options.services.sblite = {
-    enable = mkEnableOption "sblite, a lightweight proxy client based on sing-box";
+    enable = lib.mkEnableOption "sblite, a lightweight proxy client based on sing-box";
 
-    package = mkOption {
-      type = types.package;
+    package = lib.mkOption {
+      type = lib.types.package;
       default = pkgs.sblite;
       description = "The sblite package to use.";
     };
 
-    listenAddress = mkOption {
-      type = types.str;
+    listenAddress = lib.mkOption {
+      type = lib.types.str;
       default = "127.0.0.1:8180";
       description = "The address and port sblite should listen on.";
     };
 
-    stateDirectory = mkOption {
-      type = types.str;
+    stateDirectory = lib.mkOption {
+      type = lib.types.str;
       default = "/var/lib/sblite";
       description = ''
         The state directory containing sing-box config and other data.
@@ -36,7 +35,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.services.sblite = {
       description = "sblite - A lightweight proxy client based on sing-box";
       after = [ "network.target" ];

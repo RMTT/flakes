@@ -3,24 +3,23 @@
   config,
   ...
 }:
-with lib;
 let
   cfg = config.networking.firewall;
 in
 {
   options = {
     networking.firewall = {
-      trustedIpv4 = mkOption {
-        type = types.listOf types.str;
+      trustedIpv4 = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
         default = [ ];
       };
-      trustedIpv6 = mkOption {
-        type = types.listOf types.str;
+      trustedIpv6 = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
         default = [ ];
       };
 
-      extraOutputRules = mkOption {
-        type = types.str;
+      extraOutputRules = lib.mkOption {
+        type = lib.types.str;
         default = "";
       };
     };
@@ -28,8 +27,8 @@ in
 
   config =
     let
-      subnetsV4 = concatStringsSep "," cfg.trustedIpv4;
-      subnetsV6 = concatStringsSep "," cfg.trustedIpv6;
+      subnetsV4 = lib.concatStringsSep "," cfg.trustedIpv4;
+      subnetsV6 = lib.concatStringsSep "," cfg.trustedIpv6;
     in
     {
       networking.firewall = {
@@ -38,8 +37,8 @@ in
         logRefusedConnections = false;
         logRefusedUnicastsOnly = false;
         extraInputRules = ''
-          ${optionalString (subnetsV4 != "") "ip saddr { ${subnetsV4} } accept"}
-          ${optionalString (subnetsV6 != "") "ip6 saddr { ${subnetsV6} } accept"}
+          ${lib.optionalString (subnetsV4 != "") "ip saddr { ${subnetsV4} } accept"}
+          ${lib.optionalString (subnetsV6 != "") "ip6 saddr { ${subnetsV6} } accept"}
         '';
       };
 

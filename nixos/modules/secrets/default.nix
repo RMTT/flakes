@@ -2,17 +2,16 @@
 let
   cfg = config.machine.secrets;
 in
-with lib;
 {
   options.machine.secrets = {
-    enable = mkOption {
-      type = types.bool;
+    enable = lib.mkOption {
+      type = lib.types.bool;
       description = "apply default secrets config";
       default = false;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     sops.age.generateKey = false;
   };
 }

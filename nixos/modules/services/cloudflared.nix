@@ -5,22 +5,21 @@
   ...
 }:
 
-with lib;
 
 let
   cfg = config.services.cloudflare-tunnel;
 in
 {
   options.services.cloudflare-tunnel = {
-    enable = mkEnableOption "Cloudflare Tunnel";
+    enable = lib.mkEnableOption "Cloudflare Tunnel";
 
-    tokenFile = mkOption {
-      type = types.path;
+    tokenFile = lib.mkOption {
+      type = lib.types.path;
       description = "Path to the Cloudflare Tunnel token file.";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.services.cloudflare-tunnel = {
       description = "Cloudflare Tunnel";
       after = [ "network.target" ];

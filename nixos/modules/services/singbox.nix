@@ -4,22 +4,21 @@
   config,
   ...
 }:
-with lib;
 let
   cfg = config.services.singbox;
 in
 {
   options = {
     services.singbox = {
-      enable = mkEnableOption "enable singbox";
+      enable = lib.mkEnableOption "enable singbox";
 
-      configFile = mkOption {
-        type = types.path;
+      configFile = lib.mkOption {
+        type = lib.types.path;
       };
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.services.singbox = {
       serviceConfig = {
         StateDirectory = "singbox";
