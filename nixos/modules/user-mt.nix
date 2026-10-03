@@ -51,6 +51,7 @@ in
       hashedPassword = cfg.hashedPassword;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHBjkW0ansGOkZCBkjyf5RArK+Amtxw7W/FeNV6GaRfG openpgp:0x15215C93"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIJoQj9dPYf23MvOYEZlC3fdTaTg08YPsUF49ZmS1Btl"
       ];
     };
 
