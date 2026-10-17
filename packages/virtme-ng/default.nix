@@ -16,7 +16,7 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "virtme-ng";
-  version = "1.41";
+  version = "1.42";
 
   pyproject = true;
   build-system = [ python3Packages.setuptools ];
@@ -25,7 +25,7 @@ python3Packages.buildPythonApplication rec {
     owner = "arighi";
     repo = "virtme-ng";
     rev = "v${version}";
-    hash = "sha256-/R+2ND/N+exF9eDSxAN8LR3cDuxBvpGSkiXcckyq8TY=";
+    hash = "sha256-GcsX51DC4W79HGD7DRLt1ZlubNul9zi/SJVnzUN40Ok=";
   };
 
   cargoDeps = rustPlatform.fetchCargoVendor {
