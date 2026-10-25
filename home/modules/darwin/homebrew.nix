@@ -12,6 +12,7 @@ lib.mkIf (config.nixpkgs.system == "aarch64-darwin") (
 
     casks = [
       "hammerspoon"
+      "the-unarchiver"
       "google-chrome"
       "bitwarden"
       "font-fira-code-nerd-font"
