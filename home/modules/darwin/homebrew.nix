@@ -3,11 +3,11 @@ lib.mkIf (config.nixpkgs.system == "aarch64-darwin") (
   let
     taps = [
       "Sanyam-G/switch"
-      "container"
     ];
 
     brews = [
       "ykman"
+      "container"
     ];
 
     casks = [
