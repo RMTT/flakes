@@ -32,6 +32,7 @@
       smartmontools
 
       (pkgs.python3.withPackages (python-pkgs: [ ]))
+      uv
       nodejs
       docker
     ];

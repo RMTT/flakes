@@ -13,6 +13,7 @@ lib.mkIf (config.nixpkgs.system == "aarch64-darwin") (
     casks = [
       "hammerspoon"
       "the-unarchiver"
+      "cloudmounter"
       "google-chrome"
       "bitwarden"
       "font-fira-code-nerd-font"
@@ -20,10 +21,11 @@ lib.mkIf (config.nixpkgs.system == "aarch64-darwin") (
       "notion"
       "zotero"
       "opencode-desktop"
-      "antigravity"
+      "antigravity-cli"
       "Sanyam-G/switch/switch" # for switch windows in current Space
       "appcleaner"
       "omniwm"
+      "readdle-spark"
     ];
 
   in
