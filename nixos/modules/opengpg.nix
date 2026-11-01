@@ -17,11 +17,6 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      sequoia-sq
-      sequoia-wot
-      sequoia-sqv
-      sequoia-sqop
-      sequoia-chameleon-gnupg
       openpgp-card-tools
       ccid
     ];
