@@ -1,13 +1,13 @@
----- use alt+hjkl to move between windows ----
-vim.keymap.set('n', '<A-h>', '<C-w>h', { noremap = true, silent = true, desc = 'Go to left window' })
-vim.keymap.set('n', '<A-l>', '<C-w>l', { noremap = true, silent = true, desc = 'Go to right window' })
-vim.keymap.set('n', '<A-j>', '<C-w>j', { noremap = true, silent = true, desc = 'Go to lower window' })
-vim.keymap.set('n', '<A-k>', '<C-w>k', { noremap = true, silent = true, desc = 'Go to upper window' })
+---- use ctrl+hjkl to move between windows ----
+vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true, desc = 'Go to left window' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true, desc = 'Go to right window' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true, desc = 'Go to lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true, desc = 'Go to upper window' })
 ---- end ----
 
--- use alt+pn to move between buffers
-vim.keymap.set('n', '<A-p>', ':bp<CR>', { noremap = true, silent = true, desc = 'Go to previous buffer' })
-vim.keymap.set('n', '<A-n>', ':bn<CR>', { noremap = true, silent = true, desc = 'Go to next buffer' })
+-- use ctrl+pn to move between buffers
+vim.keymap.set('n', '<C-p>', ':bp<CR>', { noremap = true, silent = true, desc = 'Go to previous buffer' })
+vim.keymap.set('n', '<C-n>', ':bn<CR>', { noremap = true, silent = true, desc = 'Go to next buffer' })
 -- end
 
 ---- using <space>y[y] and <space>p to copy and paster from clipboard ----
@@ -21,15 +21,15 @@ vim.keymap.set('v', '<space>p', '"+p', { noremap = true, silent = true, desc = '
 vim.keymap.set('v', '<space>P', '"+P', { noremap = true, silent = true, desc = 'Paste from clipboard before selection' })
 ---- end ----
 
----- resize window
-vim.keymap.set('n', '<A-=>', ':vertical resize +3<CR>',
+---- use ctrl + =/-resize window
+vim.keymap.set('n', '<C-=>', ':vertical resize +3<CR>',
     { noremap = true, silent = true, desc = 'increase width of windows' })
-vim.keymap.set('n', '<A-->', ':vertical resize -3<CR>',
+vim.keymap.set('n', '<C-->', ':vertical resize -3<CR>',
     { noremap = true, silent = true, desc = 'decrease width of windows' })
 
 
 ---- close buffer and window ----
-vim.keymap.set('n', '<A-w>', ':bd<CR>', { noremap = true, silent = true, desc = 'Close buffer' })
+vim.keymap.set('n', '<M-w>', ':bd<CR>', { noremap = true, silent = true, desc = 'Close buffer' })
 
 
 -- copy location inside file

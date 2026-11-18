@@ -29,6 +29,9 @@
           "notion": {
             "serverUrl": "https://mcp.notion.com/mcp"
           },
+          "figma": {
+            "serverUrl": "https://mcp.figma.com/mcp"
+          },
           "context7": {
             "command": "npx",
             "args": [
@@ -48,10 +51,6 @@
     content = ''
       {
         "$schema": "https://opencode.ai/config.json",
-        "plugin": [
-          "@mohak34/opencode-notifier@latest",
-          "opencode-gemini-auth@latest"
-        ],
         "keybinds": {
           "command_list": "<leader>p",
           "history_previous": "ctrl+p",
@@ -61,8 +60,11 @@
           "context7": {
             "type": "remote",
             "url": "https://mcp.context7.com/mcp",
-            "headers": { "CONTEXT7_API_KEY": "${config.sops.placeholder.mcp_context7}"
-            }
+            "headers": { "CONTEXT7_API_KEY": "${config.sops.placeholder.mcp_context7}" }
+          },
+          "figma": {
+            "type": "remote",
+            "url": "https://mcp.figma.com/mcp"
           },
           "github": {
             "type": "remote",

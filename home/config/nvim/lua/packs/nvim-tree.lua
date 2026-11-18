@@ -14,8 +14,6 @@ return {
                     return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
                 end
                 api.config.mappings.default_on_attach(bufnr)
-                vim.keymap.set("n", "<C-v>", api.node.open.vertical, opts "Open: Vertical Split")
-                vim.keymap.set("n", "<C-h>", api.node.open.horizontal, opts "Open: Horizontal Split")
             end
             ,
             actions = {
@@ -52,8 +50,6 @@ return {
                 }
             },
         }
-        vim.keymap.set("n", "<C-A-v>", "<cmd>vs<CR>")
-        vim.keymap.set("n", "<C-A-h>", "<cmd>split<CR>")
         vim.keymap.set('n', '<A-d>', '<cmd>NvimTreeToggle<CR>',
             { silent = true, noremap = true })
         require("nvim-tree").setup(opts)

@@ -23,7 +23,7 @@
       detachKeys = "ctrl-x";
       currentContext = "lima";
     };
-    contexts = lib.mkIf pkgs.stdenv.isDarwin {
+    contexts = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       lima = {
         Endpoints.docker.Host = "unix://${config.home.homeDirectory}/.lima/default/sock/docker.sock";
       };

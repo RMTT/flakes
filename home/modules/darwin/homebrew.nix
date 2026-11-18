@@ -3,11 +3,14 @@ lib.mkIf (config.nixpkgs.system == "aarch64-darwin") (
   let
     taps = [
       "Sanyam-G/switch"
+      "dart-lang/dart"
     ];
 
     brews = [
       "ykman"
       "container"
+      "fluxcd"
+      "dart"
     ];
 
     casks = [
